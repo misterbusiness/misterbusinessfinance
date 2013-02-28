@@ -46,7 +46,8 @@ class LancamentosController < ApplicationController
 
     respond_to do |format|
       if @lancamento.save
-        format.html { redirect_to @lancamento, notice: 'Lancamento was successfully created.' }
+        #format.html { redirect_to @lancamento, notice: 'Lancamento was successfully created.' } Aqui iremos fazer a redireção direto para o index.
+		format.html { redirect_to '/lancamentos'}
         format.json { render json: @lancamento, status: :created, location: @lancamento }
       else
         format.html { render action: "new" }
