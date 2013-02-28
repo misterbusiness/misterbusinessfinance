@@ -1,0 +1,49 @@
+<%= form_for(@lancamento) do |f| %>
+  <% if @lancamento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>
+
+      <ul>
+      <% @lancamento.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :descricao %><br />
+    <%= f.text_field :descricao %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo %><br />
+    <%= f.text_field :tipo %>
+  </div>
+  <div class="field">
+    <%= f.label :datavencimento %><br />
+    <%= f.datetime_select :datavencimento %>
+  </div>
+  <div class="field">
+    <%= f.label :dataacao %><br />
+    <%= f.datetime_select :dataacao %>
+  </div>
+  <div class="field">
+    <%= f.label :valor %><br />
+    <%= f.text_field :valor %>
+  </div>
+  <div class="field">
+    <%= f.label :categoria %><br />
+    <%= f.text_field :categoria %>
+  </div>
+  <div class="field">
+    <%= f.label :centrodecusto %><br />
+    <%= f.text_field :centrodecusto %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

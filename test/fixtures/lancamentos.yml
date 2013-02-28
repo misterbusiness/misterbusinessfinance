@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  descricao: MyString
+  tipo: MyString
+  datavencimento: 2013-02-28 16:41:48
+  dataacao: 2013-02-28 16:41:48
+  valor: 1.5
+  categoria: MyString
+  centrodecusto: MyString
+  status: MyString
+
+two:
+  descricao: MyString
+  tipo: MyString
+  datavencimento: 2013-02-28 16:41:48
+  dataacao: 2013-02-28 16:41:48
+  valor: 1.5
+  categoria: MyString
+  centrodecusto: MyString
+  status: MyString
