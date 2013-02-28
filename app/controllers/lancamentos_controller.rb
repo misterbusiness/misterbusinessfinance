@@ -2,6 +2,8 @@ class LancamentosController < ApplicationController
   # GET /lancamentos
   # GET /lancamentos.json
   def index
+	@lancamento = Lancamento.new
+	#Aqui iremos implementar os filtros, pelo que eu entendi.
     @lancamentos = Lancamento.all
 
     respond_to do |format|

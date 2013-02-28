@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :tipo %><br />
-    <%= f.text_field :tipo %>
+    <%= f.radio_button :tipo, "Receita" %> <%= f.label :tipo, "Receita" %> <%= f.radio_button :tipo, "Despesa" %> <%= f.label :tipo, "Despesa" %>
   </div>
   <div class="field">
     <%= f.label :datavencimento %><br />
