@@ -1,26 +1,56 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-  <title>Misterbusinessfinance</title>
+  <title>Mister Business</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 
 <body>
-<table>
+
+<table border=1 height="750px" width="1550px">
  
-<tr>
+<tr height="5%">
+	<td>
     <b>Mister Business</b>
+	</td>
+	
+	<td>
+    Bem-vindo, Usuário
+	</td>
+	
 </tr>
-
-
-
+<tr height="90%" >
+	<td width="10%">
+		<table border = 1 height = "100%" width="100%>
+		
+			<tr height = "50%">
+				<td> Menus dos Módulos </td>
+			</tr>
+			
+			<tr height = "50%">
+				<td> Anúncio</td>
+			</tr>
+		
+		</table>	
+	</td>
+	<td width="90%">
+		  <div style="overflow:scroll;height:100%;width:100%;overflow:auto">
+				<%= yield %>
+		  </div>
+	</td>
+</tr>
+<tr height="5%" >
+	<td colspan = "2">
+    <b>MRBusiness. Todos os direitos reservados</b>
+	</td>
+</tr>
 
 
 </table>
 
-<%= yield %>
+
 
 </body>
 </html>

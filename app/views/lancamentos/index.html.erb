@@ -1,49 +1,63 @@
-﻿
-
-<table>
-  <tr>
-	<th></th>
-    <th>Descricao</th>
-    <th>Tipo</th>
-    <th>Datavencimento</th>
-    <th>Dataacao</th>
-    <th>Valor</th>
-    <th>Categoria</th>
-    <th>Centrodecusto</th>
-    <th>Status</th>
-    <th></th>
-    <th></th>
-    <th></th>
+﻿<table border = 1  height="100%" width="100%">
+   <tr height="60%">
+		<td width="34%">
+			<div style="overflow:scroll;height:100%;width:100%;overflow:auto">
+				<%= render 'form' %>
+			</div>
+		</td>
+		<td width="33%">
+			Notificações
+		</td>
+		<td width="33%">
+			Gráficos
+		</td>
   </tr>
-
-  <%= render 'form' %>
-  
-<% @lancamentos.each do |lancamento| %>
-  <tr>
-    <td><%= check_box lancamento.id, "checked" %></td>
-    <td><%= lancamento.descricao %></td>
-    <td><%= lancamento.tipo %></td>
-    <td><%= lancamento.datavencimento %></td>
-    <td><%= lancamento.dataacao %></td>
-    <td><%= lancamento.valor %></td>
-    <td><%= lancamento.categoria %></td>
-    <td><%= lancamento.centrodecusto %></td>
-    <td><%= lancamento.status %></td>
-    <td><%= link_to 'Edit', edit_lancamento_path(lancamento) %></td>
-    <td><%= link_to 'Destroy', lancamento, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-
-
-<tr>
-	<td> <%= button_tag 'Quitar' %> </td>
-	<td> <%= button_tag 'Estornar' %> </td>
-	<td> <%= button_tag 'Cancelar' %> </td>
-	
-</tr>
+  <tr height="30%"> 
+		<td colspan = 3>
+			<div style="overflow:scroll;height:100%;width:100%;overflow:auto">
+				<table height="100%" width="100%">
+				<tr>
+					<th></th>
+					<th>Descrição</th>
+					<th>Tipo</th>
+					<th>Vencimento</th>
+					<th>Data Ação</th>
+					<th>Valor </th>
+					<th>Categoria</th>
+					<th>Centro de Custo</th>
+					<th>Status</th>
+					<th>Editar</th>
+					<th>Remover</th>
+				</tr>
+				<% @lancamentos.each do |lancamento| %>
+				  <tr>
+					<td><%= check_box lancamento.id, "checked" %></td>
+					<td><%= lancamento.descricao %></td>
+					<td><%= lancamento.tipo %></td>
+					<td><%= lancamento.datavencimento %></td>
+					<td><%= lancamento.dataacao %></td>
+					<td><%= lancamento.valor %></td>
+					<td><%= lancamento.categoria %></td>
+					<td><%= lancamento.centrodecusto %></td>
+					<td><%= lancamento.status %></td>
+					<td><%= link_to 'Edit', edit_lancamento_path(lancamento) %></td>
+					<td><%= link_to 'Remover', lancamento, method: :delete, data: { } %></td>
+				  </tr>
+				<% end %>
+				</table>
+			
+			</div>
+		</td>
+   </tr>
+   
+   <tr height="10%">
+		<td align="middle" colspan = 3>
+			<button type="button">Quitar</button>
+			<button type="button">Estornar</button>
+			<button type="button">Cancelar</button>
+		</td>
+   </tr>
 
 </table>
-
-<br />
 
 
