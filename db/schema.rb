@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306005825) do
+ActiveRecord::Schema.define(:version => 20130306020144) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "ancestry"
+  end
+
+  add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
 
   create_table "lancamentos", :force => true do |t|
     t.string   "descricao"
@@ -19,11 +28,10 @@ ActiveRecord::Schema.define(:version => 20130306005825) do
     t.date     "datavencimento"
     t.date     "dataacao"
     t.float    "valor"
-    t.string   "categoria"
-    t.string   "centrodecusto"
     t.string   "status"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "category_id"
   end
 
 end

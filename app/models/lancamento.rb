@@ -1,8 +1,6 @@
 class Lancamento < ActiveRecord::Base
-  attr_accessible :categoria, :centrodecusto, :datavencimento, :descricao, :status, :tipo, :valor
-  
-  validates :categoria, :presence => true
-  validates :centrodecusto, :presence => true
+  attr_accessible :datavencimento, :descricao, :status, :tipo, :valor
+      
 #  validates :datavencimento, :presence => false
   validates :descricao, :presence => true
   validates :status, :presence => true
@@ -16,6 +14,10 @@ class Lancamento < ActiveRecord::Base
   before_validation :set_default_status_if_not_specified
   before_validation :set_default_datavencimento_if_not_specified
   before_validation :set_tipo_depending_valor
+  before_validation :set_default_valor_if_null
+  before_validation :set_default_categoria_if_null
+  
+  has_one :category
   
   
 # => 05-03-13 JH: Teste de função para gerar erro
@@ -34,12 +36,20 @@ class Lancamento < ActiveRecord::Base
   end
   
   def set_tipo_depending_valor
-    if self.valor < 0
+    if self.valor? and self.valor < 0
       if self.tipo == "Receita"
         self.tipo = "Despesa"
         self.valor = self.valor * -1
       end
     end
+  end
+  
+  def set_default_valor_if_null
+    self.valor = 0 if self.valor.blank?
+  end
+  
+  def set_default_categoria_if_null
+    self.category = Category.find(1) if self.category.blank?
   end
 end
 
