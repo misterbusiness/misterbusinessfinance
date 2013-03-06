@@ -5,6 +5,7 @@ class LancamentosController < ApplicationController
 	@lancamento = Lancamento.new
 	#Aqui iremos implementar os filtros, pelo que eu entendi.
     @lancamentos = Lancamento.all
+    @lancamentos = Lancamento.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -46,7 +47,7 @@ class LancamentosController < ApplicationController
 
     respond_to do |format|
       if @lancamento.save
-        #format.html { redirect_to @lancamento, notice: 'Lancamento was successfully created.' } Aqui iremos fazer a redireção direto para o index.
+        #format.html { redirect_to @lancamento, notice: 'Lancamento was successfully created.' } Aqui iremos fazer a redireï¿½ï¿½o direto para o index.
 		format.html { redirect_to '/lancamentos'}
         format.json { render json: @lancamento, status: :created, location: @lancamento }
       else
