@@ -1,5 +1,5 @@
 class CreateLancamentos < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :lancamentos do |t|
       t.string :descricao
       t.string :tipo
@@ -12,5 +12,8 @@ class CreateLancamentos < ActiveRecord::Migration
 
       t.timestamps
     end
+  end
+  def self.down
+    drop_table :lancamentos
   end
 end

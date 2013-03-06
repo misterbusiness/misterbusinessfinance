@@ -4,8 +4,7 @@ class LancamentosController < ApplicationController
   def index
 	@lancamento = Lancamento.new
 	#Aqui iremos implementar os filtros, pelo que eu entendi.
-    @lancamentos = Lancamento.all
-    @lancamentos = Lancamento.all
+    @lancamentos = Lancamento.all    
 
     respond_to do |format|
       format.html # index.html.erb

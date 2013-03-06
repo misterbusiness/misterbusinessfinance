@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228194148) do
+ActiveRecord::Schema.define(:version => 20130306005825) do
 
   create_table "lancamentos", :force => true do |t|
     t.string   "descricao"
     t.string   "tipo"
-    t.datetime "datavencimento"
-    t.datetime "dataacao"
+    t.date     "datavencimento"
+    t.date     "dataacao"
     t.float    "valor"
     t.string   "categoria"
     t.string   "centrodecusto"

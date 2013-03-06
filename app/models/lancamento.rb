@@ -1,3 +1,47 @@
 class Lancamento < ActiveRecord::Base
-  attr_accessible :categoria, :centrodecusto, :dataacao, :datavencimento, :descricao, :status, :tipo, :valor
+  attr_accessible :categoria, :centrodecusto, :datavencimento, :descricao, :status, :tipo, :valor
+  
+  validates :categoria, :presence => true
+  validates :centrodecusto, :presence => true
+#  validates :datavencimento, :presence => false
+  validates :descricao, :presence => true
+  validates :status, :presence => true
+  validates :tipo, :presence => true
+  validates :valor, :presence => true
+  
+  validates_inclusion_of :tipo, :in => ["Receita","Despesa"]
+  validates_inclusion_of :status, :in => ["Aberto","Quitado","Estornado","Cancelado"]
+    
+# => Preparação para as validações    
+  before_validation :set_default_status_if_not_specified
+  before_validation :set_default_datavencimento_if_not_specified
+  before_validation :set_tipo_depending_valor
+  
+  
+# => 05-03-13 JH: Teste de função para gerar erro
+#  before_validation :set_default_datavencimento_if_not_specified
+
+  private 
+
+  def set_default_status_if_not_specified
+    self.status = 'Aberto' if self.status.blank?
+  end
+  
+  def set_default_datavencimento_if_not_specified
+    self.datavencimento = Date.today if self.datavencimento.blank?
+# => 05-03-13 JH: Teste de função para gerar erro
+#     errors.add(:datavencimento, "Data nao pode ser vazia") if self.datavencimento.blank? 
+  end
+  
+  def set_tipo_depending_valor
+    if self.valor < 0
+      if self.tipo == "Receita"
+        self.tipo = "Despesa"
+        self.valor = self.valor * -1
+      end
+    end
+  end
 end
+
+
+#05-03-2013: Verificar como podemos usar enums no rails (evitar hard-code)
