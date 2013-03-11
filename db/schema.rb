@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130310161038) do
+ActiveRecord::Schema.define(:version => 20130311003140) do
 
   create_table "categories", :force => true do |t|
     t.string   "description"
@@ -22,16 +22,40 @@ ActiveRecord::Schema.define(:version => 20130310161038) do
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
 
+  create_table "centrodecustos", :force => true do |t|
+    t.string   "descricao"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "ancestry"
+  end
+
+  add_index "centrodecustos", ["ancestry"], :name => "index_centrodecustos_on_ancestry"
+
   create_table "lancamentos", :force => true do |t|
     t.string   "descricao"
     t.integer  "tipo_cd"
     t.date     "datavencimento"
     t.date     "dataacao"
-    t.decimal  "valor",          :precision => 9, :scale => 2
+    t.decimal  "valor",            :precision => 9, :scale => 2
     t.integer  "status_cd"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.integer  "category_id"
+    t.integer  "centrodecusto_id"
+  end
+
+  create_table "parcela_lancamentos", :force => true do |t|
+    t.integer  "indice"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "parcela_id"
+    t.integer  "lancamento_id"
+  end
+
+  create_table "parcelas", :force => true do |t|
+    t.integer  "num_parcelas"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
 end
