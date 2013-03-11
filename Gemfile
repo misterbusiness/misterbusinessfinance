@@ -1,14 +1,22 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
-gem 'mysql2'
 gem 'ancestry'
+gem 'simple_enum'
+gem 'configurable_engine'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+group :development, :test do
+#  gem 'sqlite3', '1.3.5'
+  gem 'mysql2'
+  gem 'rspec-rails', '2.11.0'
+  gem 'factory_girl_rails'
+end
+
 group :development do
-  gem 'sqlite3', '1.3.5'
+  gem 'annotate', '2.5.0'
 end
 
 
@@ -21,10 +29,14 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier', ' 1.2.3'
 end
 
 gem 'jquery-rails'
+
+group :test do
+  gem 'capybara', '1.1.2'
+end
 
 group :production do
   gem 'pg', '0.12.2'
