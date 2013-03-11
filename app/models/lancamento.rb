@@ -18,7 +18,7 @@ class Lancamento < ActiveRecord::Base
   before_validation :set_default_categoria_if_null
   
   has_one :category
-  
+  has_one :costcenter
   
 # => 05-03-13 JH: Teste de função para gerar erro
 #  before_validation :set_default_datavencimento_if_not_specified
