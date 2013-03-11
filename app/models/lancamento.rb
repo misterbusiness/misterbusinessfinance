@@ -35,14 +35,11 @@ class Lancamento < ActiveRecord::Base
   validates :datavencimento, :presence => true   
   validates :centrodecusto, :presence=> true
   
-<<<<<<< HEAD
-  has_one :category
-  has_one :costcenter
-=======
+
   validates_format_of :valor, :with => /^\d+\.*\d{0,2}$/
   validates :descricao, length: { maximum: 255 }
   
->>>>>>> eae583c9d8439f647460bbbf436ac2f25711c320
+
   
 # => 05-03-13 JH: Teste de função para gerar erro
 #  before_validation :set_default_datavencimento_if_not_specified

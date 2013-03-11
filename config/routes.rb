@@ -1,10 +1,6 @@
 Misterbusinessfinance::Application.routes.draw do
-<<<<<<< HEAD
-  resources :costcenters
-=======
-  resources :centrodecustos
->>>>>>> eae583c9d8439f647460bbbf436ac2f25711c320
 
+  resources :centrodecustos
 
   resources :categories
 
