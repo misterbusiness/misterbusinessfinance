@@ -1,4 +1,5 @@
 class Category < ActiveRecord::Base
+
   attr_accessible :descricao
   
   validates :descricao, :presence => true, :uniqueness => { :case_sensitive => false }

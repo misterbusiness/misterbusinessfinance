@@ -1,6 +1,6 @@
 Misterbusinessfinance::Application.routes.draw do
-  resources :centrodecustos
 
+  resources :centrodecustos
 
   resources :categories
 

@@ -2,6 +2,11 @@ class AddFkToLancamentos < ActiveRecord::Migration
   def change
     change_table :lancamentos do |t|
       t.references :category
-    end       
+    end
+
+    change_table :lancamentos do |t|
+      t.references :costcenter
+    end
+	
   end     
 end
