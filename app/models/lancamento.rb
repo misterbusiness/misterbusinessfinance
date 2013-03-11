@@ -5,8 +5,7 @@ class Lancamento < ActiveRecord::Base
 # 10-03-13 JH: Para queries a sintaxa é (nome_coluna)_cd => Lancamento.(nome_chave)
 #  validates_inclusion_of :tipo, :in => ["Receita","Despesa"]
 #  validates_inclusion_of :status, :in => ["Aberto","Quitado","Estornado","Cancelado"]
-  
-  # Engenharia detalhada: 3.1.1   
+    
   as_enum :tipo, [:receita, :despesa]
   as_enum :status, [:aberto, :quitado, :estornado, :cancelado]
   
@@ -16,7 +15,7 @@ class Lancamento < ActiveRecord::Base
   belongs_to :category
   belongs_to :centrodecusto
   
-  has_one :parcela_lancamento 
+  has_one :parcela_lancamento, :dependent => :destroy 
   has_one :parcela, :through => :parcela_lancamento
     
 # => Preparação para as validações    
@@ -54,8 +53,7 @@ class Lancamento < ActiveRecord::Base
 # => 05-03-13 JH: Teste de função para gerar erro
 #     errors.add(:datavencimento, "Data nao pode ser vazia") if self.datavencimento.blank? 
   end
-  
-  # Engenharia detalhada: 3.1.4
+    
   def set_tipo_depending_valor
     if self.valor? and self.valor < 0
       if self.tipo == :receita
@@ -74,11 +72,11 @@ class Lancamento < ActiveRecord::Base
   end
   
   def set_default_categoria_if_null
-    self.category = Category.find_by_description("Categoria vazia") if self.category.blank?
+    self.category = Category.find_by_descricao(Configurable.categoria_padrao) if self.category.blank?
   end
   
   def set_default_centrodecusto_if_null
-    self.centrodecusto = Centrodecusto.find_by_descricao("Centro de custo vazio") if self.centrodecusto.blank?
+    self.centrodecusto = Centrodecusto.find_by_descricao(Configurable.centrodecusto_padrao) if self.centrodecusto.blank?
   end
 end
 

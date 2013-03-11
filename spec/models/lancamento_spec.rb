@@ -4,7 +4,7 @@ describe Lancamento do
 #  fixtures :lancamentos
 
   before { @lancamento = Lancamento.new(descricao:"Lancamento de Teste", tipo: Lancamento.receita) }  
-  before { @cat = Category.new(description: "Categoria vazia") }
+  before { @cat = Category.new(descricao: "Categoria vazia") }
   before { @cat.save }
   before { @cdc = Centrodecusto.new(descricao: "Centro de custo vazio") }
   before { @cdc.save } 
@@ -53,7 +53,7 @@ describe Lancamento do
   describe "when categoria is not present" do 
     before { @lancamento.category = nil }
     before { @lancamento.save }
-    it { @lancamento.category.should eq(Category.find_by_description("Categoria vazia")) }
+    it { @lancamento.category.should eq(Category.find_by_descricao("Categoria vazia")) }
   end 
   
   describe "when centrodecusto is not present" do

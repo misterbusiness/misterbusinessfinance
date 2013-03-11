@@ -1,0 +1,16 @@
+05-03-2013 - JH - 	Configuração do git da conta joaohenriqueabreu apontando para o repo misterbusinessfinance
+					Configuração do mysql2 adapter, criação do banco e migrate
+					Configuração do heroku para a conta joaohenriqueabreu@gmail.com
+					Migração da versão atual para o heroku
+					Atualização do modelo de lançamentos
+#*************************************************************************************************#
+10-03-2013 - JH - 	Configurado RSpec
+					Atualizado modelo lançamento
+					Atualizado modelo categoria
+					Atualizado modelo centro de custo
+					Atualizado modelo parcela
+					Atualizado modelo parcela_lancamento
+					To Do: 	Comentários no codigo
+							Modelo Agendamento
+							Testes parcela, parcela_lancamento
+							Converter migrations para uma so
