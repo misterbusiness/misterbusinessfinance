@@ -3222,3 +3222,1094 @@ Served asset /application.js - 200 OK (6ms)
 
 Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 20:29:12 -0300
 Served asset /lancamentos.js - 200 OK (1ms)
+
+
+Started POST "/lancamentos" for 127.0.0.1 at 2013-03-11 20:54:55 -0300
+Processing by LancamentosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk=", "lancamento"=>{"descricao"=>"teste", "tipo"=>"Receita", "datavencimento(1i)"=>"2013", "datavencimento(2i)"=>"3", "datavencimento(3i)"=>"11", "datavencimento(4i)"=>"23", "datavencimento(5i)"=>"29", "dataacao(1i)"=>"2013", "dataacao(2i)"=>"3", "dataacao(3i)"=>"11", "dataacao(4i)"=>"23", "dataacao(5i)"=>"29", "valor"=>"15", "category"=>"", "centrodecusto"=>"", "status"=>""}, "commit"=>"Create Lancamento"}
+Completed 500 Internal Server Error in 3ms
+
+ActiveModel::MassAssignmentSecurity::Error (Can't mass-assign protected attributes: dataacao(1i), dataacao(2i), dataacao(3i), dataacao(4i), dataacao(5i), category, centrodecusto):
+  app/controllers/lancamentos_controller.rb:45:in `new'
+  app/controllers/lancamentos_controller.rb:45:in `create'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.5ms)
+
+
+Started POST "/lancamentos" for 127.0.0.1 at 2013-03-11 20:55:42 -0300
+Processing by LancamentosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk=", "lancamento"=>{"descricao"=>"teste", "tipo"=>"Receita", "datavencimento(1i)"=>"2013", "datavencimento(2i)"=>"3", "datavencimento(3i)"=>"11", "datavencimento(4i)"=>"23", "datavencimento(5i)"=>"29", "dataacao(1i)"=>"2013", "dataacao(2i)"=>"3", "dataacao(3i)"=>"11", "dataacao(4i)"=>"23", "dataacao(5i)"=>"29", "valor"=>"15", "category"=>"", "centrodecusto"=>"", "status"=>""}, "commit"=>"Create Lancamento"}
+Completed 500 Internal Server Error in 21ms
+
+ArgumentError (Invalid enumeration value: Receita):
+  app/controllers/lancamentos_controller.rb:45:in `new'
+  app/controllers/lancamentos_controller.rb:45:in `create'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.0ms)
+
+
+Started POST "/lancamentos" for 127.0.0.1 at 2013-03-11 20:57:07 -0300
+Processing by LancamentosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk=", "lancamento"=>{"descricao"=>"teste", "tipo"=>"Receita", "datavencimento(1i)"=>"2013", "datavencimento(2i)"=>"3", "datavencimento(3i)"=>"11", "datavencimento(4i)"=>"23", "datavencimento(5i)"=>"29", "dataacao(1i)"=>"2013", "dataacao(2i)"=>"3", "dataacao(3i)"=>"11", "dataacao(4i)"=>"23", "dataacao(5i)"=>"29", "valor"=>"15", "category"=>"", "centrodecusto"=>"", "status"=>""}, "commit"=>"Create Lancamento"}
+Completed 500 Internal Server Error in 0ms
+
+ArgumentError (Invalid enumeration value: Receita):
+  app/controllers/lancamentos_controller.rb:45:in `new'
+  app/controllers/lancamentos_controller.rb:45:in `create'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.6ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.2ms)
+Connecting to database specified by database.yml
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (93.1ms)[0m  DROP DATABASE IF EXISTS `mrbusinessfinance_test`
+  [1m[36m (0.3ms)[0m  [1mCREATE DATABASE `mrbusinessfinance_test` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (46.5ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `descricao` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `ancestry` varchar(255)) ENGINE=InnoDB
+  [1m[36m (49.9ms)[0m  [1mCREATE INDEX `index_categories_on_ancestry` ON `categories` (`ancestry`)[0m
+  [1m[35m (17.0ms)[0m  CREATE TABLE `centrodecustos` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `descricao` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `ancestry` varchar(255)) ENGINE=InnoDB
+  [1m[36m (46.6ms)[0m  [1mCREATE INDEX `index_centrodecustos_on_ancestry` ON `centrodecustos` (`ancestry`)[0m
+  [1m[35m (28.9ms)[0m  CREATE TABLE `configurables` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (73.7ms)[0m  [1mCREATE INDEX `index_configurables_on_name` ON `configurables` (`name`)[0m
+  [1m[35m (16.9ms)[0m  CREATE TABLE `costcenters` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `descricao` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (24.5ms)[0m  [1mCREATE TABLE `lancamentos` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `descricao` varchar(255), `tipo_cd` int(11), `datavencimento` date, `dataacao` date, `valor` decimal(9,2), `status_cd` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `category_id` int(11), `centrodecusto_id` int(11)) ENGINE=InnoDB[0m
+  [1m[35m (13.6ms)[0m  CREATE TABLE `parcela_lancamentos` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `indice` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `parcela_id` int(11), `lancamento_id` int(11)) ENGINE=InnoDB
+  [1m[36m (21.0ms)[0m  [1mCREATE TABLE `parcelas` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `num_parcelas` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (27.8ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (53.7ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (0.7ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (8.1ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130311222306')[0m
+  [1m[35m (6.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130311002957')
+  [1m[36m (7.1ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130306015213')[0m
+  [1m[35m (14.6ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130228194148')
+  [1m[36m (4.9ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130310143727')[0m
+  [1m[35m (5.2ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130311003140')
+  [1m[36m (5.7ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130311002000')[0m
+  [1m[35m (5.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130306005825')
+  [1m[36m (4.8ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130311000851')[0m
+  [1m[35m (4.4ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130310161038')
+  [1m[36m (9.9ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130310230314')[0m
+  [1m[35m (4.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130310143946')
+  [1m[36m (4.7ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130310224323')[0m
+  [1m[35m (5.7ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130306015348')
+  [1m[36m (6.5ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130310224434')[0m
+  [1m[35m (3.6ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130306020144')
+  [1m[36m (5.1ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130310230528')[0m
+  [1m[35m (3.1ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130310224035')
+  [1m[36m (6.6ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130306015835')[0m
+  [1m[35m (6.2ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130311220444')
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Processing by LancamentosController#new as HTML
+  [1m[36mCategory Load (0.5ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.3ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  Rendered lancamentos/_form.html.erb (34.3ms)
+  Rendered lancamentos/new.html.erb within layouts/application (35.4ms)
+Completed 200 OK in 100ms (Views: 55.2ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Served asset /application.css - 304 Not Modified (10ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Served asset /jquery.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:47:51 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Processing by LancamentosController#new as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.1ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  Rendered lancamentos/_form.html.erb (20.4ms)
+  Rendered lancamentos/new.html.erb within layouts/application (21.3ms)
+Completed 200 OK in 32ms (Views: 30.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:48:47 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Processing by LancamentosController#new as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.2ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  Rendered lancamentos/_form.html.erb (43.7ms)
+  Rendered lancamentos/new.html.erb within layouts/application (45.8ms)
+Completed 200 OK in 54ms (Views: 52.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Served asset /categories.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Served asset /centrodecustos.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:10 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.5ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.6ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` 
+  Rendered lancamentos/_form.html.erb (23.0ms)
+  Rendered lancamentos/new.html.erb within layouts/application (24.2ms)
+Completed 200 OK in 35ms (Views: 31.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:30 -0300
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Processing by LancamentosController#new as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.3ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  Rendered lancamentos/_form.html.erb (13.2ms)
+  Rendered lancamentos/new.html.erb within layouts/application (13.6ms)
+Completed 200 OK in 49ms (Views: 46.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Served asset /categories.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Served asset /categories.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:32 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.6ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.5ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (10.3ms)
+  Rendered lancamentos/new.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 25ms (Views: 21.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Served asset /jquery.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:42 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.2ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (16.6ms)
+  Rendered lancamentos/new.html.erb within layouts/application (17.6ms)
+Completed 200 OK in 29ms (Views: 26.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Served asset /application.css - 200 OK (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Served asset /categories.css - 200 OK (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Served asset /scaffolds.css - 200 OK (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Served asset /lancamentos.css - 200 OK (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Served asset /jquery.js - 200 OK (1ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Served asset /centrodecustos.css - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Served asset /centrodecustos.js - 200 OK (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Served asset /categories.js - 200 OK (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Served asset /lancamentos.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:56:47 -0300
+Served asset /application.js - 200 OK (1ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.2ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (12.0ms)
+  Rendered lancamentos/new.html.erb within layouts/application (13.2ms)
+Completed 200 OK in 21ms (Views: 19.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:22 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.5ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.5ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (29.1ms)
+  Rendered lancamentos/new.html.erb within layouts/application (30.2ms)
+Completed 200 OK in 46ms (Views: 41.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Served asset /jquery.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:30 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.6ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.6ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (25.3ms)
+  Rendered lancamentos/new.html.erb within layouts/application (26.6ms)
+Completed 200 OK in 40ms (Views: 35.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Served asset /application.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Served asset /categories.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:57:53 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:58:06 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.8ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (11.3ms)
+  Rendered lancamentos/new.html.erb within layouts/application (11.8ms)
+Completed 500 Internal Server Error in 23ms
+
+ActionView::Template::Error (undefined method `map' for nil:NilClass):
+    47:  -->
+    48:    <div class="field">
+    49:     <%= f.label :centrodecusto %><br />
+    50:     <%= f.collection_select(:centrodecusto, @centrodecusto, :id, :descricao) %>
+    51:   </div> 
+    52:  
+    53:  <!-- 
+  app/views/lancamentos/_form.html.erb:50:in `block in _app_views_lancamentos__form_html_erb__2696509285545065847_70150172758100'
+  app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb__2696509285545065847_70150172758100'
+  app/views/lancamentos/new.html.erb:3:in `_app_views_lancamentos_new_html_erb__3097457982734258155_70150171879980'
+  app/controllers/lancamentos_controller.rb:35:in `new'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.5ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (9.7ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:58:24 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.6ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.4ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (12.8ms)
+  Rendered lancamentos/new.html.erb within layouts/application (13.6ms)
+Completed 200 OK in 48ms (Views: 43.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:58:25 -0300
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:58:25 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:58:25 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:58:25 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:58:25 -0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:58:25 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:58:25 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:58:25 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:58:25 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:58:25 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:58:25 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.5ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.7ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (24.0ms)
+  Rendered lancamentos/new.html.erb within layouts/application (26.0ms)
+Completed 200 OK in 45ms (Views: 38.6ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:06 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started POST "/lancamentos" for 127.0.0.1 at 2013-03-11 21:59:22 -0300
+Processing by LancamentosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk=", "lancamento"=>{"descricao"=>"Lançamento de teste", "tipo"=>"0", "datavencimento(1i)"=>"2013", "datavencimento(2i)"=>"3", "datavencimento(3i)"=>"12", "datavencimento(4i)"=>"00", "datavencimento(5i)"=>"56", "valor"=>"17", "category"=>"4", "centrodecusto"=>"1", "status"=>""}, "commit"=>"Create Lancamento"}
+Completed 500 Internal Server Error in 1ms
+
+ArgumentError (Invalid enumeration value: 0):
+  app/controllers/lancamentos_controller.rb:49:in `new'
+  app/controllers/lancamentos_controller.rb:49:in `create'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.3ms)
+
+
+Started POST "/lancamentos" for 127.0.0.1 at 2013-03-11 21:59:50 -0300
+Processing by LancamentosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk=", "lancamento"=>{"descricao"=>"Lançamento de teste", "tipo"=>"0", "datavencimento(1i)"=>"2013", "datavencimento(2i)"=>"3", "datavencimento(3i)"=>"12", "datavencimento(4i)"=>"00", "datavencimento(5i)"=>"56", "valor"=>"17", "category"=>"4", "centrodecusto"=>"1", "status"=>""}, "commit"=>"Create Lancamento"}
+Completed 500 Internal Server Error in 1ms
+
+ArgumentError (Invalid enumeration value: 0):
+  app/controllers/lancamentos_controller.rb:49:in `new'
+  app/controllers/lancamentos_controller.rb:49:in `create'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.6ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.5ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.5ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (40.4ms)
+  Rendered lancamentos/new.html.erb within layouts/application (41.5ms)
+Completed 200 OK in 53ms (Views: 48.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Served asset /jquery.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 21:59:59 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started POST "/lancamentos" for 127.0.0.1 at 2013-03-11 22:00:03 -0300
+Processing by LancamentosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk=", "lancamento"=>{"descricao"=>"Lançamento de teste", "tipo"=>"despesa", "datavencimento(1i)"=>"2013", "datavencimento(2i)"=>"3", "datavencimento(3i)"=>"12", "datavencimento(4i)"=>"00", "datavencimento(5i)"=>"56", "valor"=>"17", "category"=>"4", "centrodecusto"=>"1", "status"=>""}, "commit"=>"Create Lancamento"}
+Completed 500 Internal Server Error in 1ms
+
+ActiveRecord::AssociationTypeMismatch (Category(#70150271828380) expected, got String(#8805740)):
+  app/controllers/lancamentos_controller.rb:49:in `new'
+  app/controllers/lancamentos_controller.rb:49:in `create'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.7ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.8ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.5ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.8ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (12.4ms)
+  Rendered lancamentos/new.html.erb within layouts/application (12.9ms)
+Completed 200 OK in 25ms (Views: 19.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Served asset /jquery.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 22:02:14 -0300
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started POST "/lancamentos" for 127.0.0.1 at 2013-03-11 22:02:16 -0300
+Processing by LancamentosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk=", "lancamento"=>{"descricao"=>"Lançamento de teste", "tipo"=>"despesa", "datavencimento(1i)"=>"2013", "datavencimento(2i)"=>"3", "datavencimento(3i)"=>"12", "datavencimento(4i)"=>"00", "datavencimento(5i)"=>"56", "valor"=>"17", "category_id"=>"2", "centrodecusto"=>"1", "status"=>""}, "commit"=>"Create Lancamento"}
+Completed 500 Internal Server Error in 0ms
+
+ActiveModel::MassAssignmentSecurity::Error (Can't mass-assign protected attributes: category_id):
+  app/controllers/lancamentos_controller.rb:49:in `new'
+  app/controllers/lancamentos_controller.rb:49:in `create'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.8ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (6.6ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 22:02:31 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.5ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.6ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (32.6ms)
+  Rendered lancamentos/new.html.erb within layouts/application (33.5ms)
+Completed 500 Internal Server Error in 41ms
+
+ActionView::Template::Error (#<#<Class:0x007f9a38262490>:0x000000037a6ec8 @_config={}, @view_renderer=#<ActionView::Renderer:0x000000037a8ef8 @lookup_context=#<ActionView::LookupContext:0x0000000368f030 @details_key=#<ActionView::LookupContext::DetailsKey:0x00000001f1b778 @hash=-1380893287802612807>, @details={:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :coffee]}, @skip_default_locale=false, @cache=true, @prefixes=["lancamentos", "application"], @rendered_format=:html, @view_paths=#<ActionView::PathSet:0x0000000368ef90 @paths=[/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views, /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/configurable_engine-0.2.9/app/views]>>, @_template_renderer=#<ActionView::TemplateRenderer:0x000000037a67c0 @lookup_context=#<ActionView::LookupContext:0x0000000368f030 @details_key=#<ActionView::LookupContext::DetailsKey:0x00000001f1b778 @hash=-1380893287802612807>, @details={:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :coffee]}, @skip_default_locale=false, @cache=true, @prefixes=["lancamentos", "application"], @rendered_format=:html, @view_paths=#<ActionView::PathSet:0x0000000368ef90 @paths=[/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views, /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/configurable_engine-0.2.9/app/views]>>, @view=#<#<Class:0x007f9a38262490>:0x000000037a6ec8 ...>, @details={}>, @_partial_renderer=#<ActionView::PartialRenderer:0x0000000351bf50 @lookup_context=#<ActionView::LookupContext:0x0000000368f030 @details_key=#<ActionView::LookupContext::DetailsKey:0x00000001f1b778 @hash=-1380893287802612807>, @details={:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :coffee]}, @skip_default_locale=false, @cache=true, @prefixes=["lancamentos", "application"], @rendered_format=:html, @view_paths=#<ActionView::PathSet:0x0000000368ef90 @paths=[/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views, /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/configurable_engine-0.2.9/app/views]>>, @context_prefix="lancamentos", @partial_names={}, @view=#<#<Class:0x007f9a38262490>:0x000000037a6ec8 ...>, @options={:partial=>"form", :locals=>{:form=>nil}}, @locals={:form=>nil}, @block=nil, @details={}, @object=nil, @path="form", @collection=nil, @variable=:form, @variable_counter=nil, @template=app/views/lancamentos/_form.html.erb>>, @_routes=nil, @lancamento=#<Lancamento id: nil, descricao: nil, tipo_cd: nil, datavencimento: nil, dataacao: nil, valor: nil, status_cd: nil, created_at: nil, updated_at: nil, category_id: nil, centrodecusto_id: nil>, @categorias=[#<Category id: 2, descricao: "Categoria vazia", created_at: "2013-03-10 23:53:17", updated_at: "2013-03-10 23:55:16", ancestry: nil>, #<Category id: 4, descricao: "Categoria teste", created_at: "2013-03-12 00:53:29", updated_at: "2013-03-12 00:53:29", ancestry: nil>], @centrosdecusto=[#<Centrodecusto id: 1, descricao: "Centro de custo vazio", created_at: "2013-03-10 23:53:44", updated_at: "2013-03-10 23:55:16", ancestry: nil>], @_assigns={"_routes"=>nil, "lancamento"=>#<Lancamento id: nil, descricao: nil, tipo_cd: nil, datavencimento: nil, dataacao: nil, valor: nil, status_cd: nil, created_at: nil, updated_at: nil, category_id: nil, centrodecusto_id: nil>, "categorias"=>[#<Category id: 2, descricao: "Categoria vazia", created_at: "2013-03-10 23:53:17", updated_at: "2013-03-10 23:55:16", ancestry: nil>, #<Category id: 4, descricao: "Categoria teste", created_at: "2013-03-12 00:53:29", updated_at: "2013-03-12 00:53:29", ancestry: nil>], "centrosdecusto"=>[#<Centrodecusto id: 1, descricao: "Centro de custo vazio", created_at: "2013-03-10 23:53:44", updated_at: "2013-03-10 23:55:16", ancestry: nil>]}, @_controller=#<LancamentosController:0x0000000368f5f8 @_routes=nil, @_action_has_layout=true, @_headers={"Content-Type"=>"text/html"}, @_status=200, @_request=#<ActionDispatch::Request:0x0000000368f4b8 @env={"GATEWAY_INTERFACE"=>"CGI/1.1", "PATH_INFO"=>"/lancamentos/new", "QUERY_STRING"=>"", "REMOTE_ADDR"=>"127.0.0.1", "REMOTE_HOST"=>"localhost", "REQUEST_METHOD"=>"GET", "REQUEST_URI"=>"http://127.0.0.1:3000/lancamentos/new", "SCRIPT_NAME"=>"", "SERVER_NAME"=>"127.0.0.1", "SERVER_PORT"=>"3000", "SERVER_PROTOCOL"=>"HTTP/1.1", "SERVER_SOFTWARE"=>"WEBrick/1.3.1 (Ruby/1.9.3/2012-04-20)", "HTTP_HOST"=>"127.0.0.1:3000", "HTTP_USER_AGENT"=>"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1", "HTTP_ACCEPT"=>"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "HTTP_ACCEPT_LANGUAGE"=>"pt-br,pt;q=0.8,en-us;q=0.5,en;q=0.3", "HTTP_ACCEPT_ENCODING"=>"gzip, deflate", "HTTP_CONNECTION"=>"keep-alive", "HTTP_COOKIE"=>"_misterbusinessfinance_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg%3D%3D--05d752ee4903a51f90b4ff305961ca04e29ad700", "HTTP_IF_NONE_MATCH"=>"\"c56cf5c869e172d6ec7b4e7805fcdee1\"", "HTTP_CACHE_CONTROL"=>"max-age=0", "rack.version"=>[1, 1], "rack.input"=>#<StringIO:0x0000000335fa18>, "rack.errors"=>#<IO:<STDERR>>, "rack.multithread"=>false, "rack.multiprocess"=>false, "rack.run_once"=>false, "rack.url_scheme"=>"http", "HTTP_VERSION"=>"HTTP/1.1", "REQUEST_PATH"=>"/lancamentos/new", "ORIGINAL_FULLPATH"=>"/lancamentos/new", "action_dispatch.routes"=>#<ActionDispatch::Routing::RouteSet:0x00000001383d98>, "action_dispatch.parameter_filter"=>[:password], "action_dispatch.secret_token"=>"ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", "action_dispatch.show_exceptions"=>true, "action_dispatch.show_detailed_exceptions"=>true, "action_dispatch.logger"=>#<ActiveSupport::TaggedLogging:0x00000001091c48 @logger=#<ActiveSupport::BufferedLogger:0x0000000108a330 @log_dest=#<File:/home/administrator/Documentos/Projetos/misterbusinessfinance/log/development.log>, @log=#<Logger:0x0000000108a308 @progname=nil, @level=0, @default_formatter=#<Logger::Formatter:0x0000000108a290 @datetime_format=nil>, @formatter=#<Logger::SimpleFormatter:0x00000001089f48 @datetime_format=nil>, @logdev=#<Logger::LogDevice:0x0000000108a0b0 @shift_size=nil, @shift_age=nil, @filename=nil, @dev=#<File:/home/administrator/Documentos/Projetos/misterbusinessfinance/log/development.log>, @mutex=#<Logger::LogDevice::LogDeviceMutex:0x0000000108a088 @mon_owner=nil, @mon_count=0, @mon_mutex=#<Mutex:0x0000000108a038>>>>>>, "action_dispatch.backtrace_cleaner"=>#<Rails::BacktraceCleaner:0x00000001496910 @filters=[#<Proc:0x000000014a1860@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:10>, #<Proc:0x000000014a10b8@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:11>, #<Proc:0x0000000149e778@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:12>, #<Proc:0x000000014ac328@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:26>], @silencers=[#<Proc:0x000000014ac2d8@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:15>]>, "action_dispatch.request_id"=>"0993f2d3c5748ee3f57a98bba8286210", "action_dispatch.remote_ip"=>127.0.0.1, "rack.session"=>{"session_id"=>"419881764c5f0de3b195328fb1da3f6f", "_csrf_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk="}, "rack.session.options"=>{:path=>"/", :domain=>nil, :expire_after=>nil, :secure=>false, :httponly=>true, :defer=>false, :renew=>false, :secret=>"e6d588c07e72203c3d61687381726462b7f4470329c610779e669440a95e", :coder=>#<Rack::Session::Cookie::Base64::Marshal:0x000000014a4ec0>, :id=>"419881764c5f0de3b195328fb1da3f6f"}, "rack.request.cookie_hash"=>{"_misterbusinessfinance_session"=>"BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg==--05d752ee4903a51f90b4ff305961ca04e29ad700"}, "rack.request.cookie_string"=>"_misterbusinessfinance_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg%3D%3D--05d752ee4903a51f90b4ff305961ca04e29ad700", "action_dispatch.cookies"=>#<ActionDispatch::Cookies::CookieJar:0x00000002a834d0 @secret="ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", @set_cookies={}, @delete_cookies={}, @host="127.0.0.1", @secure=false, @closed=false, @cookies={"_misterbusinessfinance_session"=>"BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg==--05d752ee4903a51f90b4ff305961ca04e29ad700"}, @signed=#<ActionDispatch::Cookies::SignedCookieJar:0x00000002cb7d28 @parent_jar=#<ActionDispatch::Cookies::CookieJar:0x00000002a834d0 ...>, @verifier=#<ActiveSupport::MessageVerifier:0x00000002cb7c10 @secret="ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", @digest="SHA1", @serializer=Marshal>>>, "action_dispatch.request.unsigned_session_cookie"=>{"session_id"=>"419881764c5f0de3b195328fb1da3f6f", "_csrf_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk="}, "action_dispatch.request.path_parameters"=>{:action=>"new", :controller=>"lancamentos"}, "action_controller.instance"=>#<LancamentosController:0x0000000368f5f8 ...>, "action_dispatch.request.content_type"=>nil, "action_dispatch.request.request_parameters"=>{}, "rack.request.query_string"=>"", "rack.request.query_hash"=>{}, "action_dispatch.request.query_parameters"=>{}, "action_dispatch.request.parameters"=>{"action"=>"new", "controller"=>"lancamentos"}, "action_dispatch.request.formats"=>[text/html]}, @request_method="GET", @filtered_parameters={"action"=>"new", "controller"=>"lancamentos"}, @method="GET", @fullpath="/lancamentos/new", @port=3000, @protocol="http://", @symbolized_path_params={:action=>"new", :controller=>"lancamentos"}>, @_response=#<ActionDispatch::Response:0x0000000368f490 @body=[], @header={}, @status=200, @sending_file=false, @blank=false, @cache_control={}, @etag=nil, @request=#<ActionDispatch::Request:0x0000000368f4b8 @env={"GATEWAY_INTERFACE"=>"CGI/1.1", "PATH_INFO"=>"/lancamentos/new", "QUERY_STRING"=>"", "REMOTE_ADDR"=>"127.0.0.1", "REMOTE_HOST"=>"localhost", "REQUEST_METHOD"=>"GET", "REQUEST_URI"=>"http://127.0.0.1:3000/lancamentos/new", "SCRIPT_NAME"=>"", "SERVER_NAME"=>"127.0.0.1", "SERVER_PORT"=>"3000", "SERVER_PROTOCOL"=>"HTTP/1.1", "SERVER_SOFTWARE"=>"WEBrick/1.3.1 (Ruby/1.9.3/2012-04-20)", "HTTP_HOST"=>"127.0.0.1:3000", "HTTP_USER_AGENT"=>"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1", "HTTP_ACCEPT"=>"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "HTTP_ACCEPT_LANGUAGE"=>"pt-br,pt;q=0.8,en-us;q=0.5,en;q=0.3", "HTTP_ACCEPT_ENCODING"=>"gzip, deflate", "HTTP_CONNECTION"=>"keep-alive", "HTTP_COOKIE"=>"_misterbusinessfinance_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg%3D%3D--05d752ee4903a51f90b4ff305961ca04e29ad700", "HTTP_IF_NONE_MATCH"=>"\"c56cf5c869e172d6ec7b4e7805fcdee1\"", "HTTP_CACHE_CONTROL"=>"max-age=0", "rack.version"=>[1, 1], "rack.input"=>#<StringIO:0x0000000335fa18>, "rack.errors"=>#<IO:<STDERR>>, "rack.multithread"=>false, "rack.multiprocess"=>false, "rack.run_once"=>false, "rack.url_scheme"=>"http", "HTTP_VERSION"=>"HTTP/1.1", "REQUEST_PATH"=>"/lancamentos/new", "ORIGINAL_FULLPATH"=>"/lancamentos/new", "action_dispatch.routes"=>#<ActionDispatch::Routing::RouteSet:0x00000001383d98>, "action_dispatch.parameter_filter"=>[:password], "action_dispatch.secret_token"=>"ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", "action_dispatch.show_exceptions"=>true, "action_dispatch.show_detailed_exceptions"=>true, "action_dispatch.logger"=>#<ActiveSupport::TaggedLogging:0x00000001091c48 @logger=#<ActiveSupport::BufferedLogger:0x0000000108a330 @log_dest=#<File:/home/administrator/Documentos/Projetos/misterbusinessfinance/log/development.log>, @log=#<Logger:0x0000000108a308 @progname=nil, @level=0, @default_formatter=#<Logger::Formatter:0x0000000108a290 @datetime_format=nil>, @formatter=#<Logger::SimpleFormatter:0x00000001089f48 @datetime_format=nil>, @logdev=#<Logger::LogDevice:0x0000000108a0b0 @shift_size=nil, @shift_age=nil, @filename=nil, @dev=#<File:/home/administrator/Documentos/Projetos/misterbusinessfinance/log/development.log>, @mutex=#<Logger::LogDevice::LogDeviceMutex:0x0000000108a088 @mon_owner=nil, @mon_count=0, @mon_mutex=#<Mutex:0x0000000108a038>>>>>>, "action_dispatch.backtrace_cleaner"=>#<Rails::BacktraceCleaner:0x00000001496910 @filters=[#<Proc:0x000000014a1860@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:10>, #<Proc:0x000000014a10b8@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:11>, #<Proc:0x0000000149e778@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:12>, #<Proc:0x000000014ac328@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:26>], @silencers=[#<Proc:0x000000014ac2d8@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:15>]>, "action_dispatch.request_id"=>"0993f2d3c5748ee3f57a98bba8286210", "action_dispatch.remote_ip"=>127.0.0.1, "rack.session"=>{"session_id"=>"419881764c5f0de3b195328fb1da3f6f", "_csrf_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk="}, "rack.session.options"=>{:path=>"/", :domain=>nil, :expire_after=>nil, :secure=>false, :httponly=>true, :defer=>false, :renew=>false, :secret=>"e6d588c07e72203c3d61687381726462b7f4470329c610779e669440a95e", :coder=>#<Rack::Session::Cookie::Base64::Marshal:0x000000014a4ec0>, :id=>"419881764c5f0de3b195328fb1da3f6f"}, "rack.request.cookie_hash"=>{"_misterbusinessfinance_session"=>"BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg==--05d752ee4903a51f90b4ff305961ca04e29ad700"}, "rack.request.cookie_string"=>"_misterbusinessfinance_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg%3D%3D--05d752ee4903a51f90b4ff305961ca04e29ad700", "action_dispatch.cookies"=>#<ActionDispatch::Cookies::CookieJar:0x00000002a834d0 @secret="ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", @set_cookies={}, @delete_cookies={}, @host="127.0.0.1", @secure=false, @closed=false, @cookies={"_misterbusinessfinance_session"=>"BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg==--05d752ee4903a51f90b4ff305961ca04e29ad700"}, @signed=#<ActionDispatch::Cookies::SignedCookieJar:0x00000002cb7d28 @parent_jar=#<ActionDispatch::Cookies::CookieJar:0x00000002a834d0 ...>, @verifier=#<ActiveSupport::MessageVerifier:0x00000002cb7c10 @secret="ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", @digest="SHA1", @serializer=Marshal>>>, "action_dispatch.request.unsigned_session_cookie"=>{"session_id"=>"419881764c5f0de3b195328fb1da3f6f", "_csrf_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk="}, "action_dispatch.request.path_parameters"=>{:action=>"new", :controller=>"lancamentos"}, "action_controller.instance"=>#<LancamentosController:0x0000000368f5f8 ...>, "action_dispatch.request.content_type"=>nil, "action_dispatch.request.request_parameters"=>{}, "rack.request.query_string"=>"", "rack.request.query_hash"=>{}, "action_dispatch.request.query_parameters"=>{}, "action_dispatch.request.parameters"=>{"action"=>"new", "controller"=>"lancamentos"}, "action_dispatch.request.formats"=>[text/html]}, @request_method="GET", @filtered_parameters={"action"=>"new", "controller"=>"lancamentos"}, @method="GET", @fullpath="/lancamentos/new", @port=3000, @protocol="http://", @symbolized_path_params={:action=>"new", :controller=>"lancamentos"}>, @content_type="text/html">, @_env={"GATEWAY_INTERFACE"=>"CGI/1.1", "PATH_INFO"=>"/lancamentos/new", "QUERY_STRING"=>"", "REMOTE_ADDR"=>"127.0.0.1", "REMOTE_HOST"=>"localhost", "REQUEST_METHOD"=>"GET", "REQUEST_URI"=>"http://127.0.0.1:3000/lancamentos/new", "SCRIPT_NAME"=>"", "SERVER_NAME"=>"127.0.0.1", "SERVER_PORT"=>"3000", "SERVER_PROTOCOL"=>"HTTP/1.1", "SERVER_SOFTWARE"=>"WEBrick/1.3.1 (Ruby/1.9.3/2012-04-20)", "HTTP_HOST"=>"127.0.0.1:3000", "HTTP_USER_AGENT"=>"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1", "HTTP_ACCEPT"=>"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "HTTP_ACCEPT_LANGUAGE"=>"pt-br,pt;q=0.8,en-us;q=0.5,en;q=0.3", "HTTP_ACCEPT_ENCODING"=>"gzip, deflate", "HTTP_CONNECTION"=>"keep-alive", "HTTP_COOKIE"=>"_misterbusinessfinance_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg%3D%3D--05d752ee4903a51f90b4ff305961ca04e29ad700", "HTTP_IF_NONE_MATCH"=>"\"c56cf5c869e172d6ec7b4e7805fcdee1\"", "HTTP_CACHE_CONTROL"=>"max-age=0", "rack.version"=>[1, 1], "rack.input"=>#<StringIO:0x0000000335fa18>, "rack.errors"=>#<IO:<STDERR>>, "rack.multithread"=>false, "rack.multiprocess"=>false, "rack.run_once"=>false, "rack.url_scheme"=>"http", "HTTP_VERSION"=>"HTTP/1.1", "REQUEST_PATH"=>"/lancamentos/new", "ORIGINAL_FULLPATH"=>"/lancamentos/new", "action_dispatch.routes"=>#<ActionDispatch::Routing::RouteSet:0x00000001383d98>, "action_dispatch.parameter_filter"=>[:password], "action_dispatch.secret_token"=>"ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", "action_dispatch.show_exceptions"=>true, "action_dispatch.show_detailed_exceptions"=>true, "action_dispatch.logger"=>#<ActiveSupport::TaggedLogging:0x00000001091c48 @logger=#<ActiveSupport::BufferedLogger:0x0000000108a330 @log_dest=#<File:/home/administrator/Documentos/Projetos/misterbusinessfinance/log/development.log>, @log=#<Logger:0x0000000108a308 @progname=nil, @level=0, @default_formatter=#<Logger::Formatter:0x0000000108a290 @datetime_format=nil>, @formatter=#<Logger::SimpleFormatter:0x00000001089f48 @datetime_format=nil>, @logdev=#<Logger::LogDevice:0x0000000108a0b0 @shift_size=nil, @shift_age=nil, @filename=nil, @dev=#<File:/home/administrator/Documentos/Projetos/misterbusinessfinance/log/development.log>, @mutex=#<Logger::LogDevice::LogDeviceMutex:0x0000000108a088 @mon_owner=nil, @mon_count=0, @mon_mutex=#<Mutex:0x0000000108a038>>>>>>, "action_dispatch.backtrace_cleaner"=>#<Rails::BacktraceCleaner:0x00000001496910 @filters=[#<Proc:0x000000014a1860@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:10>, #<Proc:0x000000014a10b8@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:11>, #<Proc:0x0000000149e778@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:12>, #<Proc:0x000000014ac328@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:26>], @silencers=[#<Proc:0x000000014ac2d8@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:15>]>, "action_dispatch.request_id"=>"0993f2d3c5748ee3f57a98bba8286210", "action_dispatch.remote_ip"=>127.0.0.1, "rack.session"=>{"session_id"=>"419881764c5f0de3b195328fb1da3f6f", "_csrf_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk="}, "rack.session.options"=>{:path=>"/", :domain=>nil, :expire_after=>nil, :secure=>false, :httponly=>true, :defer=>false, :renew=>false, :secret=>"e6d588c07e72203c3d61687381726462b7f4470329c610779e669440a95e", :coder=>#<Rack::Session::Cookie::Base64::Marshal:0x000000014a4ec0>, :id=>"419881764c5f0de3b195328fb1da3f6f"}, "rack.request.cookie_hash"=>{"_misterbusinessfinance_session"=>"BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg==--05d752ee4903a51f90b4ff305961ca04e29ad700"}, "rack.request.cookie_string"=>"_misterbusinessfinance_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg%3D%3D--05d752ee4903a51f90b4ff305961ca04e29ad700", "action_dispatch.cookies"=>#<ActionDispatch::Cookies::CookieJar:0x00000002a834d0 @secret="ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", @set_cookies={}, @delete_cookies={}, @host="127.0.0.1", @secure=false, @closed=false, @cookies={"_misterbusinessfinance_session"=>"BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg==--05d752ee4903a51f90b4ff305961ca04e29ad700"}, @signed=#<ActionDispatch::Cookies::SignedCookieJar:0x00000002cb7d28 @parent_jar=#<ActionDispatch::Cookies::CookieJar:0x00000002a834d0 ...>, @verifier=#<ActiveSupport::MessageVerifier:0x00000002cb7c10 @secret="ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", @digest="SHA1", @serializer=Marshal>>>, "action_dispatch.request.unsigned_session_cookie"=>{"session_id"=>"419881764c5f0de3b195328fb1da3f6f", "_csrf_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk="}, "action_dispatch.request.path_parameters"=>{:action=>"new", :controller=>"lancamentos"}, "action_controller.instance"=>#<LancamentosController:0x0000000368f5f8 ...>, "action_dispatch.request.content_type"=>nil, "action_dispatch.request.request_parameters"=>{}, "rack.request.query_string"=>"", "rack.request.query_hash"=>{}, "action_dispatch.request.query_parameters"=>{}, "action_dispatch.request.parameters"=>{"action"=>"new", "controller"=>"lancamentos"}, "action_dispatch.request.formats"=>[text/html]}, @_prefixes=["lancamentos", "application"], @_lookup_context=#<ActionView::LookupContext:0x0000000368f030 @details_key=#<ActionView::LookupContext::DetailsKey:0x00000001f1b778 @hash=-1380893287802612807>, @details={:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :coffee]}, @skip_default_locale=false, @cache=true, @prefixes=["lancamentos", "application"], @rendered_format=:html, @view_paths=#<ActionView::PathSet:0x0000000368ef90 @paths=[/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views, /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/configurable_engine-0.2.9/app/views]>>, @_action_name="new", @_response_body=nil, @_config={}, @lancamento=#<Lancamento id: nil, descricao: nil, tipo_cd: nil, datavencimento: nil, dataacao: nil, valor: nil, status_cd: nil, created_at: nil, updated_at: nil, category_id: nil, centrodecusto_id: nil>, @categorias=[#<Category id: 2, descricao: "Categoria vazia", created_at: "2013-03-10 23:53:17", updated_at: "2013-03-10 23:55:16", ancestry: nil>, #<Category id: 4, descricao: "Categoria teste", created_at: "2013-03-12 00:53:29", updated_at: "2013-03-12 00:53:29", ancestry: nil>], @centrosdecusto=[#<Centrodecusto id: 1, descricao: "Centro de custo vazio", created_at: "2013-03-10 23:53:44", updated_at: "2013-03-10 23:55:16", ancestry: nil>], @_view_renderer=#<ActionView::Renderer:0x000000037a8ef8 @lookup_context=#<ActionView::LookupContext:0x0000000368f030 @details_key=#<ActionView::LookupContext::DetailsKey:0x00000001f1b778 @hash=-1380893287802612807>, @details={:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :coffee]}, @skip_default_locale=false, @cache=true, @prefixes=["lancamentos", "application"], @rendered_format=:html, @view_paths=#<ActionView::PathSet:0x0000000368ef90 @paths=[/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views, /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/configurable_engine-0.2.9/app/views]>>, @_template_renderer=#<ActionView::TemplateRenderer:0x000000037a67c0 @lookup_context=#<ActionView::LookupContext:0x0000000368f030 @details_key=#<ActionView::LookupContext::DetailsKey:0x00000001f1b778 @hash=-1380893287802612807>, @details={:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :coffee]}, @skip_default_locale=false, @cache=true, @prefixes=["lancamentos", "application"], @rendered_format=:html, @view_paths=#<ActionView::PathSet:0x0000000368ef90 @paths=[/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views, /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/configurable_engine-0.2.9/app/views]>>, @view=#<#<Class:0x007f9a38262490>:0x000000037a6ec8 ...>, @details={}>, @_partial_renderer=#<ActionView::PartialRenderer:0x0000000351bf50 @lookup_context=#<ActionView::LookupContext:0x0000000368f030 @details_key=#<ActionView::LookupContext::DetailsKey:0x00000001f1b778 @hash=-1380893287802612807>, @details={:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :coffee]}, @skip_default_locale=false, @cache=true, @prefixes=["lancamentos", "application"], @rendered_format=:html, @view_paths=#<ActionView::PathSet:0x0000000368ef90 @paths=[/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views, /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/configurable_engine-0.2.9/app/views]>>, @context_prefix="lancamentos", @partial_names={}, @view=#<#<Class:0x007f9a38262490>:0x000000037a6ec8 ...>, @options={:partial=>"form", :locals=>{:form=>nil}}, @locals={:form=>nil}, @block=nil, @details={}, @object=nil, @path="form", @collection=nil, @variable=:form, @variable_counter=nil, @template=app/views/lancamentos/_form.html.erb>>, @_view_context_class=#<Class:0x007f9a38262490>, @_url_options={:host=>"127.0.0.1", :port=>3000, :protocol=>"http://", :_path_segments=>{:action=>"new", :controller=>"lancamentos"}}>, @_request=#<ActionDispatch::Request:0x0000000368f4b8 @env={"GATEWAY_INTERFACE"=>"CGI/1.1", "PATH_INFO"=>"/lancamentos/new", "QUERY_STRING"=>"", "REMOTE_ADDR"=>"127.0.0.1", "REMOTE_HOST"=>"localhost", "REQUEST_METHOD"=>"GET", "REQUEST_URI"=>"http://127.0.0.1:3000/lancamentos/new", "SCRIPT_NAME"=>"", "SERVER_NAME"=>"127.0.0.1", "SERVER_PORT"=>"3000", "SERVER_PROTOCOL"=>"HTTP/1.1", "SERVER_SOFTWARE"=>"WEBrick/1.3.1 (Ruby/1.9.3/2012-04-20)", "HTTP_HOST"=>"127.0.0.1:3000", "HTTP_USER_AGENT"=>"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1", "HTTP_ACCEPT"=>"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "HTTP_ACCEPT_LANGUAGE"=>"pt-br,pt;q=0.8,en-us;q=0.5,en;q=0.3", "HTTP_ACCEPT_ENCODING"=>"gzip, deflate", "HTTP_CONNECTION"=>"keep-alive", "HTTP_COOKIE"=>"_misterbusinessfinance_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg%3D%3D--05d752ee4903a51f90b4ff305961ca04e29ad700", "HTTP_IF_NONE_MATCH"=>"\"c56cf5c869e172d6ec7b4e7805fcdee1\"", "HTTP_CACHE_CONTROL"=>"max-age=0", "rack.version"=>[1, 1], "rack.input"=>#<StringIO:0x0000000335fa18>, "rack.errors"=>#<IO:<STDERR>>, "rack.multithread"=>false, "rack.multiprocess"=>false, "rack.run_once"=>false, "rack.url_scheme"=>"http", "HTTP_VERSION"=>"HTTP/1.1", "REQUEST_PATH"=>"/lancamentos/new", "ORIGINAL_FULLPATH"=>"/lancamentos/new", "action_dispatch.routes"=>#<ActionDispatch::Routing::RouteSet:0x00000001383d98>, "action_dispatch.parameter_filter"=>[:password], "action_dispatch.secret_token"=>"ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", "action_dispatch.show_exceptions"=>true, "action_dispatch.show_detailed_exceptions"=>true, "action_dispatch.logger"=>#<ActiveSupport::TaggedLogging:0x00000001091c48 @logger=#<ActiveSupport::BufferedLogger:0x0000000108a330 @log_dest=#<File:/home/administrator/Documentos/Projetos/misterbusinessfinance/log/development.log>, @log=#<Logger:0x0000000108a308 @progname=nil, @level=0, @default_formatter=#<Logger::Formatter:0x0000000108a290 @datetime_format=nil>, @formatter=#<Logger::SimpleFormatter:0x00000001089f48 @datetime_format=nil>, @logdev=#<Logger::LogDevice:0x0000000108a0b0 @shift_size=nil, @shift_age=nil, @filename=nil, @dev=#<File:/home/administrator/Documentos/Projetos/misterbusinessfinance/log/development.log>, @mutex=#<Logger::LogDevice::LogDeviceMutex:0x0000000108a088 @mon_owner=nil, @mon_count=0, @mon_mutex=#<Mutex:0x0000000108a038>>>>>>, "action_dispatch.backtrace_cleaner"=>#<Rails::BacktraceCleaner:0x00000001496910 @filters=[#<Proc:0x000000014a1860@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:10>, #<Proc:0x000000014a10b8@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:11>, #<Proc:0x0000000149e778@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:12>, #<Proc:0x000000014ac328@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:26>], @silencers=[#<Proc:0x000000014ac2d8@/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/backtrace_cleaner.rb:15>]>, "action_dispatch.request_id"=>"0993f2d3c5748ee3f57a98bba8286210", "action_dispatch.remote_ip"=>127.0.0.1, "rack.session"=>{"session_id"=>"419881764c5f0de3b195328fb1da3f6f", "_csrf_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk="}, "rack.session.options"=>{:path=>"/", :domain=>nil, :expire_after=>nil, :secure=>false, :httponly=>true, :defer=>false, :renew=>false, :secret=>"e6d588c07e72203c3d61687381726462b7f4470329c610779e669440a95e", :coder=>#<Rack::Session::Cookie::Base64::Marshal:0x000000014a4ec0>, :id=>"419881764c5f0de3b195328fb1da3f6f"}, "rack.request.cookie_hash"=>{"_misterbusinessfinance_session"=>"BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg==--05d752ee4903a51f90b4ff305961ca04e29ad700"}, "rack.request.cookie_string"=>"_misterbusinessfinance_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg%3D%3D--05d752ee4903a51f90b4ff305961ca04e29ad700", "action_dispatch.cookies"=>#<ActionDispatch::Cookies::CookieJar:0x00000002a834d0 @secret="ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", @set_cookies={}, @delete_cookies={}, @host="127.0.0.1", @secure=false, @closed=false, @cookies={"_misterbusinessfinance_session"=>"BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTQxOTg4MTc2NGM1ZjBkZTNiMTk1MzI4ZmIxZGEzZjZmBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlEbWpVT2VTckwweS91YUdJbmh3WUZtYVlGbjFhVWYwUGVlQ1dzekppYms9BjsARg==--05d752ee4903a51f90b4ff305961ca04e29ad700"}, @signed=#<ActionDispatch::Cookies::SignedCookieJar:0x00000002cb7d28 @parent_jar=#<ActionDispatch::Cookies::CookieJar:0x00000002a834d0 ...>, @verifier=#<ActiveSupport::MessageVerifier:0x00000002cb7c10 @secret="ae1ca12f21d013bd02be476f241f710be15afd9ea5a1e336e8f7091876dd3f430fbf94180a777e7a7cf5b18bc47d8ddcd7da9d1d382f7d91441d78056f15c2a3", @digest="SHA1", @serializer=Marshal>>>, "action_dispatch.request.unsigned_session_cookie"=>{"session_id"=>"419881764c5f0de3b195328fb1da3f6f", "_csrf_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk="}, "action_dispatch.request.path_parameters"=>{:action=>"new", :controller=>"lancamentos"}, "action_controller.instance"=>#<LancamentosController:0x0000000368f5f8 @_routes=nil, @_action_has_layout=true, @_headers={"Content-Type"=>"text/html"}, @_status=200, @_request=#<ActionDispatch::Request:0x0000000368f4b8 ...>, @_response=#<ActionDispatch::Response:0x0000000368f490 @body=[], @header={}, @status=200, @sending_file=false, @blank=false, @cache_control={}, @etag=nil, @request=#<ActionDispatch::Request:0x0000000368f4b8 ...>, @content_type="text/html">, @_env={...}, @_prefixes=["lancamentos", "application"], @_lookup_context=#<ActionView::LookupContext:0x0000000368f030 @details_key=#<ActionView::LookupContext::DetailsKey:0x00000001f1b778 @hash=-1380893287802612807>, @details={:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :coffee]}, @skip_default_locale=false, @cache=true, @prefixes=["lancamentos", "application"], @rendered_format=:html, @view_paths=#<ActionView::PathSet:0x0000000368ef90 @paths=[/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views, /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/configurable_engine-0.2.9/app/views]>>, @_action_name="new", @_response_body=nil, @_config={}, @lancamento=#<Lancamento id: nil, descricao: nil, tipo_cd: nil, datavencimento: nil, dataacao: nil, valor: nil, status_cd: nil, created_at: nil, updated_at: nil, category_id: nil, centrodecusto_id: nil>, @categorias=[#<Category id: 2, descricao: "Categoria vazia", created_at: "2013-03-10 23:53:17", updated_at: "2013-03-10 23:55:16", ancestry: nil>, #<Category id: 4, descricao: "Categoria teste", created_at: "2013-03-12 00:53:29", updated_at: "2013-03-12 00:53:29", ancestry: nil>], @centrosdecusto=[#<Centrodecusto id: 1, descricao: "Centro de custo vazio", created_at: "2013-03-10 23:53:44", updated_at: "2013-03-10 23:55:16", ancestry: nil>], @_view_renderer=#<ActionView::Renderer:0x000000037a8ef8 @lookup_context=#<ActionView::LookupContext:0x0000000368f030 @details_key=#<ActionView::LookupContext::DetailsKey:0x00000001f1b778 @hash=-1380893287802612807>, @details={:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :coffee]}, @skip_default_locale=false, @cache=true, @prefixes=["lancamentos", "application"], @rendered_format=:html, @view_paths=#<ActionView::PathSet:0x0000000368ef90 @paths=[/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views, /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/configurable_engine-0.2.9/app/views]>>, @_template_renderer=#<ActionView::TemplateRenderer:0x000000037a67c0 @lookup_context=#<ActionView::LookupContext:0x0000000368f030 @details_key=#<ActionView::LookupContext::DetailsKey:0x00000001f1b778 @hash=-1380893287802612807>, @details={:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :coffee]}, @skip_default_locale=false, @cache=true, @prefixes=["lancamentos", "application"], @rendered_format=:html, @view_paths=#<ActionView::PathSet:0x0000000368ef90 @paths=[/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views, /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/configurable_engine-0.2.9/app/views]>>, @view=#<#<Class:0x007f9a38262490>:0x000000037a6ec8 ...>, @details={}>, @_partial_renderer=#<ActionView::PartialRenderer:0x0000000351bf50 @lookup_context=#<ActionView::LookupContext:0x0000000368f030 @details_key=#<ActionView::LookupContext::DetailsKey:0x00000001f1b778 @hash=-1380893287802612807>, @details={:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :coffee]}, @skip_default_locale=false, @cache=true, @prefixes=["lancamentos", "application"], @rendered_format=:html, @view_paths=#<ActionView::PathSet:0x0000000368ef90 @paths=[/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views, /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/configurable_engine-0.2.9/app/views]>>, @context_prefix="lancamentos", @partial_names={}, @view=#<#<Class:0x007f9a38262490>:0x000000037a6ec8 ...>, @options={:partial=>"form", :locals=>{:form=>nil}}, @locals={:form=>nil}, @block=nil, @details={}, @object=nil, @path="form", @collection=nil, @variable=:form, @variable_counter=nil, @template=app/views/lancamentos/_form.html.erb>>, @_view_context_class=#<Class:0x007f9a38262490>, @_url_options={:host=>"127.0.0.1", :port=>3000, :protocol=>"http://", :_path_segments=>{:action=>"new", :controller=>"lancamentos"}}>, "action_dispatch.request.content_type"=>nil, "action_dispatch.request.request_parameters"=>{}, "rack.request.query_string"=>"", "rack.request.query_hash"=>{}, "action_dispatch.request.query_parameters"=>{}, "action_dispatch.request.parameters"=>{"action"=>"new", "controller"=>"lancamentos"}, "action_dispatch.request.formats"=>[text/html]}, @request_method="GET", @filtered_parameters={"action"=>"new", "controller"=>"lancamentos"}, @method="GET", @fullpath="/lancamentos/new", @port=3000, @protocol="http://", @symbolized_path_params={:action=>"new", :controller=>"lancamentos"}>, @view_flow=#<ActionView::OutputFlow:0x000000037a6860 @content={}>, @output_buffer="\n\n  <div class=\"field\">\n    <label for=\"lancamento_descricao\">Descricao</label><br />\n    <input id=\"lancamento_descricao\" name=\"lancamento[descricao]\" size=\"30\" type=\"text\" />\n  </div>\n  <div class=\"field\">\n    <label for=\"lancamento_tipo\">Tipo</label><br />\n    <input id=\"lancamento_tipo_receita\" name=\"lancamento[tipo]\" type=\"radio\" value=\"receita\" /> <label for=\"lancamento_tipo\">Receita</label> \n    <input id=\"lancamento_tipo_despesa\" name=\"lancamento[tipo]\" type=\"radio\" value=\"despesa\" /> <label for=\"lancamento_tipo\">Despesa</label>\n  </div>\n  <div class=\"field\">\n    <label for=\"lancamento_datavencimento\">Datavencimento</label><br />\n    <select id=\"lancamento_datavencimento_1i\" name=\"lancamento[datavencimento(1i)]\">\n<option value=\"2008\">2008</option>\n<option value=\"2009\">2009</option>\n<option value=\"2010\">2010</option>\n<option value=\"2011\">2011</option>\n<option value=\"2012\">2012</option>\n<option selected=\"selected\" value=\"2013\">2013</option>\n<option value=\"2014\">2014</option>\n<option value=\"2015\">2015</option>\n<option value=\"2016\">2016</option>\n<option value=\"2017\">2017</option>\n<option value=\"2018\">2018</option>\n</select>\n<select id=\"lancamento_datavencimento_2i\" name=\"lancamento[datavencimento(2i)]\">\n<option value=\"1\">January</option>\n<option value=\"2\">February</option>\n<option selected=\"selected\" value=\"3\">March</option>\n<option value=\"4\">April</option>\n<option value=\"5\">May</option>\n<option value=\"6\">June</option>\n<option value=\"7\">July</option>\n<option value=\"8\">August</option>\n<option value=\"9\">September</option>\n<option value=\"10\">October</option>\n<option value=\"11\">November</option>\n<option value=\"12\">December</option>\n</select>\n<select id=\"lancamento_datavencimento_3i\" name=\"lancamento[datavencimento(3i)]\">\n<option value=\"1\">1</option>\n<option value=\"2\">2</option>\n<option value=\"3\">3</option>\n<option value=\"4\">4</option>\n<option value=\"5\">5</option>\n<option value=\"6\">6</option>\n<option value=\"7\">7</option>\n<option value=\"8\">8</option>\n<option value=\"9\">9</option>\n<option value=\"10\">10</option>\n<option value=\"11\">11</option>\n<option selected=\"selected\" value=\"12\">12</option>\n<option value=\"13\">13</option>\n<option value=\"14\">14</option>\n<option value=\"15\">15</option>\n<option value=\"16\">16</option>\n<option value=\"17\">17</option>\n<option value=\"18\">18</option>\n<option value=\"19\">19</option>\n<option value=\"20\">20</option>\n<option value=\"21\">21</option>\n<option value=\"22\">22</option>\n<option value=\"23\">23</option>\n<option value=\"24\">24</option>\n<option value=\"25\">25</option>\n<option value=\"26\">26</option>\n<option value=\"27\">27</option>\n<option value=\"28\">28</option>\n<option value=\"29\">29</option>\n<option value=\"30\">30</option>\n<option value=\"31\">31</option>\n</select>\n &mdash; <select id=\"lancamento_datavencimento_4i\" name=\"lancamento[datavencimento(4i)]\">\n<option value=\"00\">00</option>\n<option selected=\"selected\" value=\"01\">01</option>\n<option value=\"02\">02</option>\n<option value=\"03\">03</option>\n<option value=\"04\">04</option>\n<option value=\"05\">05</option>\n<option value=\"06\">06</option>\n<option value=\"07\">07</option>\n<option value=\"08\">08</option>\n<option value=\"09\">09</option>\n<option value=\"10\">10</option>\n<option value=\"11\">11</option>\n<option value=\"12\">12</option>\n<option value=\"13\">13</option>\n<option value=\"14\">14</option>\n<option value=\"15\">15</option>\n<option value=\"16\">16</option>\n<option value=\"17\">17</option>\n<option value=\"18\">18</option>\n<option value=\"19\">19</option>\n<option value=\"20\">20</option>\n<option value=\"21\">21</option>\n<option value=\"22\">22</option>\n<option value=\"23\">23</option>\n</select>\n : <select id=\"lancamento_datavencimento_5i\" name=\"lancamento[datavencimento(5i)]\">\n<option value=\"00\">00</option>\n<option value=\"01\">01</option>\n<option selected=\"selected\" value=\"02\">02</option>\n<option value=\"03\">03</option>\n<option value=\"04\">04</option>\n<option value=\"05\">05</option>\n<option value=\"06\">06</option>\n<option value=\"07\">07</option>\n<option value=\"08\">08</option>\n<option value=\"09\">09</option>\n<option value=\"10\">10</option>\n<option value=\"11\">11</option>\n<option value=\"12\">12</option>\n<option value=\"13\">13</option>\n<option value=\"14\">14</option>\n<option value=\"15\">15</option>\n<option value=\"16\">16</option>\n<option value=\"17\">17</option>\n<option value=\"18\">18</option>\n<option value=\"19\">19</option>\n<option value=\"20\">20</option>\n<option value=\"21\">21</option>\n<option value=\"22\">22</option>\n<option value=\"23\">23</option>\n<option value=\"24\">24</option>\n<option value=\"25\">25</option>\n<option value=\"26\">26</option>\n<option value=\"27\">27</option>\n<option value=\"28\">28</option>\n<option value=\"29\">29</option>\n<option value=\"30\">30</option>\n<option value=\"31\">31</option>\n<option value=\"32\">32</option>\n<option value=\"33\">33</option>\n<option value=\"34\">34</option>\n<option value=\"35\">35</option>\n<option value=\"36\">36</option>\n<option value=\"37\">37</option>\n<option value=\"38\">38</option>\n<option value=\"39\">39</option>\n<option value=\"40\">40</option>\n<option value=\"41\">41</option>\n<option value=\"42\">42</option>\n<option value=\"43\">43</option>\n<option value=\"44\">44</option>\n<option value=\"45\">45</option>\n<option value=\"46\">46</option>\n<option value=\"47\">47</option>\n<option value=\"48\">48</option>\n<option value=\"49\">49</option>\n<option value=\"50\">50</option>\n<option value=\"51\">51</option>\n<option value=\"52\">52</option>\n<option value=\"53\">53</option>\n<option value=\"54\">54</option>\n<option value=\"55\">55</option>\n<option value=\"56\">56</option>\n<option value=\"57\">57</option>\n<option value=\"58\">58</option>\n<option value=\"59\">59</option>\n</select>\n\n  </div>\n<!--  \n  <div class=\"field\">\n    <label for=\"lancamento_dataacao\">Dataacao</label><br />\n    <select id=\"lancamento_dataacao_1i\" name=\"lancamento[dataacao(1i)]\">\n<option value=\"2008\">2008</option>\n<option value=\"2009\">2009</option>\n<option value=\"2010\">2010</option>\n<option value=\"2011\">2011</option>\n<option value=\"2012\">2012</option>\n<option selected=\"selected\" value=\"2013\">2013</option>\n<option value=\"2014\">2014</option>\n<option value=\"2015\">2015</option>\n<option value=\"2016\">2016</option>\n<option value=\"2017\">2017</option>\n<option value=\"2018\">2018</option>\n</select>\n<select id=\"lancamento_dataacao_2i\" name=\"lancamento[dataacao(2i)]\">\n<option value=\"1\">January</option>\n<option value=\"2\">February</option>\n<option selected=\"selected\" value=\"3\">March</option>\n<option value=\"4\">April</option>\n<option value=\"5\">May</option>\n<option value=\"6\">June</option>\n<option value=\"7\">July</option>\n<option value=\"8\">August</option>\n<option value=\"9\">September</option>\n<option value=\"10\">October</option>\n<option value=\"11\">November</option>\n<option value=\"12\">December</option>\n</select>\n<select id=\"lancamento_dataacao_3i\" name=\"lancamento[dataacao(3i)]\">\n<option value=\"1\">1</option>\n<option value=\"2\">2</option>\n<option value=\"3\">3</option>\n<option value=\"4\">4</option>\n<option value=\"5\">5</option>\n<option value=\"6\">6</option>\n<option value=\"7\">7</option>\n<option value=\"8\">8</option>\n<option value=\"9\">9</option>\n<option value=\"10\">10</option>\n<option value=\"11\">11</option>\n<option selected=\"selected\" value=\"12\">12</option>\n<option value=\"13\">13</option>\n<option value=\"14\">14</option>\n<option value=\"15\">15</option>\n<option value=\"16\">16</option>\n<option value=\"17\">17</option>\n<option value=\"18\">18</option>\n<option value=\"19\">19</option>\n<option value=\"20\">20</option>\n<option value=\"21\">21</option>\n<option value=\"22\">22</option>\n<option value=\"23\">23</option>\n<option value=\"24\">24</option>\n<option value=\"25\">25</option>\n<option value=\"26\">26</option>\n<option value=\"27\">27</option>\n<option value=\"28\">28</option>\n<option value=\"29\">29</option>\n<option value=\"30\">30</option>\n<option value=\"31\">31</option>\n</select>\n &mdash; <select id=\"lancamento_dataacao_4i\" name=\"lancamento[dataacao(4i)]\">\n<option value=\"00\">00</option>\n<option selected=\"selected\" value=\"01\">01</option>\n<option value=\"02\">02</option>\n<option value=\"03\">03</option>\n<option value=\"04\">04</option>\n<option value=\"05\">05</option>\n<option value=\"06\">06</option>\n<option value=\"07\">07</option>\n<option value=\"08\">08</option>\n<option value=\"09\">09</option>\n<option value=\"10\">10</option>\n<option value=\"11\">11</option>\n<option value=\"12\">12</option>\n<option value=\"13\">13</option>\n<option value=\"14\">14</option>\n<option value=\"15\">15</option>\n<option value=\"16\">16</option>\n<option value=\"17\">17</option>\n<option value=\"18\">18</option>\n<option value=\"19\">19</option>\n<option value=\"20\">20</option>\n<option value=\"21\">21</option>\n<option value=\"22\">22</option>\n<option value=\"23\">23</option>\n</select>\n : <select id=\"lancamento_dataacao_5i\" name=\"lancamento[dataacao(5i)]\">\n<option value=\"00\">00</option>\n<option value=\"01\">01</option>\n<option selected=\"selected\" value=\"02\">02</option>\n<option value=\"03\">03</option>\n<option value=\"04\">04</option>\n<option value=\"05\">05</option>\n<option value=\"06\">06</option>\n<option value=\"07\">07</option>\n<option value=\"08\">08</option>\n<option value=\"09\">09</option>\n<option value=\"10\">10</option>\n<option value=\"11\">11</option>\n<option value=\"12\">12</option>\n<option value=\"13\">13</option>\n<option value=\"14\">14</option>\n<option value=\"15\">15</option>\n<option value=\"16\">16</option>\n<option value=\"17\">17</option>\n<option value=\"18\">18</option>\n<option value=\"19\">19</option>\n<option value=\"20\">20</option>\n<option value=\"21\">21</option>\n<option value=\"22\">22</option>\n<option value=\"23\">23</option>\n<option value=\"24\">24</option>\n<option value=\"25\">25</option>\n<option value=\"26\">26</option>\n<option value=\"27\">27</option>\n<option value=\"28\">28</option>\n<option value=\"29\">29</option>\n<option value=\"30\">30</option>\n<option value=\"31\">31</option>\n<option value=\"32\">32</option>\n<option value=\"33\">33</option>\n<option value=\"34\">34</option>\n<option value=\"35\">35</option>\n<option value=\"36\">36</option>\n<option value=\"37\">37</option>\n<option value=\"38\">38</option>\n<option value=\"39\">39</option>\n<option value=\"40\">40</option>\n<option value=\"41\">41</option>\n<option value=\"42\">42</option>\n<option value=\"43\">43</option>\n<option value=\"44\">44</option>\n<option value=\"45\">45</option>\n<option value=\"46\">46</option>\n<option value=\"47\">47</option>\n<option value=\"48\">48</option>\n<option value=\"49\">49</option>\n<option value=\"50\">50</option>\n<option value=\"51\">51</option>\n<option value=\"52\">52</option>\n<option value=\"53\">53</option>\n<option value=\"54\">54</option>\n<option value=\"55\">55</option>\n<option value=\"56\">56</option>\n<option value=\"57\">57</option>\n<option value=\"58\">58</option>\n<option value=\"59\">59</option>\n</select>\n\n  </div>\n -->\n  \n  <div class=\"field\">\n    <label for=\"lancamento_valor\">Valor</label><br />\n    <input id=\"lancamento_valor\" name=\"lancamento[valor]\" size=\"30\" type=\"text\" />\n  </div>\n  \n  <div class=\"field\">\n    <label for=\"lancamento_categoria\">Categoria</label><br />\n    ", @virtual_path="lancamentos/_form"> is not a symbol):
+    38:   
+    39:   <div class="field">
+    40:     <%= f.label :categoria %><br />
+    41:     <%= f.collection_select(:category, @categorias, self, :descricao) %>
+    42:   </div>
+    43: <!--
+    44:   <div class="field">
+  app/views/lancamentos/_form.html.erb:41:in `block in _app_views_lancamentos__form_html_erb__2696509285545065847_29329100'
+  app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb__2696509285545065847_29329100'
+  app/views/lancamentos/new.html.erb:3:in `_app_views_lancamentos_new_html_erb__3097457982734258155_70150171879980'
+  app/controllers/lancamentos_controller.rb:35:in `new'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.8ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (7.9ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 22:02:39 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.6ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.8ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (17.0ms)
+  Rendered lancamentos/new.html.erb within layouts/application (18.2ms)
+Completed 500 Internal Server Error in 23ms
+
+ActionView::Template::Error (undefined method `category' for #<Category:0x007f9a38244440>):
+    38:   
+    39:   <div class="field">
+    40:     <%= f.label :categoria %><br />
+    41:     <%= f.collection_select(:category, @categorias, :category, :descricao) %>
+    42:   </div>
+    43: <!--
+    44:   <div class="field">
+  app/views/lancamentos/_form.html.erb:41:in `block in _app_views_lancamentos__form_html_erb__2696509285545065847_70150171843860'
+  app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb__2696509285545065847_70150171843860'
+  app/views/lancamentos/new.html.erb:3:in `_app_views_lancamentos_new_html_erb__3097457982734258155_70150171879980'
+  app/controllers/lancamentos_controller.rb:35:in `new'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (8.2ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 22:02:47 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.6ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.8ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (42.9ms)
+  Rendered lancamentos/new.html.erb within layouts/application (44.0ms)
+Completed 500 Internal Server Error in 52ms
+
+ActionView::Template::Error (undefined local variable or method `category' for #<#<Class:0x007f9a38262490>:0x007f9a3853ba68>):
+    38:   
+    39:   <div class="field">
+    40:     <%= f.label :categoria %><br />
+    41:     <%= f.collection_select(:category, @categorias, category, :descricao) %>
+    42:   </div>
+    43: <!--
+    44:   <div class="field">
+  app/views/lancamentos/_form.html.erb:41:in `block in _app_views_lancamentos__form_html_erb__2696509285545065847_70150173370720'
+  app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb__2696509285545065847_70150173370720'
+  app/views/lancamentos/new.html.erb:3:in `_app_views_lancamentos_new_html_erb__3097457982734258155_70150171879980'
+  app/controllers/lancamentos_controller.rb:35:in `new'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.7ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (6.5ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 22:04:16 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.4ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.5ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (14.5ms)
+  Rendered lancamentos/new.html.erb within layouts/application (15.2ms)
+Completed 500 Internal Server Error in 21ms
+
+ActionView::Template::Error (undefined method `category' for #<Class:0x007f9a488481d8>):
+    38:   
+    39:   <div class="field">
+    40:     <%= f.label :categoria %><br />
+    41:     <%= f.collection_select(:category, @categorias, Lancamento.category, :descricao) %>
+    42:   </div>
+    43: <!--
+    44:   <div class="field">
+  app/views/lancamentos/_form.html.erb:41:in `block in _app_views_lancamentos__form_html_erb__2696509285545065847_70150309210580'
+  app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb__2696509285545065847_70150309210580'
+  app/views/lancamentos/new.html.erb:3:in `_app_views_lancamentos_new_html_erb__3097457982734258155_70150171879980'
+  app/controllers/lancamentos_controller.rb:35:in `new'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.1ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.8ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (9.5ms)
+
+
+Started GET "/lancamentos/new" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Processing by LancamentosController#new as HTML
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.5ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered lancamentos/_form.html.erb (18.7ms)
+  Rendered lancamentos/new.html.erb within layouts/application (19.6ms)
+Completed 200 OK in 31ms (Views: 27.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Served asset /jquery.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 22:04:31 -0300
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started POST "/lancamentos" for 127.0.0.1 at 2013-03-11 22:04:35 -0300
+Processing by LancamentosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YDmjUOeSrL0y/uaGInhwYFmaYFn1aUf0PeeCWszJibk=", "lancamento"=>{"descricao"=>"", "datavencimento(1i)"=>"2013", "datavencimento(2i)"=>"3", "datavencimento(3i)"=>"12", "datavencimento(4i)"=>"01", "datavencimento(5i)"=>"04", "valor"=>"", "category"=>"2", "centrodecusto"=>"1", "status"=>""}, "commit"=>"Create Lancamento"}
+Completed 500 Internal Server Error in 1ms
+
+ActiveRecord::AssociationTypeMismatch (Category(#70150271828380) expected, got String(#8805740)):
+  app/controllers/lancamentos_controller.rb:49:in `new'
+  app/controllers/lancamentos_controller.rb:49:in `create'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (6.7ms)

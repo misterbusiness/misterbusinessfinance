@@ -1,5 +1,5 @@
 class Lancamento < ActiveRecord::Base
-  attr_accessible :datavencimento, :descricao, :status, :tipo, :valor
+  attr_accessible :datavencimento, :descricao, :status, :tipo, :valor, :dataacao, :category, :centrodecusto
  
 # 10-03-13 JH: Deprecated, alterado para gema simple_enum  
 # 10-03-13 JH: Para queries a sintaxa é (nome_coluna)_cd => Lancamento.(nome_chave)
@@ -10,8 +10,7 @@ class Lancamento < ActiveRecord::Base
   as_enum :status, [:aberto, :quitado, :estornado, :cancelado]
   
   as_enum :freq_repeticoes, [:diario, :semanal, :semestral, :anual]
-  
-  
+    
   belongs_to :category
   belongs_to :centrodecusto
   
@@ -35,12 +34,9 @@ class Lancamento < ActiveRecord::Base
   validates :datavencimento, :presence => true   
   validates :centrodecusto, :presence=> true
   
-
   validates_format_of :valor, :with => /^\d+\.*\d{0,2}$/
   validates :descricao, length: { maximum: 255 }
-  
-
-  
+    
 # => 05-03-13 JH: Teste de função para gerar erro
 #  before_validation :set_default_datavencimento_if_not_specified
 

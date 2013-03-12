@@ -27,6 +27,10 @@ class LancamentosController < ApplicationController
   # GET /lancamentos/new.json
   def new
     @lancamento = Lancamento.new
+    
+    @categorias = Category.all
+    @centrosdecusto = Centrodecusto.all
+#    @lancamentopadrao = Lancamentopadrao.all
 
     respond_to do |format|
       format.html # new.html.erb

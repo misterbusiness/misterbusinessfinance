@@ -13645,3 +13645,346 @@ Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.4ms)
   [1m[35m (0.3ms)[0m  ROLLBACK
   [1m[36m (0.2ms)[0m  [1mBEGIN[0m
   [1m[35m (0.3ms)[0m  ROLLBACK
+Connecting to database specified by database.yml
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  Rendered centrodecustos/index.html.erb (29.1ms)
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mConfigurable Load (4.8ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.5ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.3ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (119.4ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mConfigurable Load (0.2ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCentrodecusto Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mConfigurable Load (0.1ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.2ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36m (6.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.4ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE (`centrodecustos`.`descricao` = 'Centro de custo vazio' AND `centrodecustos`.`id` != 2) LIMIT 1
+  [1m[36m (11.8ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  Rendered centrodecustos/_form.html.erb (2.8ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.3ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.4ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (14.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.4ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.2ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (6.4ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.4ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.3ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (8.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.3ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.2ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.4ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (9.5ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.3ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.2ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (7.0ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.2ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.3ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (5.9ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.2ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.2ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mConfigurable Load (0.5ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1[0m
+  [1m[35mCategory Load (0.5ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mConfigurable Load (0.2ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1[0m
+  [1m[35mCentrodecusto Load (0.6ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36m (4.7ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.3ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.3ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (6.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.4ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.2ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mConfigurable Load (0.2ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1[0m
+  [1m[35mConfigurable Load (0.1ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1
+  [1m[36mCentrodecusto Load (0.2ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `lancamentos` (`category_id`, `centrodecusto_id`, `created_at`, `dataacao`, `datavencimento`, `descricao`, `status_cd`, `tipo_cd`, `updated_at`, `valor`) VALUES (9, 11, '2013-03-12 00:08:26', NULL, '2013-03-11', 'Lancamento de Teste', 0, 0, '2013-03-12 00:08:26', 0.0)
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Load (0.2ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36m (6.8ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.3ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.2ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mConfigurable Load (0.1ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1[0m
+  [1m[35mConfigurable Load (0.2ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1
+  [1m[36mCentrodecusto Load (0.2ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `lancamentos` (`category_id`, `centrodecusto_id`, `created_at`, `dataacao`, `datavencimento`, `descricao`, `status_cd`, `tipo_cd`, `updated_at`, `valor`) VALUES (10, 12, '2013-03-12 00:08:26', NULL, '2013-03-11', 'Lancamento de Teste', 0, 0, '2013-03-12 00:08:26', 0.0)
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36m (6.0ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.3ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.3ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Centro de custo vazio', '2013-03-12 00:08:26')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mConfigurable Load (0.1ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1[0m
+  [1m[35mConfigurable Load (0.5ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1
+  [1m[36mCentrodecusto Load (0.7ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `lancamentos` (`category_id`, `centrodecusto_id`, `created_at`, `dataacao`, `datavencimento`, `descricao`, `status_cd`, `tipo_cd`, `updated_at`, `valor`) VALUES (11, 13, '2013-03-12 00:08:26', NULL, '2013-03-11', 'Lancamento de Teste', 0, 1, '2013-03-12 00:08:26', 3.14)
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (6.8ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCategory Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:26', 'Categoria vazia', '2013-03-12 00:08:26')
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCentrodecusto Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:27', 'Centro de custo vazio', '2013-03-12 00:08:27')
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mConfigurable Load (0.2ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1[0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mConfigurable Load (0.1ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1[0m
+  [1m[35mCentrodecusto Load (0.3ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `lancamentos` (`category_id`, `centrodecusto_id`, `created_at`, `dataacao`, `datavencimento`, `descricao`, `status_cd`, `tipo_cd`, `updated_at`, `valor`) VALUES (12, 14, '2013-03-12 00:08:27', NULL, '2013-03-11', 'Lancamento de Teste', 0, 1, '2013-03-12 00:08:27', 3.14)[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (11.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.3ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:27', 'Categoria vazia', '2013-03-12 00:08:27')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.4ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:27', 'Centro de custo vazio', '2013-03-12 00:08:27')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mConfigurable Load (0.2ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1[0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mConfigurable Load (0.1ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1[0m
+  [1m[35mCentrodecusto Load (0.3ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36m (5.0ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.3ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:27', 'Categoria vazia', '2013-03-12 00:08:27')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.2ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `centrodecustos` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:27', 'Centro de custo vazio', '2013-03-12 00:08:27')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mConfigurable Load (0.2ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1[0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mConfigurable Load (0.1ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1[0m
+  [1m[35mCentrodecusto Load (0.2ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36m (17.4ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+Started GET "/centrodecustos" for 127.0.0.1 at 2013-03-11 21:08:27 -0300
+Processing by CentrodecustosController#index as HTML
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+Completed 200 OK in 6ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mConfigurable Load (0.4ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.3ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:27', 'Categoria vazia', '2013-03-12 00:08:27')[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (4.9ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mConfigurable Load (0.3ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCategory Exists (0.7ms)[0m  [1mSELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO `categories` (`ancestry`, `created_at`, `descricao`, `updated_at`) VALUES (NULL, '2013-03-12 00:08:27', 'Categoria vazia', '2013-03-12 00:08:27')
+  [1m[36m (0.7ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mConfigurable Load (0.2ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1
+  [1m[36m (0.7ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.3ms)[0m  SELECT 1 AS one FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35mCategory Exists (0.3ms)[0m  SELECT 1 AS one FROM `categories` WHERE (`categories`.`descricao` = 'Categoria vazia' AND `categories`.`id` != 16) LIMIT 1
+  [1m[36m (6.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  Rendered centrodecustos/_form.html.erb (1.5ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.2ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+Processing by CentrodecustosController#create as HTML
+  Parameters: {"centrodecusto"=>{}}
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+Processing by CentrodecustosController#create as HTML
+  Parameters: {"centrodecusto"=>{}}
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+Processing by CentrodecustosController#create as HTML
+  Parameters: {"centrodecusto"=>{}}
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCentrodecusto Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.3ms)
+  [1m[36mCentrodecusto Load (0.2ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` ORDER BY `centrodecustos`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+Processing by CentrodecustosController#create as HTML
+  Parameters: {"centrodecusto"=>{}}
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCentrodecusto Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.7ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `centrodecustos` [0m
+Processing by CentrodecustosController#create as HTML
+  Parameters: {"centrodecusto"=>{}}
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCentrodecusto Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+Completed 200 OK in 4ms (Views: 0.9ms | ActiveRecord: 0.6ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM `centrodecustos` [0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCentrodecusto Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.2ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCentrodecusto Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.4ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCentrodecusto Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+Processing by CentrodecustosController#new as HTML
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.4ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCentrodecusto Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mCentrodecusto Exists (0.3ms)[0m  SELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1
+  [1m[36m (0.7ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mCentrodecusto Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM `centrodecustos` WHERE `centrodecustos`.`descricao` IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m

@@ -17,30 +17,46 @@
   </div>
   <div class="field">
     <%= f.label :tipo %><br />
-    <%= f.radio_button :tipo, "Receita" %> <%= f.label :tipo, "Receita" %> <%= f.radio_button :tipo, "Despesa" %> <%= f.label :tipo, "Despesa" %>
+    <%= f.radio_button :tipo, :receita %> <%= f.label :tipo, "Receita" %> 
+    <%= f.radio_button :tipo, :despesa %> <%= f.label :tipo, "Despesa" %>
   </div>
   <div class="field">
     <%= f.label :datavencimento %><br />
     <%= f.datetime_select :datavencimento %>
   </div>
+<!--  
   <div class="field">
     <%= f.label :dataacao %><br />
     <%= f.datetime_select :dataacao %>
   </div>
+ -->
+  
   <div class="field">
     <%= f.label :valor %><br />
     <%= f.text_field :valor %>
   </div>
-
+  
+  <div class="field">
+    <%= f.label :categoria %><br />
+    <%= f.collection_select(:category, @categorias, :id, :descricao) %>
+  </div>
+<!--
   <div class="field">
     <%= f.label :category %><br />
     <%= f.text_field :category %>
   </div>
+ -->
+   <div class="field">
+    <%= f.label :centrodecusto %><br />
+    <%= f.collection_select(:centrodecusto, @centrosdecusto, :id, :descricao) %>
+  </div> 
+ 
+ <!-- 
   <div class="field">
     <%= f.label :centrodecusto %><br />
     <%= f.text_field :centrodecusto %>
   </div>
-
+-->
   <div class="field">
     <%= f.label :status %><br />
     <%= f.text_field :status %>
