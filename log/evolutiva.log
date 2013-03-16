@@ -14,3 +14,6 @@
 							Modelo Agendamento
 							Testes parcela, parcela_lancamento
 							Converter migrations para uma so
+#*************************************************************************************************#
+16-03-2013 - JH - Adicionado bootstrap
+				- Adicionar a gem Select2

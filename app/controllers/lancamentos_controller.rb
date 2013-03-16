@@ -4,7 +4,10 @@ class LancamentosController < ApplicationController
   def index
 	@lancamento = Lancamento.new
 	#Aqui iremos implementar os filtros, pelo que eu entendi.
-    @lancamentos = Lancamento.all    
+    @lancamentos = Lancamento.all
+    
+    @categorias = Category.all
+    @centrosdecusto = Centrodecusto.all    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,6 +19,9 @@ class LancamentosController < ApplicationController
   # GET /lancamentos/1.json
   def show
     @lancamento = Lancamento.find(params[:id])
+    
+    @categorias = Category.all
+    @centrosdecusto = Centrodecusto.all
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,6 +47,9 @@ class LancamentosController < ApplicationController
   # GET /lancamentos/1/edit
   def edit
     @lancamento = Lancamento.find(params[:id])
+    
+    @categorias = Category.all
+    @centrosdecusto = Centrodecusto.all
   end
 
   # POST /lancamentos

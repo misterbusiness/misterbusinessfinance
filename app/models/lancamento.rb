@@ -33,23 +33,29 @@ class Lancamento < ActiveRecord::Base
   validates :valor, :presence => true
   validates :datavencimento, :presence => true   
   validates :centrodecusto, :presence=> true
+  validates :category, :presence => true
   
   validates_format_of :valor, :with => /^\d+\.*\d{0,2}$/
-  validates :descricao, length: { maximum: 255 }
-    
-# => 05-03-13 JH: Teste de função para gerar erro
-#  before_validation :set_default_datavencimento_if_not_specified
+  validates :descricao, length: { maximum: 255 } 
+  
+  validates_as_enum :tipo
+  validates_as_enum :status
+  validates_as_enum :freq_repeticoes  
+  
+  #Status validation
+  validate :status_not_aberto_if_dataacao
+  validate :status_not_quitado_if_no_dataacao
+  validate :status_quitado_no_change_allowed
 
   private 
 
   def set_default_status_if_not_specified
     self.status = :aberto if self.status.blank?
   end
+  
   # Engenharia detalhada: 3.1.2
   def set_default_datavencimento_if_not_specified
-    self.datavencimento = Date.today if self.datavencimento.blank?
-# => 05-03-13 JH: Teste de função para gerar erro
-#     errors.add(:datavencimento, "Data nao pode ser vazia") if self.datavencimento.blank? 
+    self.datavencimento = Date.today if self.datavencimento.blank? 
   end
     
   def set_tipo_depending_valor
@@ -76,7 +82,25 @@ class Lancamento < ActiveRecord::Base
   def set_default_centrodecusto_if_null
     self.centrodecusto = Centrodecusto.find_by_descricao(Configurable.centrodecusto_padrao) if self.centrodecusto.blank?
   end
+  
+#  def set_dataacao_null_if_status_cancelado
+#    self.dataacao = nil if self.cancelado?
+#  end
+  
+  def status_not_aberto_if_dataacao    
+    errors.add(:status, "Nao pode estar aberto se existir data de confirmacao") if not self.dataacao.blank? and self.aberto?   
+  end
+  
+  def status_not_quitado_if_no_dataacao
+    errors.add(:status, "O lancamento nao pode estar quitado sem uma data de confirmacao") if self.quitado? and self.dataacao.blank?
+  end
+  
+  def status_quitado_no_change_allowed
+    errors.add(:status, "O lancamento quitado nao pode ser alterado") if self.changed? and self.quitado?
+  end 
+  
+#  def status_not_cancelado_if_dataacao
+#    errors.add(:status, "Nao pode estar cancelado se existir data de ")
+#  end
+      
 end
-
-
-#05-03-2013: Verificar como podemos usar enums no rails (evitar hard-code)

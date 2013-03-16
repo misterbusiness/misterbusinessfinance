@@ -1,0 +1,9 @@
+<script type="text/javascript">
+	$(document).ready(function() { $("#<%= @page_item_id %>").select2({
+		maximumSelectionSize: 1,
+		placeholder: "<%= @placeholder_value %>"
+		tags: [<%= render 'shared/tags_iterator'%>],
+		data: [<%= render 'shared/data_iterator'%>]		
+		}); });
+		
+</script>
