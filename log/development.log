@@ -31028,3 +31028,1455 @@ NoMethodError (undefined method `freq_repeticoes_cd' for #<Lancamento:0x007fc124
   Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (3.3ms)
   Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.8ms)
   Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (15.7ms)
+
+
+Started POST "/lancamentos" for 127.0.0.1 at 2013-03-17 22:34:29 -0300
+Processing by LancamentosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"DH0skYKd96jb1DRGF36jAtsOSerBKlOL0SUUFRLlRlA=", "lancamento"=>{"descricao"=>"teste", "tipo"=>"receita", "datavencimento(1i)"=>"2013", "datavencimento(2i)"=>"3", "datavencimento(3i)"=>"18", "datavencimento(4i)"=>"01", "datavencimento(5i)"=>"25", "valor"=>"17", "status"=>""}, "commit"=>"Create Lancamento"}
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mConfigurable Load (0.3ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Categoria vazia' LIMIT 1
+  [1m[36mConfigurable Load (0.2ms)[0m  [1mSELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1[0m
+  [1m[35mCentrodecusto Load (0.2ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Centro de custo vazio' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 500 Internal Server Error in 12ms
+
+NoMethodError (undefined method `freq_repeticoes_cd' for #<Lancamento:0x007fc124c3b120>):
+  app/controllers/lancamentos_controller.rb:61:in `block in create'
+  app/controllers/lancamentos_controller.rb:60:in `create'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.5ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.1ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.9ms)
+
+
+Started GET "/lancamentos" for 127.0.0.1 at 2013-03-17 22:34:34 -0300
+Processing by LancamentosController#index as HTML
+  [1m[35mLancamento Load (0.3ms)[0m  SELECT `lancamentos`.* FROM `lancamentos` 
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.2ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+ERROR: compiling _app_views_lancamentos_scripts__select__html_erb___1093853135915576130_70233755644420 RAISED /home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/scripts/_select2.html.erb:17: syntax error, unexpected ','
+...ape_javascript(link_to "Add", , :action => :create, :method ...
+...                               ^
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/scripts/_select2.html.erb:17: syntax error, unexpected ')', expecting keyword_end
+...> "btn btn-success btn-small"));@output_buffer.safe_concat('...
+...                               ^
+Function body:           def _app_views_lancamentos_scripts__select__html_erb___1093853135915576130_70233755644420(local_assigns, output_buffer)
+            _old_virtual_path, @virtual_path = @virtual_path, "lancamentos/scripts/_select2";_old_output_buffer = @output_buffer;select2 = local_assigns[:select2];;@output_buffer = output_buffer || ActionView::OutputBuffer.new;@output_buffer.safe_concat('<script type="text/javascript">
+	
+	$(document).ready(function() { $("#');@output_buffer.append= ( @page_item_id );@output_buffer.safe_concat('").select2({
+		maximumSelectionSize: 1,
+		createSearchChoice: false,
+		placeholder: "');@output_buffer.append= ( @placeholder_value );@output_buffer.safe_concat('",
+		tags: [');@output_buffer.append= ( render 'shared/data_iterator');@output_buffer.safe_concat('],
+		formatNoMatches: function () { return "No matches <a href=\'#\' class=\'btn btn-success btn-small\'>Add</a>"; } 				
+		}); });
+								
+	$(document).ready(function() { $("#');@output_buffer.append= ( @page_item_id );@output_buffer.safe_concat('")
+		.on("change", function(e) {alert ("Selected value is: "+JSON.stringify($("#');@output_buffer.append= ( @page_item_id);@output_buffer.safe_concat('").select2("data")));} );
+	
+	});	
+</script>
+
+<!-- ');@output_buffer.append= ( escape_javascript(link_to "Add", , :action => :create, :method => :post, :class=> "btn btn-success btn-small"));@output_buffer.safe_concat(' -->
+');@output_buffer.to_s
+          ensure
+            @virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+
+Backtrace: /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:297:in `module_eval'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:297:in `compile'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:244:in `block in compile!'
+<internal:prelude>:10:in `synchronize'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:232:in `compile!'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:144:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:125:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:143:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:265:in `render_partial'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:238:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:237:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/renderer.rb:41:in `render_partial'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/rendering_helper.rb:27:in `render'
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/_form.html.erb:40:in `block in _app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/capture_helper.rb:40:in `block in capture'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/capture_helper.rb:187:in `with_output_buffer'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/capture_helper.rb:40:in `capture'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/form_helper.rb:607:in `fields_for'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/form_helper.rb:378:in `form_for'
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:145:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:125:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:143:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:265:in `render_partial'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:238:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:237:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/renderer.rb:41:in `render_partial'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/rendering_helper.rb:27:in `render'
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/index.html.erb:5:in `_app_views_lancamentos_index_html_erb__326865504335031227_30086640'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:145:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:125:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:143:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/template_renderer.rb:47:in `block (2 levels) in render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/template_renderer.rb:46:in `block in render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/template_renderer.rb:54:in `render_with_layout'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/template_renderer.rb:45:in `render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/template_renderer.rb:18:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/renderer.rb:36:in `render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/renderer.rb:17:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/rendering.rb:110:in `_render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/streaming.rb:225:in `_render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/rendering.rb:103:in `render_to_body'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/renderers.rb:28:in `render_to_body'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/compatibility.rb:50:in `render_to_body'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/rendering.rb:88:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/rendering.rb:16:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:40:in `block (2 levels) in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/core_ext/benchmark.rb:5:in `block in ms'
+/home/administrator/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/benchmark.rb:295:in `realtime'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:40:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:83:in `cleanup_view_runtime'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activerecord-3.2.12/lib/active_record/railties/controller_runtime.rb:24:in `cleanup_view_runtime'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:39:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/mime_responds.rb:196:in `respond_to'
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/controllers/lancamentos_controller.rb:12:in `index'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/base.rb:167:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/rendering.rb:10:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:414:in `_run__715878670459898469__process_action__1892454786312077908__callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:405:in `__run_callback'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:81:in `run_callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/callbacks.rb:17:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/rescue.rb:29:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activerecord-3.2.12/lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/base.rb:121:in `process'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/rendering.rb:45:in `process'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal.rb:203:in `dispatch'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal.rb:246:in `block in action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/routing/route_set.rb:73:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/routing/route_set.rb:36:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/journey-1.0.4/lib/journey/router.rb:68:in `block in call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/journey-1.0.4/lib/journey/router.rb:56:in `each'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/journey-1.0.4/lib/journey/router.rb:56:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/routing/route_set.rb:601:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/etag.rb:23:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/conditionalget.rb:25:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/head.rb:14:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/flash.rb:242:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/session/abstract/id.rb:210:in `context'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/session/abstract/id.rb:205:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/cookies.rb:341:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activerecord-3.2.12/lib/active_record/query_cache.rb:64:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activerecord-3.2.12/lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:405:in `_run__4273847817653094303__call__1050422869127252707__callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:405:in `__run_callback'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:81:in `run_callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/reloader.rb:65:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/rack/logger.rb:32:in `call_app'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/rack/logger.rb:16:in `block in call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/tagged_logging.rb:22:in `tagged'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/rack/logger.rb:16:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/request_id.rb:22:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/static.rb:62:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/engine.rb:479:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/application.rb:223:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/rack/log_tailer.rb:17:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
+/home/administrator/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+/home/administrator/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+/home/administrator/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+  Rendered lancamentos/scripts/_select2.html.erb (0.7ms)
+  Rendered lancamentos/_form.html.erb (6.7ms)
+  Rendered lancamentos/index.html.erb within layouts/application (7.1ms)
+Completed 500 Internal Server Error in 12ms
+
+ActionView::Template::Error (/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/scripts/_select2.html.erb:17: syntax error, unexpected ','
+...ape_javascript(link_to "Add", , :action => :create, :method ...
+...                               ^
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/scripts/_select2.html.erb:17: syntax error, unexpected ')', expecting keyword_end
+...> "btn btn-success btn-small"));@output_buffer.safe_concat('...
+...                               ^):
+    14: 	});	
+    15: </script>
+    16: 
+    17: <!-- <%= escape_javascript(link_to "Add", , :action => :create, :method => :post, :class=> "btn btn-success btn-small")%> -->
+  app/views/lancamentos/_form.html.erb:40:in `block in _app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+  app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+  app/views/lancamentos/index.html.erb:5:in `_app_views_lancamentos_index_html_erb__326865504335031227_30086640'
+  app/controllers/lancamentos_controller.rb:12:in `index'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (6.3ms)
+
+
+Started GET "/lancamentos" for 127.0.0.1 at 2013-03-17 22:34:47 -0300
+Processing by LancamentosController#index as HTML
+  [1m[36mLancamento Load (0.2ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered shared/_data_iterator.html.erb (0.0ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.0ms)
+  Rendered shared/_options_iterator.html.erb (0.1ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.4ms)
+  Rendered shared/_options_iterator.html.erb (0.1ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.7ms)
+  Rendered shared/_data_iterator.html.erb (0.0ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.4ms)
+  Rendered lancamentos/_form.html.erb (12.8ms)
+  [1m[35mCategory Load (0.4ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 2 LIMIT 1
+  [1m[36mCentrodecusto Load (0.2ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 1 LIMIT 1[0m
+  Rendered lancamentos/index.html.erb within layouts/application (17.7ms)
+Completed 200 OK in 66ms (Views: 62.4ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /application.css - 304 Not Modified (11ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.css?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /select2.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (29ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /jquery.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-transition.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-button.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /bootstrap.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /select2.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-17 22:34:48 -0300
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/select2-spinner.gif" for 127.0.0.1 at 2013-03-17 22:34:50 -0300
+Served asset /select2-spinner.gif - 304 Not Modified (0ms)
+
+
+Started GET "/lancamentos" for 127.0.0.1 at 2013-03-17 22:35:09 -0300
+Processing by LancamentosController#index as HTML
+  [1m[35mLancamento Load (0.5ms)[0m  SELECT `lancamentos`.* FROM `lancamentos` 
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.2ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  Rendered shared/_data_iterator.html.erb (0.0ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.0ms)
+  Rendered shared/_options_iterator.html.erb (0.1ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.4ms)
+  Rendered shared/_options_iterator.html.erb (0.0ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.4ms)
+  Rendered shared/_data_iterator.html.erb (0.0ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.4ms)
+  Rendered lancamentos/_form.html.erb (11.5ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 2 LIMIT 1[0m
+  [1m[35mCentrodecusto Load (0.2ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 1 LIMIT 1
+  Rendered lancamentos/index.html.erb within layouts/application (16.2ms)
+Completed 200 OK in 64ms (Views: 58.3ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-17 22:35:09 -0300
+Served asset /application.css - 304 Not Modified (16ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (6ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.css?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /select2.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /bootstrap.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /select2.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-17 22:35:10 -0300
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/lancamentos" for 127.0.0.1 at 2013-03-17 22:42:01 -0300
+Processing by LancamentosController#index as HTML
+  [1m[36mLancamento Load (0.8ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mCategory Load (0.8ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.8ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+ERROR: compiling _app_views_lancamentos_scripts__select__html_erb___1093853135915576130_70233756217640 RAISED /home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/scripts/_select2.html.erb:20: syntax error, unexpected tSTRING_BEG, expecting keyword_do or '{' or '('
+');		 @cat = Category.new(descricao: javascript_tag "descricao") 
+   		                                                ^
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/scripts/_select2.html.erb:20: syntax error, unexpected ')', expecting keyword_end
+');		 @cat = Category.new(descricao: javascript_tag "descricao") 
+   		                                                           ^
+Function body:           def _app_views_lancamentos_scripts__select__html_erb___1093853135915576130_70233756217640(local_assigns, output_buffer)
+            _old_virtual_path, @virtual_path = @virtual_path, "lancamentos/scripts/_select2";_old_output_buffer = @output_buffer;select2 = local_assigns[:select2];;@output_buffer = output_buffer || ActionView::OutputBuffer.new;@output_buffer.safe_concat('<script type="text/javascript">
+	
+	$(document).ready(function() { $("#');@output_buffer.append= ( @page_item_id );@output_buffer.safe_concat('").select2({
+		maximumSelectionSize: 1,
+		createSearchChoice: false,
+		placeholder: "');@output_buffer.append= ( @placeholder_value );@output_buffer.safe_concat('",
+		tags: [');@output_buffer.append= ( render 'shared/data_iterator');@output_buffer.safe_concat('],
+		formatNoMatches: function () { return "No matches <a id=\'btn_create_category\' href=\'#\' class=\'btn btn-success btn-small\' onclick=\'createCategory("+ JSON.stringify($("#');@output_buffer.append= ( @page_item_id);@output_buffer.safe_concat('").select2("val")+")\'>Add</a>"; } 				
+		}); });
+								
+	$(document).ready(function() { $("#');@output_buffer.append= ( @page_item_id );@output_buffer.safe_concat('")
+		.on("change", function(e) {alert ("Selected value is: "+JSON.stringify($("#');@output_buffer.append= ( @page_item_id);@output_buffer.safe_concat('").select2("data")));} );
+	
+	});	
+</script>
+
+<script type="text/javascript">
+	function createCategory(var descricao)
+	{
+');		 @cat = Category.new(descricao: javascript_tag "descricao") 
+		 @cat.save 
+@output_buffer.safe_concat('		alert("Categoria salva com sucesso.");
+	}
+</script>
+');@output_buffer.to_s
+          ensure
+            @virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+
+Backtrace: /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:297:in `module_eval'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:297:in `compile'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:244:in `block in compile!'
+<internal:prelude>:10:in `synchronize'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:232:in `compile!'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:144:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:125:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:143:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:265:in `render_partial'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:238:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:237:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/renderer.rb:41:in `render_partial'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/rendering_helper.rb:27:in `render'
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/_form.html.erb:40:in `block in _app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/capture_helper.rb:40:in `block in capture'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/capture_helper.rb:187:in `with_output_buffer'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/capture_helper.rb:40:in `capture'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/form_helper.rb:607:in `fields_for'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/form_helper.rb:378:in `form_for'
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:145:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:125:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:143:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:265:in `render_partial'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:238:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/partial_renderer.rb:237:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/renderer.rb:41:in `render_partial'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/helpers/rendering_helper.rb:27:in `render'
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/index.html.erb:5:in `_app_views_lancamentos_index_html_erb__326865504335031227_30086640'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:145:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:125:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/template.rb:143:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/template_renderer.rb:47:in `block (2 levels) in render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/template_renderer.rb:46:in `block in render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/template_renderer.rb:54:in `render_with_layout'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/template_renderer.rb:45:in `render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/template_renderer.rb:18:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/renderer.rb:36:in `render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_view/renderer/renderer.rb:17:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/rendering.rb:110:in `_render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/streaming.rb:225:in `_render_template'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/rendering.rb:103:in `render_to_body'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/renderers.rb:28:in `render_to_body'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/compatibility.rb:50:in `render_to_body'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/rendering.rb:88:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/rendering.rb:16:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:40:in `block (2 levels) in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/core_ext/benchmark.rb:5:in `block in ms'
+/home/administrator/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/benchmark.rb:295:in `realtime'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:40:in `block in render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:83:in `cleanup_view_runtime'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activerecord-3.2.12/lib/active_record/railties/controller_runtime.rb:24:in `cleanup_view_runtime'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:39:in `render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/mime_responds.rb:196:in `respond_to'
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/controllers/lancamentos_controller.rb:12:in `index'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/base.rb:167:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/rendering.rb:10:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:414:in `_run__715878670459898469__process_action__1892454786312077908__callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:405:in `__run_callback'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:81:in `run_callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/callbacks.rb:17:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/rescue.rb:29:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `block in instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/notifications.rb:123:in `instrument'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activerecord-3.2.12/lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/base.rb:121:in `process'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/abstract_controller/rendering.rb:45:in `process'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal.rb:203:in `dispatch'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_controller/metal.rb:246:in `block in action'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/routing/route_set.rb:73:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/routing/route_set.rb:36:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/journey-1.0.4/lib/journey/router.rb:68:in `block in call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/journey-1.0.4/lib/journey/router.rb:56:in `each'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/journey-1.0.4/lib/journey/router.rb:56:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/routing/route_set.rb:601:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/etag.rb:23:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/conditionalget.rb:25:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/head.rb:14:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/flash.rb:242:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/session/abstract/id.rb:210:in `context'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/session/abstract/id.rb:205:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/cookies.rb:341:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activerecord-3.2.12/lib/active_record/query_cache.rb:64:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activerecord-3.2.12/lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:405:in `_run__4273847817653094303__call__1050422869127252707__callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:405:in `__run_callback'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/callbacks.rb:81:in `run_callbacks'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/reloader.rb:65:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/rack/logger.rb:32:in `call_app'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/rack/logger.rb:16:in `block in call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/tagged_logging.rb:22:in `tagged'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/rack/logger.rb:16:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/request_id.rb:22:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/activesupport-3.2.12/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/static.rb:62:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/engine.rb:479:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/application.rb:223:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/railties-3.2.12/lib/rails/rack/log_tailer.rb:17:in `call'
+/home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
+/home/administrator/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+/home/administrator/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+/home/administrator/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+  Rendered lancamentos/scripts/_select2.html.erb (0.9ms)
+  Rendered lancamentos/_form.html.erb (6.1ms)
+  Rendered lancamentos/index.html.erb within layouts/application (6.7ms)
+Completed 500 Internal Server Error in 21ms
+
+ActionView::Template::Error (/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/scripts/_select2.html.erb:20: syntax error, unexpected tSTRING_BEG, expecting keyword_do or '{' or '('
+');		 @cat = Category.new(descricao: javascript_tag "descricao") 
+   		                                                ^
+/home/administrator/Documentos/Projetos/misterbusinessfinance/app/views/lancamentos/scripts/_select2.html.erb:20: syntax error, unexpected ')', expecting keyword_end
+');		 @cat = Category.new(descricao: javascript_tag "descricao") 
+   		                                                           ^):
+    17: <script type="text/javascript">
+    18: 	function createCategory(var descricao)
+    19: 	{
+    20: 		<% @cat = Category.new(descricao: javascript_tag "descricao") %>
+    21: 		<% @cat.save %>
+    22: 		alert("Categoria salva com sucesso.");
+    23: 	}
+  app/views/lancamentos/_form.html.erb:40:in `block in _app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+  app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+  app/views/lancamentos/index.html.erb:5:in `_app_views_lancamentos_index_html_erb__326865504335031227_30086640'
+  app/controllers/lancamentos_controller.rb:12:in `index'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.6ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.6ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (6.5ms)
+
+
+Started GET "/lancamentos" for 127.0.0.1 at 2013-03-17 22:45:03 -0300
+Processing by LancamentosController#index as HTML
+  [1m[35mLancamento Load (0.8ms)[0m  SELECT `lancamentos`.* FROM `lancamentos` 
+  [1m[36mCategory Load (0.5ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.8ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (7.9ms)
+  Rendered lancamentos/_form.html.erb (18.8ms)
+  Rendered lancamentos/index.html.erb within layouts/application (19.7ms)
+Completed 500 Internal Server Error in 30ms
+
+ActionView::Template::Error (undefined method `link_to_remote' for #<#<Class:0x007fc124258a90>:0x007fc1245b1b60>):
+    5: 		createSearchChoice: false,
+    6: 		placeholder: "<%= @placeholder_value %>",
+    7: 		tags: [<%= render 'shared/data_iterator'%>],
+    8: 		formatNoMatches: function () { return "No matches <%= escape_javascript(link_to_remote "Add", :url=> categories_path, :method => :post)%>"; } 				
+    9: 		}); });
+    10: 								
+    11: 	$(document).ready(function() { $("#<%= @page_item_id %>")
+  app/views/lancamentos/scripts/_select2.html.erb:8:in `_app_views_lancamentos_scripts__select__html_erb___1093853135915576130_70233755421280'
+  app/views/lancamentos/_form.html.erb:40:in `block in _app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+  app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+  app/views/lancamentos/index.html.erb:5:in `_app_views_lancamentos_index_html_erb__326865504335031227_30086640'
+  app/controllers/lancamentos_controller.rb:12:in `index'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.7ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (6.4ms)
+
+
+Started GET "/lancamentos" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Processing by LancamentosController#index as HTML
+  [1m[36mLancamento Load (1.4ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered shared/_data_iterator.html.erb (0.0ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.5ms)
+  Rendered shared/_options_iterator.html.erb (0.1ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.6ms)
+  Rendered shared/_options_iterator.html.erb (0.0ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.7ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.4ms)
+  Rendered lancamentos/_form.html.erb (36.1ms)
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 2 LIMIT 1
+  [1m[36mCentrodecusto Load (0.2ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 1 LIMIT 1[0m
+  Rendered lancamentos/index.html.erb within layouts/application (40.8ms)
+Completed 200 OK in 77ms (Views: 62.1ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /application.css - 304 Not Modified (40ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (9ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /select2.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-transition.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /bootstrap.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /select2.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:18 -0300
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/select2-spinner.gif" for 127.0.0.1 at 2013-03-17 22:46:20 -0300
+Served asset /select2-spinner.gif - 304 Not Modified (0ms)
+
+
+Started GET "/lancamentos?method=post&url=%2Fcategories" for 127.0.0.1 at 2013-03-17 22:46:22 -0300
+Processing by LancamentosController#index as HTML
+  Parameters: {"method"=>"post", "url"=>"/categories"}
+  [1m[35mLancamento Load (0.3ms)[0m  SELECT `lancamentos`.* FROM `lancamentos` 
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.3ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  Rendered shared/_data_iterator.html.erb (0.0ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.3ms)
+  Rendered shared/_options_iterator.html.erb (0.2ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.4ms)
+  Rendered shared/_options_iterator.html.erb (0.1ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.0ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.0ms)
+  Rendered lancamentos/_form.html.erb (18.3ms)
+  [1m[36mCategory Load (0.4ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 2 LIMIT 1[0m
+  [1m[35mCentrodecusto Load (0.3ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 1 LIMIT 1
+  Rendered lancamentos/index.html.erb within layouts/application (45.5ms)
+Completed 200 OK in 70ms (Views: 66.5ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /application.css - 304 Not Modified (39ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.css?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /select2.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /bootstrap.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /select2.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-17 22:46:23 -0300
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/select2-spinner.gif" for 127.0.0.1 at 2013-03-17 22:48:35 -0300
+Served asset /select2-spinner.gif - 304 Not Modified (0ms)
+
+
+Started GET "/lancamentos?method=post&url=%2Fcategories" for 127.0.0.1 at 2013-03-17 22:48:43 -0300
+Processing by LancamentosController#index as HTML
+  Parameters: {"method"=>"post", "url"=>"/categories"}
+  [1m[36mLancamento Load (0.4ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mCategory Load (0.6ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.6ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered shared/_data_iterator.html.erb (1.0ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.8ms)
+  Rendered shared/_options_iterator.html.erb (0.1ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.7ms)
+  Rendered shared/_options_iterator.html.erb (0.0ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.9ms)
+  Rendered shared/_data_iterator.html.erb (0.0ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.7ms)
+  Rendered lancamentos/_form.html.erb (15.8ms)
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 2 LIMIT 1
+  [1m[36mCentrodecusto Load (0.2ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 1 LIMIT 1[0m
+  Rendered lancamentos/index.html.erb within layouts/application (21.6ms)
+Completed 200 OK in 75ms (Views: 69.5ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /application.css - 304 Not Modified (14ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (27ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.css?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /select2.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-tooltip.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /bootstrap.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /select2.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-17 22:48:44 -0300
+Served asset /application.js - 304 Not Modified (3ms)
+
+
+Started GET "/lancamentos?method=post&url=%2Fcategories" for 127.0.0.1 at 2013-03-17 22:48:52 -0300
+Processing by LancamentosController#index as HTML
+  Parameters: {"method"=>"post", "url"=>"/categories"}
+  [1m[35mLancamento Load (0.2ms)[0m  SELECT `lancamentos`.* FROM `lancamentos` 
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.2ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  Rendered shared/_data_iterator.html.erb (0.0ms)
+  Rendered lancamentos/scripts/_select2.html.erb (7.4ms)
+  Rendered lancamentos/_form.html.erb (13.4ms)
+  Rendered lancamentos/index.html.erb within layouts/application (13.8ms)
+Completed 500 Internal Server Error in 17ms
+
+ActionView::Template::Error (undefined local variable or method `new_categories_path' for #<#<Class:0x007fc124258a90>:0x007fc12464b558>):
+    5: 		createSearchChoice: false,
+    6: 		placeholder: "<%= @placeholder_value %>",
+    7: 		tags: [<%= render 'shared/data_iterator'%>],
+    8: 		formatNoMatches: function () { return "No matches <%= escape_javascript(link_to "Add", :url=> new_categories_path, :method => :post, :remote =>true)%>"; } 				
+    9: 		}); });
+    10: 								
+    11: 	$(document).ready(function() { $("#<%= @page_item_id %>")
+  app/views/lancamentos/scripts/_select2.html.erb:8:in `_app_views_lancamentos_scripts__select__html_erb___1093853135915576130_70233757666120'
+  app/views/lancamentos/_form.html.erb:40:in `block in _app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+  app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb___3561170941259240043_70233758647240'
+  app/views/lancamentos/index.html.erb:5:in `_app_views_lancamentos_index_html_erb__326865504335031227_30086640'
+  app/controllers/lancamentos_controller.rb:12:in `index'
+
+
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.8ms)
+  Rendered /home/administrator/.rvm/gems/ruby-1.9.3-p194/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (6.6ms)
+
+
+Started GET "/lancamentos?method=post&url=%2Fcategories" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Processing by LancamentosController#index as HTML
+  Parameters: {"method"=>"post", "url"=>"/categories"}
+  [1m[36mLancamento Load (0.6ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mCategory Load (0.5ms)[0m  SELECT `categories`.* FROM `categories` 
+  [1m[36mCentrodecusto Load (0.8ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` [0m
+  Rendered shared/_data_iterator.html.erb (0.0ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.5ms)
+  Rendered shared/_options_iterator.html.erb (0.1ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.9ms)
+  Rendered shared/_options_iterator.html.erb (0.6ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.8ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (0.9ms)
+  Rendered lancamentos/_form.html.erb (47.3ms)
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 2 LIMIT 1
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 1 LIMIT 1[0m
+  Rendered lancamentos/index.html.erb within layouts/application (53.0ms)
+Completed 200 OK in 84ms (Views: 76.4ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /application.css - 304 Not Modified (43ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /select2.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-transition.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-affix.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /bootstrap.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /select2.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:00 -0300
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/select2-spinner.gif" for 127.0.0.1 at 2013-03-17 22:49:02 -0300
+Served asset /select2-spinner.gif - 304 Not Modified (0ms)
+
+
+Started GET "/lancamentos?method=post&url=%2Fcategories%2Fnew" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Processing by LancamentosController#index as HTML
+  Parameters: {"method"=>"post", "url"=>"/categories/new"}
+  [1m[35mLancamento Load (0.4ms)[0m  SELECT `lancamentos`.* FROM `lancamentos` 
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.3ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  Rendered shared/_data_iterator.html.erb (0.0ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.2ms)
+  Rendered shared/_options_iterator.html.erb (0.1ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.0ms)
+  Rendered shared/_options_iterator.html.erb (0.1ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (1.2ms)
+  Rendered shared/_data_iterator.html.erb (0.1ms)
+  Rendered lancamentos/scripts/_select2.html.erb (2.5ms)
+  Rendered lancamentos/_form.html.erb (18.8ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 2 LIMIT 1[0m
+  [1m[35mCentrodecusto Load (0.3ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 1 LIMIT 1
+  Rendered lancamentos/index.html.erb within layouts/application (48.5ms)
+Completed 200 OK in 76ms (Views: 70.9ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /application.css - 304 Not Modified (33ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (9ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /categories.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/select2.css?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /select2.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /categories.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /bootstrap.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/select2.js?body=1" for 127.0.0.1 at 2013-03-17 22:49:04 -0300
+Served asset /select2.js - 304 Not Modified (0ms)
