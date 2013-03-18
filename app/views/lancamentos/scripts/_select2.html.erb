@@ -1,9 +1,15 @@
 <script type="text/javascript">
+	
 	$(document).ready(function() { $("#<%= @page_item_id %>").select2({
 		maximumSelectionSize: 1,
-		placeholder: "<%= @placeholder_value %>"
-		tags: [<%= render 'shared/tags_iterator'%>],
-		data: [<%= render 'shared/data_iterator'%>]		
+		createSearchChoice: false,
+		placeholder: "<%= @placeholder_value %>",
+		tags: [<%= render 'shared/data_iterator'%>],
+		formatNoMatches: function () { return "No matches <%= escape_javascript(link_to "Add", categories_path, :action => :create, :method => :post, :class=> "btn btn-success btn-small")%>"; } 				
 		}); });
-		
+								
+	$(document).ready(function() { $("#<%= @page_item_id %>")
+		.on("change", function(e) {alert ("Selected value is: "+JSON.stringify($("#<%= @page_item_id%>").select2("data")));} );
+	
+	});	
 </script>
