@@ -5,11 +5,32 @@
 		createSearchChoice: false,
 		placeholder: "<%= @placeholder_value %>",
 		tags: [<%= render 'shared/data_iterator'%>],
-		formatNoMatches: function () { return "No matches <%= escape_javascript(link_to "Add", :url=> new_category_path, :method => :post, :remote =>true)%>"; } 				
+		formatNoMatches: function () { return "No matches <a class='btn btn-success btn-small' onclick='handleAddEvent()'>Add</a>"; } 				
 		}); });
 								
 	$(document).ready(function() { $("#<%= @page_item_id %>")
 		.on("change", function(e) {alert ("Selected value is: "+JSON.stringify($("#<%= @page_item_id%>").select2("data")));} );
 	
 	});	
+	
+	function handleAddEvent()
+	{
+//		var desc = document.getElementsByClassName('select2-sizer')[0].textContent
+		var desc = $('.select2-sizer').text();
+		$.post('<%= centrodecustos_path %>', {centrodecusto: { descricao: desc}})
+		$('#<%= @page_item_id  %>').select2();
+	}
+	
+//	$.ajax({
+//    type: "POST",
+
+//    data = { category : { descricao : 'hello' } }    
+//    success: function(data){
+        // here is where you process the return value from your controller method
+        // the data variable will hold the return value if the call is successful
+        // you can make your controller return the html to be inserted in your table
+        // and insert it from here or just return a status message and build and add
+        // the html manually here.
+//    }
+	
 </script>

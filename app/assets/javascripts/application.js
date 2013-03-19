@@ -15,3 +15,4 @@
 //= require bootstrap
 //= require_tree .
 //= require select2
+//= require rails.validations

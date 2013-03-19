@@ -6,6 +6,7 @@ gem 'simple_enum'
 gem 'configurable_engine'
 gem 'bootstrap-sass'
 gem 'select2-rails'
+gem 'client_side_validations'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

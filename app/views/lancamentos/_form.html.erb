@@ -66,16 +66,14 @@
 <%= render 'lancamentos/scripts/select2'%>
   <div class="field" style="float:left">
     <%= f.label :categoria %>
-	<input type="hidden" id="categoria_place" style="width:200px; float:left"> 	
-			 								 		 							
+	<input type="hidden" id="categoria_place" style="width:200px; float:left"> 				 								 		 							
   </div>  
   
-  
-  
-  
+     
 <% @page_item_id = "centrodecusto_place"%> 
 <% @placeholder_value = "Selecione um centro de custo" %>
-<% @iterator = @centrosdecusto %>  
+<% @iterator = @centrosdecusto %>
+<% @which_class = 'centrodecusto' %>  
 <%= render 'lancamentos/scripts/select2'%>
   <div class="field">
     <%= f.label :centrodecusto %>
