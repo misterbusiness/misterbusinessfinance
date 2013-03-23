@@ -1,7 +1,7 @@
 class LancamentosController < ApplicationController
   # GET /lancamentos
   # GET /lancamentos.json
-  def index
+  def index  
 	@lancamento = Lancamento.new
 	#Aqui iremos implementar os filtros, pelo que eu entendi.
     @lancamentos = Lancamento.all
@@ -18,6 +18,7 @@ class LancamentosController < ApplicationController
   # GET /lancamentos/1
   # GET /lancamentos/1.json
   def show
+    
     @lancamento = Lancamento.find(params[:id])
     
     @categorias = Category.all
@@ -32,6 +33,7 @@ class LancamentosController < ApplicationController
   # GET /lancamentos/new
   # GET /lancamentos/new.json
   def new
+    
     @lancamento = Lancamento.new
     
     @categorias = Category.all
@@ -46,6 +48,7 @@ class LancamentosController < ApplicationController
 
   # GET /lancamentos/1/edit
   def edit
+    
     @lancamento = Lancamento.find(params[:id])
     
     @categorias = Category.all
@@ -55,6 +58,7 @@ class LancamentosController < ApplicationController
   # POST /lancamentos
   # POST /lancamentos.json
   def create
+    
     @lancamento = Lancamento.new(params[:lancamento])
 
     respond_to do |format|
@@ -72,6 +76,7 @@ class LancamentosController < ApplicationController
   # PUT /lancamentos/1
   # PUT /lancamentos/1.json
   def update
+    
     @lancamento = Lancamento.find(params[:id])
 
     respond_to do |format|
@@ -88,6 +93,7 @@ class LancamentosController < ApplicationController
   # DELETE /lancamentos/1
   # DELETE /lancamentos/1.json
   def destroy
+    
     @lancamento = Lancamento.find(params[:id])
     @lancamento.destroy
 

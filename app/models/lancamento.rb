@@ -7,9 +7,7 @@ class Lancamento < ActiveRecord::Base
 #  validates_inclusion_of :status, :in => ["Aberto","Quitado","Estornado","Cancelado"]
     
   as_enum :tipo, [:receita, :despesa]
-  as_enum :status, [:aberto, :quitado, :estornado, :cancelado]
-  
-  as_enum :freq_repeticoes, [:diario, :semanal, :semestral, :anual]
+  as_enum :status, [:aberto, :quitado, :estornado, :cancelado]  
     
   belongs_to :category
   belongs_to :centrodecusto
@@ -40,7 +38,6 @@ class Lancamento < ActiveRecord::Base
   
   validates_as_enum :tipo
   validates_as_enum :status
-  validates_as_enum :freq_repeticoes  
   
   #Status validation
   validate :status_not_aberto_if_dataacao

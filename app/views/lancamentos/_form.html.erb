@@ -1,90 +1,68 @@
 <%= form_for(@lancamento) do |f| %>
-  <% if @lancamento.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>
+<% if @lancamento.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>
 
-      <ul>
-      <% @lancamento.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<ul>
+		<% @lancamento.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :descricao %>
-    <%= f.text_field :descricao %>
-  </div>
- <div class="field" style="">
-    <%= f.label :tipo %>
-    <%= f.radio_button :tipo, :receita, :style => "float:left" %> <span class="label label-success" style="float:left"> Receita </span> 
-    <%= f.radio_button :tipo, :despesa, :style => "float:left" %> <span class="label label-important"> Depesa </span>
-  </div>
+<div class="field">
+	<%= f.label :descricao %>
+	<%= f.text_field :descricao %>
+</div>
+
+<div class="field" style="">
+	<%= f.label :tipo %>
+	<%= f.radio_button :tipo, :receita, :style => "float:left" %> <span class="label label-success" style="float:left"> Receita </span>
+	<%= f.radio_button :tipo, :despesa, :style => "float:left" %> <span class="label label-important"> Depesa </span>
+</div>
+
+<%= render 'lancamentos/scripts/datepicker'%>
+<div class="field">
+	<%= f.label :datavencimento %>
+	<br />
+	<input type="text" value="<%= Date.today.strftime("%d/%m/%Y") %>" id="datepicker"/>
+</div>
+
+<%= render 'lancamentos/scripts/test' %>
+<div class="field input-prepend">
+	<%= f.label :valor %>
+	<span class="add-on">R$</span>
+	<%= f.text_field :valor, :ovalue=> "", :class=> "auto", :alt=> "n0p3c2S" %>
+</div></br>
 
 
-  <div class="field">    
-    <%= f.label :datavencimento %><br />
-    <%= f.datetime_select :datavencimento %>
-  </div>
-  
-  <div class="field input-prepend">
-    <%= f.label :valor %>
-    <span class="add-on">R$</span>
-    <%= f.text_field :valor %>
-  </div></br>
-
-<!-- 16-03-2013 - JH - Select2 script configuration parameters   
-<% @page_item_id = "categoria_place"%> 
+<% @page_item_id = "categoria_place"%>
 <% @placeholder_value = "Selecione uma categoria" %>
-<% @is_select = true %>
+<% @iterator = @categorias %>
 <%= render 'lancamentos/scripts/select2'%>
-  <div class="field" style="float:left">
-    <%= f.label :categoria %>
-	<select multiple id="categoria_place" style="width:200px;">
-		<% @iterator = @categorias %>   				
-		<%= render 'shared/options_iterator'%>
-	</select>				   
-  </div>
-    
-<!-- 16-03-2013 - JH - Select2 script configuration parameters -->
-<!--  
-  <% @page_item_id = "centrodecusto_place"%>
-  <% @placeholder_value = "Selecione um centro de custo"%> 
-  <% @is_select = true %>
-  <%= render 'lancamentos/scripts/select2'%>     
-  <div class="field">
-    <%= f.label :centrodecusto %>
-	<select multiple id="centrodecusto_place" style="width:200px">
-		<% @iterator = @centrosdecusto %> 		
-		<%= render 'shared/options_iterator'%>
-	</select>		
-  </div>
- -->
-<% @page_item_id = "categoria_place"%> 
-<% @placeholder_value = "Selecione uma categoria" %>
-<% @iterator = @categorias %>  
-<%= render 'lancamentos/scripts/select2'%>
-  <div class="field" style="float:left">
-    <%= f.label :categoria %>
-	<input type="hidden" id="categoria_place" style="width:200px; float:left"> 				 								 		 							
-  </div>  
-  
-     
-<% @page_item_id = "centrodecusto_place"%> 
+<div class="field">
+	<%= f.label :categoria %>
+	<input type="text" id="categoria_place" style="width:200px;">
+</div>
+
+<br>
+<% @page_item_id = "centrodecusto_place"%>
 <% @placeholder_value = "Selecione um centro de custo" %>
 <% @iterator = @centrosdecusto %>
-<% @which_class = 'centrodecusto' %>  
 <%= render 'lancamentos/scripts/select2'%>
-  <div class="field">
-    <%= f.label :centrodecusto %>
-	<input type="hidden" id="centrodecusto_place" style="width:200px;">		 								 		 							
-  </div>      
- 
-  <div class="field">
-    <%= f.label :status %>
-    <%= f.text_field :status %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div class="field">
+	<%= f.label :centrodecusto %>
+	<input type="text" id="centrodecusto_place" style="width:200px;">
+</div>
+
+<label class="checkbox">
+	<input type="checkbox">
+	Quitado? </label>
+	
+<div class="actions">
+	<%= f.submit %>
+</div>
 <% end %>
