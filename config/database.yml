@@ -32,11 +32,10 @@ test:
   host: 127.0.0.1
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   reconnect: false
   database: mrbusinessfinance_production
   pool: 5
   username: root
-  password: liseries
-  host: 127.0.0.1
+  password: liseries  
