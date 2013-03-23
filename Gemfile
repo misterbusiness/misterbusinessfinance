@@ -7,6 +7,7 @@ gem 'configurable_engine'
 gem 'bootstrap-sass'
 gem 'select2-rails'
 gem 'client_side_validations'
+gem 'jquery-rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -16,6 +17,7 @@ group :development, :test do
   gem 'mysql2'
   gem 'rspec-rails', '2.11.0'
   gem 'factory_girl_rails'
+  gem 'capybara', '1.1.2'  
 end
 
 group :development do
@@ -35,10 +37,8 @@ group :assets do
   gem 'uglifier', ' 1.2.3'
 end
 
-gem 'jquery-rails'
-
 group :test do
-  gem 'capybara', '1.1.2'
+  
 end
 
 group :production do
