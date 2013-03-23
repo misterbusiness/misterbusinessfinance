@@ -42,7 +42,7 @@ class Lancamento < ActiveRecord::Base
   #Status validation
   validate :status_not_aberto_if_dataacao
   validate :status_not_quitado_if_no_dataacao
-  validate :status_quitado_no_change_allowed
+#  validate :status_quitado_no_change_allowed
 
   private 
 
@@ -56,11 +56,9 @@ class Lancamento < ActiveRecord::Base
   end
     
   def set_tipo_depending_valor
-    if self.valor? and self.valor < 0
-      if self.tipo == :receita
+    if self.valor? and self.valor < 0      
         self.tipo = :despesa
-        self.valor = self.valor * -1
-      end
+        self.valor = self.valor * -1      
     end
   end
   

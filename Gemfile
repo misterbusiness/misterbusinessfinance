@@ -1,4 +1,4 @@
-#source 'https://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 gem 'ancestry'
@@ -16,13 +16,17 @@ group :development, :test do
 #  gem 'sqlite3', '1.3.5'
   gem 'mysql2'
   gem 'rspec-rails', '2.11.0'
-  gem 'factory_girl_rails'  
+  gem 'factory_girl_rails'
+  gem 'log4r'
+ # gem 'ruby-debug-ide'
+ # gem 'debugger'
+ # gem 'ruby-debug19'
+#  gem 'ruby-debug'  
 end
 
 group :development do
   gem 'annotate', '2.5.0'
 end
-
 
 # Gems used only for assets and not required
 # in production environments by default.

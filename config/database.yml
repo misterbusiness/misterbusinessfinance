@@ -38,4 +38,5 @@ production:
   database: mrbusinessfinance_production
   pool: 5
   username: root
-  password: liseries  
+  password: liseries
+  host: 127.0.0.1

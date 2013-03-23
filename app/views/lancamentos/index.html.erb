@@ -37,8 +37,8 @@
 					<td><%= lancamento.datavencimento %></td>
 					<td><%= lancamento.dataacao %></td>
 					<td><%= lancamento.valor %></td>
-					<td><%= lancamento.category %></td>
-					<td><%= lancamento.centrodecusto %></td>
+					<td><%= lancamento.category.descricao unless lancamento.centrodecusto.nil? %></td>
+					<td><%= lancamento.centrodecusto.descricao unless lancamento.centrodecusto.nil? %></td>
 					<td><%= lancamento.status %></td>
 					<td><%= link_to 'Edit', edit_lancamento_path(lancamento) %></td>
 					<td><%= link_to 'Remover', lancamento, method: :delete, data: { } %></td>
