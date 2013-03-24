@@ -61,6 +61,15 @@ class LancamentosController < ApplicationController
   # POST /lancamentos.json
   def create 
     @lancamento = Lancamento.new(params[:lancamento])
+# Verifica a categoria que foi enviada
+#    @categoria = Category.find(params[:category]) unless params[:category] == "0"
+#    @lancamento.category = @categoria unless @categoria.nil?
+#    DebugLog("Categoria - id: " + @categoria.id.inspect) unless @categoria.nil?
+    
+# Verifica o centro de custo que foi enviado
+#    @centrodecusto = Centrodecusto.find(params[:centrodecusto]) unless params[:centrodecusto] == "0"
+#    @lancamento.centrodecusto = @centrodecusto unless @centrodecusto.nil?
+#    DebugLog("CentrodeCusto - id: " + @centrodecusto.id.inspect) unless @centrodecusto.nil?            
     
     @quitado = params[:quitado]
     
@@ -104,6 +113,42 @@ class LancamentosController < ApplicationController
   def update
     
     @lancamento = Lancamento.find(params[:id])
+            
+    # Verifica a categoria que foi enviada
+#    @categoria = Category.find(params[:category]) unless params[:category] == "0"
+#    @lancamento.category = @categoria unless @categoria.nil?
+#    DebugLog("Categoria - id: " + @categoria.id.inspect) unless @categoria.nil?
+    
+    # Verifica o centro de custo que foi enviado
+#    @centrodecusto = Centrodecusto.find(params[:centrodecusto]) unless params[:centrodecusto] == "0"
+#    @lancamento.centrodecusto = @centrodecusto unless @centrodecusto.nil?
+#    DebugLog("CentrodeCusto - id: " + @centrodecusto.id.inspect) unless @centrodecusto.nil?            
+    
+    @quitado = params[:quitado]
+    
+    #Validações padrão
+    @lancamento.tipo = :receita if @lancamento.tipo.blank?
+#    @lancamento.status = :aberto if @lancamento.status.blank?
+    @lancamento.valor = 0 if @lancamento.valor.blank?  
+#    @lancamento.category = Category.find_by_descricao(Configurable.categoria_padrao) if @lancamento.category.nil?
+#    @lancamento.centrodecusto = Centrodecusto.find_by_descricao(Configurable.centrodecusto_padrao) if @lancamento.centrodecusto.nil?
+         
+    if @quitado == "true" then     
+      @lancamento.status = :quitado      
+      @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")           
+    end
+    
+# Logging income
+    DebugLog("Lancamento - params: " + params.inspect)    
+    DebugLog("Lancamento - desc: " + @lancamento.descricao.inspect)
+    DebugLog("Lancamento - status: " + @lancamento.status.inspect)
+    DebugLog("Lancamento - tipo: " + @lancamento.tipo.inspect)
+    DebugLog("Lancamento - datavencimento: " + @lancamento.datavencimento.inspect)
+    DebugLog("Lancamento - dataacao: " + @lancamento.dataacao.inspect)
+    DebugLog("Lancamento - valor: " + @lancamento.valor.inspect)
+    DebugLog("Lancamento - categoria: " + @lancamento.category.descricao.inspect) unless @lancamento.category.nil?
+    DebugLog("Lancamento - centrodecusto: " + @lancamento.centrodecusto.descricao.inspect) unless @lancamento.centrodecusto.nil?  
+    
 
     respond_to do |format|
       if @lancamento.update_attributes(params[:lancamento])

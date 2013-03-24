@@ -33,7 +33,11 @@
 				  <tr>
 					<td><%= check_box lancamento.id, "checked" %></td>
 					<td><%= lancamento.descricao %></td>
-					<td><%= lancamento.tipo %></td>
+					<td><% if lancamento.tipo == :receita %> 
+							<i class='icon-plus-sign'></i> 
+						<% else %>
+							<i class='icon-minus-sign'></i>
+						<% end %></td>
 					<td><%= lancamento.datavencimento %></td>
 					<td><%= lancamento.dataacao %></td>
 					<td><%= lancamento.valor %></td>

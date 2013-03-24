@@ -6,6 +6,9 @@
 				createSearchChoice: false,
 				placeholder: "<%= @placeholder_value %>",
 				tags: [<%= render 'shared/data_iterator'%>]							
+			});
+			$("#<%= @page_item_id%>").change(function(){				
+				$("#<%= @hidden_item_id%>").val($(this).val())
 			}); 
 		});
 </script>

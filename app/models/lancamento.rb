@@ -1,5 +1,5 @@
 class Lancamento < ActiveRecord::Base
-  attr_accessible :datavencimento, :descricao, :status, :tipo, :valor, :dataacao, :category, :centrodecusto
+  attr_accessible :datavencimento, :descricao, :status, :tipo, :valor, :dataacao, :category, :centrodecusto, :category_id, :centrodecusto_id
  
 # 10-03-13 JH: Deprecated, alterado para gema simple_enum  
 # 10-03-13 JH: Para queries a sintaxa é (nome_coluna)_cd => Lancamento.(nome_chave)
