@@ -37,7 +37,7 @@
 
 <%= render 'lancamentos/scripts/datepicker'%>
 <div class="field span4">
-	<%= f.label :datavencimento, :style => "float:left" %>:&nbsp;&nbsp;	
+	<%= f.label :datavencimento, :style => "float:left" %>&nbsp;&nbsp;	
 	<input type="text" value="<%= Date.today.strftime("%d-%m-%Y") %>" id="datepicker"/>
 </div>
 
@@ -79,7 +79,7 @@
 <% @iterator = @centrosdecusto %>
 <%= render 'lancamentos/scripts/select2'%>
 <div class="field span4">
-	<%= f.label :centrodecusto , :style => "float:left" %>:&nbsp;&nbsp;
+	<%= f.label :centrodecusto , :style => "float:left" %>&nbsp;&nbsp;
 <!-- 	<input type="text" id="centrodecusto_place" style="width:200px;"> -->
 	<%= f.text_field :centrodecusto_id, :as=> :text, :id=> @page_item_id, :style=>"width:200px"%>
 </div>
