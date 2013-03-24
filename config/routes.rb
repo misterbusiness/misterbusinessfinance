@@ -2,11 +2,15 @@ Misterbusinessfinance::Application.routes.draw do
 
   resources :centrodecustos
 
-  resources :categories
-
-
-  resources :lancamentos
+  resources :categories  
   
+  resources :lancamentos do
+     member do
+       put :quitar
+       put :estornar
+     end
+  end
+  resources :lancamentos    
   
 
 

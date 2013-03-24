@@ -51,6 +51,8 @@ class LancamentosController < ApplicationController
   # GET /lancamentos/1/edit
   def edit
     
+    DebugLog(params.inspect)
+    
     @lancamento = Lancamento.find(params[:id])
     
     @categorias = Category.all
@@ -166,11 +168,67 @@ class LancamentosController < ApplicationController
   def destroy
     
     @lancamento = Lancamento.find(params[:id])
-    @lancamento.destroy
+#    @lancamento.destroy
+    @lancamento.cancel    
 
     respond_to do |format|
       format.html { redirect_to lancamentos_url }
       format.json { head :no_content }
     end
   end
+  
+# Custom controllers
+  def quitar
+    DebugLog("Params: " + params.inspect);        
+    
+    @lancamento = Lancamento.find(params[:id])    
+    if @lancamento.quitado? then
+      @lancamento.status = :aberto
+      @lancamento.dataacao = nil
+      @lancamento.save
+    else
+      @lancamento.status = :quitado
+      @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
+      @lancamento.save
+    end      
+  end
+  
+  def estornar
+    DebugLog("Params: " + params.inspect);
+    
+    @lancamento = Lancamento.find(params[:id])
+    if @lancamento.quitado? and !@lancamento.has_estorno? then      
+# Altera os valores do lançamento duplicado      
+      @lancamento_estornado = @lancamento.dup    
+      @lancamento_estornado.descricao = "#{@lancamento_estornado.descricao} - ESTORNO"
+      @lancamento_estornado.tipo = :receita unless @lancamento_estornado.receita?
+      @lancamento_estornado.tipo = :despesa unless @lancamento_estornado.despesa?
+      @lancamento_estornado.dataacao = Date.today.strftime("%d-%m-%Y") 
+      @lancamento_estornado.status = :estornado          
+# Salva o lançamento estornado para recuperar o id       
+      @lancamento_estornado.save      
+      
+      @lancamento.lancamento_estornado = @lancamento_estornado
+      @lancamento.status = :estornado
+      
+      @lancamento.save      
+    else      
+       if @lancamento.has_estorno? then
+# Verifica se este é o original          
+         if @lancamento.is_original? then
+            @lancamento.status = :aberto
+            @lancamento.dataacao = nil
+            @lancamento.lancamento_estornado.cancel
+            @lancamento.lancamento_estornado = nil
+            @lancamento.save            
+         else           
+           @lancamento.lancamento_original.status = :aberto
+           @lancamento.lancamento_original.dataacao = nil
+           @lancamento.lancamento_original.save
+           
+           @lancamento.cancel
+         end  
+       end            
+    end 
+  end  
 end

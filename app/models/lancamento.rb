@@ -1,5 +1,5 @@
 class Lancamento < ActiveRecord::Base
-  attr_accessible :datavencimento, :descricao, :status, :tipo, :valor, :dataacao, :category, :centrodecusto, :category_id, :centrodecusto_id
+  attr_accessible :datavencimento, :descricao, :status, :tipo, :valor, :dataacao, :category, :centrodecusto, :category_id, :centrodecusto_id, :lancamento_estornado, :lancamento_original
  
 # 10-03-13 JH: Deprecated, alterado para gema simple_enum  
 # 10-03-13 JH: Para queries a sintaxa é (nome_coluna)_cd => Lancamento.(nome_chave)
@@ -14,6 +14,11 @@ class Lancamento < ActiveRecord::Base
   
   has_one :parcela_lancamento, :dependent => :destroy 
   has_one :parcela, :through => :parcela_lancamento
+  
+  
+  has_one :lancamento_estornado, :class_name => "Lancamento", :foreign_key => "estorno_id"
+  belongs_to :lancamento_original, :class_name => "Lancamento", :foreign_key => "estorno_id"
+  
     
 # => Preparação para as validações    
   before_validation :set_default_status_if_not_specified
@@ -43,6 +48,25 @@ class Lancamento < ActiveRecord::Base
   validate :status_not_aberto_if_dataacao
   validate :status_not_quitado_if_no_dataacao
 #  validate :status_quitado_no_change_allowed
+
+# public methods
+  def has_estorno?
+    (!self.lancamento_estornado.nil? or !self.lancamento_original.nil?) and self.estornado?
+  end
+  
+  def is_original?
+    !self.lancamento_estornado.nil?
+  end
+  
+  def is_estorno?
+    !self.lancamento_original.nil?
+  end
+  
+  def cancel
+    self.status = :cancelado
+    self.dataacao = Date.today.strftime("%d-%m-%Y")
+    self.save
+  end
 
   private 
 
