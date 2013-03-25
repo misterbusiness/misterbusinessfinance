@@ -3222,3 +3222,146 @@ Served asset /application.js - 200 OK (6ms)
 
 Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 20:29:12 -0300
 Served asset /lancamentos.js - 200 OK (1ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Processing by LancamentosController#index as HTML
+  [1m[36mLancamento Load (1.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  Rendered lancamentos/_form.html.erb (81.0ms)
+  Rendered lancamentos/index.html.erb within layouts/application (96.0ms)
+Completed 200 OK in 227ms (Views: 166.0ms | ActiveRecord: 10.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /application.css - 304 Not Modified (11ms)
+
+
+Started GET "/assets/categories.css?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /categories.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/centrodecustos.css?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /centrodecustos.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/costcenters.css?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /costcenters.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /scaffolds.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/lancamentos.css?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /lancamentos.css - 304 Not Modified (20ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /jquery.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/categories.js?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /categories.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/centrodecustos.js?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /centrodecustos.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/costcenters.js?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /costcenters.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/lancamentos.js?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /lancamentos.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-03-11 20:48:58 -0300
+Served asset /application.js - 304 Not Modified (7ms)
+
+
+Started POST "/lancamentos" for 127.0.0.1 at 2013-03-11 20:49:03 -0300
+Processing by LancamentosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"X81WEP+Jp2OCeO76Kk6xG+Rvy7dDEOI2roVw+WynaF8=", "lancamento"=>{"descricao"=>"", "datavencimento(1i)"=>"2013", "datavencimento(2i)"=>"3", "datavencimento(3i)"=>"11", "datavencimento(4i)"=>"23", "datavencimento(5i)"=>"48", "dataacao(1i)"=>"2013", "dataacao(2i)"=>"3", "dataacao(3i)"=>"11", "dataacao(4i)"=>"23", "dataacao(5i)"=>"48", "valor"=>"", "category"=>"", "centrodecusto"=>"", "status"=>""}, "commit"=>"Create Lancamento"}
+Completed 500 Internal Server Error in 0ms
+
+ActiveModel::MassAssignmentSecurity::Error (Can't mass-assign protected attributes: dataacao(1i), dataacao(2i), dataacao(3i), dataacao(4i), dataacao(5i), category, centrodecusto):
+  app/controllers/lancamentos_controller.rb:45:in `new'
+  app/controllers/lancamentos_controller.rb:45:in `create'
+
+
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (57.0ms)
+
+
+Started POST "/lancamentos" for 127.0.0.1 at 2013-03-11 20:50:06 -0300
+Processing by LancamentosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"X81WEP+Jp2OCeO76Kk6xG+Rvy7dDEOI2roVw+WynaF8=", "lancamento"=>{"descricao"=>"teste", "datavencimento(1i)"=>"2013", "datavencimento(2i)"=>"3", "datavencimento(3i)"=>"11", "datavencimento(4i)"=>"23", "datavencimento(5i)"=>"48", "dataacao(1i)"=>"2013", "dataacao(2i)"=>"3", "dataacao(3i)"=>"11", "dataacao(4i)"=>"23", "dataacao(5i)"=>"48", "valor"=>"121.0", "category"=>"1", "centrodecusto"=>"1", "status"=>""}, "commit"=>"Create Lancamento"}
+Completed 500 Internal Server Error in 0ms
+
+ActiveModel::MassAssignmentSecurity::Error (Can't mass-assign protected attributes: dataacao(1i), dataacao(2i), dataacao(3i), dataacao(4i), dataacao(5i), category, centrodecusto):
+  app/controllers/lancamentos_controller.rb:45:in `new'
+  app/controllers/lancamentos_controller.rb:45:in `create'
+
+
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (3.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (22.0ms)
+
+
+Started GET "/lancamentos" for 127.0.0.1 at 2013-03-11 20:52:08 -0300
+Processing by LancamentosController#index as HTML
+  [1m[35mLancamento Load (1.0ms)[0m  SELECT `lancamentos`.* FROM `lancamentos` 
+  Rendered lancamentos/_form.html.erb (34.0ms)
+  Rendered lancamentos/index.html.erb within layouts/application (35.0ms)
+Completed 500 Internal Server Error in 40ms
+
+ActionView::Template::Error (undefined method `lancamento_category' for #<Lancamento:0x37fa430>):
+    34: 
+    35:   <div class="field">
+    36:     <%= f.label :lancamento_category %><br />
+    37:     <%= f.text_field :lancamento_category %>
+    38:   </div>
+    39:   <div class="field">
+    40:     <%= f.label :lancamento_centrodecusto %><br />
+  app/views/lancamentos/_form.html.erb:37:in `block in _app_views_lancamentos__form_html_erb__1018482013_30700056'
+  app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb__1018482013_30700056'
+  app/views/lancamentos/index.html.erb:5:in `_app_views_lancamentos_index_html_erb__172391463_35727888'
+  app/controllers/lancamentos_controller.rb:9:in `index'
+
+
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (15.0ms)
+
+
+Started GET "/lancamentos" for 127.0.0.1 at 2013-03-11 20:52:29 -0300
+Processing by LancamentosController#index as HTML
+  [1m[36mLancamento Load (1.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  Rendered lancamentos/_form.html.erb (9.0ms)
+  Rendered lancamentos/index.html.erb within layouts/application (10.0ms)
+Completed 500 Internal Server Error in 14ms
+
+ActionView::Template::Error (undefined method `lancamentos_category' for #<Lancamento:0x42023a0>):
+    34: 
+    35:   <div class="field">
+    36:     <%= f.label :lancamentos_category %><br />
+    37:     <%= f.text_field :lancamentos_category %>
+    38:   </div>
+    39:   <div class="field">
+    40:     <%= f.label :lancamentos_centrodecusto %><br />
+  app/views/lancamentos/_form.html.erb:37:in `block in _app_views_lancamentos__form_html_erb__1018482013_35241432'
+  app/views/lancamentos/_form.html.erb:1:in `_app_views_lancamentos__form_html_erb__1018482013_35241432'
+  app/views/lancamentos/index.html.erb:5:in `_app_views_lancamentos_index_html_erb__172391463_35727888'
+  app/controllers/lancamentos_controller.rb:9:in `index'
+
+
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+  Rendered C:/Ruby193/lib/ruby/gems/1.9.1/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (11.0ms)
