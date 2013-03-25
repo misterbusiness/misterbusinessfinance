@@ -4,6 +4,10 @@ gem 'rails', '3.2.12'
 gem 'ancestry'
 gem 'simple_enum'
 gem 'configurable_engine'
+gem 'bootstrap-sass'
+gem 'select2-rails'
+gem 'client_side_validations'
+gem 'jquery-rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -13,12 +17,16 @@ group :development, :test do
   gem 'mysql2'
   gem 'rspec-rails', '2.11.0'
   gem 'factory_girl_rails'
+  gem 'log4r'
+ # gem 'ruby-debug-ide'
+ # gem 'debugger'
+ # gem 'ruby-debug19'
+#  gem 'ruby-debug'  
 end
 
 group :development do
   gem 'annotate', '2.5.0'
 end
-
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -32,27 +40,10 @@ group :assets do
   gem 'uglifier', ' 1.2.3'
 end
 
-gem 'jquery-rails'
-
 group :test do
-  gem 'capybara', '1.1.2'
+  gem 'capybara', '1.1.2'  
 end
 
 group :production do
-  gem 'pg', '0.12.2'
+  gem 'pg'
 end
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'

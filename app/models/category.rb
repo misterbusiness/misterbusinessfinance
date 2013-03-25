@@ -4,7 +4,7 @@ class Category < ActiveRecord::Base
   
   validates :descricao, :presence => true, :uniqueness => { :case_sensitive => false }
     
-  belongs_to :lancamento
+  has_many :lancamento
   
   has_ancestry
 end

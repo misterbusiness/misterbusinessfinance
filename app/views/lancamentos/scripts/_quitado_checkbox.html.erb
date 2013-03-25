@@ -1,0 +1,16 @@
+<script type="text/javascript">
+	$(document).ready(function (){
+		$('#quitado_hidden').val($('#quitado_checkbox').is(':checked'))
+		$('#quitado_checkbox').click(function(){
+			if($(this).is(':checked'))
+			{
+				$('#quitado_hidden').val(true);
+			}
+			else
+			{
+				$('#quitado_hidden').val(false);
+			}
+		});		
+	});
+	
+</script>

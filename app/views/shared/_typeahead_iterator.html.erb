@@ -1,0 +1,9 @@
+    <% if not @iterator.nil? then %>
+	    <% @iterator.each_with_index do |iteration,id| %>
+			<% if id+1 == @iterator.length then%>
+				"<%= iteration.descricao %>"
+			<% else %>
+				"<%= iteration.descricao %>",
+			<% end %>    		
+	    <% end %>
+	<% end %>	

@@ -1,4 +1,5 @@
 <%= form_for(@lancamento) do |f| %>
+<<<<<<< HEAD
   <% if @lancamento.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>
@@ -48,4 +49,109 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+=======
+<% if @lancamento.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>
+
+	<ul>
+		<% @lancamento.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<!-- ********************************************************************************************************* 
+	Tipo
+	-->
+<%= render 'lancamentos/scripts/change_tipo_class'%>
+<div class="field span4" style="">	
+	<%= f.radio_button :tipo, :receita, :style => "float:left; display:none" %> <a id="receita_label" class="label label-success" style="float:left;color:white"> Receita </a> &nbsp; &nbsp;
+	<%= f.radio_button :tipo, :despesa, :style => "float:left; display:none" %> <a id="despesa_label" class="label label-default" style="color:white"> Depesa </a>
+</div>
+
+<!-- ********************************************************************************************************* 
+	Descrição
+	-->
+
+<div class="field span4">
+	<%= f.label :descricao, :style => "float:left" %>&nbsp;&nbsp;
+	<%= f.text_field :descricao %>
+</div>
+
+<!-- ********************************************************************************************************* 
+	Data de vencimento
+	-->
+
+<%= render 'lancamentos/scripts/datepicker'%>
+<div class="field span4">
+	<%= f.label :datavencimento, :style => "float:left" %>&nbsp;&nbsp;	
+	<input type="text" value="<%= Date.today.strftime("%d-%m-%Y") %>" id="datepicker"/>
+</div>
+
+<!-- ********************************************************************************************************* 
+	Valor
+	-->
+
+<%= render 'lancamentos/scripts/change_tipo' %>
+<div class="field input-prepend span4">
+	<%= f.label :valor , :style => "float:left" %>&nbsp;&nbsp;
+	<span class="add-on">R$</span>
+	<%= f.text_field :valor, :class=> "auto", :alt=> "n0p3c2S", :style => "text-align:right;" %>
+</div></br>
+<!-- ********************************************************************************************************* 
+	Categoria
+	-->
+
+<% @page_item_id = "categoria_place"%>
+<% @hidden_item_id = "categoria_hidden"%>
+<% @placeholder_value = "Selecione uma categoria" %>
+<% @iterator = @categorias %>
+<%= render 'lancamentos/scripts/select2'%>
+<div class="field span4">
+	<%= f.label :categoria , :style => "float:left" %>&nbsp;&nbsp;
+<!-- TODO: 23-03-13 JH: Verificar se não tem como incluir o f.text_field apontando para category e enviar 
+	automaticamente o objeto category -->	
+<!--	<input type="text" id="categoria_place" style="width:200px"%>  	-->
+	<%= f.text_field :category_id, :as=> :text, :id=> @page_item_id, :style=>"width:200px"%>
+</div>
+<!-- <%= hidden_field_tag :category, 0, :id => @hidden_item_id%> -->
+
+<!-- ********************************************************************************************************* 
+	Centro de custo
+	--> 
+<br>
+<% @page_item_id = "centrodecusto_place"%>
+<% @hidden_item_id = "centrodecusto_hidden"%>
+<% @placeholder_value = "Selecione um centro de custo" %>
+<% @iterator = @centrosdecusto %>
+<%= render 'lancamentos/scripts/select2'%>
+<div class="field span4">
+	<%= f.label :centrodecusto , :style => "float:left" %>&nbsp;&nbsp;
+<!-- 	<input type="text" id="centrodecusto_place" style="width:200px;"> -->
+	<%= f.text_field :centrodecusto_id, :as=> :text, :id=> @page_item_id, :style=>"width:200px"%>
+</div>
+<!-- <%= hidden_field_tag :centrodecusto, 0, :id => @hidden_item_id%> -->
+
+<!-- ********************************************************************************************************* 
+	Quitado checkbox
+	-->
+
+<%= render 'lancamentos/scripts/quitado_checkbox'%>
+<label class="checkbox span4" style="float:left">
+	<input id= "quitado_checkbox" type="checkbox">	Quitado? &nbsp;&nbsp; 
+</label>
+<%= hidden_field_tag :quitado, false, :id => "quitado_hidden" %>
+
+<!-- ********************************************************************************************************* 
+	Submit
+-->
+	
+<div id="lancamento_quitado" class="actions span4">
+	<%= f.submit %>
+</div>
+>>>>>>> 9c456d054f0eca778f057927125898d44c6be6a3
 <% end %>

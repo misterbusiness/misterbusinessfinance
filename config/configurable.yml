@@ -33,8 +33,8 @@
 #   type: password
 categoria_padrao:
    name: Categoria Padrão
-   default: Categoria vazia
+   default: Sem categoria
    
 centrodecusto_padrao:
   name: Centro de custo padrão
-  default: Centro de custo vazio
+  default: Sem centro de custo
