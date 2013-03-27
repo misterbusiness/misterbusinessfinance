@@ -29,7 +29,7 @@
 						<% end %></td>
 					<td><%= lancamento.datavencimento %></td>
 					<td><%= lancamento.dataacao %></td>
-					<td><%= lancamento.valor %></td>
+					<td><%= if lancamento.tipo == :receita  then "+" + lancamento.valor.to_s else "-" + lancamento.valor.to_s end %></td>
 					<td><%= lancamento.category.descricao unless lancamento.centrodecusto.nil? %></td>
 					<td><%= lancamento.centrodecusto.descricao unless lancamento.centrodecusto.nil? %></td>
 					<td><%= lancamento.status %></td>
