@@ -1,0 +1,23 @@
+<h1>Listing costcenters</h1>
+
+<table>
+  <tr>
+    <th>Descricao</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @costcenters.each do |costcenter| %>
+  <tr>
+    <td><%= costcenter.descricao %></td>
+    <td><%= link_to 'Show', costcenter %></td>
+    <td><%= link_to 'Edit', edit_costcenter_path(costcenter) %></td>
+    <td><%= link_to 'Destroy', costcenter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Costcenter', new_costcenter_path %>
