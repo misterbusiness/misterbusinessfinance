@@ -1,55 +1,4 @@
 <%= form_for(@lancamento) do |f| %>
-<<<<<<< HEAD
-  <% if @lancamento.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>
-
-      <ul>
-      <% @lancamento.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :descricao %><br />
-    <%= f.text_field :descricao %>
-  </div>
-  <div class="field">
-    <%= f.label :tipo %><br />
-    <%= f.radio_button :tipo, "Receita" %> <%= f.label :tipo, "Receita" %> <%= f.radio_button :tipo, "Despesa" %> <%= f.label :tipo, "Despesa" %>
-  </div>
-  <div class="field">
-    <%= f.label :datavencimento %><br />
-    <%= f.datetime_select :datavencimento %>
-  </div>
-  <div class="field">
-    <%= f.label :dataacao %><br />
-    <%= f.datetime_select :dataacao %>
-  </div>
-  <div class="field">
-    <%= f.label :valor %><br />
-    <%= f.text_field :valor %>
-  </div>
-
-  <div class="field">
-    <%= f.label :lancamentos_category %><br />
-    <%= f.text_field :lancamentos_category %>
-  </div>
-  <div class="field">
-    <%= f.label :lancamentos_centrodecusto %><br />
-    <%= f.text_field :lancamentos_centrodecusto %>
-  </div>
-
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-=======
 <% if @lancamento.errors.any? %>
 <div id="error_explanation">
 	<h2><%= pluralize(@lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>
@@ -153,5 +102,5 @@
 <div id="lancamento_quitado" class="actions span4">
 	<%= f.submit %>
 </div>
->>>>>>> 9c456d054f0eca778f057927125898d44c6be6a3
+
 <% end %>

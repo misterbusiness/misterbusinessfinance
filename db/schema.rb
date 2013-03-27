@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(:version => 20130324184144) do
 
   add_index "configurables", ["name"], :name => "index_configurables_on_name"
 
+  create_table "costcenters", :force => true do |t|
+    t.string   "descricao"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "lancamentos", :force => true do |t|
     t.string   "descricao"
     t.integer  "tipo_cd"
@@ -52,16 +58,6 @@ ActiveRecord::Schema.define(:version => 20130324184144) do
     t.integer  "category_id"
     t.integer  "centrodecusto_id"
     t.integer  "estorno_id"
-  end
-
-  create_table "meta", :force => true do |t|
-    t.integer  "tipo"
-    t.integer  "mes"
-    t.integer  "ano"
-    t.string   "descricao"
-    t.decimal  "valor",      :precision => 10, :scale => 0
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
   end
 
   create_table "parcela_lancamentos", :force => true do |t|
