@@ -1,0 +1,2 @@
+module LancamentorapidosHelper
+end

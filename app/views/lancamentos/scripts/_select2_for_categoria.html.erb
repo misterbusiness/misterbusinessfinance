@@ -1,0 +1,26 @@
+<script type="text/javascript">
+	
+		$(document).ready(function() { 
+			$("#<%= @page_item_id %>").select2({
+				maximumSelectionSize: 1,
+				createSearchChoice: true,
+				placeholder: "<%= @placeholder_value %>",
+				tags: [<%= render 'shared/data_iterator'%>]							
+			});
+			$("#<%= @page_item_id%>").change(function(){
+				alert("cahnge");				
+				var jqxhr = 
+					$.ajax({
+						url: "/<%= lancamentorapidos_path %>",
+						dataType: 'json'
+						data:{
+							id: $('#<%= @page_item_id %>')
+						} 
+					})
+					.success(function(response){
+						alert("sucesso: "+ response.descricao);
+					})
+								
+			}); 
+		});
+</script>

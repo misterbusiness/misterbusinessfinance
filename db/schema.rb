@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130324184144) do
+ActiveRecord::Schema.define(:version => 20130327000423) do
 
   create_table "categories", :force => true do |t|
     t.string   "descricao"
@@ -39,6 +39,19 @@ ActiveRecord::Schema.define(:version => 20130324184144) do
   end
 
   add_index "configurables", ["name"], :name => "index_configurables_on_name"
+
+  create_table "lancamentorapidos", :force => true do |t|
+    t.string   "descricao"
+    t.integer  "tipo_cd"
+    t.integer  "diavencimento"
+    t.decimal  "valor",            :precision => 9, :scale => 2
+    t.string   "categoria"
+    t.string   "centrodecusto"
+    t.integer  "category_id"
+    t.integer  "centrodecusto_id"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+  end
 
   create_table "lancamentos", :force => true do |t|
     t.string   "descricao"

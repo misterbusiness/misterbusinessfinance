@@ -1,0 +1,28 @@
+<script type="text/javascript">
+	$(document).ready( function()
+	{
+		$('#lancamentorapido_valor').blur(function(){
+			var valor = $.fn.autoNumeric.Strip('lancamentorapido_valor');
+			var valor_input = $('#lancamentorapido_valor')
+			var radio_receita = $('#lancamentorapido_tipo_receita');
+			var radio_despesa = $('#lancamentorapido_tipo_despesa');
+// Adicionados labels para fazer a troca de cores na seleção			
+			var label_receita = $("#receita_label");
+			var label_despesa = $("#despesa_label");			
+			if (valor < 0)
+			{				
+				radio_despesa.prop("checked",true);
+				label_despesa.removeClass('label-default').addClass('label-important');
+				label_receita.removeClass('label-success').addClass('label-default');
+				valor_input.val($.fn.autoNumeric.Format('lancamentorapido_valor', Math.abs(valor)));																	
+			}			
+			if (radio_despesa.is(":checked") == false && radio_receita.is(":checked") == false )
+			{
+				radio_receita.prop("checked",true);
+				label_receita.removeClass('label-default').addClass('label-success');
+				label_despesa.removeClass('label-important').addClass('label-default');
+			}				
+		});
+	});
+
+</script>

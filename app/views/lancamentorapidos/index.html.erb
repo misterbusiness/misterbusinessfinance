@@ -1,0 +1,71 @@
+<!--
+<h1>Listing lancamentorapidos</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @lancamentorapidos.each do |lancamentorapido| %>
+  <tr>
+    <td><%= link_to 'Show', lancamentorapido %></td>
+    <td><%= link_to 'Edit', edit_lancamentorapido_path(lancamentorapido) %></td>
+    <td><%= link_to 'Destroy', lancamentorapido, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Lancamentorapido', new_lancamentorapido_path %>
+-->
+
+﻿<table class="table">
+   <tr height="60%">
+		<td width="34%">
+			<div style="overflow:scroll;height:100%;width:100%;overflow:auto">
+				<%= render 'form' %>
+			</div>
+  </tr>
+ </table>
+ <table = class="table table-hover table-condensed">
+  <thead>
+  <tr height="30%"> 
+		<td colspan = 3>
+			<div style="overflow:scroll;height:100%;width:100%;overflow:auto">				
+				<tr>					
+					<th>Descrição</th>
+					<th>Tipo</th>
+					<th>Dia Vencimento</th>					
+					<th>Valor </th>
+					<th>Categoria</th>
+					<th>Centro de Custo</th>					
+					<th>Editar</th>
+					<th>Remover</th>
+				</tr>
+				</thead>				
+				<tbody>				
+				<% @lancamentorapidos.each do |lancamentorapido| %>
+				  <tr>					
+					<td><%= lancamentorapido.descricao %></td>
+					<td><% if lancamentorapido.tipo == :receita %> 
+							<i class='icon-plus-sign'></i> 
+						<% else %>
+							<i class='icon-minus-sign'></i>
+						<% end %></td>
+					<td><%= lancamentorapido.diavencimento %></td>					
+					<td><%= lancamentorapido.valor %></td>
+					<td><%= lancamentorapido.category.descricao unless lancamentorapido.centrodecusto.nil? %></td>
+					<td><%= lancamentorapido.centrodecusto.descricao unless lancamentorapido.centrodecusto.nil? %></td>					
+					<td><%= link_to 'Edit', edit_lancamentorapido_path(lancamentorapido)  %></td>
+					<td><%= link_to 'Remover', lancamentorapido, method: :delete, data: { } %></td>
+				  </tr>
+				<% end %>				
+				</table>			
+			</div>
+		</td>
+   </tr>
+   </tbody>
+</table>

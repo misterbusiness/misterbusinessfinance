@@ -8,6 +8,8 @@ class LancamentosController < ApplicationController
 	#Aqui iremos implementar os filtros, pelo que eu entendi.
     @lancamentos = Lancamento.all
     
+# Active records auxiliares
+    @lancamentorapidos = Lancamentorapido.all    
     @categorias = Category.all
     @centrosdecusto = Centrodecusto.all    
 
@@ -23,6 +25,7 @@ class LancamentosController < ApplicationController
     
     @lancamento = Lancamento.find(params[:id])
     
+    @lancamentorapidos = Lancamentorapido.all
     @categorias = Category.all
     @centrosdecusto = Centrodecusto.all
 
@@ -38,6 +41,7 @@ class LancamentosController < ApplicationController
     
     @lancamento = Lancamento.new
     
+    @lancamentorapidos = Lancamentorapido.all
     @categorias = Category.all
     @centrosdecusto = Centrodecusto.all
 #    @lancamentopadrao = Lancamentopadrao.all
@@ -55,6 +59,7 @@ class LancamentosController < ApplicationController
     
     @lancamento = Lancamento.find(params[:id])
     
+    @lancamentorapidos = Lancamentorapido.all
     @categorias = Category.all
     @centrosdecusto = Centrodecusto.all
   end

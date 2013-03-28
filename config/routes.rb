@@ -1,4 +1,8 @@
 Misterbusinessfinance::Application.routes.draw do
+   
+  
+  resources :lancamentorapidos
+
 
   resources :centrodecustos
 
@@ -10,7 +14,8 @@ Misterbusinessfinance::Application.routes.draw do
        put :estornar
      end
   end
-  resources :lancamentos    
+  resources :lancamentos   
+    
   
 
 
