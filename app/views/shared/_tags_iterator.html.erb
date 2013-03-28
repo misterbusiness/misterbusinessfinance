@@ -1,0 +1,5 @@
+<% if not @iterator.nil? then %>
+	<% @iterator.each do |iteration| %>
+		"<%= iteration.descricao %>",			
+	<% end %>
+<% end %> 
