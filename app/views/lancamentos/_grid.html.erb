@@ -1,0 +1,56 @@
+ <table = class="table table-hover table-condensed">
+  <thead>
+  <tr height="30%"> 
+		<td colspan = 3>
+			<div style="overflow:scroll;height:100%;width:100%;overflow:auto">				
+				<tr>
+					<th></th>
+					<th>Descrição</th>
+					<th>Tipo</th>
+					<th>Vencimento</th>
+					<th>Data Ação</th>
+					<th>Valor </th>
+					<th>Categoria</th>
+					<th>Centro de Custo</th>
+					<th>Status</th>
+					<th>Editar</th>
+					<th>Remover</th>
+				</tr>
+				</thead>				
+				<tbody>				
+				<% @lancamentos.each do |lancamento| %>
+				  <tr>
+					<td><%= check_box_tag "lancamento_ids", lancamento.id, false, :id => "lancamento_#{lancamento.id}"  %>
+					<td><%= lancamento.descricao %></td>
+					<td><% if lancamento.tipo == :receita %> 
+							<i class='icon-plus-sign'></i> 
+						<% else %>
+							<i class='icon-minus-sign'></i>
+						<% end %></td>
+					<td><%= lancamento.datavencimento %></td>
+					<td><%= lancamento.dataacao %></td>
+					<td><%= if lancamento.tipo == :receita  then "+" + lancamento.valor.to_s else "-" + lancamento.valor.to_s end %></td>
+					<td><%= lancamento.category.descricao unless lancamento.centrodecusto.nil? %></td>
+					<td><%= lancamento.centrodecusto.descricao unless lancamento.centrodecusto.nil? %></td>
+					<td><%= lancamento.status %></td>
+					<td><%= if not lancamento.quitado? then link_to 'Edit', edit_lancamento_path(lancamento) else 'Edit' end %></td>
+					<td><%= link_to 'Remover', lancamento, method: :delete, data: { } %></td>
+				  </tr>
+				<% end %>				
+				</table>			
+			</div>
+		</td>
+   </tr>
+   
+   <tr height="10%">
+		<td align="middle" colspan = 3>
+			<%= render 'lancamentos/scripts/quitar_checkboxes'%>
+			<button id="quitar_button" type="button">Quitar</button>
+			<%= render 'lancamentos/scripts/estornar_checkboxes'%>					
+			<button id="estornar_button" type="button">Estornar</button>
+			<%= render 'lancamentos/scripts/cancelar_checkboxes'%>
+			<button id="cancelar_button" type="button">Cancelar</button>
+		</td>
+   </tr>
+   </tbody>
+</table>
