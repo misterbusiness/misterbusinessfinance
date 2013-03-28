@@ -26724,3 +26724,4 @@ Served asset /select2.js - 304 Not Modified (0ms)
 Served asset /rails.validations.js - 304 Not Modified (0ms)
 Served asset /application.js - 304 Not Modified (2ms)
 >>>>>>> 022ace136489303a56f8fe42262399164c2845dc
+Connecting to database specified by database.yml

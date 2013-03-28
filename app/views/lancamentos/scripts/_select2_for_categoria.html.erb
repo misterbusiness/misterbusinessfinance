@@ -8,19 +8,7 @@
 				tags: [<%= render 'shared/data_iterator'%>]							
 			});
 			$("#<%= @page_item_id%>").change(function(){
-				alert("cahnge");				
-				var jqxhr = 
-					$.ajax({
-						url: "/<%= lancamentorapidos_path %>",
-						dataType: 'json'
-						data:{
-							id: $('#<%= @page_item_id %>')
-						} 
-					})
-					.success(function(response){
-						alert("sucesso: "+ response.descricao);
-					})
-								
+				$("#<%= @hidden_item_id%>").val($(this).val())								
 			}); 
 		});
 </script>
