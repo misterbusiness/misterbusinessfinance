@@ -67,25 +67,13 @@ class LancamentosController < ApplicationController
   # POST /lancamentos
   # POST /lancamentos.json
   def create 
-    @lancamento = Lancamento.new(params[:lancamento])
-# Verifica a categoria que foi enviada
-#    @categoria = Category.find(params[:category]) unless params[:category] == "0"
-#    @lancamento.category = @categoria unless @categoria.nil?
-#    DebugLog("Categoria - id: " + @categoria.id.inspect) unless @categoria.nil?
-    
-# Verifica o centro de custo que foi enviado
-#    @centrodecusto = Centrodecusto.find(params[:centrodecusto]) unless params[:centrodecusto] == "0"
-#    @lancamento.centrodecusto = @centrodecusto unless @centrodecusto.nil?
-#    DebugLog("CentrodeCusto - id: " + @centrodecusto.id.inspect) unless @centrodecusto.nil?            
+    @lancamento = Lancamento.new(params[:lancamento])          
     
     @quitado = params[:quitado]
     
     #Validações padrão
     @lancamento.tipo = :receita if @lancamento.tipo.blank?
-#    @lancamento.status = :aberto if @lancamento.status.blank?
     @lancamento.valor = 0 if @lancamento.valor.blank?  
-#    @lancamento.category = Category.find_by_descricao(Configurable.categoria_padrao) if @lancamento.category.nil?
-#    @lancamento.centrodecusto = Centrodecusto.find_by_descricao(Configurable.centrodecusto_padrao) if @lancamento.centrodecusto.nil?
          
     if @quitado == "true" then     
       @lancamento.status = :quitado      
@@ -119,26 +107,13 @@ class LancamentosController < ApplicationController
   # PUT /lancamentos/1.json
   def update
     
-    @lancamento = Lancamento.find(params[:id])
-            
-    # Verifica a categoria que foi enviada
-#    @categoria = Category.find(params[:category]) unless params[:category] == "0"
-#    @lancamento.category = @categoria unless @categoria.nil?
-#    DebugLog("Categoria - id: " + @categoria.id.inspect) unless @categoria.nil?
-    
-    # Verifica o centro de custo que foi enviado
-#    @centrodecusto = Centrodecusto.find(params[:centrodecusto]) unless params[:centrodecusto] == "0"
-#    @lancamento.centrodecusto = @centrodecusto unless @centrodecusto.nil?
-#    DebugLog("CentrodeCusto - id: " + @centrodecusto.id.inspect) unless @centrodecusto.nil?            
+    @lancamento = Lancamento.find(params[:id])                 
     
     @quitado = params[:quitado]
     
     #Validações padrão
     @lancamento.tipo = :receita if @lancamento.tipo.blank?
-#    @lancamento.status = :aberto if @lancamento.status.blank?
     @lancamento.valor = 0 if @lancamento.valor.blank?  
-#    @lancamento.category = Category.find_by_descricao(Configurable.categoria_padrao) if @lancamento.category.nil?
-#    @lancamento.centrodecusto = Centrodecusto.find_by_descricao(Configurable.centrodecusto_padrao) if @lancamento.centrodecusto.nil?
          
     if @quitado == "true" then     
       @lancamento.status = :quitado      
@@ -173,8 +148,12 @@ class LancamentosController < ApplicationController
   def destroy
     
     @lancamento = Lancamento.find(params[:id])
-#    @lancamento.destroy
-    @lancamento.cancel    
+#   @lancamento.destroy
+    @lancamento.cancel 
+    
+    if @lancamento.is_original? then                   
+       @lancamento.lancamento_estornado.cancel     
+    end   
 
     respond_to do |format|
       format.html { redirect_to lancamentos_url }

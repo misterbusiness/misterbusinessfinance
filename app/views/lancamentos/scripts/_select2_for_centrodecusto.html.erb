@@ -2,6 +2,7 @@
 	
 		$(document).ready(function() { 
 			$("#<%= @page_item_id %>").select2({
+				width: 'resolve',
 				maximumSelectionSize: 1,
 				createSearchChoice: false,
 				placeholder: "<%= @placeholder_value %>",

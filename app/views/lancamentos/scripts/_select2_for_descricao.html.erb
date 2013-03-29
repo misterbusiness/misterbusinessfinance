@@ -15,6 +15,8 @@
 						data: {}
 					})
 					.success(function(response){																			
+						$("#lancamento_descricao").val(response.descricao);
+						
 						var radio_receita = $('#lancamento_tipo_receita');
 						var radio_despesa = $('#lancamento_tipo_despesa');
 						// Adicionados labels para fazer a troca de cores na seleção			
@@ -32,9 +34,9 @@
 							radio_receita.prop("checked",true);
 							label_receita.removeClass('label-default').addClass('label-success');
 							label_despesa.removeClass('label-important').addClass('label-default');
-						}
+						}						
+						$("#lancamento_valor").val(response.valor);						
 						
-						$("#lancamento_valor").val(response.valor);
 						var selectedDate = new Date((new Date).getFullYear(), (new Date).getMonth(), response.diavencimento)												
 						$("#datepicker").datepicker("setDate", selectedDate);
 						$("#datepicker").datepicker({ dateFormat: "dd-mm-yy" });
@@ -43,7 +45,7 @@
 						$("#centrodecusto_place").val(response.centrodecusto_id).trigger("change");								
 					})
 					.error(function(){
-						alert("erro!!")
+						// Erro ocorre quando não encontra nenhum registro
 					})
 			});
 			
