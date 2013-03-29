@@ -8,6 +8,7 @@ gem 'bootstrap-sass'
 gem 'select2-rails'
 gem 'client_side_validations'
 gem 'jquery-rails'
+gem 'simple_form'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
