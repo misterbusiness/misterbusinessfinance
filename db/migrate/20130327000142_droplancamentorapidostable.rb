@@ -1,6 +1,6 @@
 class Droplancamentorapidostable < ActiveRecord::Migration
   def up
-    drop_table :lancamentorapidos
+    #drop_table :lancamentorapidos
   end
 
   def down
