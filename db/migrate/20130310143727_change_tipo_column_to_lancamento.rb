@@ -1,9 +1,8 @@
 class ChangeTipoColumnToLancamento < ActiveRecord::Migration
-  def up
-    change_column :lancamentos, :tipo, :integer
-    change_column :lancamentos, :status, :integer
-  end
-
-  def down
+  def change
+    remove_column :lancamentos, :tipo
+    
+    add_column :lancamentos, :tipo, :integer
+    add_column :lancamentos, :status, :integer
   end
 end
