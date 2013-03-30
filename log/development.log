@@ -33793,3 +33793,404 @@ Served asset /rails.validations.js - 304 Not Modified (1ms)
 Served asset /select2.js - 304 Not Modified (2ms)
 Served asset /application.js - 304 Not Modified (21ms)
 Served asset /glyphicons-halflings.png - 304 Not Modified (18ms)
+Connecting to database specified by database.yml
+  [1m[36mLancamento Load (42.5ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.4ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.3ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36mCentrodecusto Load (9.7ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCategory Load (0.5ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCentrodecusto Load (0.4ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 14 LIMIT 1[0m
+  [1m[35mCategory Load (0.4ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 4 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+Served asset /application.css - 200 OK (54ms)
+Served asset /bootstrap_and_overrides.css - 200 OK (10ms)
+Served asset /categories.css - 200 OK (1ms)
+Served asset /datepicker.css - 200 OK (1ms)
+Served asset /centrodecustos.css - 200 OK (1ms)
+Served asset /costcenters.css - 200 OK (1ms)
+Served asset /lancamentorapidos.css - 200 OK (1ms)
+Served asset /lancamentos.css - 200 OK (1ms)
+Served asset /scaffolds.css - 200 OK (1ms)
+Served asset /select2.css - 200 OK (2ms)
+Served asset /jquery.js - 200 OK (2ms)
+Served asset /jquery_ujs.js - 200 OK (1ms)
+Served asset /bootstrap-transition.js - 200 OK (2ms)
+Served asset /bootstrap-affix.js - 200 OK (4ms)
+Served asset /bootstrap-alert.js - 200 OK (2ms)
+Served asset /bootstrap-button.js - 200 OK (2ms)
+Served asset /bootstrap-carousel.js - 200 OK (2ms)
+Served asset /bootstrap-collapse.js - 200 OK (3ms)
+Served asset /bootstrap-dropdown.js - 200 OK (2ms)
+Served asset /bootstrap-scrollspy.js - 200 OK (3ms)
+Served asset /bootstrap-modal.js - 200 OK (2ms)
+Served asset /bootstrap-tooltip.js - 200 OK (2ms)
+Served asset /bootstrap-tab.js - 200 OK (2ms)
+Served asset /bootstrap-typeahead.js - 200 OK (3ms)
+Served asset /bootstrap-popover.js - 200 OK (3ms)
+Served asset /bootstrap.js - 200 OK (12ms)
+Served asset /autoLoader.js - 200 OK (1ms)
+Served asset /autoNumeric-1.4.5.js - 200 OK (1ms)
+Served asset /bootstrap-datepicker.js - 200 OK (1ms)
+Served asset /categories.js - 200 OK (1ms)
+Served asset /lancamentorapidos.js - 200 OK (1ms)
+Served asset /centrodecustos.js - 200 OK (2ms)
+Served asset /costcenters.js - 200 OK (1ms)
+Served asset /rails.validations.js - 200 OK (1ms)
+Served asset /lancamentos.js - 200 OK (1ms)
+Served asset /select2.js - 200 OK (2ms)
+Served asset /application.js - 200 OK (28ms)
+Served asset /glyphicons-halflings.png - 200 OK (23ms)
+  [1m[36mLancamento Load (0.3ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.2ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.2ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCentrodecusto Load (0.2ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 14 LIMIT 1[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 4 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+Served asset /application.css - 304 Not Modified (18ms)
+Served asset /categories.css - 304 Not Modified (0ms)
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (4ms)
+Served asset /datepicker.css - 304 Not Modified (0ms)
+Served asset /costcenters.css - 304 Not Modified (0ms)
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+Served asset /select2.css - 304 Not Modified (0ms)
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+Served asset /bootstrap-modal.js - 304 Not Modified (2ms)
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+Served asset /bootstrap.js - 304 Not Modified (1ms)
+Served asset /autoLoader.js - 304 Not Modified (0ms)
+Served asset /bootstrap-datepicker.js - 304 Not Modified (0ms)
+Served asset /autoNumeric-1.4.5.js - 304 Not Modified (3ms)
+Served asset /categories.js - 304 Not Modified (0ms)
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+Served asset /costcenters.js - 304 Not Modified (0ms)
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /rails.validations.js - 304 Not Modified (0ms)
+Served asset /select2.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+Served asset /glyphicons-halflings.png - 304 Not Modified (0ms)
+  [1m[36mLancamento Load (0.6ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.5ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.8ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.6ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 14 LIMIT 1[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 4 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+Served asset /application.css - 304 Not Modified (37ms)
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (5ms)
+Served asset /categories.css - 304 Not Modified (0ms)
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+Served asset /datepicker.css - 304 Not Modified (0ms)
+Served asset /costcenters.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (1ms)
+Served asset /select2.css - 304 Not Modified (0ms)
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+Served asset /bootstrap-affix.js - 304 Not Modified (1ms)
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+Served asset /bootstrap.js - 304 Not Modified (2ms)
+Served asset /autoLoader.js - 304 Not Modified (0ms)
+Served asset /autoNumeric-1.4.5.js - 304 Not Modified (0ms)
+Served asset /bootstrap-datepicker.js - 304 Not Modified (0ms)
+Served asset /categories.js - 304 Not Modified (0ms)
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+Served asset /costcenters.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+Served asset /rails.validations.js - 304 Not Modified (23ms)
+Served asset /select2.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+Served asset /glyphicons-halflings.png - 304 Not Modified (0ms)
+  [1m[36mLancamento Load (0.3ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.4ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.3ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCACHE (0.5ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 14 LIMIT 1[0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 4 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+Served asset /application.css - 304 Not Modified (20ms)
+Served asset /categories.css - 304 Not Modified (0ms)
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+Served asset /costcenters.css - 304 Not Modified (0ms)
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (12ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /datepicker.css - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /select2.css - 304 Not Modified (0ms)
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (1ms)
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+Served asset /bootstrap.js - 304 Not Modified (2ms)
+Served asset /autoLoader.js - 304 Not Modified (0ms)
+Served asset /autoNumeric-1.4.5.js - 304 Not Modified (0ms)
+Served asset /categories.js - 304 Not Modified (0ms)
+Served asset /bootstrap-datepicker.js - 304 Not Modified (0ms)
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+Served asset /costcenters.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+Served asset /rails.validations.js - 304 Not Modified (0ms)
+Served asset /select2.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+Served asset /glyphicons-halflings.png - 304 Not Modified (0ms)
+  [1m[36mLancamento Load (0.3ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.2ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.7ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCentrodecusto Load (0.8ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 14 LIMIT 1[0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 4 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+Served asset /application.css - 304 Not Modified (9ms)
+Served asset /datepicker.css - 304 Not Modified (0ms)
+Served asset /costcenters.css - 304 Not Modified (0ms)
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (28ms)
+Served asset /categories.css - 304 Not Modified (0ms)
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (1ms)
+Served asset /select2.css - 304 Not Modified (0ms)
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tooltip.js - 304 Not Modified (2ms)
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+Served asset /bootstrap.js - 304 Not Modified (4ms)
+Served asset /autoLoader.js - 304 Not Modified (0ms)
+Served asset /autoNumeric-1.4.5.js - 304 Not Modified (0ms)
+Served asset /bootstrap-datepicker.js - 304 Not Modified (0ms)
+Served asset /categories.js - 304 Not Modified (0ms)
+Served asset /costcenters.js - 304 Not Modified (0ms)
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+Served asset /rails.validations.js - 304 Not Modified (0ms)
+Served asset /select2.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+Served asset /glyphicons-halflings.png - 304 Not Modified (0ms)
+  [1m[36mLancamento Load (0.5ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.2ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.3ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36mCentrodecusto Load (0.4ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCentrodecusto Load (0.2ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 14 LIMIT 1[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 4 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+Served asset /application.css - 304 Not Modified (17ms)
+Served asset /datepicker.css - 304 Not Modified (0ms)
+Served asset /costcenters.css - 304 Not Modified (0ms)
+Served asset /categories.css - 304 Not Modified (0ms)
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (4ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+Served asset /select2.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (1ms)
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+Served asset /bootstrap-dropdown.js - 304 Not Modified (2ms)
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+Served asset /bootstrap.js - 304 Not Modified (3ms)
+Served asset /autoLoader.js - 304 Not Modified (0ms)
+Served asset /autoNumeric-1.4.5.js - 304 Not Modified (0ms)
+Served asset /bootstrap-datepicker.js - 304 Not Modified (0ms)
+Served asset /categories.js - 304 Not Modified (0ms)
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+Served asset /costcenters.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+Served asset /rails.validations.js - 304 Not Modified (0ms)
+Served asset /select2.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+Served asset /glyphicons-halflings.png - 304 Not Modified (0ms)
+  [1m[36mLancamento Load (0.2ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.3ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.2ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCentrodecusto Load (0.4ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 14 LIMIT 1[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 4 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+Served asset /application.css - 304 Not Modified (29ms)
+Served asset /categories.css - 304 Not Modified (0ms)
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (7ms)
+Served asset /datepicker.css - 304 Not Modified (0ms)
+Served asset /costcenters.css - 304 Not Modified (0ms)
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (38ms)
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /select2.css - 304 Not Modified (0ms)
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+Served asset /bootstrap.js - 304 Not Modified (2ms)
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+Served asset /autoLoader.js - 304 Not Modified (0ms)
+Served asset /bootstrap-typeahead.js - 304 Not Modified (0ms)
+Served asset /autoNumeric-1.4.5.js - 304 Not Modified (0ms)
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+Served asset /bootstrap-datepicker.js - 304 Not Modified (0ms)
+Served asset /categories.js - 304 Not Modified (0ms)
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+Served asset /costcenters.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+Served asset /rails.validations.js - 304 Not Modified (0ms)
+Served asset /select2.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+Served asset /glyphicons-halflings.png - 304 Not Modified (1ms)
+  [1m[36mLancamento Load (0.3ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.4ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.2ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36mCentrodecusto Load (0.8ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+  [1m[36mCentrodecusto Load (0.3ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 14 LIMIT 1[0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 4 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`id` = 15 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `categories`.* FROM `categories` WHERE `categories`.`id` = 5 LIMIT 1
+Served asset /application.css - 304 Not Modified (39ms)
+Served asset /costcenters.css - 304 Not Modified (4ms)
+Served asset /bootstrap_and_overrides.css - 304 Not Modified (10ms)
+Served asset /centrodecustos.css - 304 Not Modified (0ms)
+Served asset /datepicker.css - 304 Not Modified (0ms)
+Served asset /categories.css - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+Served asset /select2.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+Served asset /bootstrap-transition.js - 304 Not Modified (0ms)
+Served asset /bootstrap-affix.js - 304 Not Modified (0ms)
+Served asset /bootstrap-alert.js - 304 Not Modified (0ms)
+Served asset /bootstrap-carousel.js - 304 Not Modified (0ms)
+Served asset /bootstrap-collapse.js - 304 Not Modified (0ms)
+Served asset /bootstrap-button.js - 304 Not Modified (0ms)
+Served asset /bootstrap-dropdown.js - 304 Not Modified (0ms)
+Served asset /bootstrap-modal.js - 304 Not Modified (0ms)
+Served asset /bootstrap-scrollspy.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tab.js - 304 Not Modified (0ms)
+Served asset /bootstrap-tooltip.js - 304 Not Modified (0ms)
+Served asset /bootstrap-popover.js - 304 Not Modified (0ms)
+Served asset /bootstrap-typeahead.js - 304 Not Modified (1ms)
+Served asset /autoLoader.js - 304 Not Modified (0ms)
+Served asset /bootstrap.js - 304 Not Modified (3ms)
+Served asset /bootstrap-datepicker.js - 304 Not Modified (0ms)
+Served asset /autoNumeric-1.4.5.js - 304 Not Modified (0ms)
+Served asset /categories.js - 304 Not Modified (0ms)
+Served asset /centrodecustos.js - 304 Not Modified (0ms)
+Served asset /costcenters.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /lancamentos.js - 304 Not Modified (0ms)
+Served asset /rails.validations.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (5ms)
+Served asset /select2.js - 304 Not Modified (0ms)
+Served asset /glyphicons-halflings.png - 304 Not Modified (0ms)

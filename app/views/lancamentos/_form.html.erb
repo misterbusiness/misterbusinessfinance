@@ -124,6 +124,19 @@
 	Quitado checkbox
 	-->
 
+<%= render 'lancamentos/scripts/calculo_parcela' %>
+<div class="container-fluid">
+<div class="span1">
+<label>Nº parcelas</label>
+</div>
+<div class="span3">
+	<input type="text" placeholder="Número de parcelas" id="numero_parcelas">	
+</div>	
+<div class="span1">
+	<label id="total_parcela">0</label>
+</div>
+</div>
+
 <%= render 'lancamentos/scripts/quitado_checkbox'%>
 <div class = "container">
 <label class="checkbox">
