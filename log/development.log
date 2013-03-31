@@ -46880,3 +46880,404 @@ Served asset /lancamentos.js - 304 Not Modified (0ms)
 Served asset /application.js - 304 Not Modified (3ms)
 Served asset /glyphicons-halflings.png - 304 Not Modified (0ms)
 Served asset /select2.png - 304 Not Modified (0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (958.1ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (304.0ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to ChangeDatetimeFormatInLancamentos (20130306005825)
+Mysql2::Error: Table 'mrbusinessfinance_development.lancamentos' doesn't exist: SHOW FULL FIELDS FROM `lancamentos`
+Connecting to database specified by database.yml
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to ChangeDatetimeFormatInLancamentos (20130306005825)
+Mysql2::Error: Table 'mrbusinessfinance_development.lancamentos' doesn't exist: SHOW FULL FIELDS FROM `lancamentos`
+Connecting to database specified by database.yml
+Mysql2::Error: Table 'mrbusinessfinance_development.lancamentos' doesn't exist: SHOW FULL FIELDS FROM `lancamentos`
+Mysql2::Error: Table 'mrbusinessfinance_development.lancamentos' doesn't exist: SHOW FULL FIELDS FROM `lancamentos`
+Connecting to database specified by database.yml
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to ChangeDatetimeFormatInLancamentos (20130306005825)
+Mysql2::Error: Table 'mrbusinessfinance_development.lancamentos' doesn't exist: SHOW FULL FIELDS FROM `lancamentos`
+Connecting to database specified by database.yml
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to ChangeDatetimeFormatInLancamentos (20130306005825)
+Mysql2::Error: Table 'mrbusinessfinance_development.lancamentos' doesn't exist: SHOW FULL FIELDS FROM `lancamentos`
+Connecting to database specified by database.yml
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (1.0ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to ChangeDatetimeFormatInLancamentos (20130306005825)
+Mysql2::Error: Table 'mrbusinessfinance_development.lancamentos' doesn't exist: SHOW FULL FIELDS FROM `lancamentos`
+Connecting to database specified by database.yml
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (0.0ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to ChangeDatetimeFormatInLancamentos (20130306005825)
+Mysql2::Error: Table 'mrbusinessfinance_development.lancamentos' doesn't exist: SHOW FULL FIELDS FROM `lancamentos`
+Connecting to database specified by database.yml
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (0.0ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Connecting to database specified by database.yml
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Connecting to database specified by database.yml
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to ChangeDatetimeFormatInLancamentos (20130306005825)
+Mysql2::Error: Table 'mrbusinessfinance_development.lancamentos' doesn't exist: SHOW FULL FIELDS FROM `lancamentos`
+Connecting to database specified by database.yml
+  [1m[36m (124.0ms)[0m  [1mDROP DATABASE IF EXISTS `mrbusinessfinance_development`[0m
+  [1m[35m (2.0ms)[0m  DROP DATABASE IF EXISTS `mrbusinessfinance_test`
+  [1m[36m (5.0ms)[0m  [1mCREATE DATABASE `mrbusinessfinance_development` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (2.0ms)[0m  CREATE DATABASE `mrbusinessfinance_test` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`
+  [1m[36m (43.0ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `descricao` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `ancestry` varchar(255)) ENGINE=InnoDB[0m
+  [1m[35m (54.0ms)[0m  CREATE INDEX `index_categories_on_ancestry` ON `categories` (`ancestry`)
+  [1m[36m (37.0ms)[0m  [1mCREATE TABLE `centrodecustos` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `descricao` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `ancestry` varchar(255)) ENGINE=InnoDB[0m
+  [1m[35m (27.0ms)[0m  CREATE INDEX `index_centrodecustos_on_ancestry` ON `centrodecustos` (`ancestry`)
+  [1m[36m (24.0ms)[0m  [1mCREATE TABLE `configurables` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (67.0ms)[0m  CREATE INDEX `index_configurables_on_name` ON `configurables` (`name`)
+  [1m[36m (81.0ms)[0m  [1mCREATE TABLE `lancamentorapidos` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `descricao` varchar(255), `tipo_cd` int(11), `diavencimento` int(11), `valor` decimal(9,2), `categoria` varchar(255), `centrodecusto` varchar(255), `category_id` int(11), `centrodecusto_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (72.0ms)[0m  CREATE TABLE `lancamentos` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `descricao` varchar(255), `tipo_cd` int(11), `datavencimento` date, `dataacao` date, `valor` decimal(9,2), `status_cd` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `category_id` int(11), `centrodecusto_id` int(11), `estorno_id` int(11), `parcela_id` int(11)) ENGINE=InnoDB
+  [1m[36m (24.0ms)[0m  [1mCREATE TABLE `meta` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `tipo` int(11), `mes` int(11), `ano` int(11), `descricao` varchar(255), `valor` decimal(10,0), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (36.0ms)[0m  CREATE TABLE `parcela_lancamentos` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `indice` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `parcela_id` int(11), `lancamento_id` int(11)) ENGINE=InnoDB
+  [1m[36m (36.0ms)[0m  [1mCREATE TABLE `parcelas` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `num_parcelas` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (54.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (54.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (1.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (4.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130331000823')[0m
+  [1m[35m (48.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130306005825')
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130306015213')[0m
+  [1m[35m (2.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130306015348')
+  [1m[36m (3.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130306015835')[0m
+  [1m[35m (2.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130306020144')
+  [1m[36m (3.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130310143727')[0m
+  [1m[35m (3.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130310143946')
+  [1m[36m (3.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130310161038')[0m
+  [1m[35m (2.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130310224035')
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130310224323')[0m
+  [1m[35m (2.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130310224434')
+  [1m[36m (3.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130310230314')[0m
+  [1m[35m (3.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130310230528')
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130311000851')[0m
+  [1m[35m (2.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130311002000')
+  [1m[36m (3.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130311002957')[0m
+  [1m[35m (2.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130311003140')
+  [1m[36m (32.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130311220444')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130311222306')
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130324184144')[0m
+  [1m[35m (2.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130327000142')
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130327000259')[0m
+  [1m[35m (2.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20130327000423')
+  [1m[36m (3.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20130327002856')[0m
+  [1m[35m (1.0ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+Connecting to database specified by database.yml
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to ChangeDatetimeFormatInLancamentos (20130306005825)
+Migrating to CreateCategories (20130306015213)
+Migrating to AddAncestryToCategories (20130306015348)
+Migrating to RemoveCategoriaFromLancamento (20130306015835)
+Migrating to AddFkToLancamentos (20130306020144)
+Migrating to ChangeTipoColumnToLancamento (20130310143727)
+Migrating to ChangeTipoColumnNameOnLancamento (20130310143946)
+Migrating to ChangeValorScale (20130310161038)
+Migrating to CreateCentrodecustos (20130310224035)
+Migrating to AddAncestryToCentrodecustos (20130310224323)
+Migrating to AddCentrodecustoFkToLancamentos (20130310224434)
+Migrating to CreateParcelas (20130310230314)
+Migrating to CreateParcelaLancamentos (20130310230528)
+Migrating to AddParcelaFkToLancamento (20130311000851)
+Migrating to AddFkParcelaToParcelaLancamento (20130311002000)
+Migrating to RemoveFkParcelaFromLancamento (20130311002957)
+Migrating to AddFkLancamentoToParcelaLancamento (20130311003140)
+Migrating to RenameDescriptionForCategory (20130311220444)
+Migrating to CreateConfigurables (20130311222306)
+Migrating to AddEstornadoIdToLancamentos (20130324184144)
+Migrating to Droplancamentorapidostable (20130327000142)
+Migrating to CreateLancamentorapidosFixed (20130327000259)
+Migrating to ChangeValorScaleLancamentoRapido (20130327000423)
+Migrating to CreateLancamentorapidos (20130327002856)
+Migrating to AddIndexParcelaToLancamento (20130331000823)
+Migrating to CreateLancamentos (20130331125227)
+  [1m[35m (2.0ms)[0m  CREATE TABLE `lancamentos` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+Mysql2::Error: Table 'lancamentos' already exists: CREATE TABLE `lancamentos` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (3.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Compiled bootstrap_and_overrides.css  (5739ms)  (pid 5420)
+Compiled categories.css  (6ms)  (pid 5420)
+Compiled centrodecustos.css  (6ms)  (pid 5420)
+Compiled datepicker.css  (0ms)  (pid 5420)
+Compiled lancamentorapidos.css  (6ms)  (pid 5420)
+Compiled lancamentos.css  (8ms)  (pid 5420)
+Compiled scaffolds.css  (22ms)  (pid 5420)
+Compiled select2.css  (213ms)  (pid 5420)
+Compiled application.css  (6515ms)  (pid 5420)
+Compiled jquery.js  (4ms)  (pid 5420)
+Compiled jquery_ujs.js  (1ms)  (pid 5420)
+Compiled bootstrap-transition.js  (0ms)  (pid 5420)
+Compiled bootstrap-affix.js  (0ms)  (pid 5420)
+Compiled bootstrap-alert.js  (0ms)  (pid 5420)
+Compiled bootstrap-button.js  (1ms)  (pid 5420)
+Compiled bootstrap-carousel.js  (1ms)  (pid 5420)
+Compiled bootstrap-collapse.js  (1ms)  (pid 5420)
+Compiled bootstrap-dropdown.js  (0ms)  (pid 5420)
+Compiled bootstrap-modal.js  (1ms)  (pid 5420)
+Compiled bootstrap-scrollspy.js  (0ms)  (pid 5420)
+Compiled bootstrap-tab.js  (0ms)  (pid 5420)
+Compiled bootstrap-tooltip.js  (0ms)  (pid 5420)
+Compiled bootstrap-popover.js  (0ms)  (pid 5420)
+Compiled bootstrap-typeahead.js  (0ms)  (pid 5420)
+Compiled bootstrap.js  (1968ms)  (pid 5420)
+Compiled autoLoader.js  (0ms)  (pid 5420)
+Compiled autoNumeric-1.4.5.js  (0ms)  (pid 5420)
+Compiled bootstrap-datepicker.js  (0ms)  (pid 5420)
+Compiled categories.js  (1949ms)  (pid 5420)
+Compiled centrodecustos.js  (273ms)  (pid 5420)
+Compiled lancamentorapidos.js  (319ms)  (pid 5420)
+Compiled lancamentos.js  (281ms)  (pid 5420)
+Compiled rails.validations.js  (1ms)  (pid 5420)
+Compiled select2.js  (2ms)  (pid 5420)
+Compiled application.js  (6210ms)  (pid 5420)
+Served asset /categories.css - 200 OK (10ms)
+Served asset /lancamentorapidos.css - 200 OK (4ms)
+Served asset /datepicker.css - 200 OK (3ms)
+Served asset /centrodecustos.css - 200 OK (5ms)
+Served asset /application.css - 200 OK (36ms)
+Served asset /bootstrap_and_overrides.css - 200 OK (13ms)
+Served asset /lancamentos.css - 200 OK (3ms)
+Served asset /scaffolds.css - 200 OK (3ms)
+Served asset /bootstrap-transition.js - 200 OK (10ms)
+Served asset /jquery.js - 200 OK (14ms)
+Served asset /jquery_ujs.js - 200 OK (8ms)
+Served asset /select2.css - 200 OK (14ms)
+Served asset /bootstrap-affix.js - 200 OK (5ms)
+Served asset /bootstrap-alert.js - 200 OK (10ms)
+Served asset /bootstrap-button.js - 200 OK (7ms)
+Served asset /bootstrap-carousel.js - 200 OK (6ms)
+Served asset /bootstrap-collapse.js - 200 OK (31ms)
+Served asset /bootstrap-dropdown.js - 200 OK (7ms)
+Served asset /bootstrap-modal.js - 200 OK (45ms)
+Served asset /bootstrap-scrollspy.js - 200 OK (7ms)
+Served asset /bootstrap-tab.js - 200 OK (6ms)
+Served asset /bootstrap-tooltip.js - 200 OK (13ms)
+Served asset /bootstrap-typeahead.js - 200 OK (50ms)
+Served asset /bootstrap-popover.js - 200 OK (9ms)
+Served asset /bootstrap.js - 200 OK (35ms)
+Served asset /autoLoader.js - 200 OK (3ms)
+Served asset /autoNumeric-1.4.5.js - 200 OK (5ms)
+Served asset /bootstrap-datepicker.js - 200 OK (3ms)
+Served asset /categories.js - 200 OK (6ms)
+Served asset /centrodecustos.js - 200 OK (7ms)
+Served asset /select2.js - 200 OK (7ms)
+Served asset /rails.validations.js - 200 OK (4ms)
+Served asset /lancamentorapidos.js - 200 OK (3ms)
+Served asset /lancamentos.js - 200 OK (2ms)
+Served asset /application.js - 200 OK (70ms)
+Served asset /select2.png - 200 OK (46ms)
+Served asset /select2-spinner.gif - 200 OK (55ms)
+Served asset /glyphicons-halflings.png - 200 OK (133ms)
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mConfigurable Load (1.0ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Sem categoria' LIMIT 1[0m
+  [1m[35mConfigurable Load (0.0ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1
+  [1m[36mCentrodecusto Load (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Sem centro de custo' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (1.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mConfigurable Load (1.0ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Sem categoria' LIMIT 1[0m
+  [1m[35mConfigurable Load (0.0ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1
+  [1m[36mCentrodecusto Load (0.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Sem centro de custo' LIMIT 1[0m
+  [1m[35m (1.0ms)[0m  ROLLBACK
+  [1m[36mLancamento Load (1.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mConfigurable Load (0.0ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'categoria_padrao' LIMIT 1
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE `categories`.`descricao` = 'Sem categoria' LIMIT 1[0m
+  [1m[35mConfigurable Load (0.0ms)[0m  SELECT `configurables`.* FROM `configurables` WHERE `configurables`.`name` = 'centrodecusto_padrao' LIMIT 1
+  [1m[36mCentrodecusto Load (1.0ms)[0m  [1mSELECT `centrodecustos`.* FROM `centrodecustos` WHERE `centrodecustos`.`descricao` = 'Sem centro de custo' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36mLancamento Load (1.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (1.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Connecting to database specified by database.yml
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (1.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (4ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (1ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (4ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+  [1m[36mLancamento Load (1.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (1.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (1ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (1ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (4ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (1.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (4ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (1.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (1ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (4ms)
+  [1m[36mLancamento Load (1.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /application.js - 304 Not Modified (3ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (1ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+  [1m[36mLancamento Load (1.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (1.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (5ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (3ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentos.css - 304 Not Modified (1ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (4ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (2ms)
+  [1m[36mLancamento Load (1.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (2ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+  [1m[36mLancamento Load (1.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.css - 304 Not Modified (1ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (5ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (1.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.js - 304 Not Modified (1ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (1ms)
+Served asset /application.js - 304 Not Modified (3ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (1.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (0.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+  [1m[36mLancamento Load (1.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (1.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (1.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.js - 304 Not Modified (1ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (3ms)
+  [1m[36mLancamento Load (0.0ms)[0m  [1mSELECT `lancamentos`.* FROM `lancamentos` [0m
+  [1m[35mLancamentorapido Load (0.0ms)[0m  SELECT `lancamentorapidos`.* FROM `lancamentorapidos` 
+  [1m[36mCategory Load (0.0ms)[0m  [1mSELECT `categories`.* FROM `categories` [0m
+  [1m[35mCentrodecusto Load (1.0ms)[0m  SELECT `centrodecustos`.* FROM `centrodecustos` 
+Served asset /lancamentorapidos.css - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (4ms)
+Served asset /lancamentos.css - 304 Not Modified (0ms)
+Served asset /lancamentorapidos.js - 304 Not Modified (0ms)

@@ -29,14 +29,25 @@
 						<% end %></td>
 					<td><%= lancamento.datavencimento %></td>
 					<td><%= lancamento.dataacao %></td>
-					<td><%= if lancamento.tipo == :receita  then "+" + lancamento.valor.to_s else "-" + lancamento.valor.to_s end %></td>
+					<td><%= if lancamento.receita?  then "+" + lancamento.valor.to_s else "-" + lancamento.valor.to_s end %></td>
 					<td><%= lancamento.category.descricao unless lancamento.centrodecusto.nil? %></td>
 					<td><%= lancamento.centrodecusto.descricao unless lancamento.centrodecusto.nil? %></td>
 					<td><%= lancamento.status %></td>
 					<td><%= if not lancamento.quitado? then link_to 'Edit', edit_lancamento_path(lancamento) else 'Edit' end %></td>
 					<td><%= link_to 'Remover', lancamento, method: :delete, data: { } %></td>
 				  </tr>
-				<% end %>				
+				<% end %>	
+				
+				<% if @lancamentos.count == 0 then%>
+					<tr>
+						<td colspan="11"> Nenhum resultado encontrado. </td>
+						
+						
+					</tr>
+				
+				
+				<%end%>
+							
 				</table>			
 			</div>
 		</td>
