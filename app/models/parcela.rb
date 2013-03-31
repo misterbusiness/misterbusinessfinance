@@ -3,6 +3,6 @@ class Parcela < ActiveRecord::Base
   
   validates :num_parcelas, :presence => true
   
-  has_many :parcela_lancamento, :dependent => :destroy
-  has_many :lancamento, :through => :parcela_lancamento
+#  has_many :parcela_lancamento, :dependent => :destroy
+  has_many :lancamento, :dependent => :destroy
 end

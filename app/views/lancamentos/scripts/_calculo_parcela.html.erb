@@ -1,6 +1,15 @@
 <script type="text/javascript">
 	$(document).ready(function(){
+		$("#numero_parcelas").blur(function(){
+/// Calculo da parcela
+		var dataVencimento = $("#datepicker").val();
+		var numeroParcelas = $("#numero_parcelas").val();
+		var freqParcelas = $("#frequencia_parcelas").val();
+		var valorParcelas = $.fn.autoNumeric.Strip('lancamento_valor');							
 		
+		$("#total_parcela").text(valorParcelas/numeroParcelas);
+												
+		});
 	});
 	
 </script>

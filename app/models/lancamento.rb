@@ -12,10 +12,9 @@ class Lancamento < ActiveRecord::Base
   belongs_to :category
   belongs_to :centrodecusto
   
-  has_one :parcela_lancamento, :dependent => :destroy 
-  has_one :parcela, :through => :parcela_lancamento
-  
-  
+#  has_one :parcela_lancamento, :dependent => :destroy 
+  belongs_to :parcela
+    
   has_one :lancamento_estornado, :class_name => "Lancamento", :foreign_key => "estorno_id"
   belongs_to :lancamento_original, :class_name => "Lancamento", :foreign_key => "estorno_id"
   

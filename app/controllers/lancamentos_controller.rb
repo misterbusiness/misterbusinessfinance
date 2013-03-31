@@ -66,10 +66,12 @@ class LancamentosController < ApplicationController
 
   # POST /lancamentos
   # POST /lancamentos.json
-  def create 
+  def create         
     @lancamento = Lancamento.new(params[:lancamento])          
     
     @quitado = params[:quitado]
+    @freqPacelas = params[:freqParcelas]
+    @numParcelas = Integer(params[:numParcelas])
     
     #Validações padrão
     @lancamento.tipo = :receita if @lancamento.tipo.blank?
@@ -78,6 +80,36 @@ class LancamentosController < ApplicationController
     if @quitado == "true" then     
       @lancamento.status = :quitado      
       @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")           
+    end
+    
+    if @numParcelas > 1 then
+      # Cria o registro de parcela
+      @parcela = Parcela.new
+      @parcela.num_parcelas = @numParcelas
+      
+      if @parcela.save       
+        (1..@numParcelas).each do |i|
+          @lancamento_parcela = Lancamento.new
+          @lancamento_parcela = @lancamento.dup
+          @lancamento_parcela.valor = @lancamento.valor/@numParcelas
+          @lancamento_parcela.descricao = "#{@lancamento.descricao} - (#{i}/#{@numParcelas})"
+          @lancamento_parcela.parcela = @parcela                   
+          
+          @lancamento_parcela.save                                       
+        end
+     end
+        format.html { redirect_to @lancamento, notice: 'Lancamento was successfully created.' }      
+        format.json { render json: @lancamento, status: :created, location: @lancamento }      
+    else
+      respond_to do |format|
+      if @lancamento.save
+        #format.html { redirect_to @lancamento, notice: 'Lancamento was successfully created.' } Aqui iremos fazer a redire��o direto para o index.
+        format.html { redirect_to '/lancamentos'}
+        format.json { render json: @lancamento, status: :created, location: @lancamento }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @lancamento.errors, status: :unprocessable_entity }
+      end
     end
     
 # Logging income
@@ -91,15 +123,6 @@ class LancamentosController < ApplicationController
     DebugLog("Lancamento - categoria: " + @lancamento.category.descricao.inspect) unless @lancamento.category.nil?
     DebugLog("Lancamento - centrodecusto: " + @lancamento.centrodecusto.descricao.inspect) unless @lancamento.centrodecusto.nil?    
          
-    respond_to do |format|
-      if @lancamento.save
-        #format.html { redirect_to @lancamento, notice: 'Lancamento was successfully created.' } Aqui iremos fazer a redire��o direto para o index.
-		format.html { redirect_to '/lancamentos'}
-        format.json { render json: @lancamento, status: :created, location: @lancamento }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @lancamento.errors, status: :unprocessable_entity }
-      end
     end
   end
 
@@ -148,12 +171,15 @@ class LancamentosController < ApplicationController
   def destroy
     
     @lancamento = Lancamento.find(params[:id])
-#   @lancamento.destroy
-    @lancamento.cancel 
+#   @lancamento.destroy    
     
     if @lancamento.is_original? then                   
-       @lancamento.lancamento_estornado.cancel     
+       @lancamento.lancamento_estornado.destroy     
+       #@lancamento.lancamento_estornado.cancel
     end   
+    
+    @lancamento.destroy
+    #@lancamento.cancel
 
     respond_to do |format|
       format.html { redirect_to lancamentos_url }

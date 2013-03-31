@@ -2,21 +2,23 @@
 	
 		$(document).ready(function() { 
 			$("#<%= @page_item_id %>").select2({
-				maximumSelectionSize: 1,				
+				width: "resolve",
+				maximumSelectionSize: 1,	
+				createSearchChoice: true,			
 				placeholder: "<%= @placeholder_value %>",
 				tags: [<%= render 'shared/data_iterator'%>]							
 			});
-			$("#lancamento_descricao").change(function(){
-				var selectedValue = $("#lancamento_descricao").val();
+			$("#lancamento_descricao").change(function(){							
+				var selectedValue = $("#lancamento_descricao").val();				
 				var jqxhr =
 					$.ajax({
 						url: "<%= lancamentorapidos_path %>/" + selectedValue,
 						dataType: 'json',
 						data: {}
 					})
-					.success(function(response){																			
-						$("#lancamento_descricao").val(response.descricao);
-						
+					.success(function(response){																	
+						$("#lancamento_descricao").select2(this).find(response.descricao);
+												
 						var radio_receita = $('#lancamento_tipo_receita');
 						var radio_despesa = $('#lancamento_tipo_despesa');
 						// Adicionados labels para fazer a troca de cores na seleção			

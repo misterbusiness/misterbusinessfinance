@@ -1,0 +1,12 @@
+<script type="text/javascript">
+	
+		$(document).ready(function() { 
+			$("#frequencia_parcelas").select2({
+				width: "resolve",	
+				height: "resolve",
+				maximumSelectionSize: 1,									
+				tags: ['Semanal', 'Mensal', 'Semestral', 'Anual']							
+			});
+			$("#frequencia_parcelas").val('Mensal').trigger("change");						
+		});
+</script>

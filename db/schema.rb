@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327000423) do
+ActiveRecord::Schema.define(:version => 20130331000823) do
 
   create_table "categories", :force => true do |t|
     t.string   "descricao"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20130327000423) do
     t.integer  "category_id"
     t.integer  "centrodecusto_id"
     t.integer  "estorno_id"
+    t.integer  "parcela_id"
   end
 
   create_table "meta", :force => true do |t|
