@@ -4,8 +4,8 @@ class LancamentosController < ApplicationController
   # GET /lancamentos
   # GET /lancamentos.json
   def index  
-	@lancamento = Lancamento.new
-	#Aqui iremos implementar os filtros, pelo que eu entendi.
+  @lancamento = Lancamento.new
+  #Aqui iremos implementar os filtros, pelo que eu entendi.
     @lancamentos = Lancamento.all
     
 # Active records auxiliares
@@ -66,11 +66,12 @@ class LancamentosController < ApplicationController
 
   # POST /lancamentos
   # POST /lancamentos.json
-  def create         
+  def create   
+    DebugLog("Lancamento - params: " + params.inspect)      
     @lancamento = Lancamento.new(params[:lancamento])          
     
     @quitado = params[:quitado]
-    @freqPacelas = params[:freqParcelas]
+    @freqParcelas = params[:freqParcelas]
     @numParcelas = Integer(params[:numParcelas])
     
     #Validações padrão
@@ -87,44 +88,32 @@ class LancamentosController < ApplicationController
       @parcela = Parcela.new
       @parcela.num_parcelas = @numParcelas
       
-      if @parcela.save       
+      if @parcela.save then      
         (1..@numParcelas).each do |i|
           @lancamento_parcela = Lancamento.new
           @lancamento_parcela = @lancamento.dup
           @lancamento_parcela.valor = @lancamento.valor/@numParcelas
-          @lancamento_parcela.descricao = "#{@lancamento.descricao} - (#{i}/#{@numParcelas})"
+                       
+          @lancamento_parcela.datavencimento = case @freqParcelas           
+            when 'Semanal' then @lancamento_parcela.datavencimento + (i-1).weeks
+            when 'Mensal' then @lancamento_parcela.datavencimento + (i-1).months
+            when 'Semestral' then @lancamento_parcela.datavencimento + ((i-1)*6).months
+            when 'Anual' then @lancamento_parcela.datavencimento + (i-1).years   
+            else @lancamento_parcela.datavencimento       
+          end 
+                            
+          @lancamento_parcela.descricao = "#{@lancamento.descricao} - #{@freqParcelas} - (#{i}/#{@numParcelas})"
           @lancamento_parcela.parcela = @parcela                   
           
           @lancamento_parcela.save                                       
-        end
-     end
-        format.html { redirect_to @lancamento, notice: 'Lancamento was successfully created.' }      
-        format.json { render json: @lancamento, status: :created, location: @lancamento }      
-    else
-      respond_to do |format|
-      if @lancamento.save
-        #format.html { redirect_to @lancamento, notice: 'Lancamento was successfully created.' } Aqui iremos fazer a redire��o direto para o index.
-        format.html { redirect_to '/lancamentos'}
-        format.json { render json: @lancamento, status: :created, location: @lancamento }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @lancamento.errors, status: :unprocessable_entity }
-      end
-    end
-    
-# Logging income
-    DebugLog("Lancamento - params: " + params.inspect)    
-    DebugLog("Lancamento - desc: " + @lancamento.descricao.inspect)
-    DebugLog("Lancamento - status: " + @lancamento.status.inspect)
-    DebugLog("Lancamento - tipo: " + @lancamento.tipo.inspect)
-    DebugLog("Lancamento - datavencimento: " + @lancamento.datavencimento.inspect)
-    DebugLog("Lancamento - dataacao: " + @lancamento.dataacao.inspect)
-    DebugLog("Lancamento - valor: " + @lancamento.valor.inspect)
-    DebugLog("Lancamento - categoria: " + @lancamento.category.descricao.inspect) unless @lancamento.category.nil?
-    DebugLog("Lancamento - centrodecusto: " + @lancamento.centrodecusto.descricao.inspect) unless @lancamento.centrodecusto.nil?    
-         
-    end
-  end
+        end #do     
+      end # if @parcela       
+    else # @parcela.save    
+      @lancamento.save                    
+    end # if @parcela.save 
+        
+    redirect_to '/lancamentos'     
+  end #create
 
   # PUT /lancamentos/1
   # PUT /lancamentos/1.json

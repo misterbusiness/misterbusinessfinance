@@ -1,0 +1,22 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#numero_agendamentos").blur(function(){
+/// Calculo da parcela
+		var dataVencimento = $("#datepicker").val();
+		var numeroRepeticoes = $("#numero_agendamentos").val();
+		var freqRepeticoes = $("#frequencia_agendamentos").val();
+		var valorRepeticao = $.fn.autoNumeric.Strip('lancamento_valor');
+		var dataRepeticao = new Date();									
+		switch(freqRepeticoes){
+			case 'Semanal': {$("#total_agendamento").text(dataRepeticao);break;}
+			case 'Mensal': {$("#total_agendamento").text(dataRepeticao);break;}
+			case 'Semestral': {$("#total_agendamento").text(dataRepeticao);break;}
+			case 'Anual': {$("#total_agendamento").text(dataRepeticao);break;}						
+		}
+		dataRepeticao = $.datepicker.formatDate('dd-MM-yyyy', dataRepeticao)
+		alert(dataRepeticao);
+												
+		});
+	});
+	
+</script>

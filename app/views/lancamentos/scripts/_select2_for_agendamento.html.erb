@@ -1,0 +1,12 @@
+<script type="text/javascript">
+	
+		$(document).ready(function() { 
+			$("#frequencia_agendamentos").select2({
+				width: "resolve",	
+				height: "resolve",
+				maximumSelectionSize: 1,									
+				tags: ['Semanal', 'Mensal', 'Semestral', 'Anual']							
+			});
+			$("#frequencia_agendamentos").val('Mensal').trigger("change");						
+		});
+</script>

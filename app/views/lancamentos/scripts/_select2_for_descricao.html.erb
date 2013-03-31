@@ -17,7 +17,7 @@
 						data: {}
 					})
 					.success(function(response){																	
-						$("#lancamento_descricao").select2(this).find(response.descricao);
+						$("#lancamento_descricao").val(response.descricao);
 												
 						var radio_receita = $('#lancamento_tipo_receita');
 						var radio_despesa = $('#lancamento_tipo_despesa');
