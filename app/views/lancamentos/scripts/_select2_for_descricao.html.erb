@@ -39,7 +39,7 @@
 						}						
 						$("#lancamento_valor").val(response.valor);						
 						
-						var selectedDate = new Date((new Date).getFullYear(), (new Date).getMonth(), response.diavencimento)												
+						var selectedDate = new Date((new Date).getFullYear(), (new Date).getMonth(), response.diavencimento);
 						$("#datepicker").datepicker("setDate", selectedDate);
 						$("#datepicker").datepicker({ dateFormat: "dd-mm-yy" });
 						

@@ -16,12 +16,3 @@
 //= require_tree .
 //= require select2
 //= require rails.validations
-
-JQuery.fn.parcela = function(numParcelas, freqParcela, valor, dataVencimento){
-	switch(freqParcela){
-		case 'Mensal': return 2 ;break;
-		case 'Semanal': return 1 ;break;
-		case 'Semestral': return 3;break;
-		case 'Anual': return 4;break;
-	}
-}

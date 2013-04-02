@@ -178,6 +178,7 @@ DEPENDENCIES
   mysql2
   pg
   rails (= 3.2.12)
+  rake
   rspec-rails (= 2.11.0)
   sass-rails (~> 3.2.3)
   select2-rails

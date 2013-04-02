@@ -1,15 +1,25 @@
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#numero_parcelas").blur(function(){
+    $(document).ready(function () {
+        $("#numero_parcelas").blur(function () {
 /// Calculo da parcela
-		var dataVencimento = $("#datepicker").val();
-		var numeroParcelas = $("#numero_parcelas").val();
-		var freqParcelas = $("#frequencia_parcelas").val();
-		var valorParcelas = $.fn.autoNumeric.Strip('lancamento_valor');							
-		
-		$("#total_parcela").text(valorParcelas/numeroParcelas);
-												
-		});
-	});
-	
+            var dataVencimento = $("#datepicker").val();
+            var numeroParcelas = $("#numero_parcelas").val();
+            var freqParcelas = $("#frequencia_parcelas").val();
+            var valorParcelas = $.fn.autoNumeric.Strip('lancamento_valor');
+
+            var agendamentoBox = $("#numero_agendamentos");
+            var agendamentoFreq = $("#frequencia_agendamentos");
+            if (numeroParcelas > 1) {
+                agendamentoBox.prop('disabled',true);
+                agendamentoBox.val(1);
+            }
+            else{
+                agendamentoBox.prop('disabled',false);
+            }
+
+            $("#total_parcela").text(valorParcelas / numeroParcelas);
+
+        });
+    });
+
 </script>

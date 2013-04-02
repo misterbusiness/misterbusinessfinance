@@ -1,22 +1,52 @@
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#numero_agendamentos").blur(function(){
+    $(document).ready(function () {
+        $("#numero_agendamentos").blur(function () {
 /// Calculo da parcela
-		var dataVencimento = $("#datepicker").val();
-		var numeroRepeticoes = $("#numero_agendamentos").val();
-		var freqRepeticoes = $("#frequencia_agendamentos").val();
-		var valorRepeticao = $.fn.autoNumeric.Strip('lancamento_valor');
-		var dataRepeticao = new Date();									
-		switch(freqRepeticoes){
-			case 'Semanal': {$("#total_agendamento").text(dataRepeticao);break;}
-			case 'Mensal': {$("#total_agendamento").text(dataRepeticao);break;}
-			case 'Semestral': {$("#total_agendamento").text(dataRepeticao);break;}
-			case 'Anual': {$("#total_agendamento").text(dataRepeticao);break;}						
-		}
-		dataRepeticao = $.datepicker.formatDate('dd-MM-yyyy', dataRepeticao)
-		alert(dataRepeticao);
-												
-		});
-	});
-	
+            var dataVencimento = $("#datepicker").val();
+            var numeroRepeticoes = $("#numero_agendamentos").val();
+            var freqRepeticoes = $("#frequencia_agendamentos").val();
+            var valorRepeticao = $.fn.autoNumeric.Strip('lancamento_valor');
+            var dataRepeticao = new Date();
+//        var selectedDate = new Date((new Date).getFullYear(), (new Date).getMonth(), response.diavencimento);
+            if (dataVencimento != null) {
+                switch (freqRepeticoes) {
+                    case 'Semanal':
+                    {
+                        dataRepeticao = new Date((dataVencimento).getFullYear(), (dataVencimento).getMonth(), (dataVencimento).getDay() + 7);
+                        break;
+                    }
+                    case 'Mensal':
+                    {
+                        dataRepeticao = new Date((dataVencimento).getFullYear(), (dataVencimento).getMonth() + 1, (dataVencimento).getDay());
+                        break;
+                    }
+                    case 'Semestral':
+                    {
+                        dataRepeticao = new Date((dataVencimento).getFullYear(), (dataVencimento).getMonth() + 6, (dataVencimento).getDay());
+                        break;
+                    }
+                    case 'Anual':
+                    {
+                        dataRepeticao = new Date((dataVencimento).getFullYear() + 1, (dataVencimento).getMonth(), (dataVencimento).getDay());
+                        break;
+                    }
+                    default :
+                    {
+                        dataRepeticao = new Date((dataVencimento).getFullYear(), (dataVencimento).getMonth(), (dataVencimento).getDay());
+                        break;
+                    }
+                }
+            }
+            $("#total_agendamento").text(dataRepeticao);
+            var parcelaBox = $("#numero_parcelas");
+            if (numeroRepeticoes > 1) {
+                parcelaBox.prop('disabled', true);
+                parcelaBox.val(1);
+            }
+            else {
+                parcelaBox.prop('disabled', false);
+            }
+        });
+    });
+
 </script>

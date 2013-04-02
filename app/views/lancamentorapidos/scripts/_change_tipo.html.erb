@@ -3,10 +3,10 @@
 	{
 		$('#lancamentorapido_valor').blur(function(){
 			var valor = $.fn.autoNumeric.Strip('lancamentorapido_valor');
-			var valor_input = $('#lancamentorapido_valor')
+			var valor_input = $('#lancamentorapido_valor');
 			var radio_receita = $('#lancamentorapido_tipo_receita');
 			var radio_despesa = $('#lancamentorapido_tipo_despesa');
-// Adicionados labels para fazer a troca de cores na seleção			
+            // Adicionados labels para fazer a troca de cores na seleção
 			var label_receita = $("#receita_label");
 			var label_despesa = $("#despesa_label");			
 			if (valor < 0)
