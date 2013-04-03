@@ -4,9 +4,11 @@
 			$("#frequencia_agendamentos").select2({
 				width: "resolve",	
 				height: "resolve",
-				maximumSelectionSize: 1,									
+				maximumSelectionSize: 1,
+                allowClear: true,
 				tags: ['Semanal', 'Mensal', 'Semestral', 'Anual']							
 			});
-			$("#frequencia_agendamentos").val('Mensal').trigger("change");						
+			$("#frequencia_agendamentos").val('Mensal').trigger("change");
+
 		});
 </script>

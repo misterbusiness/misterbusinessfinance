@@ -3,12 +3,18 @@
         $("#numero_agendamentos").blur(function () {
 /// Calculo da parcela
             var dataVencimento = $("#datepicker").val();
-            var numeroRepeticoes = $("#numero_agendamentos").val();
-            var freqRepeticoes = $("#frequencia_agendamentos").val();
+            var numeroRepeticoes = $("#numero_agendamentos");
+            var freqRepeticoes = $("#frequencia_agendamentos");
+            var numeroParcelas = $("#numero_parcelas");
+            var freqParcelas = $("#frequencia_parcelas");
             var valorRepeticao = $.fn.autoNumeric.Strip('lancamento_valor');
             var dataRepeticao = new Date();
+
+            //alert(dataRepeticao.toDateString());
+
+            $("#total_agendamento").text(dataRepeticao);
 //        var selectedDate = new Date((new Date).getFullYear(), (new Date).getMonth(), response.diavencimento);
-            if (dataVencimento != null) {
+ /*           if (dataVencimento != null) {
                 switch (freqRepeticoes) {
                     case 'Semanal':
                     {
@@ -37,15 +43,28 @@
                     }
                 }
             }
-            $("#total_agendamento").text(dataRepeticao);
-            var parcelaBox = $("#numero_parcelas");
-            if (numeroRepeticoes > 1) {
-                parcelaBox.prop('disabled', true);
-                parcelaBox.val(1);
+            $("#total_agendamento").text(dataRepeticao);*/
+
+            if (numeroRepeticoes.val() > 1) {
+                numeroParcelas.prop('disabled', true);
+                freqParcelas.select2('disable');
+
+                numeroRepeticoes.prop('disabled',false);
+                freqRepeticoes.select2('enable');
             }
             else {
-                parcelaBox.prop('disabled', false);
+                numeroRepeticoes.prop('disabled', false);
+                freqRepeticoes.select2('enable');
+
+                numeroParcelas.prop('disabled',false);
+                freqParcelas.select2('enable');
             }
+
+            $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
+            $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
+
+            $("#numero_parcelas_hidden").val(numeroParcelas.val());
+            $("#frequencia_parcelas_hidden").val(freqParcelas.val());
         });
     });
 

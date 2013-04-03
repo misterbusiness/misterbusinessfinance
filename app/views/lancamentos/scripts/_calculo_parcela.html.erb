@@ -3,13 +3,17 @@
         $("#numero_parcelas").blur(function () {
 /// Calculo da parcela
             var dataVencimento = $("#datepicker").val();
-            var numeroParcelas = $("#numero_parcelas").val();
-            var freqParcelas = $("#frequencia_parcelas").val();
+            var numeroParcelas = $("#numero_parcelas");
+            var freqParcelas = $("#frequencia_parcelas");
+
+            var numeroRepeticoes = $("#numero_agendamentos");
+            var freqRepeticoes = $("#frequencia_agendamentos");
+
             var valorParcelas = $.fn.autoNumeric.Strip('lancamento_valor');
 
             var agendamentoBox = $("#numero_agendamentos");
             var agendamentoFreq = $("#frequencia_agendamentos");
-            if (numeroParcelas > 1) {
+            if (numeroParcelas.val() > 1) {
                 agendamentoBox.prop('disabled',true);
                 agendamentoBox.val(1);
             }
@@ -17,7 +21,28 @@
                 agendamentoBox.prop('disabled',false);
             }
 
-            $("#total_parcela").text(valorParcelas / numeroParcelas);
+            $("#total_parcela").text(valorParcelas / numeroParcelas.val());
+
+            if (numeroParcelas.val() > 1) {
+                numeroRepeticoes.prop('disabled', true);
+                freqRepeticoes.select2('disable');
+
+                numeroParcelas.prop('disabled',false);
+                freqParcelas.select2('enable');
+            }
+            else {
+                numeroRepeticoes.prop('disabled', false);
+                freqRepeticoes.select2('enable');
+
+                numeroParcelas.prop('disabled',false);
+                freqParcelas.select2('enable');
+            }
+
+            $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
+            $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
+
+            $("#numero_parcelas_hidden").val(numeroParcelas.val());
+            $("#frequencia_parcelas_hidden").val(freqParcelas.val());
 
         });
     });

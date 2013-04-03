@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130331000823) do
+ActiveRecord::Schema.define(:version => 20130403111844) do
+
+  create_table "agendamentos", :force => true do |t|
+    t.integer  "num_agendamentos"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "descricao"
@@ -66,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20130331000823) do
     t.integer  "centrodecusto_id"
     t.integer  "estorno_id"
     t.integer  "parcela_id"
+    t.integer  "agendamento_id"
   end
 
   create_table "meta", :force => true do |t|

@@ -74,6 +74,9 @@ class LancamentosController < ApplicationController
     @freqParcelas = params[:freqParcelas]
     @numParcelas = Integer(params[:numParcelas])
 
+    @freqAgendamentos = params[:freqAgendamentos]
+    @numAgendamentos = Integer(params[:numAgendamentos])
+
     #Validações padrão
     @lancamento.tipo = :receita if @lancamento.tipo.blank?
     @lancamento.valor = 0 if @lancamento.valor.blank?
@@ -83,7 +86,7 @@ class LancamentosController < ApplicationController
       @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
     end
 
-    if @numParcelas > 1 then
+    if @numParcelas > 1
       # Cria o registro de parcela
       @parcela = Parcela.new
       @parcela.num_parcelas = @numParcelas
@@ -112,10 +115,18 @@ class LancamentosController < ApplicationController
 
           @lancamento_parcela.save
         end #do     
-      end # if @parcela       
-    else # @parcela.save    
-      @lancamento.save
-    end # if @parcela.save 
+      end # if @parcela.save
+    end # @numParcelas > 1
+
+
+    if @numAgendamentos > 1
+      # Cria o registro de agendamento
+      @agendamento = Agendamento.new
+      @agendamento.num = @numParcelas
+    end
+
+    @lancamento.save if (!(@numParcelas > 1) and !(@numAgendamentos > 1))
+
 
     redirect_to '/lancamentos'
   end
