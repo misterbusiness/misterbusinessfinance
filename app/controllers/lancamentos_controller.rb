@@ -71,8 +71,8 @@ class LancamentosController < ApplicationController
     @lancamento = Lancamento.new(params[:lancamento])
 
     @quitado = params[:quitado]
-    @freqParcelas = params[:freqParcelas]
-    @numParcelas = Integer(params[:numParcelas])
+    @freqParcelas = params[:freqParcelas] unless params[:numParcelas].blank?
+    @numParcelas = Integer(params[:numParcelas]) unless params[:numParcelas].blank?
 
     @freqAgendamentos = params[:freqAgendamentos]
     @numAgendamentos = Integer(params[:numAgendamentos])
@@ -81,7 +81,14 @@ class LancamentosController < ApplicationController
     @lancamento.tipo = :receita if @lancamento.tipo.blank?
     @lancamento.valor = 0 if @lancamento.valor.blank?
 
-    if @quitado == "true" then
+    @numParcelas = 1 if @numParcelas.blank?
+    @numAgendamentos = 1 if @numAgendamentos.blank?
+
+    @freqParcelas = "Mensal" if @freqParcelas.blank?
+    @freqAgendamentos = "Mensal" if @freqAgendamentos.blank?
+
+
+    if @quitado == "true"
       @lancamento.status = :quitado
       @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
     end
@@ -122,7 +129,30 @@ class LancamentosController < ApplicationController
     if @numAgendamentos > 1
       # Cria o registro de agendamento
       @agendamento = Agendamento.new
-      @agendamento.num = @numParcelas
+      @agendamento.num_agendamentos = @numAgendamentos
+
+      if @agendamento.save
+        (1..@numAgendamentos).each do |i|
+          @lancamento_agendamento = Lancamento.new
+          @lancamento_agendamento = @lancamento.dup
+
+          @lancamento_agendamento.datavencimento = case @freqAgendamentos
+                                                     when 'Semanal' then
+                                                       @lancamento_agendamento.datavencimento + (i-1).weeks
+                                                     when 'Mensal' then
+                                                       @lancamento_agendamento.datavencimento + (i-1).months
+                                                     when 'Semestral' then
+                                                       @lancamento_agendamento.datavencimento + ((i-1)*6).months
+                                                     when 'Anual' then
+                                                       @lancamento_agendamento.datavencimento + (i-1).years
+                                                     else
+                                                       @lancamento_agendamento.datavencimento
+                                                   end
+          @lancamento_agendamento.agendamento = @agendamento
+
+          @lancamento_agendamento.save
+        end #do
+      end #@agendamento.save
     end
 
     @lancamento.save if (!(@numParcelas > 1) and !(@numAgendamentos > 1))

@@ -1,5 +1,18 @@
 <script type="text/javascript">
     $(document).ready(function () {
+
+        var freqRepeticoes = $("#frequencia_agendamentos");
+        var freqParcelas = $("#frequencia_parcelas");
+
+        var numeroRepeticoes = $("#numero_agendamentos");
+        var numeroParcelas = $("#numero_parcelas");
+
+        $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
+        $("#frequencia_parcelas_hidden").val(freqParcelas.val());
+
+        $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
+        $("#numero_parcelas_hidden").val(numeroParcelas.val());
+
         $("#numero_agendamentos").blur(function () {
 /// Calculo da parcela
             var dataVencimento = $("#datepicker").val();
@@ -64,6 +77,13 @@
             $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
 
             $("#numero_parcelas_hidden").val(numeroParcelas.val());
+            $("#frequencia_parcelas_hidden").val(freqParcelas.val());
+        });
+
+        $("#frequencia_agendamentos").change(function(){
+
+            $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
+
             $("#frequencia_parcelas_hidden").val(freqParcelas.val());
         });
     });
