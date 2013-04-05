@@ -71,11 +71,11 @@ class LancamentosController < ApplicationController
     @lancamento = Lancamento.new(params[:lancamento])
 
     @quitado = params[:quitado]
-    @freqParcelas = params[:freqParcelas] unless params[:numParcelas].blank?
+    @freqParcelas = params[:freqParcelas] unless params[:freqParcelas].blank?
     @numParcelas = Integer(params[:numParcelas]) unless params[:numParcelas].blank?
 
-    @freqAgendamentos = params[:freqAgendamentos]
-    @numAgendamentos = Integer(params[:numAgendamentos])
+    @freqAgendamentos = params[:freqAgendamentos] unless params[:freqAgendamentos].blank?
+    @numAgendamentos = Integer(params[:numAgendamentos]) unless params[:numAgendamentos].blank?
 
     #Validações padrão
     @lancamento.tipo = :receita if @lancamento.tipo.blank?
