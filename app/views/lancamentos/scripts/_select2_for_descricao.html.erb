@@ -55,8 +55,8 @@
                                     $("#lancamento_valor").val(response.valor);
 
                                     var selectedDate = new Date((new Date).getFullYear(), (new Date).getMonth(), response.diavencimento);
-                                    $("#datepicker").datepicker("setDate", selectedDate);
-                                    $("#datepicker").datepicker({ dateFormat: "dd-mm-yy" });
+                                    $("#data_vencimento_picker").datepicker("setDate", selectedDate);
+                                    $("#data_vencimento_picker").datepicker({ format: 'dd-mm-yyyy' });
 
                                     $("#categoria_place").val(response.category_id).trigger("change");
                                     $("#centrodecusto_place").val(response.centrodecusto_id).trigger("change");
