@@ -1,12 +1,23 @@
 <script type="text/javascript">
 	
-		$(document).ready(function() { 
-			$("#frequencia_parcelas").select2({
-				width: "resolve",	
+		$(document).ready(function() {
+
+            var freqParcelas = $("#frequencia_parcelas");
+			freqParcelas.select2({
+				width: "resolve",
 				height: "resolve",
 				maximumSelectionSize: 1,									
 				tags: ['Semanal', 'Mensal', 'Semestral', 'Anual']							
 			});
-			$("#frequencia_parcelas").val('Mensal').trigger("change");						
+
+
+            freqParcelas.on("open", function () {
+                if (freqParcelas.val() != "") {
+                    freqParcelas.val("").trigger("change");
+                    freqParcelas.select2("open");
+                }
+            });
+
+            freqParcelas.val('Mensal').trigger("change");
 		});
 </script>

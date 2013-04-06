@@ -1,14 +1,24 @@
 <script type="text/javascript">
 	
-		$(document).ready(function() { 
-			$("#frequencia_agendamentos").select2({
-				width: "resolve",	
+		$(document).ready(function() {
+
+            var freqAgendamentos = $("#frequencia_agendamentos");
+            freqAgendamentos.select2({
+				width: "resolve",
 				height: "resolve",
 				maximumSelectionSize: 1,
                 allowClear: true,
 				tags: ['Semanal', 'Mensal', 'Semestral', 'Anual']							
 			});
-			$("#frequencia_agendamentos").val('Mensal').trigger("change");
+
+            freqAgendamentos.on("open", function () {
+                if (freqAgendamentos.val() != "") {
+                    freqAgendamentos.val("").trigger("change");
+                    freqAgendamentos.select2("open");
+                }
+            });
+
+            freqAgendamentos.val('Mensal').trigger("change");
 
 		});
 </script>
