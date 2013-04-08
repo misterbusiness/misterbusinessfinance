@@ -8,6 +8,15 @@
 				placeholder: "<%= @placeholder_value %>",
 				tags: [<%= render 'shared/data_iterator'%>]							
 			});
+
+
+            $("#<%= @page_item_id %>").on("open", function () {
+                if ($("#<%= @page_item_id %>").val() != "") {
+                    $("#<%= @page_item_id %>").val("").trigger("change");
+                    $("#<%= @page_item_id %>").select2("open");
+                }
+            });
+
 			$("#<%= @page_item_id%>").change(function(){				
 				$("#<%= @hidden_item_id%>").val($(this).val())
 			}); 
