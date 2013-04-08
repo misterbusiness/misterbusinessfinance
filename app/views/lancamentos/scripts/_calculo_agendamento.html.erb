@@ -13,19 +13,15 @@
         $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
         $("#numero_parcelas_hidden").val(numeroParcelas.val());
 
-        freqRepeticoes.blur(function () {
-/// Calculo da parcela
-            var dataVencimento = $("#datepicker").val();
+        numeroRepeticoes.blur(function () {
+            var dataVencimento = $("#data_vencimento_picker").datepicker('getDate');
             var numeroRepeticoes = $("#numero_agendamentos");
             var freqRepeticoes = $("#frequencia_agendamentos");
             var numeroParcelas = $("#numero_parcelas");
             var freqParcelas = $("#frequencia_parcelas");
             var valorRepeticao = $.fn.autoNumeric.Strip('lancamento_valor');
-            var dataRepeticao = new Date();
 
-            //alert(dataRepeticao.toDateString());
-
-            $("#total_agendamento").text(dataRepeticao);
+            $("#total_agendamento").text(dataVencimento);
 //        var selectedDate = new Date((new Date).getFullYear(), (new Date).getMonth(), response.diavencimento);
  /*           if (dataVencimento != null) {
                 switch (freqRepeticoes) {
@@ -87,6 +83,26 @@
             $("#frequencia_parcelas_hidden").val(freqParcelas.val());
             $("#numero_parcelas_hidden").val(numeroParcelas.val());
         });
+
+        numeroRepeticoes.keydown(function(event) {
+            // Allow: backspace, delete, tab, escape, and enter
+            if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
+                // Allow: Ctrl+A
+                    (event.keyCode == 65 && event.ctrlKey === true) ||
+                // Allow: home, end, left, right
+                    (event.keyCode >= 35 && event.keyCode <= 39)) {
+                // let it happen, don't do anything
+                return;
+            }
+            else {
+                // Ensure that it is a number and stop the keypress
+                if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+                    event.preventDefault();
+                }
+            }
+
+        });
+
     });
 
 </script>
