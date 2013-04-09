@@ -4,9 +4,9 @@
 		<td colspan = 3>
 			<div style="overflow:scroll;height:100%;width:100%;overflow:auto">				
 				<tr>
-					<th></th>
+					<%= render 'lancamentos/scripts/lancamento_check_uncheck_all'%>
+					<th><%= check_box_tag "lancamento_selectall"%></th>
 					<th>Descrição</th>
-					<th>Tipo</th>
 					<th>Vencimento</th>
 					<th>Data Ação</th>
 					<th>Valor </th>
@@ -20,13 +20,8 @@
 				<tbody>				
 				<% @lancamentos.each do |lancamento| %>
 				  <tr>
-					<td><%= check_box_tag "lancamento_ids", lancamento.id, false, :id => "lancamento_#{lancamento.id}"  %>
+					<td><%= check_box_tag "lancamento_ids", lancamento.id, false, :id => "lancamento_#{lancamento.id}" , :class => "check_lancamentos"  %>
 					<td><%= lancamento.descricao %></td>
-					<td><% if lancamento.tipo == :receita %> 
-							<i class='icon-plus-sign'></i> 
-						<% else %>
-							<i class='icon-minus-sign'></i>
-						<% end %></td>
 					<td><%= lancamento.datavencimento %></td>
 					<td><%= lancamento.dataacao %></td>
 					<td><%= if lancamento.receita?  then "+" + lancamento.valor.to_s else "-" + lancamento.valor.to_s end %></td>
