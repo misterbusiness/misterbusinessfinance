@@ -70,6 +70,9 @@ class LancamentosController < ApplicationController
     DebugLog("Lancamento - params: " + params.inspect)
     @lancamento = Lancamento.new(params[:lancamento])
 
+# Remove a formatação do valor para um valor legivel para operações
+    @lancamento.valor = Integer(@lancamento.valor,)
+
     @quitado = params[:quitado]
     @freqParcelas = params[:freqParcelas] unless params[:freqParcelas].blank?
     @numParcelas = Integer(params[:numParcelas]) unless params[:numParcelas].blank?
