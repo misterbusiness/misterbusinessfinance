@@ -1,0 +1,25 @@
+<script type="text/javascript">
+	$(document).ready(function() 
+	{
+		$('#lancamento_selectall').click(function()
+		
+			{
+				if ($(this).is(':checked'))
+				{
+					$(".check_lancamentos").prop('checked',true)
+				}
+				else
+				{
+					$(".check_lancamentos").prop('checked',false)					
+				}
+			}); 
+			
+			
+		$('.check_lancamentos').click( function()
+		{
+			$('#lancamento_selectall').prop('checked',false)
+			
+		});	
+			
+	});
+</script>
