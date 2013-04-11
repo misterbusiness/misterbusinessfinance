@@ -44,7 +44,7 @@ class LancamentosController < ApplicationController
     @lancamentorapidos = Lancamentorapido.all
     @categorias = Category.all
     @centrosdecusto = Centrodecusto.all
-#    @lancamentopadrao = Lancamentopadrao.all
+#    @lancamentopadrao = Lancamentopadrao.alll
 
     respond_to do |format|
       format.html # new.html.erb

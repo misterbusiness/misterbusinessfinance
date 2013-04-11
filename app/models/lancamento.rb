@@ -27,8 +27,10 @@ class Lancamento < ActiveRecord::Base
   before_validation :set_default_datavencimento_if_not_specified
   before_validation :set_tipo_depending_valor
   before_validation :set_default_valor_if_null
+  before_validation :create_category_if_noexists
   before_validation :set_default_categoria_if_null
   before_validation :set_default_centrodecusto_if_null
+
   
   before_validation :set_valor_two_decimal_places
             
@@ -119,6 +121,12 @@ class Lancamento < ActiveRecord::Base
   def status_quitado_no_change_allowed
     errors.add(:status, "O lancamento quitado nao pode ser alterado") if self.changed? and self.quitado?
   end 
+  
+  def create_category_if_noexists
+    
+    category = Category.find_or_create_by_descricao(self.category) if not self.category.blank?
+    
+  end
   
 #  def status_not_cancelado_if_dataacao
 #    errors.add(:status, "Nao pode estar cancelado se existir data de ")
