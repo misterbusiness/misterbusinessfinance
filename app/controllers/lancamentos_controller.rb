@@ -15,7 +15,7 @@ class LancamentosController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @lancamentos }
+      format.json { @lancamentos }
     end
   end
 
@@ -31,7 +31,7 @@ class LancamentosController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @lancamento }
+      format.json { @lancamento }
     end
   end
 
@@ -48,7 +48,7 @@ class LancamentosController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @lancamento }
+      format.json { @lancamento }
     end
   end
 
@@ -68,7 +68,7 @@ class LancamentosController < ApplicationController
   # POST /lancamentos.json
   def create
     DebugLog("Lancamento - params: " + params.inspect)
-    params[:lancamento][:valor] = params[:lancamento][:valor].gsub(".","").gsub(",",".")
+    params[:lancamento][:valor] = params[:lancamento][:valor].gsub(".", "").gsub(",", ".")
 
     @lancamento = Lancamento.new(params[:lancamento])
 
@@ -190,7 +190,7 @@ class LancamentosController < ApplicationController
         format.html { redirect_to @lancamento, notice: 'Lancamento was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "index" }
         format.json { render json: @lancamento.errors, status: :unprocessable_entity }
       end
     end
@@ -219,7 +219,7 @@ class LancamentosController < ApplicationController
 
 # Custom controllers
   def quitar
-    DebugLog("Params: " + params.inspect);
+    DebugLog('Params: ' + params.inspect);
 
     @lancamento = Lancamento.find(params[:id])
     if @lancamento.quitado? then
@@ -234,7 +234,7 @@ class LancamentosController < ApplicationController
   end
 
   def estornar
-    DebugLog("Params: " + params.inspect);
+    DebugLog('Params: ' + params.inspect);
 
     @lancamento = Lancamento.find(params[:id])
     if @lancamento.quitado? and !@lancamento.has_estorno? then
