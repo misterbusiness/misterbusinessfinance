@@ -68,6 +68,8 @@ class LancamentosController < ApplicationController
   # POST /lancamentos.json
   def create
     DebugLog("Lancamento - params: " + params.inspect)
+    params[:lancamento][:valor] = params[:lancamento][:valor].gsub(".","").gsub(",",".")
+
     @lancamento = Lancamento.new(params[:lancamento])
 
     @quitado = params[:quitado]
@@ -179,17 +181,6 @@ class LancamentosController < ApplicationController
       @lancamento.status = :quitado
       @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
     end
-
-# Logging income
-    DebugLog("Lancamento - params: " + params.inspect)
-    DebugLog("Lancamento - desc: " + @lancamento.descricao.inspect)
-    DebugLog("Lancamento - status: " + @lancamento.status.inspect)
-    DebugLog("Lancamento - tipo: " + @lancamento.tipo.inspect)
-    DebugLog("Lancamento - datavencimento: " + @lancamento.datavencimento.inspect)
-    DebugLog("Lancamento - dataacao: " + @lancamento.dataacao.inspect)
-    DebugLog("Lancamento - valor: " + @lancamento.valor.inspect)
-    DebugLog("Lancamento - categoria: " + @lancamento.category.descricao.inspect) unless @lancamento.category.nil?
-    DebugLog("Lancamento - centrodecusto: " + @lancamento.centrodecusto.descricao.inspect) unless @lancamento.centrodecusto.nil?
 
 
     respond_to do |format|
