@@ -52,7 +52,8 @@
                                         label_receita.removeClass('label-default').addClass('label-success');
                                         label_despesa.removeClass('label-important').addClass('label-default');
                                     }
-                                    $("#lancamento_valor").val(response.valor);
+                                    var valor = $.fn.autoNumeric.Format('lancamento_valor', response.valor + '');
+                                    $("#lancamento_valor").val(valor);
 
                                     var selectedDate = new Date((new Date).getFullYear(), (new Date).getMonth(), response.diavencimento);
                                     $("#data_vencimento_picker").datepicker("setDate", selectedDate);
