@@ -2,7 +2,8 @@
 
 <table>
   <tr>
-    <th>Description</th>
+    <th>Descricao</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,9 +12,9 @@
 <% @categories.each do |category| %>
   <tr>
     <td><%= category.descricao %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td> <%= category.ancestry%> </td>
+    <td><%= link_to 'Editar', edit_category_path(category) %></td>
+    <td><%= link_to 'Deletar', category, method: :delete, data: { confirm: 'Essa operação é irreversível. Deseja continuar?' } %></td>
   </tr>
 <% end %>
 </table>

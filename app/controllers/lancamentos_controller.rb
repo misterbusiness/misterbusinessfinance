@@ -72,8 +72,8 @@ class LancamentosController < ApplicationController
 
     @lancamento = Lancamento.new(params[:lancamento])
 
-    @lancamento.category = Category.find_or_create_by_descricao(params[:category])
-    @lancamento.centrodecusto = Centrodecusto.find_or_create_by_descricao(params[:centrodecusto])
+    @lancamento.category = Category.find_or_create_by_descricao(params[:category]) unless params[:category].blank?
+    @lancamento.centrodecusto = Centrodecusto.find_or_create_by_descricao(params[:centrodecusto]) unless params[:centrodecusto].blank?
 
 
     @quitado = params[:quitado]

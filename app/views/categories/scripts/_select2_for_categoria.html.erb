@@ -1,0 +1,36 @@
+<script type="text/javascript">
+	
+		$(document).ready(function()
+        {
+			$("#<%= @page_item_id %>").select2({
+				width: 'resolve',
+				maximumSelectionSize: 1,
+		        createSearchChoice: function (term, data)
+                {
+		            if ($(data).filter(function () {
+                        return this.text.localeCompare(term) === 0;
+                    }).length === 0)
+                    {
+                        return {id: term , text: 'Novo: ' + term};
+                    }
+
+		        },
+				placeholder: "<%= @placeholder_value %>",
+				data: [<%= render 'shared/data_iterator'%>]
+
+								
+			});
+			$("#<%= @page_item_id%>").change(function()
+            {
+				//$("#<%= @hidden_item_id%>").val($(this).val())
+
+                var selectedText = $("#<%= @page_item_id%>").select2('data').text;
+                selectedText = selectedText.replace("Novo: ","") ;
+                //alert("Texto armazenado: " + selectedText);
+                //var selectedText = "Teste";
+
+                $("#<%= @hidden_item_id%>").val(selectedText);
+
+			}); 
+		});
+</script>
