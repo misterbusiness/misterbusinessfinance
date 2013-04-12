@@ -73,6 +73,8 @@ class LancamentosController < ApplicationController
     @lancamento = Lancamento.new(params[:lancamento])
 
     @lancamento.category = Category.find_or_create_by_descricao(params[:category])
+    @lancamento.centrodecusto = Centrodecusto.find_or_create_by_descricao(params[:centrodecusto])
+
 
     @quitado = params[:quitado]
     @freqParcelas = params[:freqParcelas] unless params[:freqParcelas].blank?

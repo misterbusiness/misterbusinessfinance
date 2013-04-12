@@ -13,7 +13,7 @@
 		            }
 		        },
 				placeholder: "<%= @placeholder_value %>",
-				tags: [<%= render 'shared/data_iterator'%>]							
+				data: [<%= render 'shared/data_iterator'%>]
 			});
 
 
@@ -24,8 +24,17 @@
                 }
             });
 
-			$("#<%= @page_item_id%>").change(function(){				
-				$("#<%= @hidden_item_id%>").val($(this).val())
-			}); 
-		});
+            $("#<%= @page_item_id%>").change(function()
+            {
+                //$("#<%= @hidden_item_id%>").val($(this).val())
+
+                var selectedText = $("#<%= @page_item_id%>").select2('data').text;
+                selectedText = selectedText.replace("Novo: ","") ;
+                //alert("Texto armazenado: " + selectedText);
+                //var selectedText = "Teste";
+
+                $("#<%= @hidden_item_id%>").val(selectedText);
+
+            });
+        });
 </script>
