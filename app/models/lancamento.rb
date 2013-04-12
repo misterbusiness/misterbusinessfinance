@@ -103,7 +103,7 @@ class Lancamento < ActiveRecord::Base
   end
   
   def set_default_centrodecusto_if_null
-    self.centrodecusto = Centrodecusto.find_by_descricao(Configurable.centrodecusto_padrao) if self.centrodecusto.blank?
+    self.centrodecusto = Centrodecusto.find_by_descricao(Configurable.centrodecusto_padrao) if self.centrodecusto.nil?
   end
   
 #  def set_dataacao_null_if_status_cancelado
@@ -123,8 +123,9 @@ class Lancamento < ActiveRecord::Base
   end 
   
   def create_category_if_noexists
-    
-    category = Category.find_or_create_by_descricao(self.category) if not self.category.blank?
+
+
+    category = Category.find_or_create_by_descricao(self.category)
     
   end
   
