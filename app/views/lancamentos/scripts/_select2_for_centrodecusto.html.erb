@@ -30,7 +30,7 @@
 
                 var selectedText = $("#<%= @page_item_id%>").select2('data').text;
                 selectedText = selectedText.replace("Novo: ","") ;
-                alert("Texto armazenado: " + selectedText);
+                //alert("Texto armazenado: " + selectedText);
                 //var selectedText = "Teste";
 
                 $("#<%= @hidden_item_id%>").val(selectedText);
