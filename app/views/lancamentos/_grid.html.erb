@@ -1,62 +1,75 @@
 <table class="table table-hover table-condensed">
   <thead>
-  <tr height="30%"> 
-		<td colspan = 3>
-			<div style="overflow:scroll;height:100%;width:100%;overflow:auto">				
-				<tr>
-					<%= render 'lancamentos/scripts/lancamento_check_uncheck_all'%>
-					<th><%= check_box_tag "lancamento_selectall"%></th>
-					<th>Descrição</th>
-					<th>Vencimento</th>
-					<th>Data Ação</th>
-					<th>Valor </th>
-					<th>Categoria</th>
-					<th>Centro de Custo</th>
-					<th>Status</th>
-					<th>Editar</th>
-					<th>Remover</th>
-				</tr>
-				</thead>				
-				<tbody>				
-				<% @lancamentos.each do |lancamento| %>
-				  <tr>
-					<td><%= check_box_tag "lancamento_ids", lancamento.id, false, :id => "lancamento_#{lancamento.id}" , :class => "check_lancamentos"  %>
-					<td><%= lancamento.descricao %></td>
-					<td><%= lancamento.datavencimento %></td>
-					<td><%= lancamento.dataacao %></td>
-					<td><%= if lancamento.receita?  then "+" + lancamento.valor.to_s else "-" + lancamento.valor.to_s end %></td>
-					<td><%= lancamento.category.descricao unless lancamento.category.nil? %></td>
-					<td><%= lancamento.centrodecusto.descricao unless lancamento.centrodecusto.nil? %></td>
-					<td><%= lancamento.status %></td>
-					<td><%= if not lancamento.quitado? then link_to 'Edit', edit_lancamento_path(lancamento) else 'Edit' end %></td>
-					<td><%= link_to 'Remover', lancamento, method: :delete, data: { } %></td>
-				  </tr>
-				<% end %>	
-				
-				<% if @lancamentos.count == 0 then%>
-					<tr>
-						<td colspan="11"> Nenhum resultado encontrado. </td>
-						
-						
-					</tr>
-				
-				
-				<%end%>
-							
-				</table>			
-			</div>
-		</td>
-   </tr>
-   
-   <tr height="10%">
-		<td align="middle" colspan = 3>
-			<%= render 'lancamentos/scripts/quitar_checkboxes'%>
-			<button id="quitar_button" type="button">Quitar</button>
-			<%= render 'lancamentos/scripts/estornar_checkboxes'%>					
-			<button id="estornar_button" type="button">Estornar</button>
-			<%= render 'lancamentos/scripts/cancelar_checkboxes'%>
-			<button id="cancelar_button" type="button">Cancelar</button>
-		</td>
-   </tr>
-   </tbody>
+  <tr height="30%">
+    <td colspan=3>
+      <div style="overflow:scroll;height:100%;width:100%;overflow:auto">
+        <tr>
+          <%= render 'lancamentos/scripts/lancamento_check_uncheck_all' %>
+          <th><%= check_box_tag "lancamento_selectall" %></th>
+          <th>Descrição</th>
+          <th>Vencimento</th>
+          <th>Data Ação</th>
+          <th>Valor</th>
+          <th>Categoria</th>
+          <th>Centro de Custo</th>
+          <th>Status</th>
+          <th>Editar</th>
+          <th>Remover</th>
+        </tr>
+      </div>
+  </thead>
+  <tbody>
+  <% for lancamento in @lancamentos %>
+      <% @edit_row_id = "edit_lancamento_row_#{lancamento.id}" %>
+      <%= render 'lancamentos/scripts/edit_form' %>
+      <tr id="<%= @edit_row_id %>">
+        <td><%= check_box_tag "lancamento_ids", lancamento.id, false, :id => "lancamento_#{lancamento.id}", :class => "check_lancamentos" %>
+        <td><%= lancamento.descricao %></td>
+        <td><%= lancamento.datavencimento %></td>
+        <td><%= lancamento.dataacao %></td>
+        <td><%= if lancamento.receita? then
+                  "+" + lancamento.valor.to_s
+                else
+                  "-" + lancamento.valor.to_s
+                end %></td>
+        <td><%= lancamento.category.descricao unless lancamento.category.nil? %></td>
+        <td><%= lancamento.centrodecusto.descricao unless lancamento.centrodecusto.nil? %></td>
+        <td><%= lancamento.status %></td>
+        <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
+        <%= render 'lancamentos/scripts/set_form_edit_mode' %>
+        <td><%= if not lancamento.quitado? then
+                  link_to 'Edit', edit_lancamento_path(lancamento), :id => @edit_btn_id, :remote => true
+                else
+                  'Edit'
+                end %></td>
+        <td><%= link_to 'Remover', lancamento, method: :delete, data: {}, :remote => true %></td>
+      </tr>
+  <% end %>
+
+  <% if @lancamentos.count == 0 then %>
+      <tr>
+        <td colspan="11"> Nenhum resultado encontrado.</td>
+
+
+      </tr>
+
+
+  <% end %>
+
+  </table>
+</div>
+</td>
+</tr>
+
+<tr height="10%">
+  <td align="middle" colspan=3>
+    <%= render 'lancamentos/scripts/quitar_checkboxes' %>
+    <button id="quitar_button" type="button">Quitar</button>
+    <%= render 'lancamentos/scripts/estornar_checkboxes' %>
+    <button id="estornar_button" type="button">Estornar</button>
+    <%= render 'lancamentos/scripts/cancelar_checkboxes' %>
+    <button id="cancelar_button" type="button">Cancelar</button>
+  </td>
+</tr>
+</tbody>
 </table>

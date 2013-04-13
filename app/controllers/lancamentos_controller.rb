@@ -4,52 +4,14 @@ class LancamentosController < ApplicationController
   # GET /lancamentos
   # GET /lancamentos.json
   def index
-    @lancamento = Lancamento.new
     #Aqui iremos implementar os filtros, pelo que eu entendi.
     @lancamentos = Lancamento.all
+    @lancamento = Lancamento.new
 
 # Active records auxiliares
     @lancamentorapidos = Lancamentorapido.all
     @categorias = Category.all
     @centrosdecusto = Centrodecusto.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { @lancamentos }
-    end
-  end
-
-  # GET /lancamentos/1
-  # GET /lancamentos/1.json
-  def show
-
-    @lancamento = Lancamento.find(params[:id])
-
-    @lancamentorapidos = Lancamentorapido.all
-    @categorias = Category.all
-    @centrosdecusto = Centrodecusto.all
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { @lancamento }
-    end
-  end
-
-  # GET /lancamentos/new
-  # GET /lancamentos/new.json
-  def new
-
-    @lancamento = Lancamento.new
-
-    @lancamentorapidos = Lancamentorapido.all
-    @categorias = Category.all
-    @centrosdecusto = Centrodecusto.all
-#    @lancamentopadrao = Lancamentopadrao.alll
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { @lancamento }
-    end
   end
 
   # GET /lancamentos/1/edit
@@ -162,9 +124,10 @@ class LancamentosController < ApplicationController
     end
 
     @lancamento.save if (!(@numParcelas > 1) and !(@numAgendamentos > 1))
+    @lancamentos = Lancamento.all
 
 
-    redirect_to '/lancamentos'
+#    redirect_to '/lancamentos'
   end
 
   #create
@@ -186,15 +149,9 @@ class LancamentosController < ApplicationController
       @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
     end
 
-
-    respond_to do |format|
-      if @lancamento.update_attributes(params[:lancamento])
-        format.html { redirect_to @lancamento, notice: 'Lancamento was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "index" }
-        format.json { render json: @lancamento.errors, status: :unprocessable_entity }
-      end
+    if @lancamento.update_attributes(params[:lancamento])
+      flash[:notice] = "Successfully updated."
+      @lancamentos = Lancamento.all
     end
   end
 

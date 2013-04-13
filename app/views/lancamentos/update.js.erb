@@ -1,0 +1,11 @@
+<% if @lancamento.errors.any? -%>
+$("#flash_notice").hide(300);
+$("#error_explanation").html("<%= escape_javascript(error_messages_for(@lancamento))%>");
+$("#error_explanation").show(300);
+<% else -%>
+$("#error_explanation").hide(300);
+$("#flash_notice").html("<%= escape_javascript(flash[:notice])%>");
+$("#flash_notice").show(300);
+$(":input:not(input[type=submit])").val("");
+$("#lancamento_grid").html("<%= escape_javascript(render(:partial => "grid"))%>");
+<% end -%>
