@@ -21,6 +21,7 @@
   <tbody>
   <% for lancamento in @lancamentos %>
       <% @edit_row_id = "edit_lancamento_row_#{lancamento.id}" %>
+      <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
       <%= render 'lancamentos/scripts/edit_form' %>
       <tr id="<%= @edit_row_id %>">
         <td><%= check_box_tag "lancamento_ids", lancamento.id, false, :id => "lancamento_#{lancamento.id}", :class => "check_lancamentos" %>
@@ -35,7 +36,7 @@
         <td><%= lancamento.category.descricao unless lancamento.category.nil? %></td>
         <td><%= lancamento.centrodecusto.descricao unless lancamento.centrodecusto.nil? %></td>
         <td><%= lancamento.status %></td>
-        <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
+
         <%= render 'lancamentos/scripts/set_form_edit_mode' %>
         <td><%= if not lancamento.quitado? then
                   link_to 'Edit', edit_lancamento_path(lancamento), :id => @edit_btn_id, :remote => true
