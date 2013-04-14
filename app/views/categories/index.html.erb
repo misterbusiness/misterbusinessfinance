@@ -12,7 +12,6 @@
 <% @categories.each do |category| %>
   <tr>
     <td><%= category.descricao %></td>
-    <td> <%= category.ancestry%> </td>
     <td><%= link_to 'Editar', edit_category_path(category) %></td>
     <td><%= link_to 'Deletar', category, method: :delete, data: { confirm: 'Essa operação é irreversível. Deseja continuar?' } %></td>
   </tr>

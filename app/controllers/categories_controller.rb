@@ -25,6 +25,7 @@ class CategoriesController < ApplicationController
   # GET /categories/new.json
   def new
     @category = Category.new
+    @categories = Category.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +36,8 @@ class CategoriesController < ApplicationController
   # GET /categories/1/edit
   def edit
     @category = Category.find(params[:id])
+    @categories = Category.all
+    @categories.delete(@category)
   end
 
   # POST /categories
