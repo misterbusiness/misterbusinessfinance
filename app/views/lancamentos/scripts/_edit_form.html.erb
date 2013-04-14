@@ -1,18 +1,17 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#<%=@edit_row_id%>").click(function () {
-            if ($("#<%=@edit_row_id%>").hasClass("info")){
+            if ($("#<%=@edit_row_id%>").hasClass("info")) {
                 $("#<%=@edit_row_id%>").removeClass("info");
                 $("#lancamento_form").html("<%= escape_javascript(render(:partial => "form"))%>");
             }
-            else
-            {
+            else {
                 $('[id^="edit_lancamento_row_"]').removeClass('info');
                 $("#<%=@edit_row_id%>").addClass("info");
                 $.ajax({
                     url: "<%= edit_lancamento_path(@current_lancamento) %>",
                     data: {}
-                })
+                });
             }
         });
     });
