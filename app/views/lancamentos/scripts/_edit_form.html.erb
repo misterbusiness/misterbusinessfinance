@@ -1,7 +1,14 @@
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#<%=@edit_row_id%>").click(function(){
+    $(document).ready(function () {
+        $("#<%=@edit_row_id%>").click(function () {
+            $.ajax({
+                url: "<%= edit_lancamento_path(@current_lancamento) %>",
+                data: {}
+            })
+                    .success(function (response) {
 
+                    })
+                    .error()
         });
     });
 </script>

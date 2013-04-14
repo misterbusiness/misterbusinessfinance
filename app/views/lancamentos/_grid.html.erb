@@ -22,6 +22,7 @@
   <% for lancamento in @lancamentos %>
       <% @edit_row_id = "edit_lancamento_row_#{lancamento.id}" %>
       <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
+      <% @current_lancamento = lancamento %>
       <%= render 'lancamentos/scripts/edit_form' %>
       <tr id="<%= @edit_row_id %>">
         <td><%= check_box_tag "lancamento_ids", lancamento.id, false, :id => "lancamento_#{lancamento.id}", :class => "check_lancamentos" %>
