@@ -17,8 +17,13 @@
     </div>
 
     <div class="field">
+
+      <% @page_item_id = "fathercategory_place"%>
+      <% @iterator = @categories %>
+      <%= render 'categories/scripts/select2_for_categoria' %>
+
       <%= f.label :parent_id %><br />
-      <%= f.text_field :parent_id %>
+      <%= f.text_field :parent_id, :as => :text , :id =>  @page_item_id%>
     </div>
 
 
