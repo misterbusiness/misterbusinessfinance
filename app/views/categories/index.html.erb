@@ -1,34 +1,10 @@
 <h1>Categorias</h1>
 
-<table>
-  <tr>
-    <th>Descricao</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% Category.roots.each do |category| %>
-
-  <tr>
-    <td><%= category.descricao %></td>
-    <td><%= link_to 'Editar', edit_category_path(category) %></td>
-    <td><%= link_to 'Deletar', category, method: :delete, data: { confirm: 'Essa operação é irreversível. Deseja continuar?' } %></td>
-  </tr>
 
 
-  <% category.children.each do |subcategory| %>
+  <%= raw display_categories_tree(@categories) %>
 
-      <tr>
-        <td>&nbsp <%= subcategory.descricao %></td>
-        <td>&nbsp <%= link_to 'Editar', edit_category_path(subcategory) %></td>
-        <td>&nbsp <%= link_to 'Deletar', subcategory, method: :delete, data: { confirm: 'Essa operação é irreversível. Deseja continuar?' } %></td>
-      </tr>
-  <% end %>
 
-<% end %>
-</table>
 
 <br />
 

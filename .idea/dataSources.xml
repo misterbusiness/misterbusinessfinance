@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3147177136">
+  <component name="DataSourceManagerImpl" format="xml" hash="3072607822">
     <data-source source="LOCAL" name="Rails misterbusinessfinance: production" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="a00270db-e3fa-4937-99a0-eaf4366b998d">
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://127.0.0.1/mrbusinessfinance_production</jdbc-url>

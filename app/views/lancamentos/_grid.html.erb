@@ -13,7 +13,6 @@
           <th>Categoria</th>
           <th>Centro de Custo</th>
           <th>Status</th>
-          <th>Editar</th>
           <th>Remover</th>
         </tr>
       </div>
@@ -39,11 +38,6 @@
         <td><%= lancamento.status %></td>
 
         <%= render 'lancamentos/scripts/set_form_edit_mode' %>
-        <td><%= if not lancamento.quitado? then
-                  link_to 'Edit', edit_lancamento_path(lancamento), :id => @edit_btn_id, :remote => true
-                else
-                  'Edit'
-                end %></td>
         <td><%= link_to 'Remover', lancamento, method: :delete, data: {}, :remote => true %></td>
       </tr>
   <% end %>
