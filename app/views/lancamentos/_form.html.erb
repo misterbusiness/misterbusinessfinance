@@ -59,7 +59,8 @@
 	</div>
 	
 	<div class="span3">	
-		<%= f.text_field :datavencimento, :as => :text, :id => :data_vencimento_picker %>
+		<%= f.text_field :datavencimento, :as => :text, :id => :data_vencimento_picker,
+                         :value=> (@lancamento.datavencimento.strftime("%d-%m-%Y") unless @lancamento.nil? or @lancamento.datavencimento.nil?) %>
 	</div>
 </div>
 

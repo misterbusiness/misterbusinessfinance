@@ -1,0 +1,4 @@
+$("#error_explanation").hide(300);
+$("#flash_notice").html("<%= escape_javascript(flash[:notice])%>");
+$("#flash_notice").show(300);
+$("#lancamento_grid").html("<%= escape_javascript( render(:partial => "grid") ) %>");

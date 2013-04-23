@@ -12,14 +12,24 @@
 
         $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
         $("#numero_parcelas_hidden").val(numeroParcelas.val());
+        <% if @lancamento.has_parcelamento? %>
+            numeroRepeticoes.prop('disabled', true);
+            freqRepeticoes.select2('disable');
+
+            numeroParcelas.prop('disabled', true);
+            freqParcelas.select2('disable');
+        <% else %>
+        numeroRepeticoes.prop('disabled', false);
+        freqRepeticoes.select2('enable');
+
+        numeroParcelas.prop('disabled', false);
+        freqParcelas.select2('enable');
 
 
         numeroParcelas.blur(function () {
 /// Calculo da parcela
             var dataVencimento = $("#datepicker").val();
-
             var valorParcelas = $.fn.autoNumeric.Strip('lancamento_valor');
-
             var agendamentoBox = $("#numero_agendamentos");
             var agendamentoFreq = $("#frequencia_agendamentos");
 
@@ -29,14 +39,14 @@
                 numeroRepeticoes.prop('disabled', true);
                 freqRepeticoes.select2('disable');
 
-                numeroParcelas.prop('disabled',false);
+                numeroParcelas.prop('disabled', false);
                 freqParcelas.select2('enable');
             }
             else {
                 numeroRepeticoes.prop('disabled', false);
                 freqRepeticoes.select2('enable');
 
-                numeroParcelas.prop('disabled',false);
+                numeroParcelas.prop('disabled', false);
                 freqParcelas.select2('enable');
             }
 
@@ -47,16 +57,16 @@
             $("#frequencia_parcelas_hidden").val(freqParcelas.val());
 
         });
-        freqParcelas.change(function(){
+        freqParcelas.change(function () {
             $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
             $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
             $("#frequencia_parcelas_hidden").val(freqParcelas.val());
             $("#numero_parcelas_hidden").val(numeroParcelas.val());
         });
 
-        numeroParcelas.keydown(function(event) {
+        numeroParcelas.keydown(function (event) {
             // Allow: backspace, delete, tab, escape, and enter
-            if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
+            if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
                 // Allow: Ctrl+A
                     (event.keyCode == 65 && event.ctrlKey === true) ||
                 // Allow: home, end, left, right
@@ -71,8 +81,6 @@
                 }
             }
         });
-
-
+        <% end %>
     });
-
 </script>

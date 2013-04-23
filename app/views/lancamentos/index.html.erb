@@ -1,20 +1,23 @@
-﻿<div>
-<table class="table">
-  <tr height="60%">
-    <td width="34%">
-      <div style="overflow:scroll;height:100%;width:100%;overflow:auto">
-        <div id="lancamento_form"><%= render :partial => 'form' %></div>
-      </div>
-    </td>
-    <td width="33%">
-      <%= render 'notifications' %>
-    </td>
-    <td width="33%">
-      <%= render 'charts' %>
-    </td>
-  </tr>
-  <tr>
-  </tr>
-</table>
+﻿<div id="lancamento_index">
+  <div>
+    <table class="table">
+      <tr height="60%">
+        <td width="34%">
+          <div style="overflow:scroll;height:100%;width:100%;overflow:auto">
+            <div id="lancamento_form"><%= render :partial => 'form' %></div>
+          </div>
+        </td>
+        <td width="33%">
+          <%= render 'notifications' %>
+        </td>
+        <td width="33%">
+          <%= render 'charts' %>
+        </td>
+      </tr>
+      <tr>
+      </tr>
+    </table>
   </div>
-<div id="lancamento_grid"><%= render :partial => 'grid' %></div>
+  <div id="lancamento_grid"><%= render :partial => 'grid' %></div>
+  <div id="lancamento_grid"><%= render :partial => 'grid_buttons' %></div>
+</div>

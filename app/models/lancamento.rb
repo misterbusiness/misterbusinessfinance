@@ -53,6 +53,14 @@ class Lancamento < ActiveRecord::Base
 #  validate :status_quitado_no_change_allowed
 
 # public methods
+  def has_parcelamento?
+    !self.parcela.nil?
+  end
+
+  def has_agendamento?
+    !self.agendamento.nil?
+  end
+
   def has_estorno?
     (!self.lancamento_estornado.nil? or !self.lancamento_original.nil?) and self.estornado?
   end
@@ -119,11 +127,5 @@ class Lancamento < ActiveRecord::Base
   
   def status_quitado_no_change_allowed
     errors.add(:status, "O lancamento quitado nao pode ser alterado") if self.changed? and self.quitado?
-  end 
-
-  
-#  def status_not_cancelado_if_dataacao
-#    errors.add(:status, "Nao pode estar cancelado se existir data de ")
-#  end
-      
+  end
 end

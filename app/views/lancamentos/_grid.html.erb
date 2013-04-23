@@ -38,34 +38,13 @@
         <td><%= lancamento.status %></td>
 
         <%= render 'lancamentos/scripts/set_form_edit_mode' %>
-        <td><%= link_to 'Remover', lancamento, method: :delete, data: {}, :remote => true %></td>
+        <td><%= link_to 'Remover', lancamento, :confirm => 'Tem certeza?', :remote => true, :method => :delete %></td>
       </tr>
   <% end %>
 
   <% if @lancamentos.count == 0 then %>
       <tr>
         <td colspan="11"> Nenhum resultado encontrado.</td>
-
-
       </tr>
-
-
   <% end %>
-
   </table>
-</div>
-</td>
-</tr>
-
-<tr height="10%">
-  <td align="middle" colspan=3>
-    <%= render 'lancamentos/scripts/quitar_checkboxes' %>
-    <button id="quitar_button" type="button">Quitar</button>
-    <%= render 'lancamentos/scripts/estornar_checkboxes' %>
-    <button id="estornar_button" type="button">Estornar</button>
-    <%= render 'lancamentos/scripts/cancelar_checkboxes' %>
-    <button id="cancelar_button" type="button">Cancelar</button>
-  </td>
-</tr>
-</tbody>
-</table>
