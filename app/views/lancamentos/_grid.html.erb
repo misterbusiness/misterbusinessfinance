@@ -22,7 +22,6 @@
       <% @edit_row_id = "edit_lancamento_row_#{lancamento.id}" %>
       <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
       <% @current_lancamento = lancamento %>
-      <%= render 'lancamentos/scripts/edit_form' %>
       <tr id="<%= @edit_row_id %>">
         <td><%= check_box_tag "lancamento_ids", lancamento.id, false, :id => "lancamento_#{lancamento.id}", :class => "check_lancamentos" %>
         <td><%= lancamento.descricao %></td>
@@ -36,9 +35,15 @@
         <td><%= lancamento.category.descricao unless lancamento.category.nil? %></td>
         <td><%= lancamento.centrodecusto.descricao unless lancamento.centrodecusto.nil? %></td>
         <td><%= lancamento.status %></td>
+        <%  @has_parcelamento_id =  "has_parcelamento_row_#{lancamento.id}" %>
+        <%  @has_agendamento_id =  "has_agendamento_row_#{lancamento.id}" %>
+        <%  @has_estorno_id =  "has_estorno_row_#{lancamento.id}" %>
 
-        <%= render 'lancamentos/scripts/set_form_edit_mode' %>
+        <%= hidden_field_tag :hasParcelamento, lancamento.has_parcelamento?, :id => "has_parcelamento_row_#{lancamento.id}" %>
+        <%= hidden_field_tag :hasAgendamento, lancamento.has_agendamento?, :id => "has_agendamento_row_#{lancamento.id}" %>
+        <%= hidden_field_tag :hasEstorno, lancamento.has_estorno?, :id => "has_estorno_row_#{lancamento.id}" %>
         <td><%= link_to 'Remover', lancamento, :confirm => 'Tem certeza?', :remote => true, :method => :delete %></td>
+        <%= render 'lancamentos/scripts/edit_form' %>
       </tr>
   <% end %>
 

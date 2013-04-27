@@ -1,1 +1,14 @@
 $("#lancamento_form").html("<%= escape_javascript(render(:partial => "form"))%>");
+
+
+var freqRepeticoes = $("#frequencia_agendamentos");
+var freqParcelas = $("#frequencia_parcelas");
+
+var numeroRepeticoes = $("#numero_agendamentos");
+var numeroParcelas = $("#numero_parcelas");
+
+numeroRepeticoes.prop('disabled', true);
+freqRepeticoes.select2('disable');
+
+numeroParcelas.prop('disabled', true);
+freqParcelas.select2('disable');

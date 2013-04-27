@@ -12,19 +12,6 @@
 
         $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
         $("#numero_parcelas_hidden").val(numeroParcelas.val());
-        <% if @lancamento.has_parcelamento? %>
-            numeroRepeticoes.prop('disabled', true);
-            freqRepeticoes.select2('disable');
-
-            numeroParcelas.prop('disabled', true);
-            freqParcelas.select2('disable');
-        <% else %>
-        numeroRepeticoes.prop('disabled', false);
-        freqRepeticoes.select2('enable');
-
-        numeroParcelas.prop('disabled', false);
-        freqParcelas.select2('enable');
-
 
         numeroParcelas.blur(function () {
 /// Calculo da parcela
@@ -81,6 +68,5 @@
                 }
             }
         });
-        <% end %>
     });
 </script>

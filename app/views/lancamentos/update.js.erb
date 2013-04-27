@@ -10,4 +10,18 @@ $(":input:not(input[type=submit])").val("");
 $("#lancamento_grid").html("<%= escape_javascript(render(:partial => "grid"))%>");
 <% @lancamento = Lancamento.new %>
 $("#lancamento_form").html("<%= escape_javascript(render(:partial => "form"))%>");
+
+
+var freqRepeticoes = $("#frequencia_agendamentos");
+var freqParcelas = $("#frequencia_parcelas");
+
+var numeroRepeticoes = $("#numero_agendamentos");
+var numeroParcelas = $("#numero_parcelas");
+
+numeroRepeticoes.prop('disabled', false);
+freqRepeticoes.select2('enable');
+
+numeroParcelas.prop('disabled', false);
+freqParcelas.select2('enable');
+
 <% end -%>

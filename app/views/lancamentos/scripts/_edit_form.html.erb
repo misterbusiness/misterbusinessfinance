@@ -1,6 +1,16 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#<%=@edit_row_id%>").click(function () {
+            var freqRepeticoes = $("#frequencia_agendamentos");
+            var freqParcelas = $("#frequencia_parcelas");
+
+            var numeroRepeticoes = $("#numero_agendamentos");
+            var numeroParcelas = $("#numero_parcelas");
+
+            var hasParcelamento = $("#<%= @has_parcelamento_id%>").val();
+            var hasAgendamento = $("#<%= @has_agendamento_id%>").val();
+            var hasEstorno = $("#<%= @has_estorno_id%>").val();
+
             if ($("#<%=@edit_row_id%>").hasClass("info")) {
                 $("#<%=@edit_row_id%>").removeClass("info");
                 $("#lancamento_form").html("<%= escape_javascript(render(:partial => "form"))%>");
