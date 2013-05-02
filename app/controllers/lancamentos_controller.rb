@@ -19,7 +19,7 @@ class LancamentosController < ApplicationController
     #@lancamentos = Lancamento.all
     #@lancamento = Lancamento.new
 
-# Active records auxiliares
+    # Active records auxiliares
 
   end
 
@@ -34,7 +34,7 @@ class LancamentosController < ApplicationController
 
     @lancamento = Lancamento.find(params[:id])
 
-    if(@lancamento.despesa?)
+    if (@lancamento.despesa?)
       @lancamento.valor = @lancamento.valor * -1
     end
 
@@ -46,14 +46,13 @@ class LancamentosController < ApplicationController
   # POST /lancamentos
   # POST /lancamentos.json
   def create
-    DebugLog("Lancamento - params: " + params.inspect)
+    DebugLog('Lancamento - params: ' + params.inspect)
     params[:lancamento][:valor] = params[:lancamento][:valor].gsub('.', '').gsub(',', '.')
 
     @lancamento = Lancamento.new(params[:lancamento])
 
     @lancamento.category = Category.find_or_create_by_descricao(params[:category]) unless params[:category].blank?
     @lancamento.centrodecusto = Centrodecusto.find_or_create_by_descricao(params[:centrodecusto]) unless params[:centrodecusto].blank?
-
 
     @quitado = params[:quitado]
     @freqParcelas = params[:freqParcelas] unless params[:freqParcelas].blank?
@@ -69,13 +68,13 @@ class LancamentosController < ApplicationController
     @numParcelas = 1 if @numParcelas.blank?
     @numAgendamentos = 1 if @numAgendamentos.blank?
 
-    @freqParcelas = "Mensal" if @freqParcelas.blank?
-    @freqAgendamentos = "Mensal" if @freqAgendamentos.blank?
+    @freqParcelas = 'Mensal' if @freqParcelas.blank?
+    @freqAgendamentos = 'Mensal' if @freqAgendamentos.blank?
 
 
-    if @quitado == "true"
+    if @quitado == 'true'
       @lancamento.status = :quitado
-      @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
+      @lancamento.dataacao = Date.today.strftime('%d-%m-%Y')
     end
 
     if @numParcelas > 1
@@ -139,8 +138,14 @@ class LancamentosController < ApplicationController
         end #do
       end #@agendamento.save
     end
-
-    @lancamento.save if (!(@numParcelas > 1) and !(@numAgendamentos > 1))
+    # TODO: Criar uma tabela com o registro de todas as mensagens do sistema
+    if (!(@numParcelas > 1) and !(@numAgendamentos > 1))
+      if @lancamento.save
+        flash[:notice] = 'Sucesso - insert'
+      else
+        flash[:notice] = 'Erro ao salvar o lancamento'
+      end
+    end
     @lancamentos = Lancamento.all
   end
 
@@ -150,8 +155,8 @@ class LancamentosController < ApplicationController
   # PUT /lancamentos/1.json
   def update
 
-    DebugLog("Lancamento - params: " + params.inspect)
-    params[:lancamento][:valor] = params[:lancamento][:valor].gsub(".", "").gsub(",", ".")
+    DebugLog('Lancamento - params: ' + params.inspect)
+    params[:lancamento][:valor] = params[:lancamento][:valor].gsub('.', '').gsub(',', '.')
     @lancamento = Lancamento.find(params[:id])
 
     @lancamento.category = Category.find_or_create_by_descricao(params[:category]) unless params[:category].blank?
@@ -172,26 +177,35 @@ class LancamentosController < ApplicationController
     @numParcelas = 1 if @numParcelas.blank?
     @numAgendamentos = 1 if @numAgendamentos.blank?
 
-    @freqParcelas = "Mensal" if @freqParcelas.blank?
-    @freqAgendamentos = "Mensal" if @freqAgendamentos.blank?
+    @freqParcelas = 'Mensal' if @freqParcelas.blank?
+    @freqAgendamentos = 'Mensal' if @freqAgendamentos.blank?
 
 
-    if @quitado == "true"
+    if @quitado == 'true'
       @lancamento.status = :quitado
-      @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
+      @lancamento.dataacao = Date.today.strftime('%d-%m-%Y')
     end
 
     #Verifica se o registro ja possui parcela, caso contrário não será permitido parcelamento
+    # 2013-05-02: Quando editando o primeiro registro deve ser transformado em um registro parcelado
+
     if @numParcelas > 1 and !@lancamento.has_parcelamento?
       # Cria o registro de parcela
       @parcela = Parcela.new
       @parcela.num_parcelas = @numParcelas
 
       if @parcela.save then
-        (1..@numParcelas).each do |i|
+        @lancamento_original = @lancamento.dup
+        @lancamento.valor = @lancamento.valor/@numParcelas
+
+        @lancamento.descricao = "#{@lancamento.descricao} - #{@freqParcelas} - (#{1}/#{@numParcelas})"
+        @lancamento.parcela = @parcela
+
+        @lancamento.save
+        (2..@numParcelas).each do |i|
           @lancamento_parcela = Lancamento.new
-          @lancamento_parcela = @lancamento.dup
-          @lancamento_parcela.valor = @lancamento.valor/@numParcelas
+          @lancamento_parcela = @lancamento_original.dup
+          @lancamento_parcela.valor = @lancamento_original.valor/@numParcelas
 
           @lancamento_parcela.datavencimento = case @freqParcelas
                                                  when 'Semanal' then
@@ -206,7 +220,7 @@ class LancamentosController < ApplicationController
                                                    @lancamento_parcela.datavencimento
                                                end
 
-          @lancamento_parcela.descricao = "#{@lancamento.descricao} - #{@freqParcelas} - (#{i}/#{@numParcelas})"
+          @lancamento_parcela.descricao = "#{@lancamento_original.descricao} - #{@freqParcelas} - (#{i}/#{@numParcelas})"
           @lancamento_parcela.parcela = @parcela
 
           @lancamento_parcela.save
@@ -214,14 +228,14 @@ class LancamentosController < ApplicationController
       end # if @parcela.save
     end # @numParcelas > 1
 
-    #Verifica se o registro ja possui parcela, caso contrário não será permitido agendamento
+    #Verifica se o registro ja possui agendamento, caso contrário não será permitido agendamento
     if @numAgendamentos > 1 and !@lancamento.has_agendamento?
       # Cria o registro de agendamento
       @agendamento = Agendamento.new
       @agendamento.num_agendamentos = @numAgendamentos
 
       if @agendamento.save
-        (1..@numAgendamentos).each do |i|
+        (2..@numAgendamentos).each do |i|
           @lancamento_agendamento = Lancamento.new
           @lancamento_agendamento = @lancamento.dup
 
@@ -244,7 +258,13 @@ class LancamentosController < ApplicationController
       end #@agendamento.save
     end
 
-    @lancamento.update_attributes(params[:lancamento]) if (!(@numParcelas > 1 and @lancamento.has_parcelamento?) and !(@numAgendamentos > 1 and @lancamento.has_agendamento?))
+    if (!(@numParcelas > 1 and @lancamento.has_parcelamento?) and !(@numAgendamentos > 1 and @lancamento.has_agendamento?))
+      if @lancamento.update_attributes(params[:lancamento])
+        flash[:notice] = 'Sucesso - update'
+      else
+        flash[:notice] = 'Falha ao atualizar o lancamento'
+      end
+    end
     @lancamentos = Lancamento.all
     @lancamento = Lancamento.new
   end
@@ -260,28 +280,43 @@ class LancamentosController < ApplicationController
       #@lancamento.lancamento_estornado.cancel
     end
 
-    @lancamento.destroy
+    if @lancamento.destroy
+      flash[:notice] = 'Sucesso - destroy'
+    else
+      flash[:notice] = 'Erro ao destroy lancamento'
+    end
 
     # Recarrega as informações de lançamentos
     @lancamento = Lancamento.new
     @lancamentos = Lancamento.all
     #redirect_to lancamentos_url
-#@lancamento.cancel
+    #@lancamento.cancel
   end
 
 # Custom controllers
   def quitar
-    DebugLog('Params: ' + params.inspect);
-
     @lancamento = Lancamento.find(params[:id])
-    if @lancamento.quitado? and !@lancamento.estornado? then
+    if @lancamento.quitado? #and !@lancamento.estornado?
       @lancamento.status = :aberto
       @lancamento.dataacao = nil
-      @lancamento.save
+      if @lancamento.save
+        flash[:notice] = 'Sucesso ao reverter quitar'
+      else
+        flash[:notice] = 'Erro ao reverter quitar'
+      end
     else
-      @lancamento.status = :quitado
-      @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
-      @lancamento.save
+      if @lancamento.aberto?
+        @lancamento.status = :quitado
+        @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
+        if @lancamento.save
+          flash[:notice] = 'Lancamento quitado com sucesso'
+        else
+          flash[:notice] = 'Erro ao quitar lancamento'
+        end
+      else
+        flash[:notice] = 'Lancamento so pode estar ou quitado ou aberto'
+      end
+      @lancamentos = Lancamento.all
     end
   end
 

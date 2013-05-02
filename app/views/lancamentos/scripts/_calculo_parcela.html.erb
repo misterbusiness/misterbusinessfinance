@@ -19,29 +19,32 @@
             var valorParcelas = $.fn.autoNumeric.Strip('lancamento_valor');
             var agendamentoBox = $("#numero_agendamentos");
             var agendamentoFreq = $("#frequencia_agendamentos");
-            $("#total_parcela").text(Math.abs(valorParcelas) / numeroParcelas.val());
+            if (numeroParcelas.val() > 0) {
+                var matematics = Math;
+                $("#total_parcela").text(matematics.abs(valorParcelas) / numeroParcelas.val());
 
 
-            if (numeroParcelas.val() > 1) {
-                numeroRepeticoes.prop('disabled', true);
-                freqRepeticoes.select2('disable');
+                if (numeroParcelas.val() > 1) {
+                    numeroRepeticoes.prop('disabled', true);
+                    freqRepeticoes.select2('disable');
 
-                numeroParcelas.prop('disabled', false);
-                freqParcelas.select2('enable');
+                    numeroParcelas.prop('disabled', false);
+                    freqParcelas.select2('enable');
+                }
+                else {
+                    numeroRepeticoes.prop('disabled', false);
+                    freqRepeticoes.select2('enable');
+
+                    numeroParcelas.prop('disabled', false);
+                    freqParcelas.select2('enable');
+                }
+
+                $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
+                $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
+
+                $("#numero_parcelas_hidden").val(numeroParcelas.val());
+                $("#frequencia_parcelas_hidden").val(freqParcelas.val());
             }
-            else {
-                numeroRepeticoes.prop('disabled', false);
-                freqRepeticoes.select2('enable');
-
-                numeroParcelas.prop('disabled', false);
-                freqParcelas.select2('enable');
-            }
-
-            $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
-            $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
-
-            $("#numero_parcelas_hidden").val(numeroParcelas.val());
-            $("#frequencia_parcelas_hidden").val(freqParcelas.val());
 
         });
         freqParcelas.change(function () {

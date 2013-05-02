@@ -18,7 +18,6 @@ var numeroParcelas = $("#numero_parcelas");
     freqParcelas.select2('enable');
 <% end %>
 
-
 // É necessário o carregamento da formatação já que o mesmo já foi executado pelo form
 formatedValue = $.fn.autoNumeric.Format('lancamento_valor', $('#lancamento_valor').autoNumeric('get').val());
 $("#lancamento_valor").val(formatedValue);
