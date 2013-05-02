@@ -9,6 +9,7 @@ gem 'select2-rails'
 gem 'client_side_validations'
 gem 'jquery-rails'
 gem 'rake'
+gem 'googlecharts'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

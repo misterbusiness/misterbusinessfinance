@@ -67,6 +67,7 @@ GEM
       railties (>= 3.0.0)
     ffi (1.6.0)
     ffi (1.6.0-x86-mingw32)
+    googlecharts (1.6.8)
     hike (1.2.1)
     i18n (0.6.4)
     journey (1.0.4)
@@ -86,6 +87,7 @@ GEM
     nokogiri (1.5.9)
     nokogiri (1.5.9-x86-mingw32)
     pg (0.14.0)
+    pg (0.14.0-x86-mingw32)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -172,6 +174,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   configurable_engine
   factory_girl_rails
+  googlecharts
   jquery-rails
   log4r
   mysql2

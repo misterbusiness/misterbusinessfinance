@@ -21,9 +21,9 @@ $("#flash_notice").show(300);
 $(":input:not(input[type=submit])").val("");
 
 /*Replace the html of the div post_lists with the updated new one*/
-$("#lancamento_grid").html("<%= escape_javascript( render(:partial => "grid") ) %>");
+$("#lancamento_grid").html("<%= escape_javascript( render(:partial => 'grid') ) %>");
 <% @lancamento = Lancamento.new %>
-$("#lancamento_form").html("<%= escape_javascript( render(:partial => "form") ) %>");
+$("#lancamento_form").html("<%= escape_javascript( render(:partial => 'form') ) %>");
 
 $("#lancamento_valor").blur();
 
