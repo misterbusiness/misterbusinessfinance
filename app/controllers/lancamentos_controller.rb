@@ -23,12 +23,20 @@ class LancamentosController < ApplicationController
 
   end
 
+  def new
+    @lancamento = Lancamento.new
+  end
+
   # GET /lancamentos/1/edit
   def edit
 
     DebugLog(params.inspect)
 
     @lancamento = Lancamento.find(params[:id])
+
+    if(@lancamento.despesa?)
+      @lancamento.valor = @lancamento.valor * -1
+    end
 
     #@lancamentorapidos = Lancamentorapido.all
     #@categorias = Category.all
@@ -39,7 +47,7 @@ class LancamentosController < ApplicationController
   # POST /lancamentos.json
   def create
     DebugLog("Lancamento - params: " + params.inspect)
-    params[:lancamento][:valor] = params[:lancamento][:valor].gsub(".", "").gsub(",", ".")
+    params[:lancamento][:valor] = params[:lancamento][:valor].gsub('.', '').gsub(',', '.')
 
     @lancamento = Lancamento.new(params[:lancamento])
 
@@ -266,7 +274,7 @@ class LancamentosController < ApplicationController
     DebugLog('Params: ' + params.inspect);
 
     @lancamento = Lancamento.find(params[:id])
-    if @lancamento.quitado? then
+    if @lancamento.quitado? and !@lancamento.estornado? then
       @lancamento.status = :aberto
       @lancamento.dataacao = nil
       @lancamento.save

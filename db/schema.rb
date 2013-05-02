@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412010144) do
+ActiveRecord::Schema.define(:version => 20130403111844) do
 
   create_table "agendamentos", :force => true do |t|
     t.integer  "num_agendamentos"
@@ -64,10 +64,10 @@ ActiveRecord::Schema.define(:version => 20130412010144) do
     t.integer  "tipo_cd"
     t.date     "datavencimento"
     t.date     "dataacao"
-    t.decimal  "valor",            :precision => 13, :scale => 2
+    t.decimal  "valor",            :precision => 9, :scale => 2
     t.integer  "status_cd"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.integer  "category_id"
     t.integer  "centrodecusto_id"
     t.integer  "estorno_id"

@@ -77,7 +77,7 @@
 	</div>
 	<div class="span3">
 	<span class="add-on">R$</span>
-	<%= f.text_field :valor, :class=> "auto", :alt=> "n0p3c2S", :style => "text-align:right;" %>
+	<%= f.text_field :valor, :class=> 'auto', :alt=> 'n0p3c2S', :style => 'text-align:right;' %>
 	</div>
 </div>
 
@@ -125,10 +125,10 @@
 
 <div class="row"><\br></div>
 
-<!-- ********************************************************************************************************* 
-	Quitado checkbox
-	-->
 
+  <!-- *********************************************************************************************************
+   Parcelamento
+   -->
 <%= render 'lancamentos/scripts/calculo_parcela' %>
 <%= render 'lancamentos/scripts/select2_for_parcela' %>
 <label>Parcelamento</label>
@@ -146,6 +146,10 @@
 </div>
 </div>
 
+  <!-- *********************************************************************************************************
+	Agendamento
+	-->
+
 <%= render 'lancamentos/scripts/calculo_agendamento' %>
 <%= render 'lancamentos/scripts/select2_for_agendamento' %>
 <label>Agendamento</label>
@@ -162,6 +166,10 @@
 	<label id="total_agendamento">0</label>
 </div>
 </div>
+
+  <!-- *********************************************************************************************************
+	Quitado checkbox
+	-->
 
 <%= render 'lancamentos/scripts/quitado_checkbox'%>
 <div class = "container">

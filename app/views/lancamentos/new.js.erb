@@ -1,0 +1,4 @@
+$("#lancamento_form").html("<%= escape_javascript(render(:partial => 'form'))%>");
+
+$("#lancamento_valor").autoNumeric();
+$("#lancamento_valor").blur();

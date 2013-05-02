@@ -19,8 +19,8 @@
             var valorParcelas = $.fn.autoNumeric.Strip('lancamento_valor');
             var agendamentoBox = $("#numero_agendamentos");
             var agendamentoFreq = $("#frequencia_agendamentos");
+            $("#total_parcela").text(Math.abs(valorParcelas) / numeroParcelas.val());
 
-            $("#total_parcela").text(valorParcelas / numeroParcelas.val());
 
             if (numeroParcelas.val() > 1) {
                 numeroRepeticoes.prop('disabled', true);

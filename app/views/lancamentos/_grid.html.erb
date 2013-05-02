@@ -27,6 +27,7 @@
         <td><%= lancamento.descricao %></td>
         <td><%= lancamento.datavencimento %></td>
         <td><%= lancamento.dataacao %></td>
+
         <td><%= if lancamento.receita? then
                   "+" + lancamento.valor.to_s
                 else
