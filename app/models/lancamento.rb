@@ -128,4 +128,5 @@ class Lancamento < ActiveRecord::Base
   def status_quitado_no_change_allowed
     errors.add(:status, "O lancamento quitado nao pode ser alterado") if self.changed? and self.quitado?
   end
+
 end

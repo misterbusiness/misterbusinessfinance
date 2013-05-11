@@ -15,11 +15,66 @@ class LancamentosController < ApplicationController
   # GET /lancamentos
   # GET /lancamentos.json
   def index
-    #Aqui iremos implementar os filtros, pelo que eu entendi.
-    #@lancamentos = Lancamento.all
-    #@lancamento = Lancamento.new
+    # Charts data
 
-    # Active records auxiliares
+    #    @realizados = Lancamento.all.group_by {|l| l.parcela_id}
+
+    #@receita_series = Lancamento.all.group_by {|l| l.datavencimento.strftime("%m/%Y")}
+
+    if params[:ano].blank?
+      @ano = Time.now.year
+    else
+      @ano = params[:ano]
+    end
+
+    # Foi utilizado SQL por ser mais simples de interagir do que os helpers do ActiveRecord
+    # Procura pelos registros parcelados e os empenha na data de realização (data do primeiro registro)
+    @receita_series = Lancamento.find_by_sql(
+        "select sum(valor) as valor, month(datavencimento) as mes from
+                  (select datavencimento, SUM(valor) as valor
+                      from lancamentos
+                      where parcela_id is not null
+                        and YEAR(datavencimento) = #{@ano}
+                        and tipo_cd = #{Lancamento.receita}
+                      group by parcela_id
+                  union
+                    select datavencimento, valor as valor
+                      from lancamentos
+                      where parcela_id is null
+                        and YEAR(datavencimento) = #{@ano}
+                        and tipo_cd = #{Lancamento.receita}) as realizado
+                      group by month(datavencimento)")
+      @despesa_series = Lancamento.find_by_sql(
+          "select sum(valor) as valor, month(datavencimento) as mes from
+                  (select datavencimento, SUM(valor) as valor
+                      from lancamentos
+                      where parcela_id is not null
+                        and YEAR(datavencimento) = #{@ano}
+                        and tipo_cd = #{Lancamento.despesa}
+                      group by parcela_id
+                  union
+                    select datavencimento, valor as valor
+                      from lancamentos
+                      where parcela_id is null
+                        and YEAR(datavencimento) = #{@ano}
+                        and tipo_cd = #{Lancamento.despesa}) as realizado
+                      group by month(datavencimento)"
+      )
+
+#@receita_series = Lancamento.where(:tipo_cd => Lancamento.receita).where(" YEAR(datavencimento) = #{@ano}").all(
+    #@receita_series = @realizado.where(:tipo_cd => Lancamento.receita).where("YEAR(datavencimento) = #{@ano}").all(
+    #                                  :select => "SUM(realizado) as receita, MONTH(datavencimento) as mes",
+    #                                  :group => "MONTH(datavencimento)")
+
+    #@despesa_series = Lancamento.where(:tipo_cd => Lancamento.despesa).where("YEAR(datavencimento) = #{@ano}").all(
+    #    @despesa_series = Lancamento.where(:tipo_cd => Lancamento.despesa).where("YEAR(datavencimento) = #{@ano}").all(
+    #        :select => "SUM(valor) as despesa, MONTH(datavencimento) as mes",
+    #        :group => "MONTH(datavencimento)")
+
+     # TODO: Query do caixa
+    @caixa_series = Lancamento.where(:status_cd => Lancamento.quitado).where("YEAR(datavencimento) = #{@ano}").all(
+        :select => "SUM(valor) as receita, MONTH(datavencimento) as mes",
+        :group => "MONTH(datavencimento)")
 
   end
 
