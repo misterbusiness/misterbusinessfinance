@@ -4,8 +4,8 @@
     <td colspan=3>
       <div style="overflow:scroll;height:100%;width:100%;overflow:auto">
         <tr>
-          <%= render 'lancamentos/scripts/lancamento_check_uncheck_all' %>
-          <th><%= check_box_tag "lancamento_selectall" %></th>
+
+          <th></th>
           <th>Descrição</th>
           <th>Vencimento</th>
           <th>Data Ação</th>
@@ -13,7 +13,6 @@
           <th>Categoria</th>
           <th>Centro de Custo</th>
           <th>Status</th>
-          <th>Remover</th>
         </tr>
       </div>
   </thead>
@@ -23,7 +22,7 @@
       <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
       <% @current_lancamento = lancamento %>
       <tr id="<%= @edit_row_id %>">
-        <td><%= check_box_tag "lancamento_ids", lancamento.id, false, :id => "lancamento_#{lancamento.id}", :class => "check_lancamentos" %>
+        <td><%= button_to("Quitar", {:action => "quitar", :id => lancamento.id}, :method => :put)  %></td>
         <td><%= lancamento.descricao %></td>
         <td><%= lancamento.datavencimento %></td>
         <td><%= lancamento.dataacao %></td>
@@ -43,7 +42,6 @@
         <%= hidden_field_tag :hasParcelamento, lancamento.has_parcelamento?, :id => "has_parcelamento_row_#{lancamento.id}" %>
         <%= hidden_field_tag :hasAgendamento, lancamento.has_agendamento?, :id => "has_agendamento_row_#{lancamento.id}" %>
         <%= hidden_field_tag :hasEstorno, lancamento.has_estorno?, :id => "has_estorno_row_#{lancamento.id}" %>
-        <td><%= link_to 'Remover', lancamento, :confirm => 'Tem certeza?', :remote => true, :method => :delete %></td>
         <%= render 'lancamentos/scripts/edit_form' %>
       </tr>
   <% end %>

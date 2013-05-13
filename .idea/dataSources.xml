@@ -1,5 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" compressed="false" hash="2077443881" />
+  <component name="DataSourceManagerImpl" format="xml" hash="1731913930">
+    <data-source source="LOCAL" name="Rails misterbusinessfinance: development" product="MySQL" version="5.5.28" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.18 ( Revision: tonci.grgin@oracle.com-20110930151701-jfj14ddfq48ifkfq )" uuid="ff366b31-aeca-417e-9375-2e475b6d2393">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/mrbusinessfinance_development</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfc6dfc3dfd9dfcfdfd8dfc3dfcfdfd9</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails misterbusinessfinance: production" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="a00270db-e3fa-4937-99a0-eaf4366b998d">
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/mrbusinessfinance_production</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfc6dfc3dfd9dfcfdfd8dfc3dfcfdfd9</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails misterbusinessfinance: development" product="MySQL" version="5.5.28" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.18 ( Revision: tonci.grgin@oracle.com-20110930151701-jfj14ddfq48ifkfq )" uuid="9c98c83d-84d3-48af-8c42-8c0f55331388">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/mrbusinessfinance_development</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfc6dfc3dfd9dfcfdfd8dfc3dfcfdfd9</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails misterbusinessfinance: test" product="MySQL" version="5.5.28" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.18 ( Revision: tonci.grgin@oracle.com-20110930151701-jfj14ddfq48ifkfq )" uuid="98acdd54-d2a0-4a51-94ce-0bf80d5d10ff">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/mrbusinessfinance_test</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfc6dfc3dfd9dfcfdfd8dfc3dfcfdfd9</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
 </project>
 

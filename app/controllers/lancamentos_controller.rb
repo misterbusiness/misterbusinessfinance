@@ -373,6 +373,8 @@ class LancamentosController < ApplicationController
       end
       @lancamentos = Lancamento.all
     end
+    @lancamentos = Lancamento.all
+    @lancamento = Lancamento.new
   end
 
   def estornar
