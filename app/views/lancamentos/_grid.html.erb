@@ -22,7 +22,7 @@
       <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
       <% @current_lancamento = lancamento %>
       <tr id="<%= @edit_row_id %>">
-        <td><%= button_to("Quitar", {:action => "quitar", :id => lancamento.id}, :method => :put)  %></td>
+        <td><%= button_to("Quitar", {:action => "quitar", :id => lancamento.id}, :method => :put, :remote => :true)  %></td>
         <td><%= lancamento.descricao %></td>
         <td><%= lancamento.datavencimento %></td>
         <td><%= lancamento.dataacao %></td>
