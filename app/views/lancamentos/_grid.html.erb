@@ -25,8 +25,8 @@
         <td>
           <table border="0px">
             <tr>
-              <td><%= button_to(if lancamento.aberto? then "Quitar" else "Desquitar" end , {:action => "quitar", :id => lancamento.id}, :method => :put, :remote => :true)  %> </td>
-              <td><%= button_to("Estornar", {:action => "estornar", :id => lancamento.id}, :method => :put, :remote => :true)  %> </td>
+              <td><%= if !lancamento.estornado? then button_to(if lancamento.aberto? then "Quitar" else "Desquitar" end , {:action => "quitar", :id => lancamento.id}, :method => :put, :remote => :true) end %> </td>
+              <td><%= if lancamento.quitado? then button_to("Estornar", {:action => "estornar", :id => lancamento.id}, :method => :put, :remote => :true) end %> </td>
               <td><%= button_to("Cancelar", {:action => "destroy", :id => lancamento.id}, :method => :put, :remote => :true)  %> </td>
             </tr>
           </table>
