@@ -371,7 +371,7 @@ class LancamentosController < ApplicationController
       else
         flash[:notice] = 'Lancamento so pode estar ou quitado ou aberto'
       end
-      @lancamentos = Lancamento.all
+
     end
     @lancamentos = Lancamento.all
     @lancamento = Lancamento.new
@@ -415,4 +415,9 @@ class LancamentosController < ApplicationController
       end
     end
   end
+
+  @lancamentos = Lancamento.all
+  @lancamento = Lancamento.new
+
+
 end
