@@ -63,6 +63,34 @@
         </library>
       </libraries>
     </data-source>
+    <data-source source="LOCAL" name="Rails misterbusinessfinance: test" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="1a016526-8fba-417a-8581-cdedaad27e7b">
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/mrbusinessfinance_test</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfc6dfc3dfd9dfcfdfd8dfc3dfcfdfd9</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>jar://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails misterbusinessfinance: development" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="130427ac-f961-4c60-9120-8a2167b7eaf8">
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/mrbusinessfinance_development</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfc6dfc3dfd9dfcfdfd8dfc3dfcfdfd9</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>jar://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
   </component>
 </project>
 

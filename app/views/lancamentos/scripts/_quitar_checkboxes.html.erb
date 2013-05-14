@@ -2,21 +2,22 @@
 	$(document).ready(function(){		
 		$("#quitar_button").click(function(){
 			$('.check_lancamentos').each(function(index, element)
-			{				
+			{
+                var jqxhr;
 				if ($(element).is(':checked'))
-				{				
+				{
 					//alert("/lancamentos/"+ $(element).val()+"/quitar");
-					var jqxhr = $.ajax({
-						url: "/lancamentos/"+ $(element).val()+"/quitar",
+                    jqxhr = $.ajax({
+						url: "/lancamentos/quitar",
 						type: "POST",
 						data:{
 							_method: 'PUT',
 							id: $(element).val()
 						}
-						
+
 					})
 					.success(function(response){
-						//alert("Sucesso!");						
+						//alert("Sucesso!");
 					})
 					.error(function(jqXHR, textStatus, errorThrown){
 						if (errorThrown != "")

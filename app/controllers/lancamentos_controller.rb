@@ -196,9 +196,9 @@ class LancamentosController < ApplicationController
     # TODO: Criar uma tabela com o registro de todas as mensagens do sistema
     if (!(@numParcelas > 1) and !(@numAgendamentos > 1))
       if @lancamento.save
-        flash[:notice] = 'Sucesso - insert'
+        flash[:notice] = 'Lancamento com sucesso.'
       else
-        flash[:notice] = 'Erro ao salvar o lancamento'
+        flash[:notice] = 'Erro ao salvar o lancamento.'
       end
     end
     @lancamentos = Lancamento.all
@@ -414,10 +414,12 @@ class LancamentosController < ApplicationController
         end
       end
     end
-  end
 
-  @lancamentos = Lancamento.all
-  @lancamento = Lancamento.new
+
+    @lancamentos = Lancamento.all
+    @lancamento = Lancamento.new
+
+  end
 
 
 end

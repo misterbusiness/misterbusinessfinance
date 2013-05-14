@@ -30,6 +30,8 @@ Misterbusinessfinance::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
+    match 'lancamentos/quitar' => 'lancamentos#quitar'
+
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
