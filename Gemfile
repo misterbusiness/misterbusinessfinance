@@ -10,6 +10,7 @@ gem 'client_side_validations'
 gem 'jquery-rails'
 gem 'rake'
 gem 'googlecharts'
+gem 'squeel'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -47,6 +48,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
+  #gem 'pg'
   #gem  'activerecord-postgresql-adapter'
 end
