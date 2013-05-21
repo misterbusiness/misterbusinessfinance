@@ -11,6 +11,8 @@ gem 'jquery-rails'
 gem 'rake'
 gem 'googlecharts'
 gem 'squeel'
+gem 'activerecord-postgresql-adapter'
+gem 'pg'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -21,6 +23,7 @@ group :development, :test do
   gem 'rspec-rails', '2.11.0'
   gem 'factory_girl_rails'
   gem 'log4r'
+
  # gem 'ruby-debug-ide'
  # gem 'debugger'
  # gem 'ruby-debug19'
@@ -48,6 +51,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
-  #gem  'activerecord-postgresql-adapter'
+  #gem 'pg'
+  #gem 'activerecord-postgresql-adapter'
 end
