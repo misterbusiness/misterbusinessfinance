@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(:version => 20130521232859) do
   end
 
   create_table "categories", :force => true do |t|
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "descricao"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "ancestry"
   end
 
@@ -51,8 +51,6 @@ ActiveRecord::Schema.define(:version => 20130521232859) do
     t.integer  "tipo_cd"
     t.integer  "diavencimento"
     t.decimal  "valor",            :precision => 9, :scale => 2
-    t.string   "categoria"
-    t.string   "centrodecusto"
     t.integer  "category_id"
     t.integer  "centrodecusto_id"
     t.datetime "created_at",                                     :null => false
@@ -73,12 +71,6 @@ ActiveRecord::Schema.define(:version => 20130521232859) do
     t.integer  "parcela_id"
     t.integer  "estorno_id"
     t.integer  "agendamento_id"
-  end
-
-  create_table "parcela_lancamentos", :force => true do |t|
-    t.integer  "indice"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "parcelas", :force => true do |t|

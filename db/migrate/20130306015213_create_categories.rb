@@ -1,7 +1,7 @@
 class CreateCategories < ActiveRecord::Migration
   def change
     create_table :categories do |t|
-      t.string :description
+      t.string :descricao
 
       t.timestamps
     end

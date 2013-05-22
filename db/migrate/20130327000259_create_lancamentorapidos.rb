@@ -5,8 +5,6 @@ class CreateLancamentorapidos < ActiveRecord::Migration
       t.integer :tipo_cd
       t.integer :diavencimento
       t.decimal  :valor,            :precision => 9, :scale => 2
-      t.string :categoria
-      t.string :centrodecusto 
       
       t.references :category
       t.references :centrodecusto     
