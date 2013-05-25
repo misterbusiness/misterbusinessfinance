@@ -28,38 +28,39 @@ class LancamentosController < ApplicationController
     # Foi utilizado SQL por ser mais simples de interagir do que os helpers do ActiveRecord
     # Procura pelos registros parcelados e os empenha na data de realização (data do primeiro registro)
 
-    @receita_series_part1 = Lancamento.where {(parcela_id != nil) & (tipo_cd == Lancamento.receita)}
-        .where {date_part('year',datavencimento) == my{@ano}}
-        .select{sum(valor).as(valor)}
-        .select{date_part('month',datavencimento).as(mes)}
-        .group{parcela_id}
-        .group{date_part('month',datavencimento)}
-    @receita_series_part2 = Lancamento.where {(parcela_id == nil) & (tipo_cd == Lancamento.receita)}
-        .where {date_part('year',datavencimento) == my{@ano}}
-        .select{sum(valor).as(valor)}
-        .select{date_part('month',datavencimento).as(mes)}
-        .group{date_part('month',datavencimento)}
 
-    @receita_series_union_query = "(#{@receita_series_part1.to_sql}) UNION (#{@receita_series_part2.to_sql})"
+   # @receita_series_part1 = Lancamento.where ((:parcela_id != nil) & (:tipo_cd == Lancamento.receita?))
+   #     .where ( date_part('year',:datavencimento) == my(@ano) )
+   #     .select{sum(valor).as(valor)}
+   #     .select{date_part('month',datavencimento).as(mes)}
+   #     .group{parcela_id}
+   #     .group{date_part('month',datavencimento)}
+   # @receita_series_part2 = Lancamento.where {(parcela_id == nil) & (tipo_cd == Lancamento.receita)}  ,false
+   #     .where {date_part('year',datavencimento) == my{@ano}}
+   #     .select{sum(valor).as(valor)}
+   #     .select{date_part('month',datavencimento).as(mes)}
+   #     .group{date_part('month',datavencimento)}
+   #
+   # @receita_series_union_query = "(#{@receita_series_part1.to_sql}) UNION (#{@receita_series_part2.to_sql})"
+   #
+   # @receita_series = Lancamento.find_by_sql(@receita_series_union_query)
 
-    @receita_series = Lancamento.find_by_sql(@receita_series_union_query)
 
-
-   # @receita_series = Lancamento.find_by_sql(
-   #     "select sum(valor) as valor, month(datavencimento) as mes from
-   #               (select datavencimento, SUM(valor) as valor
-   #                   from lancamentos
-   #                   where parcela_id is not null
-   #                     and YEAR(datavencimento) = #{@ano}
-   #                     and tipo_cd = #{Lancamento.receita}
-   #                   group by parcela_id
-   #               union
-   #                 select datavencimento, valor as valor
-   #                   from lancamentos
-   #                   where parcela_id is null
-   #                     and YEAR(datavencimento) = #{@ano}
-   #                     and tipo_cd = #{Lancamento.receita}) as realizado
-   #                   group by month(datavencimento)")
+  @receita_series = Lancamento.find_by_sql(
+      "select sum(valor) as valor, date_part('month',datavencimento) as mes from
+                  (select datavencimento, SUM(valor) as valor
+                      from lancamentos
+                      where parcela_id is not null
+                        and date_part('year',datavencimento) = #{@ano}
+                        and tipo_cd = #{Lancamento.receita}
+                      group by parcela_id, datavencimento
+                 union
+                    select datavencimento, valor as valor
+                      from lancamentos
+                      where parcela_id is null
+                        and date_part('year',datavencimento) = #{@ano}
+                        and tipo_cd = #{Lancamento.receita}) as realizado
+                      group by date_part('month',datavencimento)"  )
     @despesa_series = Lancamento.find_by_sql(
         "select sum(valor) as valor, date_part('month',datavencimento) as mes from
                   (select datavencimento, SUM(valor) as valor
