@@ -17,6 +17,19 @@
       </div>
   </thead>
   <tbody>
+  <tr>
+    <td></td>
+    <td> Filtro 2</td>
+    <td> Filtro 3</td>
+    <td> Filtro 4</td>
+    <td> Filtro 5</td>
+    <td> Filtro 6</td>
+    <td> Filtro 7</td>
+    <td> Filtro 8</td>
+
+  </tr>
+
+
   <% for lancamento in @lancamentos %>
       <% @edit_row_id = "edit_lancamento_row_#{lancamento.id}" %>
       <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
@@ -27,7 +40,7 @@
             <tr>
               <td><%= if !lancamento.estornado? then button_to(if lancamento.aberto? then "Quitar" else "Desquitar" end , {:action => "quitar", :id => lancamento.id}, :method => :put, :remote => :true) end %> </td>
               <td><%= if lancamento.quitado? then button_to("Estornar", {:action => "estornar", :id => lancamento.id}, :method => :put, :remote => :true) end %> </td>
-              <td><%= button_to("Cancelar", {:action => "destroy", :id => lancamento.id}, :method => :put, :remote => :true)  %> </td>
+              <td><%= if lancamento.aberto? then button_to("Cancelar", {:action => "destroy", :id => lancamento.id}, :method => :put, :remote => :true) end %> </td>
             </tr>
           </table>
         </td>
