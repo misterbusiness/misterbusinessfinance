@@ -2,12 +2,7 @@ class Lancamento < ActiveRecord::Base
   attr_accessible :datavencimento, :descricao, :status, :tipo, :valor,
                   :dataacao, :category, :centrodecusto, :category_id, :centrodecusto_id,
                   :lancamento_estornado, :lancamento_original
- 
-# 10-03-13 JH: Deprecated, alterado para gema simple_enum  
-# 10-03-13 JH: Para queries a sintaxa é (nome_coluna)_cd => Lancamento.(nome_chave)
-#  validates_inclusion_of :tipo, :in => ["Receita","Despesa"]
-#  validates_inclusion_of :status, :in => ["Aberto","Quitado","Estornado","Cancelado"]
-    
+
   as_enum :tipo, [:receita, :despesa]
   as_enum :status, [:aberto, :quitado, :estornado, :cancelado]  
     
@@ -50,7 +45,28 @@ class Lancamento < ActiveRecord::Base
   #Status validation
   validate :status_not_aberto_if_dataacao
   validate :status_not_quitado_if_no_dataacao
-#  validate :status_quitado_no_change_allowed
+
+
+# scopes
+# Using squeel and ARel. Squeel é utilizado para operações unicas no banco
+
+  scope :parcelados, where(Lancamento.arel_table[:parcela_id].not_eq(nil)).group(:parcela_id)
+  scope :a_vista, where(Lancamento.arel_table[:parcela_id].eq(nil))
+  scope :receitas, where(:tipo_cd => Lancamento.receita)
+  scope :despesas, where(:tipo_cd => Lancamento.despesa)
+  scope :por_mes, group{date_part('month',datavencimento)}.order{date_part('month',datavencimento)}
+  scope :este_ano, lambda {|ano| where(:datavencimento => ano.beginning_of_year..ano.end_of_year)}
+  scope :este_mes, lambda {|mes| where(:datavencimento => mes.beginning_of_month..mes.end_of_month)}
+  scope :parcelamentos_realizados, lambda {|ano| parcelados.este_ano(ano).por_mes}
+  scope :lancamentos_realizados, lambda {|ano| a_vista.este_ano(ano).por_mes}
+  scope :quitados, where(:status_cd => Lancamento.quitado)
+  scope :este_dia, lambda {|dia| where(:datavencimento => dia.beginning_of_day..dia.end_of_day)}
+  scope :por_dia,  group{date_part('day',datavencimento)}.order{date_part('day',datavencimento)}
+  scope :caixa_dia, lambda {|dia| receitas.quitados.por_dia.select{sum(valor)} - despesas.quitados.por_dia.select{sum(valor)} }
+  scope :caixa_mes, lambda {|mes| receitas.quitados.este_mes(mes).select{sum(valor)} - despesas.quitados.este_mes(mes).select{sum(valor)} }
+  scope :caixa, receitas.quitados.por_mes.select{sum(valor)} - despesas.quitados.por_mes.select{sum(valor)}
+
+
 
 # public methods
   def has_parcelamento?
@@ -112,11 +128,7 @@ class Lancamento < ActiveRecord::Base
   def set_default_centrodecusto_if_null
     self.centrodecusto = Centrodecusto.find_by_descricao(Configurable.centrodecusto_padrao) if self.centrodecusto.nil?
   end
-  
-#  def set_dataacao_null_if_status_cancelado
-#    self.dataacao = nil if self.cancelado?
-#  end
-  
+
   def status_not_aberto_if_dataacao    
     errors.add(:status, "Nao pode estar aberto se existir data de confirmacao") if not self.dataacao.blank? and self.aberto?   
   end

@@ -13,6 +13,11 @@ gem 'googlecharts'
 gem 'squeel'
 gem 'activerecord-postgresql-adapter'
 gem 'pg'
+gem 'will_paginate'
+gem 'populator'
+gem 'faker'
+
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

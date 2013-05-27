@@ -22,75 +22,109 @@ class LancamentosController < ApplicationController
     #@receita_series = Lancamento.all.group_by {|l| l.datavencimento.strftime("%m/%Y")}
     @ano = Time.now.year
     @ano = params[:ano] unless params[:ano].blank?
-    @yearBegin = DateTime.new(@ano,1,1)
-    @yearEnd = DateTime.new(@ano+1,1,1)
+    @yearBegin = DateTime.new(@ano, 1, 1)
+    @yearEnd = DateTime.new(@ano+1, 1, 1)
 
     # Foi utilizado SQL por ser mais simples de interagir do que os helpers do ActiveRecord
     # Procura pelos registros parcelados e os empenha na data de realização (data do primeiro registro)
 
-    @receita_series_part1 = Lancamento.where {(parcela_id != nil) & (tipo_cd == Lancamento.receita)}
-        .where {date_part('year',datavencimento) == my{@ano}}
-        .select{sum(valor).as(valor)}
-        .select{date_part('month',datavencimento).as(mes)}
-        .group{parcela_id}
-        .group{date_part('month',datavencimento)}
-    @receita_series_part2 = Lancamento.where {(parcela_id == nil) & (tipo_cd == Lancamento.receita)}
-        .where {date_part('year',datavencimento) == my{@ano}}
-        .select{sum(valor).as(valor)}
-        .select{date_part('month',datavencimento).as(mes)}
-        .group{date_part('month',datavencimento)}
+    #@receita_series_part1 = Lancamento.where {(parcela_id != nil) & (tipo_cd == Lancamento.receita)}
+    #    .where {date_part('year',datavencimento) == my{@ano}}
+    #    .select{sum(valor).as(valor)}
+    #    .select{date_part('month',datavencimento).as(mes)}
+    #    .group{parcela_id}
+    #    .group{date_part('month',datavencimento)}
+    #    .order{date_part('month',datavencimento)}
 
-    @receita_series_union_query = "(#{@receita_series_part1.to_sql}) UNION (#{@receita_series_part2.to_sql})"
+    @dt = DateTime.new(@ano, 1, 1)
+
+    @receita_series_part1 = Lancamento.receitas.parcelamentos_realizados(@dt)
+    .select { sum(valor).as(valor) }
+    .select { date_part('month', datavencimento).as(mes) }
+
+    #@receita_series_part2 = Lancamento.where {(parcela_id == nil) & (tipo_cd == Lancamento.receita)}
+    #    .where {date_part('year',datavencimento) == my{@ano}}
+    #    .select{sum(valor).as(valor)}
+    #    .select{date_part('month',datavencimento).as(mes)}
+    #    .group{date_part('month',datavencimento)}
+    #    .order{date_part('month',datavencimento)}
+
+    @receita_series_part2 = Lancamento.receitas.lancamentos_realizados(@dt)
+    .select { sum(valor).as(valor) }
+    .select { date_part('month', datavencimento).as(mes) }
+
+    @receita_series_union_query = "SELECT valor, mes from ((#{@receita_series_part1.to_sql}) UNION (#{@receita_series_part2.to_sql})) as realizado order by mes"
 
     @receita_series = Lancamento.find_by_sql(@receita_series_union_query)
 
 
-   # @receita_series = Lancamento.find_by_sql(
-   #     "select sum(valor) as valor, month(datavencimento) as mes from
-   #               (select datavencimento, SUM(valor) as valor
-   #                   from lancamentos
-   #                   where parcela_id is not null
-   #                     and YEAR(datavencimento) = #{@ano}
-   #                     and tipo_cd = #{Lancamento.receita}
-   #                   group by parcela_id
-   #               union
-   #                 select datavencimento, valor as valor
-   #                   from lancamentos
-   #                   where parcela_id is null
-   #                     and YEAR(datavencimento) = #{@ano}
-   #                     and tipo_cd = #{Lancamento.receita}) as realizado
-   #                   group by month(datavencimento)")
-    @despesa_series = Lancamento.find_by_sql(
-        "select sum(valor) as valor, date_part('month',datavencimento) as mes from
-                  (select datavencimento, SUM(valor) as valor
-                      from lancamentos
-                      where parcela_id is not null
-                        and date_part('year',datavencimento) = #{@ano}
-                        and tipo_cd = #{Lancamento.despesa}
-                      group by parcela_id, datavencimento
-                 union
-                    select datavencimento, valor as valor
-                      from lancamentos
-                      where parcela_id is null
-                        and date_part('year',datavencimento) = #{@ano}
-                        and tipo_cd = #{Lancamento.despesa}) as realizado
-                      group by date_part('month',datavencimento)"
-    )
+    #  @receita_series = Lancamento.find_by_sql(
+    #      "select sum(valor) as valor, date_part('month',datavencimento) as mes from
+    #                (select datavencimento, SUM(valor) as valor
+    #                    from lancamentos
+    #                    where parcela_id is not null
+    #                      and date_part('year',datavencimento) = #{@ano}
+    #                      and tipo_cd = #{Lancamento.receita}
+    #                    group by parcela_id, datavencimento
+    #                union
+    #                  select datavencimento, valor as valor
+    #                    from lancamentos
+    #                    where parcela_id is null
+    #                      and date_part('year',datavencimento) = #{@ano}
+    #                      and tipo_cd = #{Lancamento.receita}) as realizado
+    #                    group by date_part('month',datavencimento)
+    #                    order by date_part('month', datavencimento)")
 
-#@receita_series = Lancamento.where(:tipo_cd => Lancamento.receita).where(" YEAR(datavencimento) = #{@ano}").all(
-#@receita_series = @realizado.where(:tipo_cd => Lancamento.receita).where("YEAR(datavencimento) = #{@ano}").all(
-#                                  :select => "SUM(realizado) as receita, MONTH(datavencimento) as mes",
-#                                  :group => "MONTH(datavencimento)")
+    @despesa_series_part1 = Lancamento.despesas.parcelamentos_realizados(@dt)
+    .select { sum(valor).as(valor) }
+    .select { date_part('month', datavencimento).as(mes) }
 
-#@despesa_series = Lancamento.where(:tipo_cd => Lancamento.despesa).where("YEAR(datavencimento) = #{@ano}").all(
-#    @despesa_series = Lancamento.where(:tipo_cd => Lancamento.despesa).where("YEAR(datavencimento) = #{@ano}").all(
-#        :select => "SUM(valor) as despesa, MONTH(datavencimento) as mes",
-#        :group => "MONTH(datavencimento)")
+    @despesa_series_part2 = Lancamento.despesas.lancamentos_realizados(@dt)
+    .select { sum(valor).as(valor) }
+    .select { date_part('month', datavencimento).as(mes) }
 
-# TODO: Query do caixa
-    @caixa_series = Lancamento.where(:status_cd => Lancamento.quitado).where("date_part('year',datavencimento) = #{@ano}").all(
-        :select => "SUM(valor) as receita, date_part('month',datavencimento) as mes",
-        :group => "date_part('month',datavencimento)")
+    @despesa_series_union_query = "SELECT valor, mes from ((#{@despesa_series_part1.to_sql}) UNION (#{@despesa_series_part2.to_sql})) as realizado order by mes"
+
+    @despesa_series = Lancamento.find_by_sql(@despesa_series_union_query)
+
+    #@despesa_series = Lancamento.find_by_sql(
+    #    "select sum(valor) as valor, date_part('month',datavencimento) as mes from
+    #              (select datavencimento, SUM(valor) as valor
+    #                  from lancamentos
+    #                  where parcela_id is not null
+    #                    and date_part('year',datavencimento) = #{@ano}
+    #                    and tipo_cd = #{Lancamento.despesa}
+    #                  group by parcela_id, datavencimento
+    #             union
+    #                select datavencimento, valor as valor
+    #                  from lancamentos
+    #                  where parcela_id is null
+    #                    and date_part('year',datavencimento) = #{@ano}
+    #                    and tipo_cd = #{Lancamento.despesa}) as realizado
+    #                  group by date_part('month',datavencimento)
+    #                  order by date_part('month', datavencimento)"
+    #)
+
+    # TODO: Query do caixa
+    #@caixa_series_part1 = Lancamento.receitas.quitados
+    #@caixa_series_part2 = Lancamento.despesas.quitados
+
+    #@caixa_sql = @caixa_series_part1.joins(@caixa_series_part2).to_sql
+
+    @caixa_series = Hash.new
+    (1..12).each do |mes|
+      @dt = DateTime.new(@ano,mes,1)
+      @caixa_series[@dt.month] = Lancamento.caixa_mes(@dt)
+    end
+
+
+
+    #@caixa_series = Lancamento.where(:status_cd => Lancamento.quitado).where("date_part('year',datavencimento) = #{@ano}").all(
+    #    :select => "SUM(valor) as receita, date_part('month',datavencimento) as mes",
+    #    :group => "date_part('month',datavencimento)")
+
+    #'select receitas.quitadas-despesas.quitadas from (select ) '
+
 
   end
 

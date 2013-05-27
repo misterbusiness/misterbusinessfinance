@@ -67,6 +67,8 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
+    faker (1.0.1)
+      i18n (~> 0.4)
     ffi (1.6.0)
     ffi (1.6.0-x86-mingw32)
     googlecharts (1.6.8)
@@ -89,9 +91,11 @@ GEM
     nokogiri (1.5.9)
     nokogiri (1.5.9-x86-mingw32)
     pg (0.14.1)
+    pg (0.14.1-x86-mingw32)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
+    populator (1.0.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -165,6 +169,7 @@ GEM
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     websocket (1.0.7)
+    will_paginate (3.0.3)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -182,11 +187,13 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   configurable_engine
   factory_girl_rails
+  faker
   googlecharts
   jquery-rails
   log4r
   mysql2
   pg
+  populator
   rails (= 3.2.12)
   rake
   rspec-rails (= 2.11.0)
@@ -195,3 +202,4 @@ DEPENDENCIES
   simple_enum
   squeel
   uglifier (= 1.2.3)
+  will_paginate

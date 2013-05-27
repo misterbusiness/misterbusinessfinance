@@ -41,6 +41,7 @@
     <orderEntry type="library" scope="PROVIDED" name="execjs (v1.4.0, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="factory_girl (v4.2.0, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="factory_girl_rails (v4.2.1, RVM: ruby-1.9.2-p320) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faker (v1.0.1, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.6.0, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="googlecharts (v1.6.8, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hike (v1.2.1, RVM: ruby-1.9.2-p320) [gem]" level="application" />
@@ -57,6 +58,7 @@
     <orderEntry type="library" scope="PROVIDED" name="pg (v0.14.1, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="polyamorous (v0.5.0, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="polyglot (v0.3.3, RVM: ruby-1.9.2-p320) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="populator (v1.0.0, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v1.4.5, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-cache (v1.2, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-ssl (v1.3.3, RVM: ruby-1.9.2-p320) [gem]" level="application" />
@@ -84,6 +86,7 @@
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v0.3.37, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="uglifier (v1.2.3, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket (v1.0.7, RVM: ruby-1.9.2-p320) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="will_paginate (v3.0.3, RVM: ruby-1.9.2-p320) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="xpath (v0.1.4, RVM: ruby-1.9.2-p320) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
