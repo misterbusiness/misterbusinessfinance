@@ -92,7 +92,7 @@
 
         data.addRows([
             <% @caixa_series.each do |serie| %>
-            ['<%= serie.mes %>' , <%= serie.receita %>],
+            ['<%= serie.mes %>' , <%= serie.valor %>],
             <% end %>
 
         ]);

@@ -64,9 +64,6 @@ class Lancamento < ActiveRecord::Base
   scope :por_dia,  group{date_part('day',datavencimento)}.order{date_part('day',datavencimento)}
   scope :caixa_dia, lambda {|dia| receitas.quitados.por_dia.select{sum(valor)} - despesas.quitados.por_dia.select{sum(valor)} }
   scope :caixa_mes, lambda {|mes| receitas.quitados.este_mes(mes).select{sum(valor)} - despesas.quitados.este_mes(mes).select{sum(valor)} }
-  scope :caixa, receitas.quitados.por_mes.select{sum(valor)} - despesas.quitados.por_mes.select{sum(valor)}
-
-
 
 # public methods
   def has_parcelamento?
