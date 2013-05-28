@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31bb495c-447c-494d-8a50-442b6547573e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/lancamentos/_grid.html.erb" afterPath="$PROJECT_DIR$/app/views/lancamentos/_grid.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/lancamentos/destroy.js.erb" afterPath="$PROJECT_DIR$/app/views/lancamentos/destroy.js.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/lancamentos/index.html.erb" afterPath="$PROJECT_DIR$/app/views/lancamentos/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/lancamentos_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/lancamentos_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misterbusinessfinance.iml" afterPath="$PROJECT_DIR$/.idea/misterbusinessfinance.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/lancamentos/scripts/_build_report_chart.html.erb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/lancamentos/scripts/_process_reports.html.erb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/lancamentos/_reports.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/lancamentos/_charts.html.erb" afterPath="$PROJECT_DIR$/app/views/lancamentos/_charts.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="misterbusinessfinance.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,7 +25,7 @@
     <file path="/create.js.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1367514449394" ignored="false" />
     <file path="/update.js.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1367514578389" ignored="false" />
     <file path="/Gemfile" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369590527260" ignored="false" />
-    <file path="/_charts.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1368305543231" ignored="false" />
+    <file path="/_charts.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369705493022" ignored="false" />
     <file path="/parcela.rb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1367593847444" ignored="false" />
     <file path="/lancamento.rb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369696310408" ignored="false" />
     <file path="/_build_receita_chart.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369697436621" ignored="false" />
@@ -44,6 +41,7 @@
     <file path="/a.regexp" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369697041611" ignored="false" />
     <file path="/populate.rake" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369699187857" ignored="false" />
     <file path="/lancamentos_helper.rb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369700013970" ignored="false" />
+    <file path="/_reports.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369705514256" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,15 +72,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lancamentos_helper.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/helpers/lancamentos_helper.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="83" selection-start="80" selection-end="137" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Rails misterbusinessfinance: development" pinned="false" current="false" current-in-tab="false">
         <entry file="dbDummy://db-console:/af7698de/3ca939a5-5150-4543-998c-a340b0bd1603/">
           <provider selected="true" editor-type-id="text-editor">
@@ -95,27 +84,36 @@
       <file leaf-file-name="lancamento.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/lancamento.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="22" selection-start="3131" selection-end="3131" vertical-scroll-proportion="0.0">
+            <state line="55" column="10" selection-start="2038" selection-end="2038" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_grid.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/lancamentos/_grid.html.erb">
+      <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/lancamentos/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="56" selection-start="463" selection-end="463" vertical-scroll-proportion="-11.875">
+            <state line="15" column="93" selection-start="435" selection-end="435" vertical-scroll-proportion="-9.375">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_reports.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/lancamentos/_reports.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="44" selection-start="59" selection-end="59" vertical-scroll-proportion="-0.625">
               <folding>
-                <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.erb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/lancamentos/index.html.erb">
+      <file leaf-file-name="_build_report_chart.html.erb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/lancamentos/scripts/_build_report_chart.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="72" selection-start="435" selection-end="435" vertical-scroll-proportion="0.39964476">
+            <state line="72" column="9" selection-start="2375" selection-end="2375" vertical-scroll-proportion="0.8131673">
               <folding />
             </state>
           </provider>
@@ -143,9 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/db/migrate/20130521232859_add_agendamento_fk_to_lancamento.rb" />
-        <option value="db-console:/af7698de/f0b3a7a5-acee-4b9b-aff3-772b8ad7eb39/" />
-        <option value="$PROJECT_DIR$/db/schema.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20130327000259_create_lancamentorapidos.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20130306015213_create_categories.rb" />
         <option value="$PROJECT_DIR$/db/seeds.rb" />
@@ -159,6 +154,9 @@
         <option value="db-console:/af7698de/3ca939a5-5150-4543-998c-a340b0bd1603/" />
         <option value="$PROJECT_DIR$/app/views/lancamentos/_grid.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/lancamentos_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/lancamentos/_charts.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/lancamentos/_reports.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/lancamentos/scripts/_build_report_chart.html.erb" />
       </list>
     </option>
   </component>
@@ -424,6 +422,32 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lancamentos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="misterbusinessfinance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="misterbusinessfinance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -470,7 +494,12 @@
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
   </component>
-  <component name="RunManager" selected="Rake.db:populate">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/views/lancamentos/scripts" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Rails.development">
     <configuration default="false" name="db:migrate" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
       <module name="misterbusinessfinance" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -1020,12 +1049,12 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22437674" sideWeight="0.5167715" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Heroku" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32809225" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2498615" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2637119" sideWeight="0.672956" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19778393" sideWeight="0.672956" order="4" side_tool="false" content_ui="tabs" x="78" y="377" width="1805" height="274" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2637119" sideWeight="0.6719078" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19778393" sideWeight="0.6719078" order="4" side_tool="false" content_ui="tabs" x="78" y="377" width="1805" height="274" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914045" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32704404" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32809225" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32704404" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32809225" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4832285" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1105,29 +1134,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/.rvm/gems/ruby-1.9.2-p320/gems/rake-10.0.4/lib/rake/application.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="0" selection-start="3299" selection-end="3299" vertical-scroll-proportion="0.33206108" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.rvm/rubies/ruby-1.9.2-p320/lib/ruby/1.9.1/monitor.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="202" column="0" selection-start="4189" selection-end="4189" vertical-scroll-proportion="0.3169399" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/af7698de/3ca939a5-5150-4543-998c-a340b0bd1603/mrbusinessfinance_development.public.categories_id_seq">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/af7698de/3ca939a5-5150-4543-998c-a340b0bd1603/mrbusinessfinance_development.public.lancamentos">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/lancamentorapido.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -1152,7 +1158,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/lancamentos/scripts/_build_receita_chart.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="49" selection-start="3099" selection-end="3099" vertical-scroll-proportion="0.44049734" />
+        <state line="94" column="49" selection-start="3099" selection-end="3099" vertical-scroll-proportion="0.44049734">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/tasks/populate.rake">
@@ -1174,13 +1182,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/lancamento.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="22" selection-start="3131" selection-end="3131" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/lancamentos_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="55" selection-start="801" selection-end="801" vertical-scroll-proportion="0.0">
@@ -1197,9 +1198,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/lancamento.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="10" selection-start="2038" selection-end="2038" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/lancamentos/scripts/_process_reports.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/lancamentos/_charts.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="22" selection-start="626" selection-end="626" vertical-scroll-proportion="0.3469751">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/lancamentos/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="72" selection-start="435" selection-end="435" vertical-scroll-proportion="0.39964476">
+        <state line="15" column="93" selection-start="435" selection-end="435" vertical-scroll-proportion="-9.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/lancamentos/_reports.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="44" selection-start="59" selection-end="59" vertical-scroll-proportion="-0.625">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/lancamentos/scripts/_build_report_chart.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="9" selection-start="2375" selection-end="2375" vertical-scroll-proportion="0.8131673">
           <folding />
         </state>
       </provider>
