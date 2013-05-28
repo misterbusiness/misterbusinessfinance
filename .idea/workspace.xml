@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31bb495c-447c-494d-8a50-442b6547573e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/lancamentos/scripts/_build_report_chart.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/lancamentos/scripts/_process_reports.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/lancamentos/_reports.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/lancamentos/_charts.html.erb" afterPath="$PROJECT_DIR$/app/views/lancamentos/_charts.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="misterbusinessfinance.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369701252087" ignored="false" />
+    <file path="/Dummy.txt" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369705618181" ignored="false" />
     <file path="/Rails misterbusinessfinance: development" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369698508417" ignored="false" />
     <file path="/_form.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1367172428487" ignored="false" />
     <file path="/_format_valor.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1367161944082" ignored="false" />
@@ -1016,7 +1012,11 @@
       <created>1369700875472</created>
       <updated>1369700875473</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Starting charts">
+      <created>1369705625608</created>
+      <updated>1369705625609</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1041,7 +1041,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-4" width="1857" height="1085" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914045" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914045" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1049,7 +1049,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22437674" sideWeight="0.5167715" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Heroku" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32809225" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2498615" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2637119" sideWeight="0.6719078" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2637119" sideWeight="0.6719078" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19778393" sideWeight="0.6719078" order="4" side_tool="false" content_ui="tabs" x="78" y="377" width="1805" height="274" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914045" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1103,7 +1103,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updates 20130527" />
+    <option name="LAST_COMMIT_MESSAGE" value="Starting charts" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1127,6 +1127,7 @@
     <MESSAGE value="Informativos funcionando!" />
     <MESSAGE value="Rake restartando sequences automaticamente" />
     <MESSAGE value="Updates 20130527" />
+    <MESSAGE value="Starting charts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
