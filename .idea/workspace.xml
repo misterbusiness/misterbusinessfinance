@@ -6,7 +6,7 @@
     </list>
     <ignored path="misterbusinessfinance.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369705618181" ignored="false" />
+    <file path="/Dummy.txt" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369705671782" ignored="false" />
     <file path="/Rails misterbusinessfinance: development" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369698508417" ignored="false" />
     <file path="/_form.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1367172428487" ignored="false" />
     <file path="/_format_valor.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1367161944082" ignored="false" />
@@ -1016,7 +1016,11 @@
       <created>1369705625608</created>
       <updated>1369705625609</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Starting charts">
+      <created>1369705673923</created>
+      <updated>1369705673923</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
