@@ -1,7 +1,7 @@
 module LancamentosHelper
-  def caixa_series_query
-    @caixa_series_part1 = Lancamento.receitas.quitados.por_mes.select{sum(valor).as(valor)}.select{date_part('month',datavencimento).as(mes)}
-    @caixa_series_part2 = Lancamento.despesas.quitados.por_mes.select{sum(valor).as(valor)}.select{date_part('month',datavencimento).as(mes)}
+  def caixa_series_query(dt)
+    @caixa_series_part1 = Lancamento.receitas.quitados.este_ano(@dt).por_mes.select{sum(valor).as(valor)}.select{date_part('month',datavencimento).as(mes)}
+    @caixa_series_part2 = Lancamento.despesas.quitados.este_ano(@dt).por_mes.select{sum(valor).as(valor)}.select{date_part('month',datavencimento).as(mes)}
 
     return "SELECT (COALESCE(r.valor,0)-COALESCE(d.valor,0)) as valor, r.mes as mes
             from (#{@caixa_series_part1.to_sql}) r
