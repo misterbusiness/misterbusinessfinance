@@ -4,6 +4,11 @@ namespace :db do
     require 'populator'
     [Category, Centrodecusto, Lancamentorapido, Lancamento].each(&:delete_all)
 
+    # Zera o sequence da categoria
+    ActiveRecord::Base.connection.execute('ALTER SEQUENCE public.categories_id_seq RESTART 1')
+    ActiveRecord::Base.connection.execute('ALTER SEQUENCE public.centrodecustos_id_seq RESTART 1')
+
+
     Category.populate 1 do |categoryBase|
       categoryBase.descricao = 'Sem categoria'
     end
