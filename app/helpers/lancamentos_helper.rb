@@ -100,4 +100,18 @@ module LancamentosHelper
     #as_enum :status, [:aberto, :quitado, :estornado, :cancelado]
   end
 
+  # Graficos e relatorios diversos
+  # Receitas
+  def contas_a_receber_series_query(dt_inicio)
+    return Lancamento.abertos.receitas.a_partir_de(dt_inicio).por_mes
+  end
+
+  def recebimentos_atrasados_series_query(dt_inicio)
+    return Lancamento.abertos.receitas.a_partir_de(dt_inicio).por_mes
+  end
+
+  def top_receitas_series_query
+     return Lancamento.receitas
+  end
+
 end

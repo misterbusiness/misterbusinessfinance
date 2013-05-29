@@ -50,6 +50,9 @@ class Lancamento < ActiveRecord::Base
 # scopes
 # Using squeel and ARel. Squeel é utilizado para operações unicas no banco
 
+  # O escopo padrão será de lançamentos válidos, ou seja, não cancelados e não estornados
+  default_scope where(Lancamento.arel_table[:status_cd].not_eq(Lancamento.cancelado))
+
   scope :parcelados, where(Lancamento.arel_table[:parcela_id].not_eq(nil)).group(:parcela_id)
   scope :a_vista, where(Lancamento.arel_table[:parcela_id].eq(nil))
   scope :receitas, where(:tipo_cd => Lancamento.receita)
@@ -60,10 +63,15 @@ class Lancamento < ActiveRecord::Base
   scope :parcelamentos_realizados, lambda {|ano| parcelados.este_ano(ano).por_mes}
   scope :lancamentos_realizados, lambda {|ano| a_vista.este_ano(ano).por_mes}
   scope :quitados, where(:status_cd => Lancamento.quitado)
+  scope :abertos, where(:status_cd => Lancamento.aberto)
   scope :este_dia, lambda {|dia| where(:datavencimento => dia.beginning_of_day..dia.end_of_day)}
   scope :por_dia,  group{date_part('day',datavencimento)}.order{date_part('day',datavencimento)}
   scope :caixa_dia, lambda {|dia| receitas.quitados.por_dia.select{sum(valor)} - despesas.quitados.por_dia.select{sum(valor)} }
   scope :caixa_mes, lambda {|mes| receitas.quitados.este_mes(mes).select{sum(valor)} - despesas.quitados.este_mes(mes).select{sum(valor)} }
+
+  scope :range, lambda {|dt_inicio, dt_fim| where(:datavencimento => dt_inicio..dt_fim )}
+  scope :a_partir_de, lambda {|dt| where('datavencimento > (?) ', dt)}
+  scope :a_partir_de_backwards, lambda {|dt| where('datavencimento < (?) ', dt)}
 
   scope :por_categoria, group{category_id}
   scope :por_centrodecusto, group{centrodecusto_id}

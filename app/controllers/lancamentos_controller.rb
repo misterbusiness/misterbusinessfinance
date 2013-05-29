@@ -5,7 +5,7 @@ class LancamentosController < ApplicationController
   before_filter :load
 
   def load
-    @lancamentos = Lancamento.all
+    @lancamentos = Lancamento.unscoped.all
     @lancamento = Lancamento.new
 
     @lancamentorapidos = Lancamentorapido.all
@@ -158,7 +158,7 @@ class LancamentosController < ApplicationController
         flash[:notice] = 'Erro ao salvar o lancamento.'
       end
     end
-    @lancamentos = Lancamento.all
+    @lancamentos = Lancamento.unscoped.all
   end
 
   #create
@@ -277,7 +277,7 @@ class LancamentosController < ApplicationController
         flash[:notice] = 'Falha ao atualizar o lancamento'
       end
     end
-    @lancamentos = Lancamento.all
+    @lancamentos = Lancamento.unscoped.all
     @lancamento = Lancamento.new
   end
 
@@ -293,6 +293,7 @@ class LancamentosController < ApplicationController
     end
 
     if @lancamento.destroy
+    #if @lancamento.cancel
       flash[:notice] = 'Sucesso - destroy'
     else
       flash[:notice] = 'Erro ao destroy lancamento'
@@ -300,7 +301,7 @@ class LancamentosController < ApplicationController
 
     # Recarrega as informações de lançamentos
     @lancamento = Lancamento.new
-    @lancamentos = Lancamento.all
+    @lancamentos = Lancamento.unscoped.all
     #redirect_to lancamentos_url
     #@lancamento.cancel
   end
@@ -330,7 +331,7 @@ class LancamentosController < ApplicationController
       end
 
     end
-    @lancamentos = Lancamento.all
+    @lancamentos = Lancamento.unscoped.all
     @lancamento = Lancamento.new
   end
 
@@ -373,7 +374,7 @@ class LancamentosController < ApplicationController
     end
 
 
-    @lancamentos = Lancamento.all
+    @lancamentos = Lancamento.unscoped.all
     @lancamento = Lancamento.new
 
   end
