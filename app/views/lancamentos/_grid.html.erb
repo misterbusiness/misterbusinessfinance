@@ -19,13 +19,16 @@
   <tbody>
   <tr>
     <td></td>
-    <td> Filtro 2</td>
-    <td> Filtro 3</td>
-    <td> Filtro 4</td>
-    <td> Filtro 5</td>
-    <td> Filtro 6</td>
-    <td> Filtro 7</td>
-    <td> Filtro 8</td>
+    <td> <%= text_field :filtroDescricao, :as => :text %></td>
+    <td>
+    		
+    	 <%= text_field :filtroDatavencimento, :as => :text, :id => :data_vencimento_filtro_picker%>
+    </td>
+    <td>  <%= text_field :filtroDataAcao, :as => :text, :id => :data_vencimento_filtro_picker%></td>
+    <td>  <%= text_field :filtroDataValor, :as => :text, :id => :data_vencimento_filtro_picker%></td>
+    <td>  <%= text_field :filtroCategoria, :as => :text, :id => :data_vencimento_filtro_picker%></td>
+    <td>  <%= text_field :filtroCentrodeCusto, :as => :text, :id => :data_vencimento_filtro_picker%></td>
+    <td>  <%= text_field :filtroStatus, :as => :text, :id => :data_vencimento_filtro_picker%></td>
 
   </tr>
 

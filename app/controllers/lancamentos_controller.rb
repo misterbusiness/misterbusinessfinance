@@ -5,7 +5,16 @@ class LancamentosController < ApplicationController
   before_filter :load
 
   def load
-    @lancamentos = Lancamento.unscoped.all
+    
+    #Nessa região irei construir a query
+    
+    query = Lancamento.unscoped
+    query = query.receitas
+    query = query.abertos
+
+    @lancamentos = query
+    #@lancamentos = Lancamento.scoped_by_status(Lancamento.quitado)
+   
     @lancamento = Lancamento.new
 
     @lancamentorapidos = Lancamentorapido.all
