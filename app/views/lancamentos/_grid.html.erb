@@ -26,8 +26,8 @@
     </td>
     <td>  <%= text_field :filtroDataAcao, :as => :text, :id => :data_vencimento_filtro_picker%></td>
     <td>  <%= text_field :filtroDataValor, :as => :text, :id => :data_vencimento_filtro_picker%></td>
-    <td>  <%= text_field :filtroCategoria, :as => :text, :id => :data_vencimento_filtro_picker%></td>
-    <td>  <%= text_field :filtroCentrodeCusto, :as => :text, :id => :data_vencimento_filtro_picker%></td>
+    <td>  <%= collection_select :filtroCategoria, :category_id, Category.all, :id,:descricao%></td>
+    <td>  <%= collection_select :filtroCentrodeCusto, :centrodecusto_id, Centrodecusto.all, :id,:descricao%></td>
     <td>  <%= text_field :filtroStatus, :as => :text, :id => :data_vencimento_filtro_picker%></td>
 
   </tr>
