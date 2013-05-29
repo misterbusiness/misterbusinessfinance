@@ -52,4 +52,29 @@ module LancamentosHelper
     return Target.despesas.este_ano(dt).por_mes
   end
 
+  def receita_por_categoria_series_query(dt)
+    return Lancamento.receitas.por_categoria.este_mes(dt).joins{category}.group{category.descricao}
+        .select { sum(valor).as(values) }
+        .select { category.descricao.as(axis) }
+  end
+
+  def receita_por_status_series_query(dt)
+    return Lancamento.receitas.por_status.este_mes(dt).group{status_cd}
+                .select { sum(valor).as(values) }
+                .select {"CASE WHEN status_cd=0 THEN 'aberto'
+                                WHEN status_cd=1 THEN 'quitado'
+                                WHEN status_cd=2 THEN 'estornado'
+                                WHEN status_cd=3 THEN 'cancelado'
+                            END AS axis"}
+  end
+
+  def convert_status_to_case_query
+    return 'CASE WHEN status_cd=0 THEN aberto
+                WHEN status_cd=1 THEN quitado
+                WHEN status_cd=2 THEN estornado
+                WHEN status_cd=3 THEN cancelado
+            END'
+    #as_enum :status, [:aberto, :quitado, :estornado, :cancelado]
+  end
+
 end

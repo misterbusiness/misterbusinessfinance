@@ -25,6 +25,14 @@ class LancamentosController < ApplicationController
     @receita_series = Lancamento.find_by_sql(receita_series_query(@dt))
     @despesa_series = Lancamento.find_by_sql(despesa_series_query(@dt))
     @caixa_series = Lancamento.find_by_sql(caixa_series_query(@dt))
+
+    #@report_series_sql = receita_por_categoria_series_query(@dt).to_sql
+    @report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
+    @report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
+    @report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
+    @report_series_zone_4 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
+
+
   end
 
   def new

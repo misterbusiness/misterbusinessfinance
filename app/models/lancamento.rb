@@ -65,6 +65,10 @@ class Lancamento < ActiveRecord::Base
   scope :caixa_dia, lambda {|dia| receitas.quitados.por_dia.select{sum(valor)} - despesas.quitados.por_dia.select{sum(valor)} }
   scope :caixa_mes, lambda {|mes| receitas.quitados.este_mes(mes).select{sum(valor)} - despesas.quitados.este_mes(mes).select{sum(valor)} }
 
+  scope :por_categoria, group{category_id}
+  scope :por_centrodecusto, group{centrodecusto_id}
+  scope :por_status, group {status_cd}
+
 # public methods
   def has_parcelamento?
     !self.parcela.nil?
@@ -92,7 +96,8 @@ class Lancamento < ActiveRecord::Base
     self.save
   end
 
-  private 
+
+  private
 
   def set_default_status_if_not_specified
     self.status = :aberto if self.status.blank?
