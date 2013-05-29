@@ -8,9 +8,7 @@ class LancamentosController < ApplicationController
     
     #Nessa região irei construir a query
     
-    query = Lancamento.unscoped
-    query = query.receitas
-    query = query.abertos
+    query = build_query()
 
     @lancamentos = query
     #@lancamentos = Lancamento.scoped_by_status(Lancamento.quitado)
@@ -20,6 +18,13 @@ class LancamentosController < ApplicationController
     @lancamentorapidos = Lancamentorapido.all
     @categorias = Category.all
     @centrosdecusto = Centrodecusto.all
+  end
+
+  def build_query
+    query = Lancamento.unscoped
+    query = query.scoped_by_status_cd Lancamento.quitado
+
+
   end
 
   # GET /lancamentos
