@@ -45,5 +45,23 @@ namespace :db do
       lancamentorapido.category_id = 1..7
       lancamentorapido.centrodecusto_id = 1..6
     end
+
+    @index = 1
+    Target.populate 12 do |target|
+      target.descricao = Populator.words(1)
+      target.tipo_cd = [Target.receita]
+      target.data = DateTime.new(Time.now.year, @index, 1)
+      target.valor = 100..9999
+      @index = @index + 1
+    end
+
+    @index = 1
+    Target.populate 12 do |target|
+      target.descricao = Populator.words(1)
+      target.tipo_cd = [Target.despesa]
+      target.data = DateTime.new(Time.now.year, @index, 1)
+      target.valor = 100..9999
+      @index = @index + 1
+    end
   end
 end

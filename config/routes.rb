@@ -1,6 +1,9 @@
 Misterbusinessfinance::Application.routes.draw do
    
 
+  resources :targets
+
+
   resources :lancamentorapidos
 
 

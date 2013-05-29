@@ -35,4 +35,21 @@ module LancamentosHelper
                   UNION (#{@despesa_series_part2.to_sql})) as realizado order by mes"
 
   end
+
+  def receita_report_series_query(dt)
+    return Lancamento.receitas.este_ano(dt).por_mes
+  end
+
+  def despesa_report_series_query(dt)
+    return Lancamento.despesas.este_ano(dt).por_mes
+  end
+
+  def meta_receita_report_series_query(dt)
+    return Target.receitas.este_ano(dt).por_mes
+  end
+
+  def meta_despesa_report_series_query(dt)
+    return Target.despesas.este_ano(dt).por_mes
+  end
+
 end
