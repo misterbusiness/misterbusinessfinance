@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31bb495c-447c-494d-8a50-442b6547573e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/lancamentos/scripts/_build_report_chart.html.erb" afterPath="$PROJECT_DIR$/app/views/lancamentos/scripts/_build_report_chart.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/lancamentos/_reports.html.erb" afterPath="$PROJECT_DIR$/app/views/lancamentos/_reports.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/lancamento.rb" afterPath="$PROJECT_DIR$/app/models/lancamento.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/lancamentos_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/lancamentos_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/lancamentos_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/lancamentos_helper.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="misterbusinessfinance.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/" />
-    <file path="/Dummy.txt" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369793500235" ignored="false" />
+    <file path="/Dummy.txt" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369796076704" ignored="false" />
     <file path="/Rails misterbusinessfinance: development" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369794234903" ignored="false" />
     <file path="/_form.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1367172428487" ignored="false" />
     <file path="/_format_valor.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1367161944082" ignored="false" />
@@ -42,7 +38,7 @@
     <file path="/_grid.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369583328600" ignored="false" />
     <file path="/a.regexp" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369697041611" ignored="false" />
     <file path="/populate.rake" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369793058299" ignored="false" />
-    <file path="/lancamentos_helper.rb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369795913895" ignored="false" />
+    <file path="/lancamentos_helper.rb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369796261060" ignored="false" />
     <file path="/_reports.html.erb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369794826215" ignored="false" />
     <file path="/temp.rb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369790979098" ignored="false" />
     <file path="$PROJECT_DIR$/spec/helpers/metas_helper_spec.rb" changelist="31bb495c-447c-494d-8a50-442b6547573e" time="1369790959312" ignored="false" />
@@ -96,10 +92,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lancamentos_helper.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="lancamentos_helper.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/helpers/lancamentos_helper.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="64" selection-start="2712" selection-end="2721" vertical-scroll-proportion="0.0">
+            <state line="66" column="105" selection-start="2722" selection-end="2722" vertical-scroll-proportion="0.16666667">
               <folding />
             </state>
           </provider>
@@ -114,10 +110,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_build_report_chart.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_build_report_chart.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/lancamentos/scripts/_build_report_chart.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="36" selection-start="3066" selection-end="3066" vertical-scroll-proportion="0.58074534">
+            <state line="93" column="36" selection-start="3066" selection-end="3066" vertical-scroll-proportion="-15.583333">
               <folding />
             </state>
           </provider>
@@ -177,8 +173,8 @@
         <option value="$PROJECT_DIR$/app/views/lancamentos/_reports.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/lancamentos_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/lancamento.rb" />
-        <option value="$PROJECT_DIR$/app/helpers/lancamentos_helper.rb" />
         <option value="$PROJECT_DIR$/app/views/lancamentos/scripts/_build_report_chart.html.erb" />
+        <option value="$PROJECT_DIR$/app/helpers/lancamentos_helper.rb" />
       </list>
     </option>
   </component>
@@ -1024,7 +1020,11 @@
       <created>1369793502643</created>
       <updated>1369793502643</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Divided reports by zone">
+      <created>1369796079304</created>
+      <updated>1369796079304</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1111,7 +1111,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Building reports queries" />
+    <option name="LAST_COMMIT_MESSAGE" value="Divided reports by zone" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1137,6 +1137,7 @@
     <MESSAGE value="Updates 20130527" />
     <MESSAGE value="Starting charts" />
     <MESSAGE value="Building reports queries" />
+    <MESSAGE value="Divided reports by zone" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1228,13 +1229,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/lancamentos_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="64" selection-start="2712" selection-end="2721" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/lancamentos_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="69" selection-start="1065" selection-end="1065" vertical-scroll-proportion="0.0">
@@ -1251,7 +1245,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/lancamentos/scripts/_build_report_chart.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="36" selection-start="3066" selection-end="3066" vertical-scroll-proportion="0.58074534">
+        <state line="93" column="36" selection-start="3066" selection-end="3066" vertical-scroll-proportion="-15.583333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/helpers/lancamentos_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="105" selection-start="2722" selection-end="2722" vertical-scroll-proportion="0.16666667">
           <folding />
         </state>
       </provider>
