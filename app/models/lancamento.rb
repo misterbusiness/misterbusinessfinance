@@ -71,7 +71,7 @@ class Lancamento < ActiveRecord::Base
 
   scope :range, lambda {|dt_inicio, dt_fim| where(:datavencimento => dt_inicio..dt_fim )}
   scope :a_partir_de, lambda {|dt| where('datavencimento > (?) ', dt)}
-  scope :a_partir_de_backwards, lambda {|dt| where('datavencimento < (?) ', dt)}
+  scope :ate, lambda {|dt| where('datavencimento < (?) ', dt)}
 
   scope :por_categoria, group{category_id}
   scope :por_centrodecusto, group{centrodecusto_id}

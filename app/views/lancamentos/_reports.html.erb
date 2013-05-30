@@ -1,45 +1,44 @@
 <!-- Modal -->
 <%= render 'lancamentos/scripts/build_report_chart' %>
-<div id="reportsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="reportsModalLabel" aria-hidden="true"
-     style="width: 800px; height:  900px;">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="reportsModalLabel">Relatórios Mister Business</h3>
-  </div>
-  <div class="modal-body">
-    <div class="tab-content">
-      <ul class="nav nav-pills">
-        <li class="active"><a href="#receitas" data-toggle="tab">Receitas</a></li>
-        <li><a href="#despesas" data-toggle="tab">Despesas</a></li>
-        <li><a href="#fluxo" data-toggle="tab">Fluxo de caixa</a></li>
-        <li><a href="#resultados" data-toggle="tab">Resultados</a></li>
-        <li><a href="#diversos" data-toggle="tab">Diversos</a></li>
-      </ul>
-
+<div class="divWebpageDialog">
+  <div id="reportsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="reportsModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="reportsModalLabel">Relatórios Mister Business</h3>
+    </div>
+    <div class="modal-body">
       <div class="tab-content">
-        <div class="tab-pane fade in active" id="receitas">
-          <div id="report_series_zone_1_div"></div>
-          <div id="report_series_zone_2_div"></div>
-          <div id="report_series_zone_3_div"></div>
-          <div id="report_series_zone_4_div"></div>
-        </div>
-        <div class="tab-pane fade in active" id="despesas">
-          <div id="despesa_report_chart_div"></div>
-        </div>
-        <div class="tab-pane fade in active" id="fluxo">
-          Estas são fluxos
-        </div>
-        <div class="tab-pane fade in active" id="resultados">
-          Estas são resultados
-        </div>
-        <div class="tab-pane fade in active" id="diversos">
-          Estas são diversos
+        <ul class="nav nav-pills">
+          <li class="active"><a href="#receitas" data-toggle="tab">Receitas</a></li>
+          <li><a href="#despesas" data-toggle="tab">Despesas</a></li>
+          <li><a href="#fluxo" data-toggle="tab">Fluxo de caixa</a></li>
+          <li><a href="#resultados" data-toggle="tab">Resultados</a></li>
+          <li><a href="#diversos" data-toggle="tab">Diversos</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="receitas">
+            <div id="report_series_zone_1_div"></div>
+            <div id="report_series_zone_2_div" style="float:left"></div>
+            <div id="report_series_zone_3_div" style="float:left"></div>
+          </div>
+          <div class="tab-pane fade in" id="despesas">
+            <div id="despesa_report_chart_div"></div>
+          </div>
+          <div class="tab-pane fade in" id="fluxo">
+            Estas são fluxos
+          </div>
+          <div class="tab-pane fade in" id="resultados">
+            Estas são resultados
+          </div>
+          <div class="tab-pane fade in" id="diversos">
+
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal">Close</button>
-    <button class="btn btn-primary">Save changes</button>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal">Close</button>
+    </div>
   </div>
 </div>

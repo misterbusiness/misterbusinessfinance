@@ -102,16 +102,79 @@ module LancamentosHelper
 
   # Graficos e relatorios diversos
   # Receitas
-  def contas_a_receber_series_query(dt_inicio)
-    return Lancamento.abertos.receitas.a_partir_de(dt_inicio).por_mes
+  def contas_a_receber_report
+    @dt = DateTime.now
+    return Lancamento.abertos.receitas.a_partir_de(@dt).order("datavencimento desc")
   end
 
-  def recebimentos_atrasados_series_query(dt_inicio)
-    return Lancamento.abertos.receitas.a_partir_de(dt_inicio).por_mes
+  def recebimentos_atrasados_report
+    @dt = DateTime.now
+    return Lancamento.abertos.receita.ate(@dt).order("datavencimento desc")
   end
 
-  def top_receitas_series_query
-     return Lancamento.receitas
+  def top_receitas_report
+    @dt = DateTime.now
+    return Lancamento.receitas.este_mes(@dt).order("valor desc").limit(Configurable.number_of_top_records)
   end
 
+  def receitas_por_categoria_report
+    @dt = DateTime.now
+    return Lancamento.receitas.por_categoria.este_ano(@dt).joins{category}.group{category.descricao}
+  end
+
+  def receitas_por_centrodecusto_report
+    @dt = DateTime.now
+    return Lancamento.receitas.por_centrodecusto.este_ano(@dt).joins{centrodecusto}.group{centrodecusto.descricao}
+  end
+
+  def prazo_medio_recebimento_report
+    @dt = DateTime.now
+    return Lancamento.receitas.este_ano(@dt).quitadas.por_mes.select('AVG(DATEDIFF(dataacao-datavencimento) AS value').select{date_part('month',datavencimento).as(axis)}
+  end
+
+  def ticket_medio_vendas_report
+    @dt = DateTime.now
+    return Lancamento.receitas.este_ano(@dt).por_mes.select{average(valor).as(value)}.select{date_part('month',datavencimento).as(axis)}
+  end
+
+  # Despesas
+  def contas_a_pagar_report
+    @dt = DateTime.now
+    return Lancamento.abertos.despesas.a_partir_de(@dt).order("datavencimento desc")
+  end
+
+  def contas_vencidas_report
+    @dt = DateTime.now
+    return Lancamento.abertos.despesas.ate(@dt).order("datavencimento desc")
+  end
+
+  def top_despesas_report
+    @dt = DateTime.now
+    return Lancamento.despesas.este_mes(@dt).order("valor desc").limit(Configurable.number_of_top_records)
+  end
+
+  def depesas_por_categoria_report
+    @dt = DateTime.now
+    return Lancamento.despesas.por_categoria.este_ano(@dt).joins{category}.group{category.descricao}
+  end
+
+  def despesas_por_centrodecusto_report
+    @dt = DateTime.now
+    return Lancamento.despesas.por_centrodecusto.este_ano(@dt).joins{centrodecusto}.group{centrodecusto.descricao}
+  end
+
+  def prazo_medio_pagamento_report
+    @dt = DateTime.now
+    return Lancamento.despesas.este_ano(@dt).quitadas.por_mes.select('AVG(DATEDIFF(dataacao-datavencimento) AS value').select{date_part('month',datavencimento).as(axis)}
+  end
+
+  def aderencia_report
+    @dt = DateTime.now
+    @aderencia_report_part1 = Lancamento.receitas.este_ano(@dt).por_mes.select{sum(valor).as(valor)}.select{date_part('month',datavencimento).as(mes)}
+    @aderencia_report_part2 = Lancamento.despesas.este_ano(@dt).por_mes.select{sum(valor).as(valor)}.select{date_part('month',datavencimento).as(mes)}
+
+    return "SELECT ((COALESCE(r.valor,0))/(CASE d.valor WHEN 0 THEN 1 ELSE COALESCE(d.valor,1) END)) as valor, r.mes as mes
+            from (#{@aderencia_report_part1.to_sql}) r
+            FULL JOIN (#{@aderencia_report_part2.to_sql}) d ON r.mes = d.mes"
+  end
 end

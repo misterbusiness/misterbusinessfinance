@@ -38,3 +38,7 @@ categoria_padrao:
 centrodecusto_padrao:
   name: Centro de custo padrão
   default: Sem centro de custo
+
+number_of_top_records:
+  name: Number of top records
+  default: 15
