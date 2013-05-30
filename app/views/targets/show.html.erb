@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Data:</b>
+  <%= @target.data %>
+</p>
+
+<p>
+  <b>Tipo cd:</b>
+  <%= @target.tipo_cd %>
+</p>
+
+<p>
+  <b>Descricao:</b>
+  <%= @target.descricao %>
+</p>
+
+<p>
+  <b>Valor:</b>
+  <%= @target.valor %>
+</p>
+
+
+<%= link_to 'Edit', edit_target_path(@target) %> |
+<%= link_to 'Back', targets_path %>

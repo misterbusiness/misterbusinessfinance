@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130529015459) do
+ActiveRecord::Schema.define(:version => 20130530132016) do
 
   create_table "agendamentos", :force => true do |t|
     t.integer  "num_agendamentos"
@@ -96,10 +96,10 @@ ActiveRecord::Schema.define(:version => 20130529015459) do
   end
 
   create_table "targets", :force => true do |t|
-    t.integer  "tipo_cd"
     t.date     "data"
+    t.integer  "tipo_cd"
     t.string   "descricao"
-    t.integer  "valor"
+    t.decimal  "valor"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
