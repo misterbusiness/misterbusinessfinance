@@ -22,8 +22,8 @@ class LancamentosController < ApplicationController
 
   def build_query
     query = Lancamento.unscoped
-    query = query.scoped_by_category_id(Category.find_by_descricao(params[:categoria])) unless params[:categoria].nil?
-    query = query.scoped_by_centrodecusto_id(Centrodecusto.find_by_descricao(params[:centrodecusto])) unless params[:centrodecusto].nil?
+    #query = query.scoped_by_category_id(Category.find_by_descricao(params[:categoria])) unless params[:categoria].nil?
+    #query = query.scoped_by_centrodecusto_id(Centrodecusto.find_by_descricao(params[:centrodecusto])) unless params[:centrodecusto].nil?
 
   end
 

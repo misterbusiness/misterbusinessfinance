@@ -19,7 +19,8 @@
   <tbody>
   <tr>
     <td></td>
-    <td> <%= text_field :filtroDescricao,:value => 'Teste AAAA' %></td>
+    <%= render 'lancamentos/scripts/filtros' %>
+    <td> <%= text_field(:filtro, :descricao, :size => 20) %></td>
     <td>
     		
     	 <%= text_field :filtroDatavencimento, :as => :text, :id => :data_vencimento_filtro_picker%>
