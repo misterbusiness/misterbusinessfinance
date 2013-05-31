@@ -2,7 +2,14 @@
     $(document).ready(function ()
     {
 
-        $('#filtro_descricao').val(<%= params[:descricao] %>);
+        $('#filtro_descricao').val("<%= params[:descricao] %>");
+        $('#filtro_datavencimento').val("<%= params[:datavencimento] %>");
+        $('#filtro_dataacao').val("<%= params[:dataacao] %>");
+        $('#filtro_status').val("<%= params[:status] %>");
+        $('#filtro_valor').val("<%= params[:valor] %>");
+        $('#filtro_categoria').val("<%= Category.find_by_descricao(params[:categoria]).id unless Category.find_by_descricao(params[:categoria]).nil? %>");
+        $('#filtro_centrodecusto').val("<%= Centrodecusto.find_by_descricao(params[:centrodecusto]).id unless Centrodecusto.find_by_descricao(params[:centrodecusto]).nil? %>");
+
 
 
 
