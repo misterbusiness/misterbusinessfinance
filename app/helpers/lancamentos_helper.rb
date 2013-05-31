@@ -36,6 +36,10 @@ module LancamentosHelper
 
   end
 
+  #@report_series_zone_1 = Lancamento.find_by_sql(despesa_series_query(@dt))
+  #@report_series_zone_2 = Lancamento.find_by_sql(despesa_por_categoria_series_query(@dt).to_sql)
+  #@report_series_zone_3 = Lancamento.find_by_sql(despesa_por_centrodecusto_series_query(@dt).to_sql)
+
   def receita_report_series_query(dt)
     return Lancamento.receitas.este_ano(dt).por_mes
   end
@@ -160,7 +164,7 @@ module LancamentosHelper
 
   def despesas_por_centrodecusto_report
     @dt = DateTime.now
-    return Lancamento.despesas.por_centrodecusto.este_ano(@dt).joins{centrodecusto}.group{centrodecusto.descricao}
+    return Lancamento.despesas.por_centrodecu sto.este_ano(@dt).joins{centrodecusto}.group{centrodecusto.descricao}
   end
 
   def prazo_medio_pagamento_report

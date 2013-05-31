@@ -20,6 +20,22 @@ class LancamentosController < ApplicationController
     @centrosdecusto = Centrodecusto.all
   end
 
+  def reports
+    @tabSelection = params[:tab]
+    @dt = DateTime.now
+
+    case @tabSelection
+         when 'receita' then
+           @report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
+           @report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
+           @report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
+         when 'despesa' then
+           @report_series_zone_1 = Lancamento.find_by_sql(despesa_series_query(@dt))
+           @report_series_zone_2 = Lancamento.find_by_sql(despesa_por_categoria_series_query(@dt).to_sql)
+           @report_series_zone_3 = Lancamento.find_by_sql(despesa_por_centrodecusto_series_query(@dt).to_sql)
+       end
+  end
+
   def build_query
     query = Lancamento.unscoped
     query = query.scoped_by_category_id(Category.find_by_descricao(params[:categoria])) unless params[:categoria].nil?
@@ -31,22 +47,39 @@ class LancamentosController < ApplicationController
   # GET /lancamentos.json
   def index
     # Series dos graficos
-    @ano = Time.now.year
+     @ano = Time.now.year
     @ano = params[:ano] unless params[:ano].blank?
 
     @dt = DateTime.new(@ano, 1, 1)
 
+    @tabSelection = params[:tab]
+
     @receita_series = Lancamento.find_by_sql(receita_series_query(@dt))
     @despesa_series = Lancamento.find_by_sql(despesa_series_query(@dt))
     @caixa_series = Lancamento.find_by_sql(caixa_series_query(@dt))
+    #
+    ##@report_series_sql = receita_por_categoria_series_query(@dt).to_sql
+    #@report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
+    #@report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
+    #@report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
+    #@report_series_zone_4 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
 
-    #@report_series_sql = receita_por_categoria_series_query(@dt).to_sql
-    @report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
-    @report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
-    @report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
-    @report_series_zone_4 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
 
-
+    case @tabSelection
+      when 'receita' then
+        @report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
+        @report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
+        @report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
+      when 'despesa' then
+        @report_series_zone_1 = Lancamento.find_by_sql(despesa_series_query(@dt))
+        @report_series_zone_2 = Lancamento.find_by_sql(despesa_por_categoria_series_query(@dt).to_sql)
+        #@report_series_zone_3 = Lancamento.find_by_sql(despesa_por_centrodecusto_series_query(@dt).to_sql)
+        @report_series_zone_3 = Lancamento.find_by_sql(despesa_por_categoria_series_query(@dt).to_sql)
+      else
+        @report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
+        @report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
+        @report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
+    end
   end
 
   def new

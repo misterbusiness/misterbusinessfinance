@@ -15,6 +15,7 @@ Misterbusinessfinance::Application.routes.draw do
      member do
        put :quitar
        put :estornar
+       get :reports
        put :destroy
      end
   end
