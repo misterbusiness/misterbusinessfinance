@@ -1,149 +1,32 @@
 <script type="text/javascript">
-    function zoneChart(chartArea) {
-        alert(chartArea);
-
-    var jqxhr;
-    jqxhr = $.ajax({
-        url: "/lancamentos",
-        type: "GET",
-        data: {
-            _method: 'GET',
-            tab: chartArea
+    jQuery(function ($) {
+        // Load Google visualization library if a chart element exists
+        if ($('[data-chart]').length > 0) {
+            $.getScript('https://www.google.com/jsapi', function (data, textStatus) {
+                google.load('visualization', '1.0', { 'packages': ['corechart'], 'callback': function () {
+                // Google visualization library loaded
+                    $('[data-chart]').each(function () {
+                        var div = $(this)
+                        // Fetch chart data
+                        $.getJSON(div.data('chart'), function (data) {
+                        // Create DataTable from received chart data
+                            var table = new google.visualization.DataTable();
+                            $.each(data.cols, function () {
+                                table.addColumn.apply(table, this);
+                            });
+                            table.addRows(data.rows);
+// Draw the chart
+                            var chart = new google.visualization.ChartWrapper();
+                            chart.setChartType(data.type);
+                            chart.setDataTable(table);
+                            chart.setOptions(data.options);
+                            chart.setOption('width', div.width());
+                            chart.setOption('height', div.height());
+                            chart.draw(div.get(0));
+                        });
+                    });
+                }});
+            });
         }
-    })
-            .success(function (response) {
-                alert("Sucesso!");
-                $("#chartsArea").load(
-                        "<div id='report_zone_1_div'></div><div id='report_zone_2_div' style='float:left'></div><div id='report_zone_3_div' style='float:left'></div>")
-                zone1Chart(chartArea);
-                zone2Chart(chartArea);
-                zone3Chart(chartArea);
-
-                alert("Chegou aqui.")
-            })
-            .error(function (jqXHR, textStatus, errorThrown) {
-                if (errorThrown != "") {
-                    alert("Erro: " + textStatus + ": " + errorThrown)
-                }
-            })
-            .complete(function () {
-            })
-    }
-</script>
-
-<script type="text/javascript">
-    function zone1Chart(chartArea) {
-        // Load the Visualization API and the piechart package.
-        google.load('visualization', '1.0', {'packages': ['corechart']});
-
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.setOnLoadCallback(drawChart);
-
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
-        function drawChart() {
-
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Mês');
-            data.addColumn('number', 'Receita');
-
-            data.addRows([
-                <% @report_series_zone_1.each do |serie| %>
-                ['<%= serie.mes %>' , <%= serie.valor %>],
-                <% end %>
-            ]);
-
-            // Set chart options
-            var options = {'title': 'zona1', //'Estatísticas - Receita',
-                'width': 400,
-                'height': 300,
-                'colors': ['green'],
-                'is3D': true};
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.ColumnChart(document.getElementById('report_zone_1_div'));
-            chart.draw(data, options);
-
-            alert ("Chegou aqui 1");
-        }
-    }
-</script>
-
-<script type="text/javascript">
-    function zone2Chart(chartArea) {
-
-        // Load the Visualization API and the piechart package.
-        google.load('visualization', '1.0', {'packages': ['corechart']});
-
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.setOnLoadCallback(drawChart);
-
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
-        function drawChart() {
-
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Mês');
-            data.addColumn('number', 'Despesa');
-
-            data.addRows([
-                <% @report_series_zone_2.each do |serie| %>
-                ['<%= serie.axis %>' , <%= serie.values %>],
-                <% end %>
-
-            ]);
-
-            // Set chart options
-            var options = {'title': 'zona2', //'Estatísticas - Receita',,
-                'width': 400,
-                'height': 300,
-                'is3D': true};
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.ColumnChart(document.getElementById('report_zone_2_div'));
-            chart.draw(data, options);
-        }
-    }
-</script>
-
-<script type="text/javascript">
-    function zone3Chart(chartArea) {
-        // Load the Visualization API and the piechart package.
-        google.load('visualization', '1.0', {'packages': ['corechart']});
-
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.setOnLoadCallback(drawChart);
-
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
-        function drawChart() {
-
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Mês');
-            data.addColumn('number', 'Despesa');
-
-            data.addRows([
-                <% @report_series_zone_3.each do |serie| %>
-                ['<%= serie.axis %>' , <%= serie.values %>],
-                <% end %>
-
-            ]);
-
-            // Set chart options
-            var options = {'title': 'zona3', //'Estatísticas - Receita',,
-                'width': 400,
-                'height': 300,
-                'is3D': true};
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.ColumnChart(document.getElementById('report_zone_3_div'));
-            chart.draw(data, options);
-        }
-    }
+    });
 </script>

@@ -1,11 +1,22 @@
 Misterbusinessfinance::Application.routes.draw do
    
 
+  # Reports - Lançamentos
+  match 'lancamentos/reports/receita_realizada', to: 'reports#receita_realizada'
+
+  match 'lancamentos/reports/despesa_realzada', to: 'reports#despesa_realzada'
+
+  match 'lancamentos/reports/receita_por_categoria', to: 'reports#receita_por_categoria'
+
+  match 'lancamentos/reports/despesa_por_categoria', to: 'reports#despesa_por_categoria'
+
+  match 'lancamentos/reports/receita_por_status', to: 'reports#receita_por_status'
+
+  match 'lancamentos/reports/despesa_por_centrodecusto', to: 'reports#despesa_por_centrodecusto'
+
   resources :targets
 
-
   resources :lancamentorapidos
-
 
   resources :centrodecustos
 
@@ -15,7 +26,6 @@ Misterbusinessfinance::Application.routes.draw do
      member do
        put :quitar
        put :estornar
-       get :reports
        put :destroy
      end
   end
