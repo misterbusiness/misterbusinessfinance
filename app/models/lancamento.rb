@@ -76,6 +76,7 @@ class Lancamento < ActiveRecord::Base
   scope :por_categoria, group{category_id}
   scope :por_centrodecusto, group{centrodecusto_id}
   scope :por_status, group {status_cd}
+  scope :por_descricao, lambda {|descricao| where('descricao like ? ', descricao)}
 
 # public methods
   def has_parcelamento?

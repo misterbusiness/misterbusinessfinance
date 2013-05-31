@@ -48,6 +48,7 @@ class LancamentosController < ApplicationController
   def build_query
     queryapoio = Lancamento.unscoped
     queryapoio = queryapoio.scoped_by_centrodecusto_id(Centrodecusto.find_by_descricao(params[:centrodecusto]).id) unless  Centrodecusto.find_by_descricao(params[:centrodecusto]).nil?
+    queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
 
     query =  queryapoio
   end
