@@ -1,4 +1,23 @@
 <!-- Modal -->
+<script type="text/javascript">
+  $(document).ready(function(){
+     $("#reportsReceita").click(function(){
+         alert("receita");
+         <% @toLoad = "" %>
+         <% @toLoad = @toLoad + " " + chart_tag('receita_realizada', 300, 'none') %>
+         <% @toLoad = @toLoad + " " + chart_tag('receita_por_categoria', 300, 'left') %>
+         <% @toLoad = @toLoad + " " + chart_tag('receita_por_status', 300, 'left') %>
+
+         $("#chartsArea").innerHTML="<%= @toLoad %>";
+
+
+     });
+     $("#reportsDespesa").click(function(){
+
+     });
+  });
+
+</script>
 <div class="divWebpageDialog">
   <div id="reportsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="reportsModalLabel" aria-hidden="true">
     <div class="modal-header">
@@ -9,8 +28,8 @@
       <div class="tab-content" id="reportsTab">
         <ul class="nav nav-pills">
           <li class="active">
-            <a href="#receitas" data-toggle="tab" id="reportsReceita" onclick="zoneChart('receita')">Receitas</a></li>
-          <li><a href="#despesas" data-toggle="tab" id="reportsDespesa" onclick="zoneChart('despesa')">Despesas</a></li>
+            <a href="#receitas" data-toggle="tab" id="reportsReceita">Receitas</a></li>
+          <li><a href="#despesas" data-toggle="tab" id="reportsDespesa">Despesas</a></li>
           <li><a href="#fluxo" data-toggle="tab" id="reportsCaixa">Fluxo de caixa</a></li>
           <li><a href="#resultados" data-toggle="tab" id="reportsResultados">Resultados</a></li>
           <li><a href="#diversos" data-toggle="tab" id="reportsDiversos">Diversos</a></li>
@@ -19,7 +38,8 @@
 
       <div id="chartsArea">
         <div id="message_div"></div>
-        <%= chart_tag('receita_realizada', 300) %>
+
+
         <!--
         <div id="report_zone_1_div"></div>
         <div id="report_zone_2_div" style="float:left"></div>
