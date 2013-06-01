@@ -4,7 +4,7 @@ Misterbusinessfinance::Application.routes.draw do
   # Reports - Lançamentos
   match 'lancamentos/reports/receita_realizada', to: 'reports#receita_realizada'
 
-  match 'lancamentos/reports/despesa_realzada', to: 'reports#despesa_realzada'
+  match 'lancamentos/reports/despesa_realizada', to: 'reports#despesa_realizada'
 
   match 'lancamentos/reports/receita_por_categoria', to: 'reports#receita_por_categoria'
 

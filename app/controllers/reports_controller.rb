@@ -8,7 +8,6 @@ class ReportsController < ApplicationController
     unless @report_series.nil?
       @json_rows = Array.new
       @report_series.each do |serie|
-        #@json_rows = @json_rows + "'" + serie.mes + "'," + serie.valor.to_s + "],"
         @json_row = Array.new
         @json_row.push(Date::MONTHNAMES[serie.mes.to_f])
         @json_row.push(serie.valor.to_f)
@@ -18,26 +17,39 @@ class ReportsController < ApplicationController
       render :json => {
           :type => 'ColumnChart',
           :options => {
-              #:chartArea => {},
-              #:hAxis => {:showTextEvery => 30},
-              #:legend => 'bottom',
-          },
-          :is3D => 'true',
-          :title => 'Receita Realizada',
-          :color => ['green'],
+              :colors => ['green'],
+              :title => 'Receita Realizada',
+              :is3D => 'true'
+            },
           :cols => [['string','mes'],['number','valor']],
           :rows => @json_rows
-              #['B',344],['A',456]
-         # :rows =>'['
-         #     @report_series.each do |serie|
-         #       [serie.mes, serie.valor],
-         #     end
-
       }
     end
   end
 
   def despesa_realizada
+    @dt = DateTime.now
+    @report_series = Lancamento.find_by_sql(despesa_series_query(@dt))
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(Date::MONTHNAMES[serie.mes.to_f])
+        @json_row.push(serie.valor.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'ColumnChart',
+          :options => {
+              :colors => ['red'],
+              :title => 'Despesa Realizada',
+              :is3D => 'true'
+          },
+          :cols => [['string','mes'],['number','valor']],
+          :rows => @json_rows
+      }
+    end
   end
 
   def receita_por_categoria
@@ -46,7 +58,6 @@ class ReportsController < ApplicationController
     unless @report_series.nil?
       @json_rows = Array.new
       @report_series.each do |serie|
-        #@json_rows = @json_rows + "'" + serie.mes + "'," + serie.valor.to_s + "],"
         @json_row = Array.new
         @json_row.push(serie.axis)
         @json_row.push(serie.values.to_f)
@@ -56,21 +67,11 @@ class ReportsController < ApplicationController
       render :json => {
           :type => 'PieChart',
           :options => {
-              #:chartArea => {},
-              #:hAxis => {:showTextEvery => 30},
-              #:legend => 'bottom',
+              :title => 'Receita por categoria',
+              :is3D => 'true'
           },
-          :is3D => 'true',
-          :title => 'Receita Realizada',
-          :color => [],
           :cols => [['string','categoria'],['number','valores']],
           :rows => @json_rows
-          #['B',344],['A',456]
-          # :rows =>'['
-          #     @report_series.each do |serie|
-          #       [serie.mes, serie.valor],
-          #     end
-
       }
     end
   end
@@ -84,7 +85,6 @@ class ReportsController < ApplicationController
     unless @report_series.nil?
       @json_rows = Array.new
       @report_series.each do |serie|
-        #@json_rows = @json_rows + "'" + serie.mes + "'," + serie.valor.to_s + "],"
         @json_row = Array.new
         @json_row.push(serie.axis)
         @json_row.push(serie.values.to_f)
@@ -94,21 +94,11 @@ class ReportsController < ApplicationController
       render :json => {
           :type => 'PieChart',
           :options => {
-              #:chartArea => {},
-              #:hAxis => {:showTextEvery => 30},
-              #:legend => 'bottom',
+              :title => 'Receita por status',
+              :is3D => 'true'
           },
-          :is3D => 'true',
-          :title => 'Receita Realizada',
-          :color => [],
           :cols => [['string','status'],['number','valores']],
           :rows => @json_rows
-          #['B',344],['A',456]
-          # :rows =>'['
-          #     @report_series.each do |serie|
-          #       [serie.mes, serie.valor],
-          #     end
-
       }
     end
   end

@@ -57,13 +57,13 @@ module LancamentosHelper
   end
 
   def receita_por_categoria_series_query(dt)
-    return Lancamento.receitas.por_categoria.este_mes(dt).joins{category}.group{category.descricao}
+    return Lancamento.receitas.por_categoria.este_ano(dt).joins{category}.group{category.descricao}
         .select { sum(valor).as(values) }
         .select { category.descricao.as(axis) }
   end
 
   def receita_por_status_series_query(dt)
-    return Lancamento.receitas.por_status.este_mes(dt).group{status_cd}
+    return Lancamento.receitas.por_status.este_ano(dt).group{status_cd}
                 .select { sum(valor).as(values) }
                 .select {"CASE WHEN status_cd=0 THEN 'aberto'
                                 WHEN status_cd=1 THEN 'quitado'

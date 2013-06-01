@@ -1,35 +1,70 @@
 <!-- Modal -->
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
-  $(document).ready(function(){
-     $("#reportsReceita").click(function(){
-         alert("receita");
-         <% @toLoad = "" %>
-         <% @toLoad = @toLoad + " " + chart_tag('receita_realizada', 300, 'none') %>
-         <% @toLoad = @toLoad + " " + chart_tag('receita_por_categoria', 300, 'left') %>
-         <% @toLoad = @toLoad + " " + chart_tag('receita_por_status', 300, 'left') %>
-
-         $("#chartsArea").innerHTML="<%= @toLoad %>";
-
-
-     });
-     $("#reportsDespesa").click(function(){
-
-     });
-  });
-
+    google.load('visualization', '1', {packages: ['annotatedtimeline']});
 </script>
+<script type="text/javascript">
+
+    function handleButtonClick() {
+        alert('button clicked!');
+        drawVisualization();
+    }
+
+    function drawVisualization(chartType, chartArea, reportUrl) {
+        $("#" + chartArea).html("");
+        $.getJSON(reportUrl, function (data) {
+            var table = new google.visualization.DataTable();
+            $.each(data.cols, function () {
+                table.addColumn.apply(table, this);
+            });
+            table.addRows(data.rows);
+            var container = document.getElementById(chartArea);
+            switch (chartType)
+            {
+                case 'column':
+                var chart = new google.visualization.ColumnChart(container);
+                    break;
+                case 'pie':
+                var chart = new google.visualization.PieChart(container);
+                    break;
+                default:
+                    var chart = new google.visualization.ColumnChart(container);
+            }
+
+            chart.draw(table, data.options);
+        });
+
+    }
+
+    function handleResponse(response) {
+        var container = document.getElementById('visualization');
+        var annotatedtimeline = new google.visualization.AnnotatedTimeLine(container);
+        annotatedtimeline.draw(response.getDataTable(), {'displayAnnotations': true});
+        google.visualization.events.addListener(annotatedtimeline, 'ready',
+                function(event) {
+                    alert('annotatedtimeline is ready, master!');
+                });
+    }
+</script>
+
+
 <div class="divWebpageDialog">
   <div id="reportsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="reportsModalLabel" aria-hidden="true">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       <h3 id="reportsModalLabel">Relatórios Mister Business</h3>
     </div>
+
     <div class="modal-body">
       <div class="tab-content" id="reportsTab">
         <ul class="nav nav-pills">
           <li class="active">
-            <a href="#receitas" data-toggle="tab" id="reportsReceita">Receitas</a></li>
-          <li><a href="#despesas" data-toggle="tab" id="reportsDespesa">Despesas</a></li>
+            <a href="#receitas" data-toggle="tab" id="reportsReceita"
+               onclick="drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_receita_realizada_path %>');
+                       drawVisualization('pie', 'report_zone_2_div','<%= lancamentos_reports_receita_por_categoria_path %>');
+                       drawVisualization('pie', 'report_zone_3_div','<%= lancamentos_reports_receita_por_status_path %>');">Receitas</a></li>
+          <li><a href="#despesas" data-toggle="tab" id="reportsDespesa"
+                    onclick="drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_despesa_realizada_path %>');">Despesas</a></li>
           <li><a href="#fluxo" data-toggle="tab" id="reportsCaixa">Fluxo de caixa</a></li>
           <li><a href="#resultados" data-toggle="tab" id="reportsResultados">Resultados</a></li>
           <li><a href="#diversos" data-toggle="tab" id="reportsDiversos">Diversos</a></li>
@@ -38,12 +73,9 @@
 
       <div id="chartsArea">
         <div id="message_div"></div>
-
-
-        <!--
         <div id="report_zone_1_div"></div>
         <div id="report_zone_2_div" style="float:left"></div>
-        <div id="report_zone_3_div" style="float:left"></div>-->
+        <div id="report_zone_3_div" style="float:left"></div>
       </div>
 
       <!--<div class="tab-pane fade in">-->
