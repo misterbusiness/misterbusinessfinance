@@ -20,16 +20,16 @@
   <tr>
     <td></td>
     <%= render 'lancamentos/scripts/filtros' %>
-    <td> <%= text_field(:filtro, :descricao, :size => 20) %></td>
+    <td> <%= text_field(:filtro, :descricao) %></td>
     <td>
     		
-    	 <%= text_field :filtroDatavencimento, :as => :text, :id => :data_vencimento_filtro_picker%>
+    	 <%= text_field :filtro, :datavencimento%>
     </td>
-    <td>  <%= text_field :filtroDataAcao, :as => :text, :id => :data_vencimento_filtro_picker%></td>
-    <td>  <%= text_field :filtroDataValor, :as => :text, :id => :data_vencimento_filtro_picker%></td>
-    <td>  <%= collection_select :filtroCategoria, :category_id, Category.all, :id,:descricao%></td>
-    <td>  <%= collection_select :filtroCentrodeCusto, :centrodecusto_id, Centrodecusto.all, :id,:descricao%></td>
-    <td>  <%= text_field :filtroStatus, :as => :text, :id => :data_vencimento_filtro_picker%></td>
+    <td>  <%= text_field :filtro, :dataacao%></td>
+    <td>  <%= text_field :filtro, :valor%></td>
+    <td>  <%= collection_select :filtro, :categoria, Category.all, :id,:descricao%></td>
+    <td>  <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id,:descricao%></td>
+    <td>  <%= text_field :filtro, :status%></td>
 
   </tr>
 
