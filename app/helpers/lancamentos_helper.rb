@@ -72,15 +72,15 @@ module LancamentosHelper
                             END AS axis"}
   end
 
-
+#TODO: Queries alteradas para este_ano, por causa do volume de dados (voltar para este_mes depois)
   def despesa_por_categoria_series_query(dt)
-    return Lancamento.despesas.por_categoria.este_mes(dt).joins{category}.group{category.descricao}
+    return Lancamento.despesas.por_categoria.este_ano(dt).joins{category}.group{category.descricao}
     .select { sum(valor).as(values) }
     .select { category.descricao.as(axis) }
   end
 
   def despesa_por_centrodecusto_series_query(dt)
-    return Lancamento.despesas.por_centrodecusto.este_mes(dt).joins{centrodecusto}.group{centrodecusto.descricao}
+    return Lancamento.despesas.por_centrodecusto.este_ano(dt).joins{centrodecusto}.group{centrodecusto.descricao}
     .select { sum(valor).as(values) }
     .select { centrodecusto.descricao.as(axis) }
   end

@@ -77,6 +77,27 @@ class ReportsController < ApplicationController
   end
 
   def despesa_por_categoria
+    @dt = DateTime.now
+    @report_series = Lancamento.find_by_sql(despesa_por_categoria_series_query(@dt).to_sql)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.axis)
+        @json_row.push(serie.values.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'PieChart',
+          :options => {
+              :title => 'Despesa por categoria',
+              :is3D => 'true'
+          },
+          :cols => [['string','categoria'],['number','valores']],
+          :rows => @json_rows
+      }
+    end
   end
 
   def receita_por_status
@@ -104,6 +125,27 @@ class ReportsController < ApplicationController
   end
 
   def despesa_por_centrodecusto
+    @dt = DateTime.now
+    @report_series = Lancamento.find_by_sql(despesa_por_centrodecusto_series_query(@dt).to_sql)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.axis)
+        @json_row.push(serie.values.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'PieChart',
+          :options => {
+              :title => 'Despesa por centro de custo',
+              :is3D => 'true'
+          },
+          :cols => [['string','centro de custo'],['number','valores']],
+          :rows => @json_rows
+      }
+    end
   end
 end
 
