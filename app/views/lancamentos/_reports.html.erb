@@ -1,7 +1,7 @@
 <!-- Modal -->
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
-    google.load('visualization', '1', {packages: ['annotatedtimeline']});
+    google.load('visualization', '1.1', {packages: ['controls']});
 </script>
 <script type="text/javascript">
 
@@ -18,20 +18,31 @@
                 table.addColumn.apply(table, this);
             });
             table.addRows(data.rows);
+
+            // Define a slider control for the Age column.
+            var slider = new google.visualization.ControlWrapper({
+                'controlType': 'NumberRangeFilter',
+                'containerId': 'reportSlider',
+                'options': {
+                    'filterColumnLabel': 'mes',
+                    'ui': {'labelStacking': 'vertical'}
+                }
+            });
+
+
             var container = document.getElementById(chartArea);
-            switch (chartType)
-            {
+            switch (chartType) {
                 case 'column':
-                var chart = new google.visualization.ColumnChart(container);
+                    var chart = new google.visualization.ColumnChart(container);
                     break;
                 case 'pie':
-                var chart = new google.visualization.PieChart(container);
+                    var chart = new google.visualization.PieChart(container);
                     break;
                 default:
                     var chart = new google.visualization.ColumnChart(container);
             }
 
-            chart.draw(table, data.options);
+            new google.visualization.Dashboard(document.getElementById('chartsArea')).bind(slider, chart).draw(table, data.options);
         });
 
     }
@@ -41,7 +52,7 @@
         var annotatedtimeline = new google.visualization.AnnotatedTimeLine(container);
         annotatedtimeline.draw(response.getDataTable(), {'displayAnnotations': true});
         google.visualization.events.addListener(annotatedtimeline, 'ready',
-                function(event) {
+                function (event) {
                     alert('annotatedtimeline is ready, master!');
                 });
     }
@@ -61,41 +72,31 @@
           <li class="active">
             <a href="#receitas" data-toggle="tab" id="reportsReceita"
                onclick="drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_receita_realizada_path %>');
-                       drawVisualization('pie', 'report_zone_2_div','<%= lancamentos_reports_receita_por_categoria_path %>');
-                       drawVisualization('pie', 'report_zone_3_div','<%= lancamentos_reports_receita_por_status_path %>');">Receitas</a></li>
+                       drawVisualization('pie', 'report_zone_2_div','<%= lancamentos_reports_receita_por_categoria_path %>') ;
+                       drawVisualization('pie', 'report_zone_3_div','<%= lancamentos_reports_receita_por_status_path %>');">Receitas</a>
+          </li>
           <li><a href="#despesas" data-toggle="tab" id="reportsDespesa"
-                    onclick="drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_despesa_realizada_path %>');
-                            drawVisualization('pie', 'report_zone_2_div','<%= lancamentos_reports_despesa_por_categoria_path %>');
-                            drawVisualization('pie', 'report_zone_3_div','<%= lancamentos_reports_despesa_por_centrodecusto_path %>');">Despesas</a></li>
+                 onclick="drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_despesa_realizada_path %>');
+                         drawVisualization('pie', 'report_zone_2_div','<%= lancamentos_reports_despesa_por_categoria_path %>');
+                         drawVisualization('pie', 'report_zone_3_div','<%= lancamentos_reports_despesa_por_centrodecusto_path %>');">Despesas</a>
+          </li>
           <li><a href="#fluxo" data-toggle="tab" id="reportsCaixa">Fluxo de caixa</a></li>
           <li><a href="#resultados" data-toggle="tab" id="reportsResultados">Resultados</a></li>
           <li><a href="#diversos" data-toggle="tab" id="reportsDiversos">Diversos</a></li>
         </ul>
       </div>
-
-      <div id="chartsArea">
-        <div id="message_div"></div>
-        <div id="report_zone_1_div"></div>
-        <div id="report_zone_2_div" style="float:left"></div>
-        <div id="report_zone_3_div" style="float:left"></div>
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span2">asd</div>
+          <div id="chartsArea span10">
+            <div id="message_div"></div>
+            <div id="report_slider"></div>
+            <div id="report_zone_1_div"></div>
+            <div id="report_zone_2_div" style="float:left"></div>
+            <div id="report_zone_3_div" style="float:left"></div>
+          </div>
+        </div>
       </div>
-
-      <!--<div class="tab-pane fade in">-->
-      <!--<div class="tab-pane fade in active" id="despesas">-->
-      <!--<div id="report_despesas_zone_1_div"></div>-->
-      <!--<div id="report_despesas_zone_2_div" style="float:left"></div>-->
-      <!--<div id="report_despesas_zone_3_div" style="float:left"></div>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div class="tab-pane fade in" id="fluxo">-->
-      <!--Estas são fluxos-->
-      <!--</div>-->
-      <!--<div class="tab-pane fade in" id="resultados">-->
-      <!--Estas são resultados-->
-      <!--</div>-->
-      <!--<div class="tab-pane fade in" id="diversos">-->
-
-      <!--</div>-->
     </div>
     <div class="modal-footer">
       <button class="btn" data-dismiss="modal">Close</button>

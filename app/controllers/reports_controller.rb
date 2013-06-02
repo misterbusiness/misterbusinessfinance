@@ -126,7 +126,7 @@ class ReportsController < ApplicationController
 
   def despesa_por_centrodecusto
     @dt = DateTime.now
-    @report_series = Lancamento.find_by_sql(despesa_por_centrodecusto_series_query(@dt).to_sql)
+    @report_series = Lancamento.find_by_sql(despesa_por_centrodecusto_series_queryl(@dt).to_sql)
     unless @report_series.nil?
       @json_rows = Array.new
       @report_series.each do |serie|
