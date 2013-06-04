@@ -126,7 +126,7 @@ class ReportsController < ApplicationController
 
   def despesa_por_centrodecusto
     @dt = DateTime.now
-    @report_series = Lancamento.find_by_sql(despesa_por_centrodecusto_series_queryl(@dt).to_sql)
+    @report_series = Lancamento.find_by_sql(despesa_por_centrodecusto_series_query(@dt).to_sql)
     unless @report_series.nil?
       @json_rows = Array.new
       @report_series.each do |serie|
@@ -147,5 +147,155 @@ class ReportsController < ApplicationController
       }
     end
   end
+
+  #TODO: ver como a tabela fica com descrições grandes
+  def contas_a_receber_table
+    @report_series = Lancamento.find_by_sql(contas_a_receber_report_table.to_sql)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.axis)
+        @json_row.push(serie.descricao)
+        @json_row.push(serie.values.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'LineChart',
+          :options => {
+              :title => 'Contas a receber',
+              :is3D => 'true'
+          },
+          :cols => [['string','data'],['string','descricao'],['number','valores']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  #TODO: O grafico não está em escala de data
+
+  def contas_a_receber_chart
+    @report_series = Lancamento.find_by_sql(contas_a_receber_report_chart.to_sql)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.axis)
+        @json_row.push(serie.values.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'LineChart',
+          :options => {
+              :title => 'Contas a receber',
+              :is3D => 'true'
+          },
+          :cols => [['string','data'],['number','valores']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  def recebimentos_atrasados_table
+    @report_series = Lancamento.find_by_sql(recebimentos_atrasados_report_table.to_sql)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.axis)
+        @json_row.push(serie.descricao)
+        @json_row.push(serie.values.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'LineChart',
+          :options => {
+              :title => 'Contas a receber',
+              :is3D => 'true'
+          },
+          :cols => [['string','data'],['string','descricao'],['number','valores']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  #TODO: O grafico não está em escala de data
+
+  def recebimentos_atrasados_chart
+    @report_series = Lancamento.find_by_sql(recebimentos_atrasados_report_chart.to_sql)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.axis)
+        @json_row.push(serie.values.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'LineChart',
+          :options => {
+              :title => 'Contas a receber',
+              :is3D => 'true'
+          },
+          :cols => [['string','data'],['number','valores']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  def top_receitas_table
+    @report_series = Lancamento.find_by_sql(top_receitas_report_table.to_sql)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.axis)
+        @json_row.push(serie.descricao)
+        @json_row.push(serie.values.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'LineChart',
+          :options => {
+              :title => 'Contas a receber',
+              :is3D => 'true'
+          },
+          :cols => [['string','data'],['string','descricao'],['number','valores']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  #TODO: O grafico não está em escala de data
+
+  def top_receitas_chart
+    @report_series = Lancamento.find_by_sql(top_receitas_report_chart.to_sql)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.axis)
+        @json_row.push(serie.values.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'LineChart',
+          :options => {
+              :title => 'Contas a receber',
+              :is3D => 'true'
+          },
+          :cols => [['string','data'],['number','valores']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+
 end
 

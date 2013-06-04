@@ -2,6 +2,7 @@
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
     google.load('visualization', '1.1', {packages: ['controls']});
+    google.load('visualization', '1', {packages: ['table']});
 </script>
 <script type="text/javascript">
 
@@ -20,14 +21,14 @@
             table.addRows(data.rows);
 
             // Define a slider control for the Age column.
-            var slider = new google.visualization.ControlWrapper({
-                'controlType': 'NumberRangeFilter',
-                'containerId': 'reportSlider',
-                'options': {
-                    'filterColumnLabel': 'mes',
-                    'ui': {'labelStacking': 'vertical'}
-                }
-            });
+          //  var slider = new google.visualization.ControlWrapper({
+          //      'controlType': 'NumberRangeFilter',
+          //      'containerId': 'reportSlider',
+          //      'options': {
+          //          'filterColumnLabel': 'mes',
+          //          'ui': {'labelStacking': 'vertical'}
+          //      }
+          //  });
 
 
             var container = document.getElementById(chartArea);
@@ -38,24 +39,40 @@
                 case 'pie':
                     var chart = new google.visualization.PieChart(container);
                     break;
+                case 'line':
+                    var chart = new google.visualization.LineChart(container);
+                    break;
+                case 'table':
+                    var chart = new google.visualization.Table(container);
+                    break;
                 default:
                     var chart = new google.visualization.ColumnChart(container);
             }
 
-            new google.visualization.Dashboard(document.getElementById('chartsArea')).bind(slider, chart).draw(table, data.options);
+            //new google.visualization.Dashboard(document.getElementById('chartsArea')).bind(slider, chart).draw(table, data.options);
+            chart.draw(table, data.options);
+
         });
-
     }
+</script>
 
-    function handleResponse(response) {
-        var container = document.getElementById('visualization');
-        var annotatedtimeline = new google.visualization.AnnotatedTimeLine(container);
-        annotatedtimeline.draw(response.getDataTable(), {'displayAnnotations': true});
-        google.visualization.events.addListener(annotatedtimeline, 'ready',
-                function (event) {
-                    alert('annotatedtimeline is ready, master!');
-                });
-    }
+<script>
+  function showReportMenu(){
+      $("#reportsSideMenu").show();
+
+      $("#report_zone_1_div").html("");
+      $("#report_zone_2_div").html("");
+      $("#report_zone_3_div").html("");
+  }
+
+  function hideReportMenu(){
+      $("#reportsSideMenu").hide();
+
+      $("#report_zone_1_div").html("");
+      $("#report_zone_2_div").html("");
+      $("#report_zone_3_div").html("");
+  }
+
 </script>
 
 
@@ -71,29 +88,54 @@
         <ul class="nav nav-pills">
           <li class="active">
             <a href="#receitas" data-toggle="tab" id="reportsReceita"
-               onclick="drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_receita_realizada_path %>');
+               onclick="
+                       hideReportMenu();
+                       drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_receita_realizada_path %>');
                        drawVisualization('pie', 'report_zone_2_div','<%= lancamentos_reports_receita_por_categoria_path %>') ;
                        drawVisualization('pie', 'report_zone_3_div','<%= lancamentos_reports_receita_por_status_path %>');">Receitas</a>
           </li>
           <li><a href="#despesas" data-toggle="tab" id="reportsDespesa"
-                 onclick="drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_despesa_realizada_path %>');
+                 onclick="
+                         hideReportMenu();
+                         drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_despesa_realizada_path %>');
                          drawVisualization('pie', 'report_zone_2_div','<%= lancamentos_reports_despesa_por_categoria_path %>');
                          drawVisualization('pie', 'report_zone_3_div','<%= lancamentos_reports_despesa_por_centrodecusto_path %>');">Despesas</a>
           </li>
-          <li><a href="#fluxo" data-toggle="tab" id="reportsCaixa">Fluxo de caixa</a></li>
-          <li><a href="#resultados" data-toggle="tab" id="reportsResultados">Resultados</a></li>
-          <li><a href="#diversos" data-toggle="tab" id="reportsDiversos">Diversos</a></li>
+          <li><a href="#fluxo" data-toggle="tab" id="reportsCaixa"
+                 onclick="hideReportMenu();">Fluxo de caixa</a></li>
+          <li><a href="#resultados" data-toggle="tab" id="reportsResultados" onclick="hideReportMenu();">Resultados</a></li>
+          <li><a href="#diversos" data-toggle="tab" id="reportsDiversos" onclick="showReportMenu()">Diversos</a></li>
         </ul>
       </div>
       <div class="container-fluid">
         <div class="row-fluid">
-          <div class="span2">asd</div>
-          <div id="chartsArea span10">
+          <div class="span2">
+            <ul class="nav nav-list" id="reportsSideMenu">
+              <li class="nav-header">Receita</li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('line', 'report_zone_3_div','<%= lancamentos_reports_contas_a_receber_chart_path %>');
+                     drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_contas_a_receber_table_path %>');">Contas a receber</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('line', 'report_zone_3_div','<%= lancamentos_reports_recebimentos_atrasados_chart_path %>');
+                     drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_recebimentos_atrasados_table_path %>');">Recebimentos atrasados</a></li>
+              <li><a href="#">TOP receitas</a></li>
+              <li><a href="#">Receitas por categoria</a></li>
+              <li><a href="#">Receitas por status</a></li>
+              <li><a href="#">Receitas por centro de custo</a></li>
+              <li><a href="#">Prazo médio de recebimento</a></li>
+              <li><a href="#">Ticket médio das vendas</a></li>
+              <li class="nav-header">Despesa</li>
+              <li class="nav-header">Outros</li>
+            </ul>
+          </div>
+          <div id="chartsArea">
             <div id="message_div"></div>
             <div id="report_slider"></div>
             <div id="report_zone_1_div"></div>
             <div id="report_zone_2_div" style="float:left"></div>
-            <div id="report_zone_3_div" style="float:left"></div>
+            <div id="report_zone_3_div" style="float: left"></div>
           </div>
         </div>
       </div>

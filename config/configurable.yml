@@ -42,3 +42,7 @@ centrodecusto_padrao:
 number_of_top_records:
   name: Number of top records
   default: 15
+
+number_of_days_range:
+  name: Number of days range
+  default: 60
