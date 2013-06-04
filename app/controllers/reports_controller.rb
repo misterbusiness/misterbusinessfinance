@@ -22,7 +22,8 @@ class ReportsController < ApplicationController
           :options => {
               :colors => ['green'],
               :title => 'Receita Realizada',
-              :is3D => 'true'
+              :is3D => 'true',
+              :enableInteractivity => 'true'
           },
           :cols => [['string', 'mes'], ['number', 'valor']],
           :rows => @json_rows
@@ -47,7 +48,8 @@ class ReportsController < ApplicationController
           :options => {
               :colors => ['red'],
               :title => 'Despesa Realizada',
-              :is3D => 'true'
+              :is3D => 'true',
+              :enableInteractivity => 'true'
           },
           :cols => [['string', 'mes'], ['number', 'valor']],
           :rows => @json_rows
@@ -71,7 +73,8 @@ class ReportsController < ApplicationController
           :type => 'PieChart',
           :options => {
               :title => 'Receita por categoria',
-              :is3D => 'true'
+              :is3D => 'true',
+              :enableInteractivity => 'true'
           },
           :cols => [['string', 'categoria'], ['number', 'valores']],
           :rows => @json_rows
@@ -95,7 +98,8 @@ class ReportsController < ApplicationController
           :type => 'PieChart',
           :options => {
               :title => 'Despesa por categoria',
-              :is3D => 'true'
+              :is3D => 'true',
+              :enableInteractivity => 'true'
           },
           :cols => [['string', 'categoria'], ['number', 'valores']],
           :rows => @json_rows
@@ -119,7 +123,8 @@ class ReportsController < ApplicationController
           :type => 'PieChart',
           :options => {
               :title => 'Receita por status',
-              :is3D => 'true'
+              :is3D => 'true',
+              :enableInteractivity => 'true'
           },
           :cols => [['string', 'status'], ['number', 'valores']],
           :rows => @json_rows
@@ -731,19 +736,19 @@ class ReportsController < ApplicationController
   end
 
   def aderencia
-    @report_series = Lancamento.find_by_sql(aderencia_report.to_sql)
+    @report_series = Lancamento.find_by_sql(aderencia_report)
     unless @report_series.nil?
       @json_rows = Array.new
       @report_series.each do |serie|
         @json_row = Array.new
         @json_row.push(serie.axis)
-        @json_row.push(serie.values.to_f)
+        @json_row.push(serie.values.to_f*100)
         @json_rows.push(@json_row)
       end
 
       render :json => {
           :options => {
-              :title => 'Aderência',
+              :title => 'Aderencia',
               :is3D => 'true',
               :allowHtml => 'true'
           },
