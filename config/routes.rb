@@ -15,6 +15,10 @@ Misterbusinessfinance::Application.routes.draw do
   match 'lancamentos/reports/despesa_por_centrodecusto', to: 'reports#despesa_por_centrodecusto'
 
   #Reports
+  # ******************************************************************************************************
+  # Receita
+  # ******************************************************************************************************
+
   match 'lancamentos/reports/contas_a_receber_chart', to: 'reports#contas_a_receber_chart'
   match 'lancamentos/reports/contas_a_receber_table', to: 'reports#contas_a_receber_table'
 
@@ -23,6 +27,41 @@ Misterbusinessfinance::Application.routes.draw do
 
   match 'lancamentos/reports/top_receitas_chart', to: 'reports#top_receitas_chart'
   match 'lancamentos/reports/top_receitas_table', to: 'reports#top_receitas_table'
+
+  match 'lancamentos/reports/receitas_por_categoria_chart', to: 'reports#receitas_por_categoria_chart'
+  match 'lancamentos/reports/receitas_por_categoria_table', to: 'reports#receitas_por_categoria_table'
+
+  match 'lancamentos/reports/receitas_por_status_table', to: 'reports#receitas_por_status_table'
+
+  match 'lancamentos/reports/receitas_por_centrodecusto_table', to: 'reports#receitas_por_centrodecusto_table'
+
+  match 'lancamentos/reports/prazo_medio_recebimento', to: 'reports#prazo_medio_recebimento'
+
+  match 'lancamentos/reports/ticket_medio_vendas', to: 'reports#ticket_medio_vendas'
+
+  # ******************************************************************************************************
+  # Despesas
+  # ******************************************************************************************************
+
+  match 'lancamentos/reports/contas_a_pagar_chart', to: 'reports#contas_a_pagar_chart'
+  match 'lancamentos/reports/contas_a_pagar_table', to: 'reports#contas_a_pagar_table'
+
+  match 'lancamentos/reports/contas_vencidas_chart', to: 'reports#contas_vencidas_chart'
+  match 'lancamentos/reports/contas_vencidas_table', to: 'reports#contas_vencidas_table'
+
+  match 'lancamentos/reports/top_despesas_chart', to: 'reports#top_despesas_chart'
+  match 'lancamentos/reports/top_despesas_table', to: 'reports#top_despesas_table'
+
+  match 'lancamentos/reports/despesas_por_categoria_chart', to: 'reports#despesas_por_categoria_chart'
+  match 'lancamentos/reports/despesas_por_categoria_table', to: 'reports#despesas_por_categoria_table'
+
+  match 'lancamentos/reports/despesas_por_status_table', to: 'reports#despesas_por_status_table'
+
+  match 'lancamentos/reports/despesas_por_centrodecusto_table', to: 'reports#despesas_por_centrodecusto_table'
+
+  match 'lancamentos/reports/prazo_medio_pagamento', to: 'reports#prazo_medio_pagamento'
+
+  match 'lancamentos/reports/aderencia', to: 'reports#aderencia'
 
 
   resources :targets

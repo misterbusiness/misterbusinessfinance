@@ -21,14 +21,14 @@
             table.addRows(data.rows);
 
             // Define a slider control for the Age column.
-          //  var slider = new google.visualization.ControlWrapper({
-          //      'controlType': 'NumberRangeFilter',
-          //      'containerId': 'reportSlider',
-          //      'options': {
-          //          'filterColumnLabel': 'mes',
-          //          'ui': {'labelStacking': 'vertical'}
-          //      }
-          //  });
+            //  var slider = new google.visualization.ControlWrapper({
+            //      'controlType': 'NumberRangeFilter',
+            //      'containerId': 'reportSlider',
+            //      'options': {
+            //          'filterColumnLabel': 'mes',
+            //          'ui': {'labelStacking': 'vertical'}
+            //      }
+            //  });
 
 
             var container = document.getElementById(chartArea);
@@ -49,6 +49,10 @@
                     var chart = new google.visualization.ColumnChart(container);
             }
 
+            var formatter = new google.visualization.NumberFormat(
+                    {prefix: 'R$', negativeColor: 'red', negativeParens: true});
+            formatter.format(table, 1); // Apply formatter to second column
+
             //new google.visualization.Dashboard(document.getElementById('chartsArea')).bind(slider, chart).draw(table, data.options);
             chart.draw(table, data.options);
 
@@ -56,22 +60,40 @@
     }
 </script>
 
+<script type="text/javascript">
+    function drawToolbar() {
+        var components = [
+            {type: 'igoogle', datasource: 'http://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA&pub=1',
+                gadget: 'http://www.google.com/ig/modules/pie-chart.xml',
+                userprefs: {'3d': 1}},
+            {type: 'html', datasource: 'http://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA&pub=1'},
+            {type: 'csv', datasource: 'http://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA&pub=1'},
+            {type: 'htmlcode', datasource: 'http://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA&pub=1',
+                gadget: 'http://www.google.com/ig/modules/pie-chart.xml'}
+        ];
+
+        var container = document.getElementById('toolbar_div');
+        google.visualization.drawToolbar(container, components);
+    }
+    ;
+</script>
+
 <script>
-  function showReportMenu(){
-      $("#reportsSideMenu").show();
+    function showReportMenu() {
+        $("#reportsSideMenu").show();
 
-      $("#report_zone_1_div").html("");
-      $("#report_zone_2_div").html("");
-      $("#report_zone_3_div").html("");
-  }
+        $("#report_zone_1_div").html("");
+        $("#report_zone_2_div").html("");
+        $("#report_zone_3_div").html("");
+    }
 
-  function hideReportMenu(){
-      $("#reportsSideMenu").hide();
+    function hideReportMenu() {
+        $("#reportsSideMenu").hide();
 
-      $("#report_zone_1_div").html("");
-      $("#report_zone_2_div").html("");
-      $("#report_zone_3_div").html("");
-  }
+        $("#report_zone_1_div").html("");
+        $("#report_zone_2_div").html("");
+        $("#report_zone_3_div").html("");
+    }
 
 </script>
 
@@ -89,21 +111,22 @@
           <li class="active">
             <a href="#receitas" data-toggle="tab" id="reportsReceita"
                onclick="
-                       hideReportMenu();
+               hideReportMenu();
                        drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_receita_realizada_path %>');
                        drawVisualization('pie', 'report_zone_2_div','<%= lancamentos_reports_receita_por_categoria_path %>') ;
                        drawVisualization('pie', 'report_zone_3_div','<%= lancamentos_reports_receita_por_status_path %>');">Receitas</a>
           </li>
           <li><a href="#despesas" data-toggle="tab" id="reportsDespesa"
                  onclick="
-                         hideReportMenu();
+                 hideReportMenu();
                          drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_despesa_realizada_path %>');
                          drawVisualization('pie', 'report_zone_2_div','<%= lancamentos_reports_despesa_por_categoria_path %>');
                          drawVisualization('pie', 'report_zone_3_div','<%= lancamentos_reports_despesa_por_centrodecusto_path %>');">Despesas</a>
           </li>
           <li><a href="#fluxo" data-toggle="tab" id="reportsCaixa"
                  onclick="hideReportMenu();">Fluxo de caixa</a></li>
-          <li><a href="#resultados" data-toggle="tab" id="reportsResultados" onclick="hideReportMenu();">Resultados</a></li>
+          <li><a href="#resultados" data-toggle="tab" id="reportsResultados" onclick="hideReportMenu();">Resultados</a>
+          </li>
           <li><a href="#diversos" data-toggle="tab" id="reportsDiversos" onclick="showReportMenu()">Diversos</a></li>
         </ul>
       </div>
@@ -115,23 +138,86 @@
               <li><a href="#"
                      onclick="
                      drawVisualization('line', 'report_zone_3_div','<%= lancamentos_reports_contas_a_receber_chart_path %>');
-                     drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_contas_a_receber_table_path %>');">Contas a receber</a></li>
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_contas_a_receber_table_path %>');">Contas
+                a receber</a></li>
               <li><a href="#"
                      onclick="
                      drawVisualization('line', 'report_zone_3_div','<%= lancamentos_reports_recebimentos_atrasados_chart_path %>');
-                     drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_recebimentos_atrasados_table_path %>');">Recebimentos atrasados</a></li>
-              <li><a href="#">TOP receitas</a></li>
-              <li><a href="#">Receitas por categoria</a></li>
-              <li><a href="#">Receitas por status</a></li>
-              <li><a href="#">Receitas por centro de custo</a></li>
-              <li><a href="#">Prazo médio de recebimento</a></li>
-              <li><a href="#">Ticket médio das vendas</a></li>
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_recebimentos_atrasados_table_path %>');">Recebimentos
+                atrasados</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('line', 'report_zone_3_div','<%= lancamentos_reports_top_receitas_chart_path %>');
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_top_receitas_table_path %>');">TOP
+                receitas</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_receitas_por_categoria_table_path %>');">Receitas
+                por categoria</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_receitas_por_status_table_path %>');">Receitas
+                por status</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_receitas_por_centrodecusto_table_path %>');">Receitas
+                por centro de custo</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('line', 'report_zone_3_div','<%= lancamentos_reports_prazo_medio_recebimento_path %>');
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_prazo_medio_recebimento_path %>');">Prazo
+                médio de recebimento</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('column', 'report_zone_3_div','<%= lancamentos_reports_ticket_medio_vendas_path %>');
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_ticket_medio_vendas_path %>');">Ticket
+                médio das vendas</a></li>
+
               <li class="nav-header">Despesa</li>
+
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('line', 'report_zone_3_div','<%= lancamentos_reports_contas_a_pagar_chart_path %>');
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_contas_a_pagar_table_path %>');">Contas
+                a receber</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('line', 'report_zone_3_div','<%= lancamentos_reports_contas_vencidas_chart_path %>');
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_contas_vencidas_table_path %>');">Recebimentos
+                atrasados</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('line', 'report_zone_3_div','<%= lancamentos_reports_top_despesas_chart_path %>');
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_top_despesas_table_path %>');">TOP
+                receitas</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_despesas_por_categoria_table_path %>');">Receitas
+                por categoria</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_despesas_por_status_table_path %>');">Receitas
+                por status</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_despesas_por_centrodecusto_table_path %>');">Receitas
+                por centro de custo</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('line', 'report_zone_3_div','<%= lancamentos_reports_prazo_medio_pagamento_path %>');
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_prazo_medio_pagamento_path %>');">Prazo
+                médio de recebimento</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('column', 'report_zone_3_div','<%= lancamentos_reports_aderencia_path %>');
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_aderencia_path %>');">Ticket
+                médio das vendas</a></li>
               <li class="nav-header">Outros</li>
             </ul>
           </div>
           <div id="chartsArea">
             <div id="message_div"></div>
+            <div id="toolbar_div"></div>
             <div id="report_slider"></div>
             <div id="report_zone_1_div"></div>
             <div id="report_zone_2_div" style="float:left"></div>

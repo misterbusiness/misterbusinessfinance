@@ -25,15 +25,27 @@ namespace :db do
       centrodecusto.descricao = Faker::Company.name
     end
 
-    Lancamento.populate 100 do |lancamento|
+    Lancamento.populate 200 do |lancamento|
       lancamento.descricao = Populator.words(1..3)
-      lancamento.status_cd = [Lancamento.aberto, Lancamento.quitado]
+      lancamento.status_cd = [Lancamento.aberto]
       lancamento.tipo_cd = [Lancamento.receita, Lancamento.despesa]
-      lancamento.datavencimento = 6.months.ago..Time.now
+      lancamento.datavencimento = 6.months.ago..3.month.from_now
       lancamento.valor = 1..99
       lancamento.created_at = 5.months.ago..Time.now
       lancamento.category_id = 1..7
       lancamento.centrodecusto_id = 1..6
+    end
+
+    Lancamento.populate 100 do |lancamento|
+      lancamento.descricao = Populator.words(1..3)
+      lancamento.status_cd = [Lancamento.quitado]
+      lancamento.tipo_cd = [Lancamento.receita, Lancamento.despesa]
+      lancamento.datavencimento = 6.months.ago..3.month.from_now
+      lancamento.valor = 1..99
+      lancamento.created_at = 5.months.ago..Time.now
+      lancamento.category_id = 1..7
+      lancamento.centrodecusto_id = 1..6
+      lancamento.dataacao = DateTime.now
     end
 
     Lancamentorapido.populate 10 do |lancamentorapido|
