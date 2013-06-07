@@ -434,7 +434,7 @@ class ReportsController < ApplicationController
           :options => {
               :title => 'Receitas por status',
               :is3D => 'true',
-              
+              :colors => ['green','red','blue'],
               :width => '800'
           },
           :cols => [['number', 'mes'], ['number', 'prazo']],
@@ -449,17 +449,17 @@ class ReportsController < ApplicationController
       @json_rows = Array.new
       @report_series.each do |serie|
         @json_row = Array.new
-        @json_row.push(serie.axis)
+        @json_row.push(serie.axis.to_f)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
       end
 
       render :json => {
           :options => {
-              :title => 'Receitas por status',
+              :title => 'Ticket Medio Vendas',
               :is3D => 'true'
           },
-          :cols => [['string', 'mes'], ['number', 'valor']],
+          :cols => [['number', 'mes'], ['number', 'valor']],
           :rows => @json_rows
       }
     end
@@ -862,27 +862,26 @@ class ReportsController < ApplicationController
       @json_rows = Array.new
       @report_series.each do |serie|
         @json_row = Array.new
-        @json_row.push(Date::MONTHNAMES[serie.mes.to_f])
+        @json_row.push(serie.mes.to_f)
         @json_row.push(serie.receitas.to_f)
         @json_row.push(serie.despesas.to_f)
         @json_rows.push(@json_row)
       end
 
       render :json => {
-          :type => 'ColumnChart',
-          :options => {
-              :colors => ['green','red'],
-              :title => 'Receita Realizada',
-              :width => '800',
-              :seriesType => 'bars',
-              :series => {1 => {:type => 'bars'}}
-          },
-          :cols => [['string', 'mes'], ['number', 'receita'], ['number','despesa']],
+          :type => 'ComboChart',
+            :options => {
+                :colors => ['green','red'],
+                :title => 'Lancamentos Futuros',
+                :width => '800',
+                :seriesType => 'bars',
+                :series => {1 => {:type => 'bars'}
+                }
+            },
+          :cols => [['number', 'mes'], ['number', 'receita'], ['number','despesa']],
           :rows => @json_rows
       }
     end
   end
-
-
 end
 

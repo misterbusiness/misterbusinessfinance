@@ -284,8 +284,8 @@ module LancamentosHelper
     @lancamentos_futuros_part_1 = Lancamento.receitas.abertos.range(@today, @dt).por_mes.select{sum(valor).as(valor) }.select { date_part('month', datavencimento).as(mes) }
     @lancamentos_futuros_part_2 = Lancamento.despesas.abertos.range(@today, @dt).por_mes.select{sum(valor).as(valor) }.select { date_part('month', datavencimento).as(mes) }
 
-    return "SELECT COALESCE(r.mes,d.mes) as mes, COALESCE(r.valor,0) as receitas, COALESCE(d.valor,0) as despesas
+    return "SELECT 5 as mes,0 as receitas,0 as despesas UNION  SELECT COALESCE(r.mes,d.mes) as mes, COALESCE(r.valor,0) as receitas, COALESCE(d.valor,0) as despesas
               FROM (#{@lancamentos_futuros_part_1.to_sql}) as r
-              FULL JOIN (#{@lancamentos_futuros_part_2.to_sql}) as d ON r.mes = d.mes"
+              FULL JOIN (#{@lancamentos_futuros_part_2.to_sql}) as d ON r.mes = d.mes ORDER BY mes"
   end
 end

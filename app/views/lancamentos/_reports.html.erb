@@ -6,10 +6,6 @@
 </script>
 <script type="text/javascript">
 
-    function handleButtonClick() {
-        alert('button clicked!');
-        drawVisualization();
-    }
 
     function drawVisualization(chartType, chartArea, reportUrl, dashboard) {
         $("#" + chartArea).html("");
@@ -20,12 +16,10 @@
             });
             table.addRows(data.rows);
 
-            if (typeof dashboard === "undefined" || dashboard === null)
-            {
-               // Do nothing
+            if (typeof dashboard === "undefined" || dashboard === null) {
+                // Do nothing
             }
-            else
-            {
+            else {
 
                 //Define a slider control for the Age column.
                 var slider = new google.visualization.ControlWrapper({
@@ -35,8 +29,8 @@
                         'filterColumnLabel': 'mes',
                         'ui': {
                             'labelStacking': 'vertical',
-                            'chartOptions':{
-                              'chartArea': {'height':'90%', 'width': '70%'}
+                            'chartOptions': {
+                                'chartArea': {'height': '90%', 'width': '70%'}
                             }
                         }
                     }
@@ -45,9 +39,8 @@
 
 
             var container = document.getElementById(chartArea);
-            if (typeof dashboard === "undefined" || dashboard === null)
-            {
-                    switch (chartType) {
+            if (typeof dashboard === "undefined" || dashboard === null) {
+                switch (chartType) {
                     case 'column':
                         var chart = new google.visualization.ColumnChart(container);
                         break;
@@ -72,12 +65,10 @@
             //        {prefix: 'R$', negativeColor: 'red', negativeParens: true});
             //formatter.format(table, 1);
 
-            if (typeof dashboard === "undefined" || dashboard === null)
-            {
+            if (typeof dashboard === "undefined" || dashboard === null) {
                 chart.draw(table, data.options);
             }
-            else
-            {
+            else {
                 chart = new google.visualization.ChartWrapper(
                         {
                             'chartType': 'LineChart',
@@ -99,7 +90,7 @@
                         }
                 );
                 var dashboardArea = new google.visualization.Dashboard(document.getElementById('chartsArea'));
-                dashboardArea.bind(slider,chart);
+                dashboardArea.bind(slider, chart);
                 dashboardArea.bind(slider, chart2);
                 dashboardArea.draw(table);
 
@@ -110,14 +101,13 @@
 </script>
 
 <script type="text/javascript">
-    function drawDashboard(reportUrl, filterType, filterColumn)
-    {
+
+    function drawDashboard(reportUrl, filterType, filterColumn, chartType) {
         hideDiv('report_zone_1_div');
         hideDiv('report_zone_2_div');
         hideDiv('report_zone_3_div');
         hideDiv('report_slider');
 
-        //$("#" + chartArea).html("");
         $.getJSON(reportUrl, function (data) {
             var table = new google.visualization.DataTable();
             $.each(data.cols, function () {
@@ -131,27 +121,50 @@
                 'containerId': 'report_slider',
                 'options': {
                     'filterColumnLabel': filterColumn,
-                    'ui': {'labelStacking': 'vertical'}
+                    'ui': {
+                        'chartType': 'ComboChart',
+                        'labelStacking': 'vertical',
+                        'chartOptions': {
+                            'chartArea': {'height': '90%', 'width': '70%'}
+                        }
+                    }
                 }
+            });
+            $.each(data.options, function (key, value) {
+                slider.setOption('ui.chartOptions.' + key, value);
             });
 
             //var formatter = new google.visualization.NumberFormat(
             //        {prefix: 'R$', negativeColor: 'red', negativeParens: true});
             //formatter.format(table, 1);
-            chart = new google.visualization.ChartWrapper(
+            var chart = new google.visualization.ChartWrapper(
                     {
-                        'chartType': 'LineChart',
+                        'chartType': chartType,
                         'containerId': 'report_zone_1_div',
                         'options': {
                             'width': 800
                         }
-
                     }
             );
+            $.each(data.options, function (key, value) {
+                chart.setOption(key, value);
+            });
+
+            var tableChart = new google.visualization.ChartWrapper(
+                    {
+                        'chartType': 'Table',
+                        'containerId': 'report_zone_2_div',
+                        'options': {
+                            'width': 800
+                        }
+                    }
+            );
+
             var dashboardArea = new google.visualization.Dashboard(document.getElementById('chartsArea'));
-            dashboardArea.bind(slider,chart);
+            dashboardArea.bind(slider, chart);
+            dashboardArea.bind(slider, tableChart);
             dashboardArea.draw(table);
-        }
+        });
     }
 
 </script>
@@ -178,6 +191,7 @@
     function showReportMenu() {
         $("#reportsSideMenu").show();
 
+        $("#report_slider").html("");
         $("#report_zone_1_div").html("");
         $("#report_zone_2_div").html("");
         $("#report_zone_3_div").html("");
@@ -186,13 +200,14 @@
     function hideReportMenu() {
         $("#reportsSideMenu").hide();
 
+        $("#report_slider").html("");
         $("#report_zone_1_div").html("");
         $("#report_zone_2_div").html("");
         $("#report_zone_3_div").html("");
     }
 
-    function hideDiv(divName){
-        $("#"+divName).html("");
+    function hideDiv(divName) {
+        $("#" + divName).html("");
     }
 
 </script>
@@ -253,7 +268,7 @@
               <li><a href="#"
                      onclick="
                      drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_receitas_por_categoria_table_path %>');
-                     hideDiv('report_zone_2_div');
+                             hideDiv('report_zone_2_div');
 
                      ">Receitas por categoria</a></li>
               <li><a href="#"
@@ -267,14 +282,10 @@
                              hideDiv('report_zone_2_div');">Receitas
                 por centro de custo</a></li>
               <li><a href="#"
-                     onclick="
-                     drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_prazo_medio_recebimento_path %>',true);
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_prazo_medio_recebimento_path %>');">Prazo
+                     onclick="drawDashboard('<%= lancamentos_reports_prazo_medio_recebimento_path %>','ChartRangeFilter','mes', 'LineChart');">Prazo
                 médio de recebimento</a></li>
               <li><a href="#"
-                     onclick="
-                     drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_ticket_medio_vendas_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_ticket_medio_vendas_path %>');">Ticket
+                     onclick="drawDashboard('<%= lancamentos_reports_ticket_medio_vendas_path %>','ChartRangeFilter','mes', 'LineChart');">Ticket
                 médio das vendas</a></li>
 
               <li class="nav-header">Despesa</li>
@@ -287,8 +298,9 @@
               <li><a href="#"
                      onclick="
                      drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_contas_vencidas_chart_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_contas_vencidas_table_path %>');">Contas Vencidas
-               </a></li>
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_contas_vencidas_table_path %>');">Contas
+                Vencidas
+              </a></li>
               <li><a href="#"
                      onclick="
                      drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_top_despesas_chart_path %>');
@@ -317,16 +329,19 @@
               <li><a href="#"
                      onclick="
                      drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_aderencia_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_aderencia_path %>');">Aderência</a></li>
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_aderencia_path %>');">Aderência</a>
+              </li>
               <li class="nav-header">Outros</li>
               <li><a href="#"
                      onclick="
                      drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_ultimos_lancamentos_path %>');
                              hideDiv('report_zone_2_div');">Ultimos Lancamentos</a></li>
               <li><a href="#"
-                     onclick="
-                     drawVisualization('combo','report_zone_1_div','<%= lancamentos_reports_lancamentos_futuros_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_lancamentos_futuros_path %>');">Lançamentos Futuros</a></li>
+                     onclick="drawDashboard('<%= lancamentos_reports_lancamentos_futuros_path %>','ChartRangeFilter','mes', 'ComboChart','1', 'bars' );">Lançamentos
+                Futuros</a></li>
+              <li><a href="#"
+                    onclick="drawVisualization('combo', 'report_zone_1_div','<%= lancamentos_reports_lancamentos_futuros_path %>');
+                            drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_lancamentos_futuros_path %>');">Lancamentos Futuros2</a></li>
               <li><a href="#"
                      onclick="
                      drawVisualization('table','report_zone_1_div','<%= categories_reports_categories_lista_path %>');
