@@ -33,7 +33,7 @@
 
   </tr>
 
-
+  <%= will_paginate @lancamentos %>
   <% for lancamento in @lancamentos %>
       <% @edit_row_id = "edit_lancamento_row_#{lancamento.id}" %>
       <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
@@ -77,3 +77,4 @@
       </tr>
   <% end %>
   </table>
+<%= will_paginate %>

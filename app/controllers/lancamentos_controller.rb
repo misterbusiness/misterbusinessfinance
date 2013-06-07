@@ -10,7 +10,9 @@ class LancamentosController < ApplicationController
 
     query = build_query()
 
-    @lancamentos = query
+# Jamba, comentei aqui para testar o will_paginate (tentando melhor o desempenho
+     @lancamentos = Lancamento.unscoped.paginate(:page => params[:page], :per_page => 10)
+#    @lancamentos = query
     #@lancamentos = Lancamento.scoped_by_status(Lancamento.quitado)
 
     @lancamento = Lancamento.new
@@ -19,31 +21,6 @@ class LancamentosController < ApplicationController
     @categorias = Category.all
     @centrosdecusto = Centrodecusto.all
   end
-
-  #def reports
-  #  @tabSelection = params[:tab]
-  #  @dt = DateTime.now
-  #
-  #  case @tabSelection
-  #    when 'receita' then
-  #      @report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
-  #      @report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
-  #      @report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
-  #    when 'despesa' then
-  #      #@report_series_zone_1 = Lancamento.find_by_sql(despesa_series_query(@dt))
-  #      #@report_series_zone_2 = Lancamento.find_by_sql(despesa_por_categoria_series_query(@dt).to_sql)
-  #      #@report_series_zone_3 = Lancamento.find_by_sql(despesa_por_centrodecusto_series_query(@dt).to_sql)
-  #      #@report_series_zone_3 = Lancamento.find_by_sql(despesa_por_categoria_series_query(@dt).to_sql)
-  #
-  #      @report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
-  #      @report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
-  #      @report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
-  #    else
-  #      @report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
-  #      @report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
-  #      @report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
-  #  end
-  #end
 
   def build_query
     queryapoio = Lancamento.unscoped
