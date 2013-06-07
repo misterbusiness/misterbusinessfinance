@@ -424,7 +424,7 @@ class ReportsController < ApplicationController
       @json_rows = Array.new
       @report_series.each do |serie|
         @json_row = Array.new
-        @json_row.push(serie.axis)
+        @json_row.push(serie.axis.to_f)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
       end
@@ -437,7 +437,7 @@ class ReportsController < ApplicationController
               
               :width => '800'
           },
-          :cols => [['string', 'mes'], ['number', 'prazo']],
+          :cols => [['number', 'mes'], ['number', 'prazo']],
           :rows => @json_rows
       }
     end
@@ -810,6 +810,79 @@ class ReportsController < ApplicationController
       }
     end
   end
+
+  def categories_lista
+    @report_series = Category.select(:descricao)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.descricao)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :options => {
+              :title => 'Lista de categorias',
+              :is3D => 'true',
+              :width => '800'
+          },
+          :cols => [['string', 'categoria']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  def centrodecustos_lista
+    @report_series = Centrodecusto.select(:descricao)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.descricao)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :options => {
+              :title => 'Lista de centros de custo',
+              :is3D => 'true',
+              :width => '800'
+          },
+          :cols => [['string', 'centro de custo']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  def lancamentos_futuros
+    @dt = DateTime.now
+    @report_series = Lancamento.find_by_sql(lancamentos_futuros_report)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(Date::MONTHNAMES[serie.mes.to_f])
+        @json_row.push(serie.receitas.to_f)
+        @json_row.push(serie.despesas.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'ColumnChart',
+          :options => {
+              :colors => ['green','red'],
+              :title => 'Receita Realizada',
+              :width => '800',
+              :seriesType => 'bars',
+              :series => {1 => {:type => 'bars'}}
+          },
+          :cols => [['string', 'mes'], ['number', 'receita'], ['number','despesa']],
+          :rows => @json_rows
+      }
+    end
+  end
+
 
 end
 

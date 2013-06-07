@@ -259,7 +259,7 @@ module LancamentosHelper
   end
 
   #TODO: Ver com o butch se para este grafico o realizado funciona da mesma forma que no informativo de receita
-  def ticket_medio_vendas_report
+  def ticket_medio_pagamento_report
     @dt = DateTime.now
     return Lancamento.receitas.este_ano(@dt).por_mes.select {avg(valor).as(values) }.select { date_part('month', datavencimento).as(axis) }
   end
@@ -276,5 +276,16 @@ module LancamentosHelper
 
   def ultimos_lancamentos_report
     return Lancamento.abertos.order("created_at desc").limit(Configurable.number_of_top_records).select{created_at}.select{valor}.select{datavencimento}.select{descricao}
+  end
+
+  def lancamentos_futuros_report
+    @today = DateTime.now
+    @dt = DateTime.now + (Configurable.number_of_future_days).days
+    @lancamentos_futuros_part_1 = Lancamento.receitas.abertos.range(@today, @dt).por_mes.select{sum(valor).as(valor) }.select { date_part('month', datavencimento).as(mes) }
+    @lancamentos_futuros_part_2 = Lancamento.despesas.abertos.range(@today, @dt).por_mes.select{sum(valor).as(valor) }.select { date_part('month', datavencimento).as(mes) }
+
+    return "SELECT COALESCE(r.mes,d.mes) as mes, COALESCE(r.valor,0) as receitas, COALESCE(d.valor,0) as despesas
+              FROM (#{@lancamentos_futuros_part_1.to_sql}) as r
+              FULL JOIN (#{@lancamentos_futuros_part_2.to_sql}) as d ON r.mes = d.mes"
   end
 end

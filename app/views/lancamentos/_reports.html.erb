@@ -1,7 +1,7 @@
-<!-- Modal
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>-->
+<!-- Modal -->
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
-    //google.load('visualization', '1.1', {packages: ['controls']});
+    google.load('visualization', '1.0', {packages: ['controls']});
     google.load('visualization', '1', {packages: ['table']});
 </script>
 <script type="text/javascript">
@@ -11,7 +11,7 @@
         drawVisualization();
     }
 
-    function drawVisualization(chartType, chartArea, reportUrl) {
+    function drawVisualization(chartType, chartArea, reportUrl, dashboard) {
         $("#" + chartArea).html("");
         $.getJSON(reportUrl, function (data) {
             var table = new google.visualization.DataTable();
@@ -20,47 +20,140 @@
             });
             table.addRows(data.rows);
 
-            // Define a slider control for the Age column.
-            //  var slider = new google.visualization.ControlWrapper({
-            //      'controlType': 'NumberRangeFilter',
-            //      'containerId': 'reportSlider',
-            //      'options': {
-            //          'filterColumnLabel': 'mes',
-            //          'ui': {'labelStacking': 'vertical'}
-            //      }
-            //  });
+            if (typeof dashboard === "undefined" || dashboard === null)
+            {
+               // Do nothing
+            }
+            else
+            {
+
+                //Define a slider control for the Age column.
+                var slider = new google.visualization.ControlWrapper({
+                    'controlType': 'ChartRangeFilter',
+                    'containerId': 'report_slider',
+                    'options': {
+                        'filterColumnLabel': 'mes',
+                        'ui': {
+                            'labelStacking': 'vertical',
+                            'chartOptions':{
+                              'chartArea': {'height':'90%', 'width': '70%'}
+                            }
+                        }
+                    }
+                });
+            }
 
 
             var container = document.getElementById(chartArea);
-            switch (chartType) {
-                case 'column':
-                    var chart = new google.visualization.ColumnChart(container);
-                    break;
-                case 'pie':
-                    var chart = new google.visualization.PieChart(container);
-                    break;
-                case 'line':
-                    var chart = new google.visualization.LineChart(container);
-                    break;
-                case 'table':
-                    var chart = new google.visualization.Table(container);
-                    break;
-                case 'combo':
-                    var chart = new google.visualization.ComboChart(container);
-                    break;
-                default:
-                    var chart = new google.visualization.ColumnChart(container);
+            if (typeof dashboard === "undefined" || dashboard === null)
+            {
+                    switch (chartType) {
+                    case 'column':
+                        var chart = new google.visualization.ColumnChart(container);
+                        break;
+                    case 'pie':
+                        var chart = new google.visualization.PieChart(container);
+                        break;
+                    case 'line':
+                        var chart = new google.visualization.LineChart(container);
+                        break;
+                    case 'table':
+                        var chart = new google.visualization.Table(container);
+                        break;
+                    case 'combo':
+                        var chart = new google.visualization.ComboChart(container);
+                        break;
+                    default:
+                        var chart = new google.visualization.ColumnChart(container);
+                }
             }
 
             //var formatter = new google.visualization.NumberFormat(
             //        {prefix: 'R$', negativeColor: 'red', negativeParens: true});
             //formatter.format(table, 1);
 
-            //new google.visualization.Dashboard(document.getElementById('chartsArea')).bind(slider, chart).draw(table, data.options);
-            chart.draw(table, data.options);
+            if (typeof dashboard === "undefined" || dashboard === null)
+            {
+                chart.draw(table, data.options);
+            }
+            else
+            {
+                chart = new google.visualization.ChartWrapper(
+                        {
+                            'chartType': 'LineChart',
+                            'containerId': 'report_zone_1_div',
+                            'options': {
+                                'width': 800
+                            }
 
+                        }
+                );
+                var chart2 = new google.visualization.ChartWrapper(
+                        {
+                            'chartType': 'Table',
+                            'containerId': 'report_zone_2_div',
+                            'options': {
+                                'width': 800
+                            }
+
+                        }
+                );
+                var dashboardArea = new google.visualization.Dashboard(document.getElementById('chartsArea'));
+                dashboardArea.bind(slider,chart);
+                dashboardArea.bind(slider, chart2);
+                dashboardArea.draw(table);
+
+                //new google.visualization.Dashboard(document.getElementById('chartsArea')).bind(slider, chart).draw(table, data.options);
+            }
         });
     }
+</script>
+
+<script type="text/javascript">
+    function drawDashboard(reportUrl, filterType, filterColumn)
+    {
+        hideDiv('report_zone_1_div');
+        hideDiv('report_zone_2_div');
+        hideDiv('report_zone_3_div');
+        hideDiv('report_slider');
+
+        //$("#" + chartArea).html("");
+        $.getJSON(reportUrl, function (data) {
+            var table = new google.visualization.DataTable();
+            $.each(data.cols, function () {
+                table.addColumn.apply(table, this);
+            });
+            table.addRows(data.rows);
+
+            //Define a slider control for the Age column.
+            var slider = new google.visualization.ControlWrapper({
+                'controlType': filterType,
+                'containerId': 'report_slider',
+                'options': {
+                    'filterColumnLabel': filterColumn,
+                    'ui': {'labelStacking': 'vertical'}
+                }
+            });
+
+            //var formatter = new google.visualization.NumberFormat(
+            //        {prefix: 'R$', negativeColor: 'red', negativeParens: true});
+            //formatter.format(table, 1);
+            chart = new google.visualization.ChartWrapper(
+                    {
+                        'chartType': 'LineChart',
+                        'containerId': 'report_zone_1_div',
+                        'options': {
+                            'width': 800
+                        }
+
+                    }
+            );
+            var dashboardArea = new google.visualization.Dashboard(document.getElementById('chartsArea'));
+            dashboardArea.bind(slider,chart);
+            dashboardArea.draw(table);
+        }
+    }
+
 </script>
 
 <script type="text/javascript">
@@ -175,7 +268,7 @@
                 por centro de custo</a></li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_prazo_medio_recebimento_path %>');
+                     drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_prazo_medio_recebimento_path %>',true);
                              drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_prazo_medio_recebimento_path %>');">Prazo
                 médio de recebimento</a></li>
               <li><a href="#"
@@ -230,14 +323,26 @@
                      onclick="
                      drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_ultimos_lancamentos_path %>');
                              hideDiv('report_zone_2_div');">Ultimos Lancamentos</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('combo','report_zone_1_div','<%= lancamentos_reports_lancamentos_futuros_path %>');
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_lancamentos_futuros_path %>');">Lançamentos Futuros</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('table','report_zone_1_div','<%= categories_reports_categories_lista_path %>');
+                             hideDiv('report_zone_2_div');">Lista de categorias</a></li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('table','report_zone_1_div','<%= centrodecustos_reports_centrodecustos_lista_path %>');
+                             hideDiv('report_zone_2_div');">Lista de Centros de custo</a></li>
+
             </ul>
           </div>
           <div id="chartsArea" class="span10">
             <div id="message_div"></div>
             <div id="toolbar_div"></div>
-            <div id="report_slider"></div>
             <div id="report_zone_1_div"></div>
-            <div>&nbsp; </div>
+            <div id="report_slider" style="height: 50px;"></div>
             <div id="report_zone_2_div" style="float:left"></div>
             <div>&nbsp; </div>
             <div id="report_zone_3_div" style="float: left"></div>
