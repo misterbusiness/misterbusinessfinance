@@ -226,6 +226,10 @@
                      drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_aderencia_path %>');
                              drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_aderencia_path %>');">Aderência</a></li>
               <li class="nav-header">Outros</li>
+              <li><a href="#"
+                     onclick="
+                     drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_ultimos_lancamentos_path %>');
+                             hideDiv('report_zone_2_div');">Ultimos Lancamentos</a></li>
             </ul>
           </div>
           <div id="chartsArea" class="span10">

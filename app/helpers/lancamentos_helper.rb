@@ -273,4 +273,8 @@ module LancamentosHelper
             from (#{@aderencia_report_part1.to_sql}) r
             FULL JOIN (#{@aderencia_report_part2.to_sql}) d ON r.mes = d.mes"
   end
+
+  def ultimos_lancamentos_report
+    return Lancamento.abertos.order("created_at desc").limit(Configurable.number_of_top_records).select{created_at}.select{valor}.select{datavencimento}.select{descricao}
+  end
 end

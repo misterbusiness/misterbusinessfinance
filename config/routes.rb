@@ -76,6 +76,8 @@ Misterbusinessfinance::Application.routes.draw do
   match 'lancamentos/reports/lista_categorias', to: 'reports#lista_categorias'
   match 'lancamentos/reports/lista_centrodecustos', to: 'reports#lista_centrodecustos'
 
+  match 'lancamentos/reports/ultimos_lancamentos', to: 'reports#ultimos_lancamentos'
+
 
   resources :targets
 

@@ -785,5 +785,31 @@ class ReportsController < ApplicationController
       }
     end
   end
+
+  def ultimos_lancamentos
+    @report_series = Lancamento.find_by_sql(ultimos_lancamentos_report)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.created_at)
+        @json_row.push(serie.datavencimento)
+        @json_row.push(serie.descricao)
+        @json_row.push(serie.valor.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :options => {
+              :title => 'Ultimos Lancamentos',
+              :is3D => 'true',
+              :width => '800'
+          },
+          :cols => [['string', 'criado'],['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
+          :rows => @json_rows
+      }
+    end
+  end
+
 end
 
