@@ -62,6 +62,7 @@ class LancamentosController < ApplicationController
     queryapoio = queryapoio.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
     queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
 
+
     query =  queryapoio
   end
 
