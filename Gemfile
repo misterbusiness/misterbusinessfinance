@@ -24,9 +24,9 @@ gem 'faker'
 
 group :development, :test do
 #  gem 'sqlite3', '1.3.5'
-  gem 'mysql2'
+  #gem 'mysql2'
   gem 'rspec-rails', '2.11.0'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '~> 1.1'
   gem 'log4r'
 
  # gem 'ruby-debug-ide'

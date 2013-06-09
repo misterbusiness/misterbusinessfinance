@@ -19,7 +19,7 @@
   <tbody>
   <tr>
     <td></td>
-    <%= render 'lancamentos/scripts/filtros' %>
+
     <td> <%= text_field(:filtro, :descricao) %></td>
     <td>
     		
@@ -32,48 +32,8 @@
     <td>  <%= text_field :filtro, :status%></td>
 
   </tr>
+  <tr>
+    <td colspan="8"><div id="grid_results"> Resultado do Grid </div> </td>
+  </tr>
 
-
-  <% for lancamento in @lancamentos %>
-      <% @edit_row_id = "edit_lancamento_row_#{lancamento.id}" %>
-      <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
-      <% @current_lancamento = lancamento %>
-      <tr id="<%= @edit_row_id %>">
-        <td>
-          <table border="0px">
-            <tr>
-              <td><%= if !lancamento.estornado? then button_to(if lancamento.aberto? then "Quitar" else "Desquitar" end , {:action => "quitar", :id => lancamento.id}, :method => :put, :remote => :true) end %> </td>
-              <td><%= if lancamento.quitado? then button_to("Estornar", {:action => "estornar", :id => lancamento.id}, :method => :put, :remote => :true) end %> </td>
-              <td><%= if lancamento.aberto? then button_to("Cancelar", {:action => "destroy", :id => lancamento.id}, :method => :put, :remote => :true) end %> </td>
-            </tr>
-          </table>
-        </td>
-        <td><%= lancamento.descricao %></td>
-        <td><%= lancamento.datavencimento %></td>
-        <td><%= lancamento.dataacao %></td>
-
-        <td><%= if lancamento.receita? then
-                  "+" + lancamento.valor.to_s
-                else
-                  "-" + lancamento.valor.to_s
-                end %></td>
-        <td><%= lancamento.category.descricao unless lancamento.category.nil? %></td>
-        <td><%= lancamento.centrodecusto.descricao unless lancamento.centrodecusto.nil? %></td>
-        <td><%= lancamento.status %></td>
-        <%  @has_parcelamento_id =  "has_parcelamento_row_#{lancamento.id}" %>
-        <%  @has_agendamento_id =  "has_agendamento_row_#{lancamento.id}" %>
-        <%  @has_estorno_id =  "has_estorno_row_#{lancamento.id}" %>
-
-        <%= hidden_field_tag :hasParcelamento, lancamento.has_parcelamento?, :id => "has_parcelamento_row_#{lancamento.id}" %>
-        <%= hidden_field_tag :hasAgendamento, lancamento.has_agendamento?, :id => "has_agendamento_row_#{lancamento.id}" %>
-        <%= hidden_field_tag :hasEstorno, lancamento.has_estorno?, :id => "has_estorno_row_#{lancamento.id}" %>
-        <%= render 'lancamentos/scripts/edit_form' %>
-      </tr>
-  <% end %>
-
-  <% if @lancamentos.count == 0 then %>
-      <tr>
-        <td colspan="11"> Nenhum resultado encontrado.</td>
-      </tr>
-  <% end %>
   </table>

@@ -20,6 +20,14 @@
       </tr>
     </table>
   </div>
-  <div> Área dos botões</div>
-  <div id="lancamento_grid"><%= render :partial => 'grid' %></div>
+  <div>
+    <%= render 'lancamentos/scripts/filtros' %>
+    <button id="botaoGrid" class="btn btn-primary" >Pesquisar</button>
+
+  </div>
+
+  <div id="lancamento_grid">
+    <%= render :partial => 'grid' %>
+
+  </div>
 </div>

@@ -62,10 +62,10 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    factory_girl (4.2.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.2.1)
-      factory_girl (~> 4.2.0)
+    factory_girl (2.6.4)
+      activesupport (>= 2.3.9)
+    factory_girl_rails (1.7.0)
+      factory_girl (~> 2.6.0)
       railties (>= 3.0.0)
     faker (1.0.1)
       i18n (~> 0.4)
@@ -86,8 +86,6 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.22)
     multi_json (1.7.2)
-    mysql2 (0.3.11)
-    mysql2 (0.3.11-x86-mingw32)
     nokogiri (1.5.9)
     nokogiri (1.5.9-x86-mingw32)
     pg (0.14.1)
@@ -186,12 +184,11 @@ DEPENDENCIES
   client_side_validations
   coffee-rails (~> 3.2.1)
   configurable_engine
-  factory_girl_rails
+  factory_girl_rails (~> 1.1)
   faker
   googlecharts
   jquery-rails
   log4r
-  mysql2
   pg
   populator
   rails (= 3.2.12)

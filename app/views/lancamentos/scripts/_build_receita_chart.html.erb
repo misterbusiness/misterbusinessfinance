@@ -16,12 +16,6 @@
         data.addColumn('string', 'Mês');
         data.addColumn('number', 'Receita');
 
-        data.addRows([
-            <% @receita_series.each do |serie| %>
-                ['<%= serie.mes %>' , <%= serie.valor %>],
-            <% end %>
-
-        ]);
 
         // Set chart options
         var options = {'title': 'Estatísticas - Receita',
@@ -54,12 +48,7 @@
         data.addColumn('string', 'Mês');
         data.addColumn('number', 'Despesa');
 
-        data.addRows([
-            <% @despesa_series.each do |serie| %>
-            ['<%= serie.mes %>' , <%= serie.valor %>],
-            <% end %>
 
-        ]);
 
         // Set chart options
         var options = {'title': 'Estatísticas - Despesa',
@@ -91,12 +80,7 @@
         data.addColumn('string', 'Mês');
         data.addColumn('number', 'Caixa');
 
-        data.addRows([
-            <% @caixa_series.each do |serie| %>
-            ['<%= serie.mes %>' , <%= serie.valor %>],
-            <% end %>
 
-        ]);
 
         // Set chart options
         var options = {'title': 'Estatísticas - Caixa',

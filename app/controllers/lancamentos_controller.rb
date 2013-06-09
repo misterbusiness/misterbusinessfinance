@@ -4,14 +4,21 @@ class LancamentosController < ApplicationController
 
   before_filter :load
 
-  def load
+  # GET /lancamentos/filter
+  # GET /lancamentos/filter.json
 
-    #Nessa região irei construir a query
+  def filter
+
+
 
     query = build_query()
-
     @lancamentos = query
-    #@lancamentos = Lancamento.scoped_by_status(Lancamento.quitado)
+
+    render :layout => false
+
+  end
+
+  def load
 
     @lancamento = Lancamento.new
 
@@ -20,6 +27,10 @@ class LancamentosController < ApplicationController
     @centrosdecusto = Centrodecusto.all
   end
 
+  def loadgrid
+    render :partial => 'grid'
+
+  end
   #def reports
   #  @tabSelection = params[:tab]
   #  @dt = DateTime.now
@@ -47,7 +58,7 @@ class LancamentosController < ApplicationController
 
   def build_query
     queryapoio = Lancamento.unscoped
-    queryapoio = queryapoio.scoped_by_centrodecusto_id(Centrodecusto.find_by_descricao(params[:centrodecusto]).id) unless  Centrodecusto.find_by_descricao(params[:centrodecusto]).nil?
+    queryapoio = queryapoio.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
     queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
 
     query =  queryapoio

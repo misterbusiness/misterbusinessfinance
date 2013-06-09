@@ -10,9 +10,53 @@
         $('#filtro_categoria').val("<%= Category.find_by_descricao(params[:categoria]).id unless Category.find_by_descricao(params[:categoria]).nil? %>");
         $('#filtro_centrodecusto').val("<%= Centrodecusto.find_by_descricao(params[:centrodecusto]).id unless Centrodecusto.find_by_descricao(params[:centrodecusto]).nil? %>");
 
+        $('#botaoGrid').click(function()
+                {
+                    //Aqui que eu vou inserir a chamada do Ajax para a página do filtro.
+                    //alert("Teste");
+                    var href = "/filter"
+
+                    $('#grid_results').html("Carregando");
+
+                    $.get(href,function(data)
+                            {
+                                $('#grid_results').html(data) ;
+
+                            }
+
+                    );
+                }
 
 
+        );
 
+        $('#filtro_descricao').change(function()
+            {
+                var href = "/filter?descricao=" + $('#filtro_descricao').val()
+                $('#grid_results').html("Carregando");
+                $.get(href,function(data){$('#grid_results').html(data) ;});
+            }
+
+        );
+
+        $('#filtro_categoria').change(function()
+                {
+                    alert($('#filtro_categoria').text());
+                    var href = "/filter?categoria=" + $('#filtro_categoria').val()
+                    $('#grid_results').html("Carregando");
+                    //$.get(href,function(data){$('#grid_results').html(data) ;});
+                }
+
+        );
+
+        $('#filtro_centrodecusto').change(function()
+                {
+                    var href = "/filter?centrodecusto=" + $('#filtro_centrodecusto').val()
+                    $('#grid_results').html("Carregando");
+                    $.get(href,function(data){$('#grid_results').html(data) ;});
+                }
+
+        );
 
     });
 
