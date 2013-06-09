@@ -2,13 +2,13 @@
     $(document).ready(function ()
     {
 
-        $('#filtro_descricao').val("<%= params[:descricao] %>");
-        $('#filtro_datavencimento').val("<%= params[:datavencimento] %>");
-        $('#filtro_dataacao').val("<%= params[:dataacao] %>");
-        $('#filtro_status').val("<%= params[:status] %>");
-        $('#filtro_valor').val("<%= params[:valor] %>");
-        $('#filtro_categoria').val("<%= Category.find_by_descricao(params[:categoria]).id unless Category.find_by_descricao(params[:categoria]).nil? %>");
-        $('#filtro_centrodecusto').val("<%= Centrodecusto.find_by_descricao(params[:centrodecusto]).id unless Centrodecusto.find_by_descricao(params[:centrodecusto]).nil? %>");
+        $('#filtro_descricao').data('nomeparametro','descricao');
+        $('#filtro_datavencimento').data('nomeparametro','datavencimento');
+        $('#filtro_dataacao').data('nomeparametro','dataacao');
+        $('#filtro_status').data('nomeparametro','status');
+        $('#filtro_valor').data('nomeparametro','valor');
+        $('#filtro_categoria').data('nomeparametro','categoria');
+        $('#filtro_centrodecusto').data('nomeparametro','centrodecusto');
 
         $('#botaoGrid').click(function()
                 {
@@ -30,32 +30,16 @@
 
         );
 
-        $('#filtro_descricao').change(function()
-            {
-                var href = "/filter?descricao=" + $('#filtro_descricao').val()
 
-                $.get(href,function(data){$('#grid_results').html(data) ;});
-            }
-
-        );
-
-        $('#filtro_categoria').change(function()
+        //Essa será a função principal para tratar a mudança de eventos. Agora falto conseguir manipular os parametros simultaneamente
+        $('.filtro_parametro').change(function()
                 {
-                    var href = "/filter?categoria=" + $('#filtro_categoria').val()
-
-                    $.get(href,function(data){$('#grid_results').html(data) ;});
-                }
-
-        );
-
-        $('#filtro_centrodecusto').change(function()
-                {
-                    var href = "/filter?centrodecusto=" + $('#filtro_centrodecusto').val()
+                    var href = "/filter?"+ $(this).data('nomeparametro')+ "= "+ $(this).val()
                     $('#grid_results').html("Carregando");
                     $.get(href,function(data){$('#grid_results').html(data) ;});
                 }
 
-        );
+        )
 
     });
 
