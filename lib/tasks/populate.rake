@@ -2,7 +2,7 @@ namespace :db do
   desc 'Erase and fill database'
   task :populate => :environment do
     require 'populator'
-    [Category, Centrodecusto, Lancamentorapido, Lancamento].each(&:delete_all)
+    [Category, Centrodecusto, Lancamentorapido, Lancamento, Target].each(&:delete_all)
 
     # Zera o sequence da categoria
     ActiveRecord::Base.connection.execute('ALTER SEQUENCE public.categories_id_seq RESTART 1')
@@ -63,7 +63,7 @@ namespace :db do
       target.descricao = Populator.words(1)
       target.tipo_cd = [Target.receita]
       target.data = DateTime.new(Time.now.year, @index, 1)
-      target.valor = 100..9999
+      target.valor = 100..999
       @index = @index + 1
     end
 
@@ -72,7 +72,7 @@ namespace :db do
       target.descricao = Populator.words(1)
       target.tipo_cd = [Target.despesa]
       target.data = DateTime.new(Time.now.year, @index, 1)
-      target.valor = 100..9999
+      target.valor = 100..999
       @index = @index + 1
     end
   end

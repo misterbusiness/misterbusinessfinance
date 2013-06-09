@@ -63,6 +63,25 @@ Misterbusinessfinance::Application.routes.draw do
 
   match 'lancamentos/reports/aderencia', to: 'reports#aderencia'
 
+  # ******************************************************************************************************
+  # Outros
+  # ******************************************************************************************************
+
+  match 'lancamentos/reports/ultimos_lancamentos_table', to: 'reports#ultimos_lancamentos_table'
+  match 'lancamentos/reports/ultimos_lancamentos_chart', to: 'reports#ultimos_lancamentos_chart'
+
+  match 'lancamentos/reports/lancamentos_futuros_table', to: 'reports#lancamentos_futuros_table'
+  match 'lancamentos/reports/lancamentos_futuros_chart', to: 'reports#lancamentos_futuros_chart'
+
+  match 'lancamentos/reports/lista_categorias', to: 'reports#lista_categorias'
+  match 'lancamentos/reports/lista_centrodecustos', to: 'reports#lista_centrodecustos'
+
+  match 'lancamentos/reports/ultimos_lancamentos', to: 'reports#ultimos_lancamentos'
+  match 'lancamentos/reports/lancamentos_futuros', to: 'reports#lancamentos_futuros'
+  match 'categories/reports/categories_lista', to: 'reports#categories_lista'
+  match 'centrodecustos/reports/centrodecustos_lista', to: 'reports#centrodecustos_lista'
+
+
 
   resources :targets
 

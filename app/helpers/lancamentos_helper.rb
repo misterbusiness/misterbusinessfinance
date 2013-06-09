@@ -18,8 +18,11 @@ module LancamentosHelper
     .select { sum(valor).as(valor) }
     .select { date_part('month', datavencimento).as(mes) }
 
-    return "SELECT valor, mes from ((#{@receita_series_part1.to_sql})
-                    UNION (#{@receita_series_part2.to_sql})) as realizado order by mes"
+    @meta_serias = Target.receitas.por_mes.este_ano(dt).select{sum(valor).as(valor)}.select{date_part('month', data).as(mes) }
+
+    return "SELECT realizado.valor as valor, realizado.mes, meta.valor as meta from ((#{@receita_series_part1.to_sql})
+                    UNION (#{@receita_series_part2.to_sql})) as realizado
+                    INNER JOIN (#{@meta_serias.to_sql}) as meta on realizado.mes = meta.mes order by mes"
   end
 
   def despesa_series_query (dt)
@@ -107,6 +110,7 @@ module LancamentosHelper
   # Graficos e relatorios diversos
   # **********************************************************************************************************
   # Receitas
+  # **********************************************************************************************************
   def contas_a_receber_report_chart
     @today = DateTime.now
     @dt = DateTime.now + (Configurable.number_of_days_range).days
@@ -255,7 +259,7 @@ module LancamentosHelper
   end
 
   #TODO: Ver com o butch se para este grafico o realizado funciona da mesma forma que no informativo de receita
-  def ticket_medio_vendas_report
+  def ticket_medio_pagamento_report
     @dt = DateTime.now
     return Lancamento.receitas.este_ano(@dt).por_mes.select {avg(valor).as(values) }.select { date_part('month', datavencimento).as(axis) }
   end
@@ -268,5 +272,20 @@ module LancamentosHelper
     return "SELECT ((COALESCE(r.valor,0))/(CASE d.valor WHEN 0 THEN 1 ELSE COALESCE(d.valor,1) END)) as values, r.mes as axis
             from (#{@aderencia_report_part1.to_sql}) r
             FULL JOIN (#{@aderencia_report_part2.to_sql}) d ON r.mes = d.mes"
+  end
+
+  def ultimos_lancamentos_report
+    return Lancamento.abertos.order("created_at desc").limit(Configurable.number_of_top_records).select{created_at}.select{valor}.select{datavencimento}.select{descricao}
+  end
+
+  def lancamentos_futuros_report
+    @today = DateTime.now
+    @dt = DateTime.now + (Configurable.number_of_future_days).days
+    @lancamentos_futuros_part_1 = Lancamento.receitas.abertos.range(@today, @dt).por_mes.select{sum(valor).as(valor) }.select { date_part('month', datavencimento).as(mes) }
+    @lancamentos_futuros_part_2 = Lancamento.despesas.abertos.range(@today, @dt).por_mes.select{sum(valor).as(valor) }.select { date_part('month', datavencimento).as(mes) }
+
+    return "SELECT 5 as mes,0 as receitas,0 as despesas UNION  SELECT COALESCE(r.mes,d.mes) as mes, COALESCE(r.valor,0) as receitas, COALESCE(d.valor,0) as despesas
+              FROM (#{@lancamentos_futuros_part_1.to_sql}) as r
+              FULL JOIN (#{@lancamentos_futuros_part_2.to_sql}) as d ON r.mes = d.mes ORDER BY mes"
   end
 end

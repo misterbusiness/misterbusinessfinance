@@ -14,6 +14,7 @@ gem 'squeel'
 gem 'activerecord-postgresql-adapter'
 gem 'pg'
 gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 gem 'populator'
 gem 'faker'
 

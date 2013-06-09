@@ -46,3 +46,7 @@ number_of_top_records:
 number_of_days_range:
   name: Number of days range
   default: 60
+
+number_of_future_days:
+    name: Number of future days
+    default: 180

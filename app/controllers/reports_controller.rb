@@ -14,18 +14,20 @@ class ReportsController < ApplicationController
         @json_row = Array.new
         @json_row.push(Date::MONTHNAMES[serie.mes.to_f])
         @json_row.push(serie.valor.to_f)
+        @json_row.push(serie.meta.to_f)
         @json_rows.push(@json_row)
       end
 
       render :json => {
           :type => 'ColumnChart',
           :options => {
-              :colors => ['green'],
+              :colors => ['green','red','blue'],
               :title => 'Receita Realizada',
-              :is3D => 'true',
-              :enableInteractivity => 'true'
+              :width => '800',
+              :seriesType => 'bars',
+              :series => {1 => {:type => 'area', :pointSize => '6'}}
           },
-          :cols => [['string', 'mes'], ['number', 'valor']],
+          :cols => [['string', 'mes'], ['number', 'valor'], ['number','meta']],
           :rows => @json_rows
       }
     end
@@ -49,7 +51,8 @@ class ReportsController < ApplicationController
               :colors => ['red'],
               :title => 'Despesa Realizada',
               :is3D => 'true',
-              :enableInteractivity => 'true'
+              :enableInteractivity => 'true',
+              :width => '800'
           },
           :cols => [['string', 'mes'], ['number', 'valor']],
           :rows => @json_rows
@@ -74,7 +77,8 @@ class ReportsController < ApplicationController
           :options => {
               :title => 'Receita por categoria',
               :is3D => 'true',
-              :enableInteractivity => 'true'
+              :enableInteractivity => 'true',
+              :width => '500'
           },
           :cols => [['string', 'categoria'], ['number', 'valores']],
           :rows => @json_rows
@@ -99,7 +103,8 @@ class ReportsController < ApplicationController
           :options => {
               :title => 'Despesa por categoria',
               :is3D => 'true',
-              :enableInteractivity => 'true'
+              :enableInteractivity => 'true',
+              :width => '500'
           },
           :cols => [['string', 'categoria'], ['number', 'valores']],
           :rows => @json_rows
@@ -124,7 +129,8 @@ class ReportsController < ApplicationController
           :options => {
               :title => 'Receita por status',
               :is3D => 'true',
-              :enableInteractivity => 'true'
+              :enableInteractivity => 'true',
+              :width => '500'
           },
           :cols => [['string', 'status'], ['number', 'valores']],
           :rows => @json_rows
@@ -148,7 +154,8 @@ class ReportsController < ApplicationController
           :type => 'PieChart',
           :options => {
               :title => 'Despesa por centro de custo',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '500'
           },
           :cols => [['string', 'centro de custo'], ['number', 'valores']],
           :rows => @json_rows
@@ -173,7 +180,8 @@ class ReportsController < ApplicationController
           :type => 'LineChart',
           :options => {
               :title => 'Contas a receber',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
@@ -198,7 +206,8 @@ class ReportsController < ApplicationController
           :type => 'LineChart',
           :options => {
               :title => 'Contas a receber',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['number', 'valores']],
           :rows => @json_rows
@@ -222,7 +231,8 @@ class ReportsController < ApplicationController
           :type => 'LineChart',
           :options => {
               :title => 'Contas a receber',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
@@ -247,7 +257,8 @@ class ReportsController < ApplicationController
           :type => 'LineChart',
           :options => {
               :title => 'Contas a receber',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['number', 'valores']],
           :rows => @json_rows
@@ -270,7 +281,8 @@ class ReportsController < ApplicationController
       render :json => {
           :options => {
               :title => 'Top receitas',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
@@ -295,7 +307,8 @@ class ReportsController < ApplicationController
           :type => 'LineChart',
           :options => {
               :title => 'Top receitas',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['number', 'valores']],
           :rows => @json_rows
@@ -320,7 +333,8 @@ class ReportsController < ApplicationController
           :type => 'LineChart',
           :options => {
               :title => 'Receitas por categoria',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'categoria'], ['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
@@ -343,7 +357,8 @@ class ReportsController < ApplicationController
           :type => 'LineChart',
           :options => {
               :title => 'Receitas por categoria',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['number', 'valores']],
           :rows => @json_rows
@@ -394,7 +409,8 @@ class ReportsController < ApplicationController
           :options => {
               :title => 'Receitas por status',
               :is3D => 'true',
-              :allowHtml => 'true'
+              
+              :width => '800'
           },
           :cols => [['string', 'CdC'], ['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
@@ -408,7 +424,7 @@ class ReportsController < ApplicationController
       @json_rows = Array.new
       @report_series.each do |serie|
         @json_row = Array.new
-        @json_row.push(serie.axis)
+        @json_row.push(serie.axis.to_f)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
       end
@@ -418,9 +434,10 @@ class ReportsController < ApplicationController
           :options => {
               :title => 'Receitas por status',
               :is3D => 'true',
-              :allowHtml => 'true'
+              :colors => ['green','red','blue'],
+              :width => '800'
           },
-          :cols => [['string', 'mes'], ['number', 'prazo']],
+          :cols => [['number', 'mes'], ['number', 'prazo']],
           :rows => @json_rows
       }
     end
@@ -432,17 +449,17 @@ class ReportsController < ApplicationController
       @json_rows = Array.new
       @report_series.each do |serie|
         @json_row = Array.new
-        @json_row.push(serie.axis)
+        @json_row.push(serie.axis.to_f)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
       end
 
       render :json => {
           :options => {
-              :title => 'Receitas por status',
+              :title => 'Ticket Medio Vendas',
               :is3D => 'true'
           },
-          :cols => [['string', 'mes'], ['number', 'valor']],
+          :cols => [['number', 'mes'], ['number', 'valor']],
           :rows => @json_rows
       }
     end
@@ -493,7 +510,8 @@ class ReportsController < ApplicationController
       render :json => {
           :options => {
               :title => 'Contas a pagar',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
@@ -516,7 +534,8 @@ class ReportsController < ApplicationController
       render :json => {
           :options => {
               :title => 'Contas a pagar',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['number', 'valores']],
           :rows => @json_rows
@@ -563,7 +582,8 @@ class ReportsController < ApplicationController
       render :json => {
           :options => {
               :title => 'Contas vencidas',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['number', 'valores']],
           :rows => @json_rows
@@ -586,7 +606,8 @@ class ReportsController < ApplicationController
       render :json => {
           :options => {
               :title => 'Top despesas',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
@@ -608,7 +629,8 @@ class ReportsController < ApplicationController
       render :json => {
           :options => {
               :title => 'Top despesas',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['number', 'valores']],
           :rows => @json_rows
@@ -632,7 +654,8 @@ class ReportsController < ApplicationController
       render :json => {
           :options => {
               :title => 'Despesas por categoria',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'categoria'], ['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
@@ -654,7 +677,8 @@ class ReportsController < ApplicationController
       render :json => {
           :options => {
               :title => 'Receitas por categoria',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'data'], ['number', 'valores']],
           :rows => @json_rows
@@ -678,7 +702,8 @@ class ReportsController < ApplicationController
       render :json => {
           :options => {
               :title => 'Despesas por status',
-              :is3D => 'true'
+              :is3D => 'true',
+              :width => '800'
           },
           :cols => [['string', 'status'], ['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
@@ -704,7 +729,8 @@ class ReportsController < ApplicationController
           :options => {
               :title => 'Despesas por centro de custo',
               :is3D => 'true',
-              :allowHtml => 'true'
+              
+              :width => '800'
           },
           :cols => [['string', 'CdC'], ['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
@@ -727,7 +753,8 @@ class ReportsController < ApplicationController
           :options => {
               :title => 'Receitas por status',
               :is3D => 'true',
-              :allowHtml => 'true'
+              
+              :width => '800'
           },
           :cols => [['string', 'mes'], ['number', 'prazo']],
           :rows => @json_rows
@@ -750,9 +777,108 @@ class ReportsController < ApplicationController
           :options => {
               :title => 'Aderencia',
               :is3D => 'true',
-              :allowHtml => 'true'
+              
+              :width => '800'
           },
           :cols => [['string', 'data'], ['number', 'valores']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  def ultimos_lancamentos
+    @report_series = Lancamento.find_by_sql(ultimos_lancamentos_report)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.created_at)
+        @json_row.push(serie.datavencimento)
+        @json_row.push(serie.descricao)
+        @json_row.push(serie.valor.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :options => {
+              :title => 'Ultimos Lancamentos',
+              :is3D => 'true',
+              :width => '800'
+          },
+          :cols => [['string', 'criado'],['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  def categories_lista
+    @report_series = Category.select(:descricao)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.descricao)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :options => {
+              :title => 'Lista de categorias',
+              :is3D => 'true',
+              :width => '800'
+          },
+          :cols => [['string', 'categoria']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  def centrodecustos_lista
+    @report_series = Centrodecusto.select(:descricao)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.descricao)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :options => {
+              :title => 'Lista de centros de custo',
+              :is3D => 'true',
+              :width => '800'
+          },
+          :cols => [['string', 'centro de custo']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  def lancamentos_futuros
+    @dt = DateTime.now
+    @report_series = Lancamento.find_by_sql(lancamentos_futuros_report)
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(serie.mes.to_f)
+        @json_row.push(serie.receitas.to_f)
+        @json_row.push(serie.despesas.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'ComboChart',
+            :options => {
+                :colors => ['green','red'],
+                :title => 'Lancamentos Futuros',
+                :width => '800',
+                :seriesType => 'bars',
+                :series => {1 => {:type => 'bars'}
+                }
+            },
+          :cols => [['number', 'mes'], ['number', 'receita'], ['number','despesa']],
           :rows => @json_rows
       }
     end
