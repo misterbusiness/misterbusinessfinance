@@ -33,7 +33,7 @@
         $('#filtro_descricao').change(function()
             {
                 var href = "/filter?descricao=" + $('#filtro_descricao').val()
-                $('#grid_results').html("Carregando");
+
                 $.get(href,function(data){$('#grid_results').html(data) ;});
             }
 
@@ -41,10 +41,9 @@
 
         $('#filtro_categoria').change(function()
                 {
-                    alert($('#filtro_categoria').text());
                     var href = "/filter?categoria=" + $('#filtro_categoria').val()
-                    $('#grid_results').html("Carregando");
-                    //$.get(href,function(data){$('#grid_results').html(data) ;});
+
+                    $.get(href,function(data){$('#grid_results').html(data) ;});
                 }
 
         );
