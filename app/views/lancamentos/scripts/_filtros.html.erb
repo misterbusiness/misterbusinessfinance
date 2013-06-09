@@ -34,7 +34,23 @@
         //Essa será a função principal para tratar a mudança de eventos. Agora falto conseguir manipular os parametros simultaneamente
         $('.filtro_parametro').change(function()
                 {
-                    var href = "/filter?"+ $(this).data('nomeparametro')+ "= "+ $(this).val()
+                    var href = "/filter?"
+                    $(this).data('valorparametro',$(this).val()) ;
+
+                    $('.filtro_parametro').each(function(){
+
+                                if(typeof($(this).data('valorparametro')) !== "undefined")
+                                {
+                                    //alert($(this).data('valorparametro'));
+                                    href+=  $(this).data('nomeparametro') +"="+$(this).data('valorparametro')+"&"
+                                }
+
+                           }
+
+                    );
+
+                    //alert(href);
+
                     $('#grid_results').html("Carregando");
                     $.get(href,function(data){$('#grid_results').html(data) ;});
                 }
