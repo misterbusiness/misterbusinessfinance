@@ -9,9 +9,10 @@
                     }
                 }
         );
-        $('#grid_results').html("Carregando");
+
         alert(href);
-        //$.get(href, function (data) {$('#grid_results').html(data);});
+        $.get(href, function (data) {$('#grid_results').html(data);});
+        $.getScript("/assets/paginate.js");
     }
     $(document).ready(function ()
     {
@@ -33,7 +34,7 @@
                             $(this).val('');
                         }
                     );
-
+                    $('#grid_results').html("Carregando");
                         buildfilter.call(this);
 
 
@@ -43,6 +44,7 @@
         $('.filtro_parametro').change(function()
             {
                 $(this).data('valorparametro', $(this).val());
+                $('#grid_results').html("Carregando");
                 buildfilter.call(this);
             }
          )
@@ -50,6 +52,7 @@
         $('#botaoReceitas').click(function()
                 {
                     $(this).data('valorparametro','S');
+                    $('#grid_results').html("Carregando");
                     buildfilter.call(this);
                 }
         )
