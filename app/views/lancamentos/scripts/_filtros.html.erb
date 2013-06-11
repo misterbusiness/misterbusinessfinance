@@ -10,8 +10,8 @@
                 }
         );
 
-        alert(href);
         $.get(href, function (data) {$('#grid_results').html(data);});
+
         $.getScript("/assets/paginate.js");
     }
     $(document).ready(function ()

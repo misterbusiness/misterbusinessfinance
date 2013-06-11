@@ -26,8 +26,8 @@ jQuery(
         $('.pagination a').click(function () {
 
             $(this).addClass('filtro_parametro');
-            alert($(this).data('valorparametro'));
             buildfilter.call(this);
+            //execScript("/assets/paginate.js");
             return false;
         });
     })
