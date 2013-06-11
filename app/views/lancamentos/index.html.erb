@@ -22,9 +22,11 @@
   </div>
   <div>
     <%= render 'lancamentos/scripts/filtros' %>
-    <button id="botaoGrid" class="btn btn-primary" >Todos</button>
-    <button id="botaoReceitas" class="btn btn-primary filtro_parametro" >Receitas</button>
-
+    <table>
+    <tr><td><button id="botaoGrid" class="btn btn-primary" >Todos</button></td>
+    <td><button id="botaoReceitas" class="btn btn-primary filtro_parametro" >Receitas</button></td>
+    <td><div id="carregando"></div></td> </tr>
+    </table>
   </div>
 
   <div id="lancamento_grid">

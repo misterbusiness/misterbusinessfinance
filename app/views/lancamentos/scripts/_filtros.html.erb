@@ -34,9 +34,11 @@
                             $(this).val('');
                         }
                     );
-                    $('#grid_results').html("Carregando");
-                        buildfilter.call(this);
+                    $('#carregando').html("Carregando");
 
+                    buildfilter.call(this);
+
+                    $('#carregando').html("");
 
                 }
         );
@@ -44,16 +46,18 @@
         $('.filtro_parametro').change(function()
             {
                 $(this).data('valorparametro', $(this).val());
-                $('#grid_results').html("Carregando");
+                $('#carregando').html("Carregando");
                 buildfilter.call(this);
+                $('#carregando').html("");
             }
          )
 
         $('#botaoReceitas').click(function()
                 {
                     $(this).data('valorparametro','S');
-                    $('#grid_results').html("Carregando");
+                    $('#carregando').html("Carregando");
                     buildfilter.call(this);
+                    $('#carregando').html("");
                 }
         )
 
