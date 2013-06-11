@@ -10,8 +10,8 @@
                 }
         );
         $('#grid_results').html("Carregando");
-        alert(href);
-        //$.get(href, function (data) {$('#grid_results').html(data);});
+        //alert(href);
+        $.get(href, function (data) {$('#grid_results').html(data);});
     }
     $(document).ready(function ()
     {
@@ -24,6 +24,7 @@
         $('#filtro_categoria').data('nomeparametro','categoria');
         $('#filtro_centrodecusto').data('nomeparametro','centrodecusto');
         $('#botaoReceitas').data('nomeparametro','receitas');
+        $('#botaoDespesas').data('nomeparametro','despesas');
 
         $('#botaoGrid').click(function()
                 {
@@ -48,6 +49,13 @@
          )
 
         $('#botaoReceitas').click(function()
+                {
+                    $(this).data('valorparametro','S');
+                    buildfilter.call(this);
+                }
+        )
+
+        $('#botaoDespesas').click(function()
                 {
                     $(this).data('valorparametro','S');
                     buildfilter.call(this);

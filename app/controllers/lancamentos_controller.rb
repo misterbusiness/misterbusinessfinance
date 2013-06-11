@@ -61,9 +61,9 @@ class LancamentosController < ApplicationController
     queryapoio = queryapoio.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
     queryapoio = queryapoio.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
     queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
+    queryapoio = queryapoio.receitas  unless params[:receitas].nil?
 
-
-    query =  queryapoio
+    query =  queryapoio.paginate(:page => "1", :per_page => 10)
   end
 
   # GET /lancamentos

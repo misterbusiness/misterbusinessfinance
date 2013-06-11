@@ -37,6 +37,7 @@
                   <%= hidden_field_tag :hasEstorno, lancamento.has_estorno?, :id => "has_estorno_row_#{lancamento.id}" %>
                   <%= render 'lancamentos/scripts/edit_form' %>
                 </tr>
+
             <% end %>
         <% if @lancamentos.count == 0 then %>
             <tr>
@@ -44,5 +45,6 @@
             </tr>
         <% end %>
     </table>
+    <div> <%= will_paginate @lancamentos %></div>
 
 <% end %>
