@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    function buildfilter() {
+        var href = "/filter?"
+
+        $('.filtro_parametro').each(function () {
+
+                    if (typeof($(this).data('valorparametro')) !== "undefined") {
+                        href += $(this).data('nomeparametro') + "=" + $(this).data('valorparametro') + "&"
+                    }
+                }
+        );
+        //$('#grid_results').html("Carregando");
+        //alert(href);
+        $.get(href, function (data) {$('#grid_results').html(data);});
+    }
+    $(document).ready(function ()
+    {
+        $('.pagination a').click(function ()
+        {
+            $(this).data('nomeparametro','page');
+            $(this).data('valorparametro',(RegExp('page=' + '(.+?)(&|$)').exec($(this).prop('href'))||[,null])[1]);
+            $('.pagination a').prop('href',"javascript:void(0)")
+            $(this).addClass('filtro_parametro');
+            buildfilter.call(this);
+            //execScript("/assets/paginate.js");
+            return false;
+            //$.get(this.href, null, null, 'script');
+            //return false;
+        });
+
+    });
+
+
+
+
+</script>

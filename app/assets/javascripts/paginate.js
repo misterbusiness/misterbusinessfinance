@@ -25,10 +25,10 @@ jQuery(
     $(function () {
         $('.pagination a').click(function () {
 
-            $(this).addClass('filtro_parametro');
-            buildfilter.call(this);
+            //$(this).addClass('filtro_parametro');
+           // buildfilter.call(this);
             //execScript("/assets/paginate.js");
-            return false;
+           // return false;
         });
     })
 
