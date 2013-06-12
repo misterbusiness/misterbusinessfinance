@@ -9,9 +9,10 @@
                     }
                 }
         );
-        $('#grid_results').html("Carregando");
-        //alert(href);
+
         $.get(href, function (data) {$('#grid_results').html(data);});
+
+        $.getScript("/assets/paginate.js");
     }
     $(document).ready(function ()
     {
@@ -24,7 +25,6 @@
         $('#filtro_categoria').data('nomeparametro','categoria');
         $('#filtro_centrodecusto').data('nomeparametro','centrodecusto');
         $('#botaoReceitas').data('nomeparametro','receitas');
-        $('#botaoDespesas').data('nomeparametro','despesas');
 
         $('#botaoGrid').click(function()
                 {

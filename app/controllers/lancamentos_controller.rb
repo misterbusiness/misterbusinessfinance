@@ -21,7 +21,7 @@ class LancamentosController < ApplicationController
   def load
 
     @lancamento = Lancamento.new
-
+	@lancamentos = Lancamento.all
     @lancamentorapidos = Lancamentorapido.all
     @categorias = Category.all
     @centrosdecusto = Centrodecusto.all
@@ -61,9 +61,22 @@ class LancamentosController < ApplicationController
     queryapoio = queryapoio.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
     queryapoio = queryapoio.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
     queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
+
+    if params[:page].nil? then
+
+      queryapoio = queryapoio.paginate(:page => "1", :per_page => 20)
+
+    else
+
+      queryapoio = queryapoio.paginate(:page => params[:page], :per_page => 20)
+
+    end
+
+
     queryapoio = queryapoio.receitas  unless params[:receitas].nil?
 
-    query =  queryapoio.paginate(:page => "1", :per_page => 10)
+
+    query =  queryapoio
   end
 
   # GET /lancamentos
