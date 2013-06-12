@@ -61,7 +61,9 @@ class LancamentosController < ApplicationController
     queryapoio = queryapoio.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
     queryapoio = queryapoio.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
     queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
-
+    queryapoio = queryapoio.receitas  unless params[:receitas].nil?
+	  queryapoio = queryapoio.scoped_by_status_cd(params[:status]) unless params[:status].nil?
+	
     if params[:page].nil? then
 
       queryapoio = queryapoio.paginate(:page => "1", :per_page => 20)
@@ -73,7 +75,7 @@ class LancamentosController < ApplicationController
     end
 
 
-    queryapoio = queryapoio.receitas  unless params[:receitas].nil?
+
 
 
     query =  queryapoio
