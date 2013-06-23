@@ -1,5 +1,11 @@
 <!--Div that will hold the pie chart-->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  function selectChartTab(chartName){
+      $("#"+chartName).click();
+  }
+</script>
+
 <%= render 'lancamentos/scripts/build_receita_chart' %>
 <div id="ChartsCarousel" class="carousel slide">
   <ol class="carousel-indicators">
@@ -10,13 +16,26 @@
   <!-- Carousel items -->
   <div class="carousel-inner">
     <div class="active item">
-      <div id="receita_chart_div"></div>
+      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsReceita')">
+        <div id="receita_chart_div"></div>
+      </a>
     </div>
     <div class="item">
-      <div id="despesa_chart_div"></div>
+      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsDespesa')">
+        <div id="despesa_chart_div"></div>
+      </a>
     </div>
     <div class="item">
-      <div id="caixa_chart_div"></div>
+      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsCaixa')">
+        <div id="caixa_chart_div"></div>
+      </a>
+    </div>
+    <div class="item">
+      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsDiversos')">
+        <div style="width:400px; height:300px; vertical-align: center">
+            <center>Relatórios Mister Business</center>
+        </div>
+      </a>
     </div>
   </div>
   <!-- Carousel nav -->
