@@ -95,7 +95,7 @@ Misterbusinessfinance::Application.routes.draw do
      member do
        put :quitar
        put :estornar
-       put :destroy
+#       put :destroy
      end
 
     get :filter

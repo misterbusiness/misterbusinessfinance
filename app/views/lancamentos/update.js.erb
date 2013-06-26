@@ -8,9 +8,11 @@ $("#flash_notice").html("<%= escape_javascript(flash[:notice])%>");
 $("#flash_notice").show(300);
 
 $(":input:not(input[type=submit])").val("");
-$("#lancamento_grid").html("<%= escape_javascript(render(:partial => 'grid'))%>");
+
 <% @lancamento = Lancamento.new %>
 $("#lancamento_form").html("<%= escape_javascript(render(:partial => 'form'))%>");
+
+buildfilter();
 
 var freqRepeticoes = $("#frequencia_agendamentos");
 var freqParcelas = $("#frequencia_parcelas");
