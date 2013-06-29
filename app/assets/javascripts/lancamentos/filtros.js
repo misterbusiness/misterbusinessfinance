@@ -17,7 +17,6 @@ function buildfilter() {
     }
     );
 
-    alert(href);
     $.get(href, function (data)
                 {
                     $('#grid_results').html(data);
@@ -57,6 +56,8 @@ $(document).ready(function ()
         $('#filtro_centrodecusto').data('nomeparametro','centrodecusto');
         $('#hiddenReceita').data('nomeparametro','receita');
         $('#hiddenDespesa').data('nomeparametro','despesa');
+        $('#hiddenReceita').data('valorparametro','S');
+        $('#hiddenDespesa').data('valorparametro','S');
 
         $('#botaoGrid').click
         (
@@ -69,6 +70,11 @@ $(document).ready(function ()
                         $(this).val('');
                     }
                 );
+
+                $('#hiddenReceita').data('valorparametro','S');
+                $('#hiddenDespesa').data('valorparametro','S');
+                $('#inputReceitas').prop('checked',true);
+                $('#inputDespesas').prop('checked',true);
                 buildfilter.call(this);
             }
         );
