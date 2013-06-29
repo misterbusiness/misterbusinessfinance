@@ -17,6 +17,7 @@ function buildfilter() {
     }
     );
 
+    alert(href);
     $.get(href, function (data)
                 {
                     $('#grid_results').html(data);
@@ -54,7 +55,8 @@ $(document).ready(function ()
         $('#filtro_valor').data('nomeparametro','valor');
         $('#filtro_categoria').data('nomeparametro','categoria');
         $('#filtro_centrodecusto').data('nomeparametro','centrodecusto');
-        $('#botaoReceitas').data('nomeparametro','receitas');
+        $('#hiddenReceita').data('nomeparametro','receita');
+        $('#hiddenDespesa').data('nomeparametro','despesa');
 
         $('#botaoGrid').click
         (
@@ -83,7 +85,8 @@ $(document).ready(function ()
 
                 if (receitasChecked)
                 {
-
+                    $('#hiddenReceita').data('valorparametro','S');
+                    buildfilter();
                 }
                 else
                 {
@@ -91,6 +94,11 @@ $(document).ready(function ()
                     {
                         //alert('Você precisa selecionar ao menos um tipo de valor.');
                         $('#inputReceitas').prop('checked',true);
+                    }
+                    else
+                    {
+                        $('#hiddenReceita').data('valorparametro','N');
+                        buildfilter();
                     }
 
                 }
@@ -108,8 +116,10 @@ $(document).ready(function ()
                 receitasChecked = $('#inputReceitas').is(':checked') ;
                 despesasChecked = $('#inputDespesas').is(':checked')  ;
 
-                if (receitasChecked)
+                if (despesasChecked)
                 {
+                    $('#hiddenDespesa').data('valorparametro','S');
+                    buildfilter();
 
                 }
                 else
@@ -118,6 +128,13 @@ $(document).ready(function ()
                     {
                         //alert('Você precisa selecionar ao menos um tipo de valor.');
                         $('#inputDespesas').prop('checked',true);
+
+                    }
+                    else
+                    {
+                        $('#hiddenDespesa').data('valorparametro','N');
+                        buildfilter();
+
                     }
 
                 }
