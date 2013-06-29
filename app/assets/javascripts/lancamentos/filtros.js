@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 function buildfilter() {
-    alert("we are here!");
+    //alert("we are here!");
     var href = "/filter?"
 
     $('.filtro_parametro').each(function () {
@@ -50,7 +50,7 @@ buildfilter.call(this);
 
 $('.filtro_parametro').change(function()
             {
-                alert('Teste?');
+                //alert('Teste?');
                 $(this).data('valorparametro', $(this).val());
                 buildfilter.call(this);
                 }
