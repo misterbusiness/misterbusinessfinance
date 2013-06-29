@@ -1,12 +1,8 @@
-<!--Div that will hold the pie chart-->
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<%= render 'lancamentos/scripts/load_google_library' %>
 <script type="text/javascript">
-  function selectChartTab(chartName){
-      $("#"+chartName).click();
-  }
-</script>
 
-<%= render 'lancamentos/scripts/build_receita_chart' %>
+</script>
 <div id="ChartsCarousel" class="carousel slide">
   <ol class="carousel-indicators">
     <li data-target="#ChartsCarousel" data-slide-to="0" class="active"></li>
@@ -17,22 +13,26 @@
   <div class="carousel-inner">
     <div class="active item">
       <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsReceita')">
-        <div id="receita_chart_div"></div>
+        <div id="receita_chart_div"
+             onload="drawVisualization('column', 'receita_chart_div', '<%= lancamentos_reports_receita_estatisticas_path %>');">
+        </div>
       </a>
     </div>
     <div class="item">
       <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsDespesa')">
-        <div id="despesa_chart_div"></div>
+        <div id="despesa_chart_div"
+             onload="drawVisualization('column', 'despesa_chart_div', '<%= lancamentos_reports_despesa_estatisticas_path %>');"></div>
       </a>
     </div>
     <div class="item">
       <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsCaixa')">
-        <div id="caixa_chart_div"></div>
+        <div id="caixa_chart_div"
+             onload="drawVisualization('column', 'caixa_chart_div', '<%= lancamentos_reports_fluxo_caixa_estatisticas_path %>');"></div>
       </a>
     </div>
     <div class="item">
       <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsDiversos')">
-        <div style="width:400px; height:300px; vertical-align: center">
+        <div style="width:500px; height:300px; vertical-align: center">
             <center>Relatórios Mister Business</center>
         </div>
       </a>
