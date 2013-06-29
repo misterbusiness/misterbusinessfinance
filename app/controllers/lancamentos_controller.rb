@@ -69,9 +69,6 @@ class LancamentosController < ApplicationController
 
       @tabSelection = params[:tab]
 
-      @receita_series = Lancamento.find_by_sql(receita_series_query(@dt))
-      @despesa_series = Lancamento.find_by_sql(despesa_series_query(@dt))
-      @caixa_series = Lancamento.find_by_sql(caixa_series_query(@dt))
     rescue
       @err = "Error #{$!}"
     ensure

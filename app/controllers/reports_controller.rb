@@ -5,6 +5,92 @@ class ReportsController < ApplicationController
   # ************************************************************************************************************
   # Receitas actions
   # ************************************************************************************************************
+
+  #@receita_series = Lancamento.find_by_sql(receita_series_query(@dt))
+  #@despesa_series = Lancamento.find_by_sql(despesa_series_query(@dt))
+  #@caixa_series = Lancamento.find_by_sql(caixa_series_query(@dt))
+
+  def receita_estatisticas
+    @dt = DateTime.now
+    @report_series = Lancamento.find_by_sql(receita_series_query(@dt))
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(Date::MONTHNAMES[serie.mes.to_f])
+        @json_row.push(serie.valor.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'ColumnChart',
+          :options => {
+              :colors => ['green','red','blue'],
+              :title => 'Receita - Estatisticas',
+              :width => '500',
+              :height => '300'
+          },
+          :cols => [['string', 'mes'], ['number', 'valor']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+  def despesa_estatisticas
+    @dt = DateTime.now
+    @report_series = Lancamento.find_by_sql(despesa_series_query(@dt))
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(Date::MONTHNAMES[serie.mes.to_f])
+        @json_row.push(serie.valor.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'ColumnChart',
+          :options => {
+              :colors => ['red'],
+              :title => 'Despesa Realizada',
+              :is3D => 'true',
+              :enableInteractivity => 'true',
+              :width => '500',
+              :height => '300'
+          },
+          :cols => [['string', 'mes'], ['number', 'valor']],
+          :rows => @json_rows
+      }
+    end
+  end
+
+
+  def fluxo_caixa_estatisticas
+    @dt = DateTime.now
+    @report_series = Lancamento.find_by_sql(caixa_series_query(@dt))
+    unless @report_series.nil?
+      @json_rows = Array.new
+      @report_series.each do |serie|
+        @json_row = Array.new
+        @json_row.push(Date::MONTHNAMES[serie.mes.to_f])
+        @json_row.push(serie.valor.to_f)
+        @json_rows.push(@json_row)
+      end
+
+      render :json => {
+          :type => 'LineChart',
+          :options => {
+              :colors => ['green','red','blue'],
+              :title => 'Estatisticas - Caixa',
+              :width => '500',
+              :height => '300'
+          },
+          :cols => [['string', 'mes'], ['number', 'valor']],
+          :rows => @json_rows
+      }
+    end
+  end
+
   def receita_realizada
     @dt = DateTime.now
     @report_series = Lancamento.find_by_sql(receita_series_query(@dt))

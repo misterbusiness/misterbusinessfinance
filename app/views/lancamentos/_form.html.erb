@@ -126,7 +126,7 @@
             <div class="accordion-inner">
 
               <!-- ******************************** Parcelamento ********************************************************* -->
-              <%= render 'lancamentos/scripts/calculo_parcela' %>
+              <!-- moved to assets <%= render 'lancamentos/scripts/calculo_parcela' %> -->
               <%= render 'lancamentos/scripts/select2_for_parcela' %>
               <label>Parcelamento</label>
 
@@ -144,11 +144,8 @@
                 </div>
               </div>
 
-              <!-- *********************************************************************************************************
-                Agendamento
-                -->
-
-              <%= render 'lancamentos/scripts/calculo_agendamento' %>
+              <!-- ******************************* Agendamento *********************************************************** -->
+              <!-- moved to assets <%= render 'lancamentos/scripts/calculo_agendamento' %> -->
               <%= render 'lancamentos/scripts/select2_for_agendamento' %>
               <label>Agendamento</label>
 
@@ -166,11 +163,8 @@
                 </div>
               </div>
 
-              <!-- *********************************************************************************************************
-                Quitado checkbox
-                -->
-
-              <%= render 'lancamentos/scripts/quitado_checkbox' %>
+              <!-- ********************************* Quitado Checkbox ***************************************************** -->
+              <!-- moved to assets <%= render 'lancamentos/scripts/quitado_checkbox' %> -->
               <div class="container">
                 <label class="checkbox">
                   <input id="quitado_checkbox" type="checkbox"> Quitado? &nbsp;&nbsp;
@@ -180,13 +174,11 @@
             </div>
           </div>
         </div>
+        </div>
 
         <div><br></div>
 
-        <!-- *********************************************************************************************************
-            Submit
-        -->
-
+        <!-- ********************************** Submit ************************************************** -->
         <div id="lancamento_quitado" class="actions">
           <%= f.submit :class => "btn btn-primary", :id => "submit_btn" %>
         </div>
