@@ -125,5 +125,12 @@ $(document).ready(function ()
             }
         );
 
+        $('.filtro_parametro').change(function()
+            {
+                $(this).data('valorparametro', $(this).val());
+                buildfilter.call(this);
+            }
+        )
+
 
 });
