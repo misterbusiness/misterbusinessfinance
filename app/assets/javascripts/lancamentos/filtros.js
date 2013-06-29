@@ -11,16 +11,42 @@ function buildfilter() {
 
     $('.filtro_parametro').each(function () {
 
-    if (typeof($(this).data('valorparametro')) !== "undefined") {
-    href += $(this).data('nomeparametro') + "=" + $(this).data('valorparametro') + "&"
+        if (typeof($(this).data('valorparametro')) !== "undefined") {
+        href += $(this).data('nomeparametro') + "=" + $(this).data('valorparametro') + "&"
+        }
     }
-}
-);
+    );
 
-$.get(href, function (data) {$('#grid_results').html(data);});
+    $.get(href, function (data)
+                {
+                    $('#grid_results').html(data);
+                    insertPaginationEvent();
+                }
+
+        );
+
 
 //$.getScript("/assets/paginate.js");
 }
+
+function insertPaginationEvent()
+{
+
+    $('.pagination a').click(function ()
+    {
+        $(this).data('nomeparametro','page');
+        $(this).data('valorparametro',(RegExp('page=' + '(.+?)(&|$)').exec($(this).prop('href'))||[,null])[1]);
+        $(this).addClass('filtro_parametro');
+        buildfilter();
+        //execScript("/assets/paginate.js");
+        //$.get(this.href, null, null, 'script');
+        return false;
+    });
+
+
+
+}
+
 $(document).ready(function ()
     {
 
@@ -69,6 +95,11 @@ $('#botaoDespesas').click(function()
                     buildfilter.call(this);
                     }
 )
+
+
+
+
+
 
 
 
