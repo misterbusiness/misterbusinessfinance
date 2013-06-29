@@ -23,9 +23,8 @@
   <div>
     <%= render 'lancamentos/scripts/filtros' %>
     <button id="botaoGrid" class="btn btn-primary" >Todos</button>
-    <button id="botaoReceitas" class="btn btn-primary filtro_parametro" >Receitas</button>
-    <button id="botaoDespesas" class="btn btn-primary filtro_parametro" >Despesas</button>
-
+    <input type="checkbox"  id="inputReceitas" checked="true"  value="S">Receitas</input>
+    <input type="checkbox"  id="inputDespesas" checked="true" value="S">Despesas</input>
   </div>
 
   <div id="lancamento_grid">
