@@ -25,8 +25,6 @@ function buildfilter() {
 
         );
 
-
-//$.getScript("/assets/paginate.js");
 }
 
 function insertPaginationEvent()
@@ -49,7 +47,6 @@ function insertPaginationEvent()
 
 $(document).ready(function ()
     {
-
         $('#filtro_descricao').data('nomeparametro','descricao');
         $('#filtro_datavencimento').data('nomeparametro','datavencimento');
         $('#filtro_dataacao').data('nomeparametro','dataacao');
@@ -59,50 +56,74 @@ $(document).ready(function ()
         $('#filtro_centrodecusto').data('nomeparametro','centrodecusto');
         $('#botaoReceitas').data('nomeparametro','receitas');
 
-        $('#botaoGrid').click(function()
-        {
-        $('.filtro_parametro').each(function ()
-        {
-        $(this).removeData('valorparametro');
-        $(this).val('');
-        }
-);
-
-buildfilter.call(this);
-
-
-}
-);
-
-$('.filtro_parametro').change(function()
+        $('#botaoGrid').click
+        (
+            function()
             {
-                //alert('Teste?');
-                $(this).data('valorparametro', $(this).val());
+                $('.filtro_parametro').each
+                (function()
+                    {
+                        $(this).removeData('valorparametro');
+                        $(this).val('');
+                    }
+                );
                 buildfilter.call(this);
+            }
+        );
+
+        $('#inputReceitas').click
+        (
+            function()
+            {
+                var receitasChecked;
+                var despesasChecked;
+
+                receitasChecked = $('#inputReceitas').is(':checked') ;
+                despesasChecked = $('#inputDespesas').is(':checked')  ;
+
+                if (receitasChecked)
+                {
+
                 }
-)
-
-$('#botaoReceitas').click(function()
+                else
                 {
-                    $(this).data('valorparametro','S');
-                    buildfilter.call(this);
+                    if (!despesasChecked)
+                    {
+                        //alert('Você precisa selecionar ao menos um tipo de valor.');
+                        $('#inputReceitas').prop('checked',true);
                     }
-)
 
-$('#botaoDespesas').click(function()
+                }
+
+            }
+        );
+
+        $('#inputDespesas').click
+        (
+            function()
+            {
+                var receitasChecked;
+                var despesasChecked;
+
+                receitasChecked = $('#inputReceitas').is(':checked') ;
+                despesasChecked = $('#inputDespesas').is(':checked')  ;
+
+                if (receitasChecked)
                 {
-                    $(this).data('valorparametro','S');
-                    buildfilter.call(this);
+
+                }
+                else
+                {
+                    if (!receitasChecked)
+                    {
+                        //alert('Você precisa selecionar ao menos um tipo de valor.');
+                        $('#inputDespesas').prop('checked',true);
                     }
-)
 
+                }
 
-
-
-
-
-
-
+            }
+        );
 
 
 });
