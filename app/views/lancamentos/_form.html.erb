@@ -14,10 +14,8 @@
 <% end %>
 <div class="container">
 
-<!-- ********************************************************************************************************* 
-	Tipo
-	-->
-<%= render 'lancamentos/scripts/change_tipo_class'%>
+<!-- ********************************** Tipo **************************************************************** -->
+<!-- moved to assets <%= render 'lancamentos/scripts/change_tipo_class'%> -->
 <div class="row">	
 	<div class="offset1 span0">
 	<%= f.radio_button :tipo, :receita, :style => "float:left; display:none" %> <a id="receita_label" class="label label-success" style="color:white"> Receita </a>
@@ -27,15 +25,13 @@
 	</div>
 </div>
 
-<div class="row"><\br></div>
+<div class="row"><br></div>
 
-<!-- ********************************************************************************************************* 
-	Descrição
-	-->
+<!-- *******************************  Descrição  *********************************************************** -->
 <% @page_item_id = "lancamento_descricao"%>
 <% @placeholder_value = "Entre com a descrição" %>
 <% @iterator = @lancamentorapidos %>
-<%= render 'lancamentos/scripts/select2_for_descricao' %> 
+ <%= render 'lancamentos/scripts/select2_for_descricao' %>
 <div class = "container-fluid">
 	<div class = "span1">
 		<%= f.label :descricao%>
@@ -46,13 +42,11 @@
 	</div>	
 </div>
 
-<div class="row"><\br></div>
+<div class="row"><br></div>
 
-<!-- ********************************************************************************************************* 
-	Data de vencimento
-	-->
+<!-- ******************************* Data vencimento ******************************************************  -->
 
-<%= render 'lancamentos/scripts/datepicker'%>
+<!-- moved to assets <%= render 'lancamentos/scripts/datepicker'%> -->
 <div class="container-fluid">
 	<div class="span1">
 		<%= f.label :datavencimento %>
@@ -64,13 +58,11 @@
 	</div>
 </div>
 
-<div class="row"><\br></div>
+<div class="row"><br></div>
 
-<!-- ********************************************************************************************************* 
-	Valor
-	-->
+<!-- ******************************** Valor *************************************************************** -->
 
-<%= render 'lancamentos/scripts/change_tipo' %>
+<!-- moved to assets <%= render 'lancamentos/scripts/change_tipo' %> -->
 <div class="container-fluid input-prepend">
 	<div class="span1">
 		<%= f.label :valor %>
@@ -81,10 +73,8 @@
 	</div>
 </div>
 
-<div class="row"><\br></div>
-<!-- ********************************************************************************************************* 
-	Categoria
-	-->
+<div class="row"><br></div>
+<!-- ********************************* Categoria ************************************************************ -->
 
 <% @page_item_id = "categoria_place"%>
 <% @placeholder_value = "Selecione uma categoria" %>
@@ -103,7 +93,7 @@
   <%= hidden_field_tag :category,"", :id => @hidden_item_id%>
 
 
-<div class="row"><\br></div>
+<div class="row"><br></div>
 <!-- ********************************************************************************************************* 
 	Centro de custo
 	--> 
@@ -123,7 +113,7 @@
 </div>
  <%= hidden_field_tag :centrodecusto, "", :id => @hidden_item_id%>
 
-<div class="row"><\br></div>
+<div class="row"><br></div>
 
 
   <!-- *********************************************************************************************************
