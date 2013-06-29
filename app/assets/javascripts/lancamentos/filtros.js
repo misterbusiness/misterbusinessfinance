@@ -17,6 +17,7 @@ function buildfilter() {
     }
     );
 
+    $('#grid_results').html('Aguarde...');
     $.get(href, function (data)
                 {
                     $('#grid_results').html(data);
