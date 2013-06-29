@@ -9,3 +9,6 @@ function MakeSelect2(item_id, placeholder_value, tags)
 }
 
 function GetTags()
+{
+
+}
