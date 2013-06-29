@@ -10,7 +10,6 @@ class LancamentosController < ApplicationController
   def filter
 
 
-
     query = build_query()
     @lancamentos = query
 
@@ -21,7 +20,7 @@ class LancamentosController < ApplicationController
   def load
 
     @lancamento = Lancamento.new
-	  @lancamentos = Lancamento.all
+    @lancamentos = Lancamento.all
     @lancamentorapidos = Lancamentorapido.all
     @categorias = Category.all
     @centrosdecusto = Centrodecusto.all
@@ -37,13 +36,13 @@ class LancamentosController < ApplicationController
     queryapoio = queryapoio.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
     queryapoio = queryapoio.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
     queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
-	  queryapoio = queryapoio.scoped_by_status_cd(params[:status]) unless params[:status].nil?
+    queryapoio = queryapoio.scoped_by_status_cd(params[:status]) unless params[:status].nil?
 
     if (params[:receita] == 'S' and params[:despesa] == 'N')
-        queryapoio = queryapoio.receitas
+      queryapoio = queryapoio.receitas
 
     elsif (params[:receita] == 'N' and params[:despesa] == 'S')
-        queryapoio = queryapoio.despesas
+      queryapoio = queryapoio.despesas
 
     end
 
@@ -59,10 +58,7 @@ class LancamentosController < ApplicationController
     end
 
 
-
-
-
-    query =  queryapoio
+    query = queryapoio
   end
 
   # GET /lancamentos
@@ -80,8 +76,28 @@ class LancamentosController < ApplicationController
     rescue
       @err = "Error #{$!}"
     ensure
-
     end
+
+    # TODO: Aguardar o término do desenvolvimento dos filtros do grid para poder linkar as notificações a ele. GR @ 20130629
+
+    # Notificações
+    @notificacoes = {}
+
+    # Receitas Atrasadas
+    notif_receitas_atrasadas = Lancamento.receitas.abertos.ate(Date.today)
+    @notificacoes['rec_atrasadas'] = notif_receitas_atrasadas.count unless notif_receitas_atrasadas.count == 0
+
+    # Despesas Vencidas
+    notif_despesas_vencidas = Lancamento.despesas.abertos.ate(Date.today)
+    @notificacoes['desp_vencidas'] = notif_despesas_vencidas.count unless notif_despesas_vencidas.count == 0
+
+    # Receitas a Receber
+    notif_receitas_a_receber = Lancamento.receitas.abertos.range(Date.today, Date.today + Configurable.number_of_future_days)
+    @notificacoes['rec_receber'] = notif_receitas_a_receber.count unless notif_receitas_a_receber.count == 0
+
+    # Despesas Vincendas
+    notif_despesas_vincendas = Lancamento.despesas.abertos.range(Date.today, Date.today + Configurable.number_of_future_days)
+    @notificacoes['desp_vincendas'] = notif_despesas_vincendas.count unless notif_despesas_vincendas.count == 0
   end
 
   def new

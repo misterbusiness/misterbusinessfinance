@@ -1,1 +1,21 @@
 Aba de Notificações
+<%
+   @notificacoes.each do |key, value|
+     case key
+       when 'rec_atrasadas'
+         key = 'Receitas Atrasadas.'
+       when 'desp_vencidas'
+         key = 'Despesas Vencidas.'
+       when 'rec_receber'
+         key = 'Receitas a receber nos próximos ' + Configurable.number_of_future_days.to_s + ' dias.'
+       when 'desp_vincendas'
+         key = 'Despesas vincendas nos próximos ' + Configurable.number_of_future_days.to_s + ' dias.'
+       else
+     end
+     if value > 0
+%>
+        <p><%= sprintf('Você tem %d %s', value, key) %></p>
+    <%
+       end
+       end
+    %>
