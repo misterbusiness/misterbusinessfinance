@@ -6,6 +6,7 @@
         <a class="btn" href="#"><i class="icon-print"></i></a>
         <a class="btn" href="#"><i class="icon-list-alt"></i></a>
         <a class="btn" href="#"><i class="icon-calendar"></i></a>
+
         <div class="text"></div>
       </div>
       <h3 id="reportsModalLabel">Relatórios Mister Business</h3>
@@ -47,24 +48,21 @@
                 a receber</a></li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_recebimentos_atrasados_chart_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_recebimentos_atrasados_table_path %>');">Recebimentos
+                     drawDashboardTimeSeries('<%= lancamentos_reports_recebimentos_atrasados_table_path %>', 'ChartRangeFilter','data', 'LineChart');">Recebimentos
                 atrasados</a></li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_top_receitas_chart_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_top_receitas_table_path %>');">TOP
+                     drawDashboardTimeSeries('<%= lancamentos_reports_top_receitas_table_path %>','ChartRangeFilter','data', 'LineChart');">TOP
                 receitas</a></li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_receitas_por_categoria_table_path %>');
-                             hideDiv('report_zone_2_div');
-
-                     ">Receitas por categoria</a></li>
+                     drawDashboardGroupChart('<%= lancamentos_reports_receitas_por_categoria_table_path %>','ChartRangeFilter','data', 'PieChart');">Receitas
+                por categoria</a></li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_receitas_por_status_table_path %>');
-                             hideDiv('report_zone_2_div');">Receitas
+                     drawVisualization('pie', 'report_zone_1_div','<%= lancamentos_reports_receita_por_status_path %>');
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_receitas_por_status_table_path %>');
+                             hideDiv('report_zone_3_div');">Receitas
                 por status</a></li>
               <li><a href="#"
                      onclick="
@@ -130,8 +128,9 @@
                      onclick="drawDashboard('<%= lancamentos_reports_lancamentos_futuros_path %>','ChartRangeFilter','mes', 'ComboChart','1', 'bars' );">Lançamentos
                 Futuros</a></li>
               <li><a href="#"
-                    onclick="drawVisualization('combo', 'report_zone_1_div','<%= lancamentos_reports_lancamentos_futuros_path %>');
-                            drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_lancamentos_futuros_path %>');">Lancamentos Futuros2</a></li>
+                     onclick="drawVisualization('combo', 'report_zone_1_div','<%= lancamentos_reports_lancamentos_futuros_path %>');
+                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_lancamentos_futuros_path %>');">Lancamentos
+                Futuros2</a></li>
               <li><a href="#"
                      onclick="
                      drawVisualization('table','report_zone_1_div','<%= categories_reports_categories_lista_path %>');

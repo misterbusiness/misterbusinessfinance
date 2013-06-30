@@ -136,7 +136,7 @@ module LancamentosHelper
   def recebimentos_atrasados_report_table
     @today = DateTime.now
     @dt = DateTime.now - (Configurable.number_of_days_range).days
-    return Lancamento.abertos.receitas.range(@dt, @today).order("datavencimento").select { valor.as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis) }.select { descricao }
+    return Lancamento.abertos.receitas.range(@dt, @today).order("datavencimento").select { valor.as(values) }.select {datavencimento.as(axis) }.select { descricao }
   end
 
   def top_receitas_report_chart
@@ -146,7 +146,7 @@ module LancamentosHelper
 
   def top_receitas_report_table
     @dt = DateTime.now
-    return Lancamento.receitas.este_mes(@dt).order("valor desc").limit(Configurable.number_of_top_records).select{valor.as(values)}.select{to_char(datavencimento, 'DD-MM').as(axis)}.select{descricao}
+    return Lancamento.receitas.este_mes(@dt).order("valor desc").limit(Configurable.number_of_top_records).select{valor.as(values)}.select{datavencimento.as(axis)}.select{descricao}
   end
 
   #TODO: Verificar com o Butch se este relatório pode ser do mês
@@ -157,7 +157,8 @@ module LancamentosHelper
 
   def receitas_por_categoria_report_table
     @dt = DateTime.now
-    return Lancamento.receitas.por_categoria.este_mes(@dt).joins { category }.group { category.descricao }.group{valor}.group{descricao}.group{datavencimento}.select{valor.as(values)}.select{category.descricao.as(axis)}.select{descricao}.select{datavencimento}.order("axis").order("valor desc")
+    #return Lancamento.receitas.por_categoria.este_mes(@dt).joins { category }.group{ category.descricao }.group{valor}.group{descricao}.group{datavencimento}.select{valor.as(values)}.select{category.descricao.as(axis)}.select{descricao}.select{datavencimento.as(dateselected)}.order("axis").order("valor desc")
+    return Lancamento.receitas.por_categoria.este_mes(@dt).joins { category }.group{ category.descricao }.group{valor}.group{descricao}.group{datavencimento}.select{valor.as(values)}.select{category.descricao.as(axis)}.select{descricao}.select{datavencimento.as(dateselected)}.order("axis").order("valor desc")
   end
 
   #TODO: Verificar a necessidade de implementar outro grafico (por causa do espaço não ficou legal)
