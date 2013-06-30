@@ -34,9 +34,10 @@
     <button id="botaoGrid" class="btn btn-primary" >Todos</button>
     <input type="checkbox"  id="inputReceitas" checked="true"  value="S">Receitas</input>
     <input type="checkbox"  id="inputDespesas" checked="true" value="S">Despesas</input>
-    <input type="hidden" id="hiddenReceita" class="filtro_parametro"  />
+    <input type="hidden" id="hiddenReceita" class="filtro_parametro"   />
     <input type="hidden" id="hiddenDespesa" class="filtro_parametro"  />
-
+    Data de Vencimento : De<input type="text"  id="filtro_DataVencimentoDe" style="width: 100px"/>
+    Até<input type="text"  id="filtro_DataVencimentoAte" style="width: 100px" />
 
   <div id="lancamento_grid">
     <%= render :partial => 'grid' %>

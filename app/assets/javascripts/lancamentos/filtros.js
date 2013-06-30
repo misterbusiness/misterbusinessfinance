@@ -60,6 +60,30 @@ $(document).ready(function ()
         $('#hiddenReceita').data('valorparametro','S');
         $('#hiddenDespesa').data('valorparametro','S');
 
+        $('#filtro_DataVencimentoDe').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            todaybtn: true,
+            showButtonPanel:true,
+            changeMonth:true,
+            changeYear:true,
+            onClose: function( selectedDate ){
+                alert('Teste?');
+            }
+        });
+
+        $('#filtro_DataVencimentoAte').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            todaybtn: true,
+            showButtonPanel:true,
+            changeMonth:true,
+            changeYear:true
+        });
+
+
+
+
         $('#botaoGrid').click
         (
             function()
