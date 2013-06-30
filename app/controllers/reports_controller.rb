@@ -32,8 +32,8 @@ class ReportsController < ApplicationController
           :options => {
               :colors => ['green', 'red', 'blue'],
               :title => 'Receita - Estatisticas',
-              :width => '500',
-              :height => '300'
+              :width => '540',
+              :height => '450'
           },
           :cols => [['string', 'mes'], ['number', 'valor']],
           :rows => @json_rows
@@ -60,8 +60,8 @@ class ReportsController < ApplicationController
               :title => 'Despesa Realizada',
               :is3D => 'true',
               :enableInteractivity => 'true',
-              :width => '500',
-              :height => '300'
+              :width => '540',
+              :height => '450'
           },
           :cols => [['string', 'mes'], ['number', 'valor']],
           :rows => @json_rows
@@ -87,8 +87,8 @@ class ReportsController < ApplicationController
           :options => {
               :colors => ['green', 'red', 'blue'],
               :title => 'Estatisticas - Caixa',
-              :width => '500',
-              :height => '300'
+              :width => '540',
+              :height => '450'
           },
           :cols => [['string', 'mes'], ['number', 'valor']],
           :rows => @json_rows
