@@ -113,24 +113,11 @@ module LancamentosHelper
   # **********************************************************************************************************
   # Receitas
   # **********************************************************************************************************
-  def contas_a_receber_report_chart
-    @today = DateTime.now
-    @dt = DateTime.now + (Configurable.number_of_days_range).days
-    #return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { sum(valor).as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis)}.group { datavencimento }
-    return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { sum(valor).as(values) }.select { datavencimento.as(axis)}.group { datavencimento }
-  end
-
   def contas_a_receber_report_table
     @today = DateTime.now
     @dt = DateTime.now + (Configurable.number_of_days_range).days
     #return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { valor.as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis) }.select { descricao }
     return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { valor.as(values) }.select { datavencimento.as(axis) }.select { descricao }
-  end
-
-  def recebimentos_atrasados_report_chart
-    @today = DateTime.now
-    @dt = DateTime.now - (Configurable.number_of_days_range).days
-    return Lancamento.abertos.receitas.range(@dt, @today).order("datavencimento").select { sum(valor).as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis) }.group { datavencimento }
   end
 
   def recebimentos_atrasados_report_table
@@ -139,20 +126,10 @@ module LancamentosHelper
     return Lancamento.abertos.receitas.range(@dt, @today).order("datavencimento").select { valor.as(values) }.select {datavencimento.as(axis) }.select { descricao }
   end
 
-  def top_receitas_report_chart
-    @dt = DateTime.now
-    return Lancamento.receitas.este_mes(@dt).order("valor desc").limit(Configurable.number_of_top_records).select{valor.as(values)}.select{to_char(datavencimento, 'DD-MM').as(axis)}
-  end
 
   def top_receitas_report_table
     @dt = DateTime.now
     return Lancamento.receitas.este_mes(@dt).order("valor desc").limit(Configurable.number_of_top_records).select{valor.as(values)}.select{datavencimento.as(axis)}.select{descricao}
-  end
-
-  #TODO: Verificar com o Butch se este relatório pode ser do mês
-  def receitas_por_categoria_report_chart
-    @dt = DateTime.now
-    return Lancamento.receitas.por_categoria.este_mes(@dt).joins { category }.group { category.descricao }.select{sum(valor).as(values)}.select{category.descricao.as(axis)}
   end
 
   def receitas_por_categoria_report_table
@@ -170,13 +147,13 @@ module LancamentosHelper
                                 WHEN status_cd=1 THEN 'quitado'
                                 WHEN status_cd=2 THEN 'estornado'
                                 WHEN status_cd=3 THEN 'cancelado'
-                            END AS axis" }.select{descricao}.select{datavencimento}.order("axis")
+                            END AS axis" }.select{descricao}.select{datavencimento.as(dateselected)}.order("axis")
   end
 
   def receitas_por_centrodecusto_report_table
     @dt = DateTime.now
     return Lancamento.receitas.por_centrodecusto.este_mes(@dt).joins { centrodecusto }.group { centrodecusto.descricao }.group{valor}.group{descricao}.group{datavencimento}
-          .select{valor.as(values)}.select{centrodecusto.descricao.as(axis)}.select{descricao}.select{datavencimento}.order("axis").order("valor desc")
+          .select{valor.as(values)}.select{centrodecusto.descricao.as(axis)}.select{descricao}.select{datavencimento.as(dateselected)}.order("axis").order("valor desc")
   end
 
   def prazo_medio_recebimento_report
@@ -195,49 +172,27 @@ module LancamentosHelper
   # **********************************************************************************************************
   # Despesas
   # **********************************************************************************************************
-  def contas_a_pagar_report_chart
-    @today = DateTime.now
-    @dt = DateTime.now + (Configurable.number_of_days_range).days
-    return Lancamento.abertos.despesas.range(@today, @dt).order("datavencimento").select { sum(valor).as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis)}.group { datavencimento }
-  end
 
   def contas_a_pagar_report_table
     @today = DateTime.now
     @dt = DateTime.now + (Configurable.number_of_days_range).days
-    return Lancamento.abertos.despesas.range(@today, @dt).order("datavencimento").select { valor.as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis) }.select { descricao }
-  end
-
-  def contas_vencidas_report_chart
-    @today = DateTime.now
-    @dt = DateTime.now - (Configurable.number_of_days_range).days
-    return Lancamento.abertos.despesas.range(@dt, @today).order("datavencimento").select { sum(valor).as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis) }.group { datavencimento }
+    return Lancamento.abertos.despesas.range(@today, @dt).order("datavencimento").select { valor.as(values) }.select { datavencimento.as(axis) }.select { descricao }
   end
 
   def contas_vencidas_report_table
     @today = DateTime.now
     @dt = DateTime.now - (Configurable.number_of_days_range).days
-    return Lancamento.abertos.despesas.range(@dt, @today).order("datavencimento").select { valor.as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis) }.select { descricao }
-  end
-
-  def top_despesas_report_chart
-    @dt = DateTime.now
-    return Lancamento.despesas.este_mes(@dt).order("valor desc").limit(Configurable.number_of_top_records).select{valor.as(values)}.select{to_char(datavencimento, 'DD-MM').as(axis)}
+    return Lancamento.abertos.despesas.range(@dt, @today).order("datavencimento").select { valor.as(values) }.select {datavencimento.as(axis) }.select { descricao }
   end
 
   def top_despesas_report_table
     @dt = DateTime.now
-    return Lancamento.despesas.este_mes(@dt).order("valor desc").limit(Configurable.number_of_top_records).select{valor.as(values)}.select{to_char(datavencimento, 'DD-MM').as(axis)}.select{descricao}
-  end
-
-  #TODO: Verificar com o Butch se este relatório pode ser do mês
-  def despesas_por_categoria_report_chart
-    @dt = DateTime.now
-    return Lancamento.despesas.por_categoria.este_mes(@dt).joins { category }.group { category.descricao }.select{sum(valor).as(values)}.select{category.descricao.as(axis)}
+    return Lancamento.despesas.este_mes(@dt).order("valor desc").limit(Configurable.number_of_top_records).select{valor.as(values)}.select{datavencimento.as(axis)}.select{descricao}
   end
 
   def despesas_por_categoria_report_table
     @dt = DateTime.now
-    return Lancamento.despesas.por_categoria.este_mes(@dt).joins { category }.group { category.descricao }.group{valor}.group{descricao}.group{datavencimento}.select{valor.as(values)}.select{category.descricao.as(axis)}.select{descricao}.select{datavencimento}.order("axis").order("valor desc")
+    return Lancamento.despesas.por_categoria.este_mes(@dt).joins { category }.group { category.descricao }.group{valor}.group{descricao}.group{datavencimento}.select{valor.as(values)}.select{category.descricao.as(axis)}.select{descricao}.select{datavencimento.as(dateselected)}.order("axis").order("valor desc")
   end
 
   #TODO: Verificar a necessidade de implementar outro grafico (por causa do espaço não ficou legal)
@@ -249,13 +204,13 @@ module LancamentosHelper
                                 WHEN status_cd=1 THEN 'quitado'
                                 WHEN status_cd=2 THEN 'estornado'
                                 WHEN status_cd=3 THEN 'cancelado'
-                            END AS axis" }.select{descricao}.select{datavencimento}.order("axis")
+                            END AS axis" }.select{descricao}.select{datavencimento.as(dateselected)}.order("axis")
   end
 
   def despesas_por_centrodecusto_report_table
     @dt = DateTime.now
     return Lancamento.despesas.por_centrodecusto.este_mes(@dt).joins { centrodecusto }.group { centrodecusto.descricao }.group{valor}.group{descricao}.group{datavencimento}
-    .select{valor.as(values)}.select{centrodecusto.descricao.as(axis)}.select{descricao}.select{datavencimento}.order("axis").order("valor desc")
+    .select{valor.as(values)}.select{centrodecusto.descricao.as(axis)}.select{descricao}.select{datavencimento.as(dateselected)}.order("axis").order("valor desc")
   end
 
   def prazo_medio_pagamento_report

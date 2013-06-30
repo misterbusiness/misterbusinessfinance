@@ -2,6 +2,11 @@ class ReportsController < ApplicationController
   include ApplicationHelper
   include LancamentosHelper
 
+
+  def DateFormat(dateValue)
+    return Time.parse(dateValue).utc.to_i*1000
+  end
+
   # ************************************************************************************************************
   # Receitas actions
   # ************************************************************************************************************
@@ -279,34 +284,30 @@ class ReportsController < ApplicationController
     end
   end
 
-  def DateFormat(dateValue)
-     return Time.parse(dateValue).utc.to_i*1000
-  end
 
-
-  def contas_a_receber_chart
-    @report_series = Lancamento.find_by_sql(contas_a_receber_report_chart.to_sql)
-    unless @report_series.nil?
-      @json_rows = Array.new
-      @report_series.each do |serie|
-        @json_row = Array.new
-        @json_row.push(serie.axis)
-        @json_row.push(serie.values.to_f)
-        @json_rows.push(@json_row)
-      end
-
-      render :json => {
-          :type => 'LineChart',
-          :options => {
-              :title => 'Contas a receber',
-              :is3D => 'true',
-              :width => '800'
-          },
-          :cols => [['date', 'data'], ['number', 'valores']],
-          :rows => @json_rows
-      }
-    end
-  end
+  #def contas_a_receber_chart
+  #  @report_series = Lancamento.find_by_sql(contas_a_receber_report_chart.to_sql)
+  #  unless @report_series.nil?
+  #    @json_rows = Array.new
+  #    @report_series.each do |serie|
+  #      @json_row = Array.new
+  #      @json_row.push(serie.axis)
+  #      @json_row.push(serie.values.to_f)
+  #      @json_rows.push(@json_row)
+  #    end
+  #
+  #    render :json => {
+  #        :type => 'LineChart',
+  #        :options => {
+  #            :title => 'Contas a receber',
+  #            :is3D => 'true',
+  #            :width => '800'
+  #        },
+  #        :cols => [['date', 'data'], ['number', 'valores']],
+  #        :rows => @json_rows
+  #    }
+  #  end
+  #end
 
   def recebimentos_atrasados_table
     @report_series = Lancamento.find_by_sql(recebimentos_atrasados_report_table.to_sql)
@@ -333,31 +334,30 @@ class ReportsController < ApplicationController
     end
   end
 
-  #TODO: O grafico não está em escala de data
 
-  def recebimentos_atrasados_chart
-    @report_series = Lancamento.find_by_sql(recebimentos_atrasados_report_chart.to_sql)
-    unless @report_series.nil?
-      @json_rows = Array.new
-      @report_series.each do |serie|
-        @json_row = Array.new
-        @json_row.push(serie.axis)
-        @json_row.push(serie.values.to_f)
-        @json_rows.push(@json_row)
-      end
-
-      render :json => {
-          :type => 'LineChart',
-          :options => {
-              :title => 'Contas a receber',
-              :is3D => 'true',
-              :width => '800'
-          },
-          :cols => [['string', 'data'], ['number', 'valores']],
-          :rows => @json_rows
-      }
-    end
-  end
+  #def recebimentos_atrasados_chart
+  #  @report_series = Lancamento.find_by_sql(recebimentos_atrasados_report_chart.to_sql)
+  #  unless @report_series.nil?
+  #    @json_rows = Array.new
+  #    @report_series.each do |serie|
+  #      @json_row = Array.new
+  #      @json_row.push(serie.axis)
+  #      @json_row.push(serie.values.to_f)
+  #      @json_rows.push(@json_row)
+  #    end
+  #
+  #    render :json => {
+  #        :type => 'LineChart',
+  #        :options => {
+  #            :title => 'Contas a receber',
+  #            :is3D => 'true',
+  #            :width => '800'
+  #        },
+  #        :cols => [['string', 'data'], ['number', 'valores']],
+  #        :rows => @json_rows
+  #    }
+  #  end
+  #end
 
   def top_receitas_table
     @report_series = Lancamento.find_by_sql(top_receitas_report_table.to_sql)
@@ -383,31 +383,30 @@ class ReportsController < ApplicationController
     end
   end
 
-  #TODO: O grafico não está em escala de data
 
-  def top_receitas_chart
-    @report_series = Lancamento.find_by_sql(top_receitas_report_chart.to_sql)
-    unless @report_series.nil?
-      @json_rows = Array.new
-      @report_series.each do |serie|
-        @json_row = Array.new
-        @json_row.push(serie.axis)
-        @json_row.push(serie.values.to_f)
-        @json_rows.push(@json_row)
-      end
-
-      render :json => {
-          :type => 'LineChart',
-          :options => {
-              :title => 'Top receitas',
-              :is3D => 'true',
-              :width => '800'
-          },
-          :cols => [['string', 'data'], ['number', 'valores']],
-          :rows => @json_rows
-      }
-    end
-  end
+  #def top_receitas_chart
+  #  @report_series = Lancamento.find_by_sql(top_receitas_report_chart.to_sql)
+  #  unless @report_series.nil?
+  #    @json_rows = Array.new
+  #    @report_series.each do |serie|
+  #      @json_row = Array.new
+  #      @json_row.push(serie.axis)
+  #      @json_row.push(serie.values.to_f)
+  #      @json_rows.push(@json_row)
+  #    end
+  #
+  #    render :json => {
+  #        :type => 'LineChart',
+  #        :options => {
+  #            :title => 'Top receitas',
+  #            :is3D => 'true',
+  #            :width => '800'
+  #        },
+  #        :cols => [['string', 'data'], ['number', 'valores']],
+  #        :rows => @json_rows
+  #    }
+  #  end
+  #end
 
   def receitas_por_categoria_table
     @report_series = Lancamento.find_by_sql(receitas_por_categoria_report_table.to_sql)
@@ -423,7 +422,7 @@ class ReportsController < ApplicationController
       end
 
       render :json => {
-          :type => 'BarChart',
+          :type => 'AreaChart',
           :options => {
               :title => 'Receitas por categoria',
               :is3D => 'true',
@@ -435,29 +434,29 @@ class ReportsController < ApplicationController
     end
   end
 
-  def receitas_por_categoria_chart
-    @report_series = Lancamento.find_by_sql(receitas_por_categoria_report_chart.to_sql)
-    unless @report_series.nil?
-      @json_rows = Array.new
-      @report_series.each do |serie|
-        @json_row = Array.new
-        @json_row.push(serie.axis)
-        @json_row.push(serie.values.to_f)
-        @json_rows.push(@json_row)
-      end
-
-      render :json => {
-          :type => 'LineChart',
-          :options => {
-              :title => 'Receitas por categoria',
-              :is3D => 'true',
-              :width => '800'
-          },
-          :cols => [['string', 'data'], ['number', 'valores']],
-          :rows => @json_rows
-      }
-    end
-  end
+  #def receitas_por_categoria_chart
+  #  @report_series = Lancamento.find_by_sql(receitas_por_categoria_report_chart.to_sql)
+  #  unless @report_series.nil?
+  #    @json_rows = Array.new
+  #    @report_series.each do |serie|
+  #      @json_row = Array.new
+  #      @json_row.push(serie.axis)
+  #      @json_row.push(serie.values.to_f)
+  #      @json_rows.push(@json_row)
+  #    end
+  #
+  #    render :json => {
+  #        :type => 'LineChart',
+  #        :options => {
+  #            :title => 'Receitas por categoria',
+  #            :is3D => 'true',
+  #            :width => '800'
+  #        },
+  #        :cols => [['string', 'data'], ['number', 'valores']],
+  #        :rows => @json_rows
+  #    }
+  #  end
+  #end
 
   def receitas_por_status_table
     @report_series = Lancamento.find_by_sql(receitas_por_status_report_table.to_sql)
@@ -466,7 +465,7 @@ class ReportsController < ApplicationController
       @report_series.each do |serie|
         @json_row = Array.new
         @json_row.push(serie.axis)
-        @json_row.push(serie.datavencimento)
+        @json_row.push(DateFormat(serie.dateselected))
         @json_row.push(serie.descricao)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
@@ -478,7 +477,7 @@ class ReportsController < ApplicationController
               :title => 'Receitas por status',
               :is3D => 'true'
           },
-          :cols => [['string', 'status'], ['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
+          :cols => [['string', 'status'], ['date', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
       }
     end
@@ -491,7 +490,7 @@ class ReportsController < ApplicationController
       @report_series.each do |serie|
         @json_row = Array.new
         @json_row.push(serie.axis)
-        @json_row.push(serie.datavencimento)
+        @json_row.push(DateFormat(serie.dateselected))
         @json_row.push(serie.descricao)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
@@ -505,7 +504,7 @@ class ReportsController < ApplicationController
               
               :width => '800'
           },
-          :cols => [['string', 'CdC'], ['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
+          :cols => [['string', 'CdC'], ['date', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
       }
     end
@@ -594,7 +593,7 @@ class ReportsController < ApplicationController
       @json_rows = Array.new
       @report_series.each do |serie|
         @json_row = Array.new
-        @json_row.push(serie.axis)
+        @json_row.push(DateFormat(serie.axis))
         @json_row.push(serie.descricao)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
@@ -606,31 +605,7 @@ class ReportsController < ApplicationController
               :is3D => 'true',
               :width => '800'
           },
-          :cols => [['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
-          :rows => @json_rows
-      }
-    end
-  end
-
-  #TODO: O grafico não está em escala de data
-  def contas_a_pagar_chart
-    @report_series = Lancamento.find_by_sql(contas_a_pagar_report_chart.to_sql)
-    unless @report_series.nil?
-      @json_rows = Array.new
-      @report_series.each do |serie|
-        @json_row = Array.new
-        @json_row.push(serie.axis)
-        @json_row.push(serie.values.to_f)
-        @json_rows.push(@json_row)
-      end
-
-      render :json => {
-          :options => {
-              :title => 'Contas a pagar',
-              :is3D => 'true',
-              :width => '800'
-          },
-          :cols => [['string', 'data'], ['number', 'valores']],
+          :cols => [['date', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
       }
     end
@@ -642,7 +617,7 @@ class ReportsController < ApplicationController
       @json_rows = Array.new
       @report_series.each do |serie|
         @json_row = Array.new
-        @json_row.push(serie.axis)
+        @json_row.push(DateFormat(serie.axis))
         @json_row.push(serie.descricao)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
@@ -653,32 +628,7 @@ class ReportsController < ApplicationController
               :title => 'Contas vencidas',
               :is3D => 'true'
           },
-          :cols => [['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
-          :rows => @json_rows
-      }
-    end
-  end
-
-  #TODO: O grafico não está em escala de data
-
-  def contas_vencidas_chart
-    @report_series = Lancamento.find_by_sql(contas_vencidas_report_chart.to_sql)
-    unless @report_series.nil?
-      @json_rows = Array.new
-      @report_series.each do |serie|
-        @json_row = Array.new
-        @json_row.push(serie.axis)
-        @json_row.push(serie.values.to_f)
-        @json_rows.push(@json_row)
-      end
-
-      render :json => {
-          :options => {
-              :title => 'Contas vencidas',
-              :is3D => 'true',
-              :width => '800'
-          },
-          :cols => [['string', 'data'], ['number', 'valores']],
+          :cols => [['date', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
       }
     end
@@ -690,7 +640,7 @@ class ReportsController < ApplicationController
       @json_rows = Array.new
       @report_series.each do |serie|
         @json_row = Array.new
-        @json_row.push(serie.axis)
+        @json_row.push(DateFormat(serie.axis))
         @json_row.push(serie.descricao)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
@@ -702,30 +652,7 @@ class ReportsController < ApplicationController
               :is3D => 'true',
               :width => '800'
           },
-          :cols => [['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
-          :rows => @json_rows
-      }
-    end
-  end
-
-  def top_despesas_chart
-    @report_series = Lancamento.find_by_sql(top_despesas_report_chart.to_sql)
-    unless @report_series.nil?
-      @json_rows = Array.new
-      @report_series.each do |serie|
-        @json_row = Array.new
-        @json_row.push(serie.axis)
-        @json_row.push(serie.values.to_f)
-        @json_rows.push(@json_row)
-      end
-
-      render :json => {
-          :options => {
-              :title => 'Top despesas',
-              :is3D => 'true',
-              :width => '800'
-          },
-          :cols => [['string', 'data'], ['number', 'valores']],
+          :cols => [['date', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
       }
     end
@@ -738,7 +665,7 @@ class ReportsController < ApplicationController
       @report_series.each do |serie|
         @json_row = Array.new
         @json_row.push(serie.axis)
-        @json_row.push(serie.datavencimento)
+        @json_row.push(DateFormat(serie.dateselected))
         @json_row.push(serie.descricao)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
@@ -750,30 +677,7 @@ class ReportsController < ApplicationController
               :is3D => 'true',
               :width => '800'
           },
-          :cols => [['string', 'categoria'], ['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
-          :rows => @json_rows
-      }
-    end
-  end
-
-  def despesas_por_categoria_chart
-    @report_series = Lancamento.find_by_sql(despesas_por_categoria_report_chart.to_sql)
-    unless @report_series.nil?
-      @json_rows = Array.new
-      @report_series.each do |serie|
-        @json_row = Array.new
-        @json_row.push(serie.axis)
-        @json_row.push(serie.values.to_f)
-        @json_rows.push(@json_row)
-      end
-
-      render :json => {
-          :options => {
-              :title => 'Receitas por categoria',
-              :is3D => 'true',
-              :width => '800'
-          },
-          :cols => [['string', 'data'], ['number', 'valores']],
+          :cols => [['string', 'categoria'], ['date', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
       }
     end
@@ -786,7 +690,7 @@ class ReportsController < ApplicationController
       @report_series.each do |serie|
         @json_row = Array.new
         @json_row.push(serie.axis)
-        @json_row.push(serie.datavencimento)
+        @json_row.push(DateFormat(serie.dateselected))
         @json_row.push(serie.descricao)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
@@ -798,7 +702,7 @@ class ReportsController < ApplicationController
               :is3D => 'true',
               :width => '800'
           },
-          :cols => [['string', 'status'], ['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
+          :cols => [['string', 'status'], ['date', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
       }
     end
@@ -811,7 +715,7 @@ class ReportsController < ApplicationController
       @report_series.each do |serie|
         @json_row = Array.new
         @json_row.push(serie.axis)
-        @json_row.push(serie.datavencimento)
+        @json_row.push(DateFormat(serie.dateselected))
         @json_row.push(serie.descricao)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
@@ -825,7 +729,7 @@ class ReportsController < ApplicationController
               
               :width => '800'
           },
-          :cols => [['string', 'CdC'], ['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
+          :cols => [['string', 'CdC'], ['date', 'data'], ['string', 'descricao'], ['number', 'valores']],
           :rows => @json_rows
       }
     end

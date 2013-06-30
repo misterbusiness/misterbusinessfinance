@@ -60,14 +60,13 @@
                 por categoria</a></li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('pie', 'report_zone_1_div','<%= lancamentos_reports_receita_por_status_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_receitas_por_status_table_path %>');
-                             hideDiv('report_zone_3_div');">Receitas
-                por status</a></li>
+                     drawDashboardGroupChart('<%= lancamentos_reports_receitas_por_status_table_path %>','ChartRangeFilter','data', 'PieChart');
+                             ">Receitas por status</a></li>
               <li><a href="#"
                      onclick="
+                     drawDashboardGroupChart('<%= lancamentos_reports_receitas_por_centrodecusto_table_path %>','ChartRangeFilter','data', 'PieChart');
                      drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_receitas_por_centrodecusto_table_path %>');
-                             hideDiv('report_zone_2_div');">Receitas
+                             ">Receitas
                 por centro de custo</a></li>
               <li><a href="#"
                      onclick="drawDashboard('<%= lancamentos_reports_prazo_medio_recebimento_path %>','ChartRangeFilter','mes', 'LineChart');">Prazo
@@ -80,39 +79,31 @@
 
               <li><a href="#"
                      onclick="
-                     drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_contas_a_pagar_chart_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_contas_a_pagar_table_path %>');">Contas
+                     drawDashboardTimeSeries('<%= lancamentos_reports_contas_a_pagar_table_path %>','ChartRangeFilter','data', 'LineChart');">Contas
                 a pagar</a></li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_contas_vencidas_chart_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_contas_vencidas_table_path %>');">Contas
+                     drawDashboardTimeSeries('<%= lancamentos_reports_contas_vencidas_table_path %>','ChartRangeFilter','data', 'LineChart');">Contas
                 Vencidas
               </a></li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_top_despesas_chart_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_top_despesas_table_path %>');">TOP
+                     drawDashboardTimeSeries('<%= lancamentos_reports_top_despesas_table_path %>','ChartRangeFilter','data', 'ColumnChart');">TOP
                 despesas</a></li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_despesas_por_categoria_table_path %>');
-                             hideDiv('report_zone_2_div');">Despesas
+                     drawDashboardGroupChart('<%= lancamentos_reports_despesas_por_categoria_table_path %>','ChartRangeFilter','data', 'PieChart');">Despesas
                 por categoria</a></li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_despesas_por_status_table_path %>');
-                             hideDiv('report_zone_2_div');">Despesas
+                     drawDashboardGroupChart('<%= lancamentos_reports_despesas_por_status_table_path %>','ChartRangeFilter','data', 'PieChart');">Despesas
                 por status</a></li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_despesas_por_centrodecusto_table_path %>');
-                             hideDiv('report_zone_2_div');">Despesas
+                     drawDashboardGroupChart('<%= lancamentos_reports_despesas_por_centrodecusto_table_path %>','ChartRangeFilter','data', 'PieChart');">Despesas
                 por centro de custo</a></li>
               <li><a href="#"
-                     onclick="
-                     drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_prazo_medio_pagamento_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_prazo_medio_pagamento_path %>');">Prazo
+                     onclick="drawDashboard('<%= lancamentos_reports_prazo_medio_pagamento_path  %>','ChartRangeFilter','mes', 'LineChart');">Prazo
                 médio de pagamento</a></li>
               <li><a href="#"
                      onclick="
