@@ -51,15 +51,15 @@ class LancamentosController < ApplicationController
     if not params[:valor].nil? then
          case params[:seletorvalor]
            when "="
-             queryapoio = queryapoio.igual(params[:valor])
+             queryapoio = queryapoio.valor_igual(params[:valor])
 
            when "<"
 
-            queryapoio = queryapoio.menor(params[:valor])
+            queryapoio = queryapoio.valor_menor(params[:valor])
 
            when ">"
 
-             queryapoio = queryapoio.maior(params[:valor])
+             queryapoio = queryapoio.valor_maior(params[:valor])
 
          end
 

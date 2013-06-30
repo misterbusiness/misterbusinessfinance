@@ -78,9 +78,9 @@ class Lancamento < ActiveRecord::Base
   scope :por_status, group {status_cd}
   scope :por_descricao, lambda {|descricao| where('descricao like ? ', descricao)}
 
-  scope :menor, lambda {|valor| where('valor < (?) ', valor)}
-  scope :maior, lambda {|valor| where('valor > (?) ', valor)}
-  scope :igual, lambda {|valor| where('valor = (?) ', valor)}
+  scope :valor_menor, lambda {|valor| where('valor < (?) ', valor)}
+  scope :valor_maior, lambda {|valor| where('valor > (?) ', valor)}
+  scope :valor_igual, lambda {|valor| where('valor = (?) ', valor)}
 
 # public methods
   def has_parcelamento?
