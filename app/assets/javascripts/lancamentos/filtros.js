@@ -181,20 +181,23 @@ $(document).ready(function ()
 
                 if ($(this).prop('id') == 'seletor_valor')
                 {
-                    $('#filtro_valor').focus();
+                    if ($.trim($('#filtro_valor').val()) == "")
+                    {
+                        $('#filtro_valor').focus();
+                        return;
+                    }
+                }
+
+                if ($.trim($(this).val()) != "")
+                {
+                    $(this).data('valorparametro', $.trim($(this).val()));
                 }
                 else
                 {
-                    if ($.trim($(this).val()) != "")
-                    {
-                        $(this).data('valorparametro', $.trim($(this).val()));
-                    }
-                    else
-                    {
-                        $(this).removeData('valorparametro');
-                    }
-                        buildfilter.call(this);
+                    $(this).removeData('valorparametro');
                 }
+                    buildfilter.call(this);
+
             }
         )
 
