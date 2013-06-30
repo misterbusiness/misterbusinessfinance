@@ -39,6 +39,8 @@ class LancamentosController < ApplicationController
     queryapoio = queryapoio.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
     queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
     queryapoio = queryapoio.scoped_by_status_cd(params[:status]) unless params[:status].nil?
+    queryapoio = queryapoio.a_partir_de(params[:datavencimentode])  unless params[:datavencimentode].nil?
+    queryapoio = queryapoio.ate(params[:datavencimentoate])  unless params[:datavencimentoate].nil?
 
     if (params[:receita] == 'S' and params[:despesa] == 'N')
       queryapoio = queryapoio.receitas

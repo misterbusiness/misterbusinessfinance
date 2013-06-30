@@ -18,7 +18,6 @@ function buildfilter() {
     );
 
     $('#grid_results').html('Aguarde...');
-
     $.get(href, function (data)
                 {
                     $('#grid_results').html(data);
@@ -54,6 +53,9 @@ $(document).ready(function ()
         $('#filtro_valor').data('nomeparametro','valor');
         $('#filtro_categoria').data('nomeparametro','categoria');
         $('#filtro_centrodecusto').data('nomeparametro','centrodecusto');
+        $('#filtro_DataVencimentoDe').data('nomeparametro','datavencimentode');
+        $('#filtro_DataVencimentoAte').data('nomeparametro','datavencimentoate');
+
         $('#seletor_valor').data('nomeparametro','seletorvalor');
         $('#hiddenReceita').data('nomeparametro','receita');
         $('#hiddenDespesa').data('nomeparametro','despesa');
@@ -66,10 +68,7 @@ $(document).ready(function ()
             todaybtn: true,
             showButtonPanel:true,
             changeMonth:true,
-            changeYear:true,
-            onClose: function( selectedDate ){
-                alert('Teste?');
-            }
+            changeYear:true
         });
 
         $('#filtro_DataVencimentoAte').datepicker({
