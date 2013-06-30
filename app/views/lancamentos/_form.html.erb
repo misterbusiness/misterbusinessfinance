@@ -168,21 +168,20 @@
               <div class="container">
                 <label class="checkbox">
                   <input id="quitado_checkbox" type="checkbox"> Quitado? &nbsp;&nbsp;
-                </label>
+                </label>                                s
                 <%= hidden_field_tag :quitado, false, :id => "quitado_hidden" %>
               </div>
             </div>
           </div>
         </div>
-        </div>
-
-        <div><br></div>
-
-        <!-- ********************************** Submit ************************************************** -->
-        <div id="lancamento_quitado" class="actions">
-          <%= f.submit :class => "btn btn-primary", :id => "submit_btn" %>
-        </div>
-        <%= hidden_field_tag :form_mode, "Insert", :id => "form_mode_hidden" %>
       </div>
+
+      <div><br></div>
+
+      <!-- ********************************** Submit ************************************************** -->
+      <div id="lancamento_quitado" class="actions">
+        <%= f.submit :class => "btn btn-primary", :id => "submit_btn" %>
+      </div>
+      <%= hidden_field_tag :form_mode, "Insert", :id => "form_mode_hidden" %>
     </div>
 <% end %>

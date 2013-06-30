@@ -10,8 +10,8 @@
  */
 
 $(document).ready(function () {
-    drawVisualization('column', 'receita_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_receita_estatisticas_path %>');
-    drawVisualization('column', 'despesa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_despesa_estatisticas_path %>');
+    drawVisualization('bar', 'receita_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_receita_estatisticas_path %>');
+    drawVisualization('bar', 'despesa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_despesa_estatisticas_path %>');
     drawVisualization('line', 'caixa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_fluxo_caixa_estatisticas_path %>');
 });
 
@@ -61,6 +61,9 @@ function drawVisualization(chartType, chartArea, reportUrl, dashboard) {
             switch (chartType) {
                 case 'column':
                     var chart = new google.visualization.ColumnChart(container);
+                    break;
+                case 'bar':
+                    var chart = new google.visualization.BarChart(container);
                     break;
                 case 'pie':
                     var chart = new google.visualization.PieChart(container);

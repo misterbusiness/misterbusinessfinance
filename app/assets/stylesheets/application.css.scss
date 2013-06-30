@@ -42,6 +42,32 @@
   overflow: none;
 }
 
+
+.divReportsDialog .modal {
+  width: 1200px;
+  left: 40%;
+
+}
+
+.divReportsDialog .modal-body {
+  width: 1200px;
+  padding: 0;
+  max-height: none;
+  height: 700px;
+  overflow: none;
+}
+
+.divReportsDialog .tab-content {
+  overflow: none;
+}
+
+.quadrante{
+  width: 100%;
+  margin-left: none;
+  margin-right: none;
+  display: table;
+}
+
 .notification_warning {
   background-color: #F2DEDE;
   border: 1px solid #EED3D7;

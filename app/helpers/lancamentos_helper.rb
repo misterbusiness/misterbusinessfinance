@@ -229,9 +229,19 @@ module LancamentosHelper
     @aderencia_report_part1 = Lancamento.receitas.este_ano(@dt).por_mes.select { sum(valor).as(valor) }.select { date_part('month', datavencimento).as(mes) }
     @aderencia_report_part2 = Lancamento.despesas.este_ano(@dt).por_mes.select { sum(valor).as(valor) }.select { date_part('month', datavencimento).as(mes) }
 
-    return "SELECT ((COALESCE(r.valor,0))/(CASE d.valor WHEN 0 THEN 1 ELSE COALESCE(d.valor,1) END)) as values, r.mes as axis
-            from (#{@aderencia_report_part1.to_sql}) r
+    @meta_series_part1 = Target.receitas.por_mes.este_ano(@dt).select{sum(valor).as(valor)}.select{date_part('month', data).as(mes) }
+    @meta_series_part2 = Target.despesas.por_mes.este_ano(@dt).select{sum(valor).as(valor)}.select{date_part('month', data).as(mes) }
+
+    @aderencia_report = "SELECT ((COALESCE(r.valor,0))/(CASE d.valor WHEN 0 THEN 1 ELSE COALESCE(d.valor,1) END)) as values, r.mes as axis
+            FROM (#{@aderencia_report_part1.to_sql}) r
             FULL JOIN (#{@aderencia_report_part2.to_sql}) d ON r.mes = d.mes"
+    @meta_report = "SELECT ((COALESCE(r.valor,0))/(CASE d.valor WHEN 0 THEN 1 ELSE COALESCE(d.valor,1) END)) as values, r.mes as axis
+            FROM (#{@meta_series_part1.to_sql}) r
+            FULL JOIN (#{@meta_series_part2.to_sql}) d ON r.mes = d.mes"
+
+    return "SELECT a.values*100 as values, a.axis as axis, m.values*100 as meta
+            FROM (#{@aderencia_report}) a
+            INNER JOIN (#{@meta_report}) m ON a.axis = m.axis"
   end
 
   def ultimos_lancamentos_report
