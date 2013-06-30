@@ -18,6 +18,7 @@ function buildfilter() {
     );
 
     $('#grid_results').html('Aguarde...');
+
     $.get(href, function (data)
                 {
                     $('#grid_results').html(data);
@@ -37,8 +38,6 @@ function insertPaginationEvent()
         $(this).data('valorparametro',(RegExp('page=' + '(.+?)(&|$)').exec($(this).prop('href'))||[,null])[1]);
         $(this).addClass('filtro_parametro');
         buildfilter();
-        //execScript("/assets/paginate.js");
-        //$.get(this.href, null, null, 'script');
         return false;
     });
 
@@ -55,6 +54,7 @@ $(document).ready(function ()
         $('#filtro_valor').data('nomeparametro','valor');
         $('#filtro_categoria').data('nomeparametro','categoria');
         $('#filtro_centrodecusto').data('nomeparametro','centrodecusto');
+        $('#seletor_valor').data('nomeparametro','seletorvalor');
         $('#hiddenReceita').data('nomeparametro','receita');
         $('#hiddenDespesa').data('nomeparametro','despesa');
         $('#hiddenReceita').data('valorparametro','S');
@@ -151,8 +151,27 @@ $(document).ready(function ()
 
         $('.filtro_parametro').change(function()
             {
-                $(this).data('valorparametro', $(this).val());
-                buildfilter.call(this);
+                if ($(this).prop('id') == 'filtro_valor')
+                {
+                    $('#seletor_valor').data('valorparametro',$('#seletor_valor').val());
+                }
+
+                if ($(this).prop('id') == 'seletor_valor')
+                {
+                    $('#filtro_valor').focus();
+                }
+                else
+                {
+                    if ($.trim($(this).val()) != "")
+                    {
+                        $(this).data('valorparametro', $.trim($(this).val()));
+                    }
+                    else
+                    {
+                        $(this).removeData('valorparametro');
+                    }
+                        buildfilter.call(this);
+                }
             }
         )
 

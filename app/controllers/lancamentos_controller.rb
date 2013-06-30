@@ -48,6 +48,22 @@ class LancamentosController < ApplicationController
 
     end
 
+    if not params[:valor].nil? then
+         case params[:seletorvalor]
+           when "="
+             queryapoio = queryapoio.igual(params[:valor])
+
+           when "<"
+
+            queryapoio = queryapoio.menor(params[:valor])
+
+           when ">"
+
+             queryapoio = queryapoio.maior(params[:valor])
+
+         end
+
+    end
 
     if params[:page].nil? then
 
