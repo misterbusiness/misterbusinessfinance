@@ -1,34 +1,43 @@
-﻿<div id="lancamento_index">
-  <div>
-    <table class="table">
-      <tr height="60%">
-        <td width="45%">
+﻿<div class="quadrante">
+<div id="lancamento_index">
+    <!--<table class="table">-->
+      <!--<tr height="60%">-->
+        <!--<td width="45%">-->
+        <div style="width:30%; float: left;">
           <div style="overflow:scroll;overflow:auto">
             <div id="lancamento_form"><%= render :partial => 'form' %></div>
           </div>
-        </td>
-        <td width="10%">
+        </div>
+        <!--</td>-->
+        <!--<td width="10%">-->
+        <div style="width: 30%; float: left;">
           <%= render 'notifications' %>
-        </td>
-        <td width="45%">
+        </div>
+        <div style="width: 30%; float: left;">
+        <!--</td>-->
+        <!--<td width="45%">-->
           <%= render 'charts' %>
-          <div id="reportsArea">
-            <%= render 'reports' %></div>
-        </td>
-      </tr>
-    </table>
+          <!--<div id="reportsArea">-->
+            <%= render 'reports' %>
+        </div>
+        <!--</td>-->
+      <!--</tr>-->
+    <!--</table>-->
   </div>
-  <div>
+</div>
+  </br>
+<div class="quadrante">
+  <div style="width: 100%; float: none">
     <button id="botaoGrid" class="btn btn-primary" >Todos</button>
     <input type="checkbox"  id="inputReceitas" checked="true"  value="S">Receitas</input>
     <input type="checkbox"  id="inputDespesas" checked="true" value="S">Despesas</input>
     <input type="hidden" id="hiddenReceita" class="filtro_parametro"  />
     <input type="hidden" id="hiddenDespesa" class="filtro_parametro"  />
 
-  </div>
 
   <div id="lancamento_grid">
     <%= render :partial => 'grid' %>
 
   </div>
+</div>
 </div>
