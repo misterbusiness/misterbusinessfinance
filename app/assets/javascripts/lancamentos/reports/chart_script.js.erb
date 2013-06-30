@@ -9,7 +9,7 @@
  *
  */
 
-$(document).ready(function(){
+$(document).ready(function () {
     drawVisualization('column', 'receita_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_receita_estatisticas_path %>');
     drawVisualization('column', 'despesa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_despesa_estatisticas_path %>');
     drawVisualization('line', 'caixa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_fluxo_caixa_estatisticas_path %>');
@@ -177,6 +177,82 @@ function drawDashboard(reportUrl, filterType, filterColumn, chartType) {
         dashboardArea.draw(table);
     });
 }
+
+function drawDashboardTimeSeries(reportUrl, filterType, filterColumn, chartType) {
+    hideDiv('report_zone_1_div');
+    hideDiv('report_zone_2_div');
+    hideDiv('report_zone_3_div');
+    hideDiv('report_slider');
+
+    $.getJSON(reportUrl, function (data) {
+        var table = new google.visualization.DataTable();
+        $.each(data.cols, function () {
+            table.addColumn.apply(table, this);
+        });
+        table.addRows(data.rows);
+
+        //Define a slider control for the Age column.
+        var slider = new google.visualization.ControlWrapper({
+            'controlType': filterType,
+            'containerId': 'report_slider',
+            'options': {
+                'filterColumnLabel': filterColumn,
+                'interpolateNulls': 'true',
+                'ui': {
+                    'chartType': 'ComboChart',
+                    'labelStacking': 'vertical',
+                    'chartOptions': {
+                        'chartArea': {'height': '90%', 'width': '70%'}
+                    },
+                    'chartView': {
+                        'columns': [0, 1]
+                    },
+                    'minRangeSize': 86400000
+                }
+            }
+        });
+        $.each(data.options, function (key, value) {
+            slider.setOption('ui.chartOptions.' + key, value);
+        });
+
+        //var formatter = new google.visualization.NumberFormat(
+        //        {prefix: 'R$', negativeColor: 'red', negativeParens: true});
+        //formatter.format(table, 1);
+        var chart = new google.visualization.ChartWrapper(
+                {
+                    'chartType': chartType,
+                    'containerId': 'report_zone_1_div',
+                    'options': {
+                        'width': 800,
+                        'ui':{
+                            'chartView':{
+                                'columns': [0,2]
+                            }
+                        }
+                    }
+                }
+        );
+        $.each(data.options, function (key, value) {
+            chart.setOption(key, value);
+        });
+
+        var tableChart = new google.visualization.ChartWrapper(
+                {
+                    'chartType': 'Table',
+                    'containerId': 'report_zone_2_div',
+                    'options': {
+                        'width': 800
+                    }
+                }
+        );
+
+        var dashboardArea = new google.visualization.Dashboard(document.getElementById('chartsArea'));
+        dashboardArea.bind(slider, chart);
+        dashboardArea.bind(slider, tableChart);
+        dashboardArea.draw(table);
+    });
+}
+
 
 function drawToolbar() {
     var components = [

@@ -43,8 +43,7 @@
               <li class="nav-header">Receita</li>
               <li><a href="#"
                      onclick="
-                     drawVisualization('line', 'report_zone_1_div','<%= lancamentos_reports_contas_a_receber_chart_path %>');
-                             drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_contas_a_receber_table_path %>');">Contas
+                     drawDashboardTimeSeries('<%= lancamentos_reports_contas_a_receber_table_path %>','ChartRangeFilter','data', 'LineChart');">Contas
                 a receber</a></li>
               <li><a href="#"
                      onclick="

@@ -128,19 +128,22 @@ class ReportsController < ApplicationController
         @json_row = Array.new
         @json_row.push(Date::MONTHNAMES[serie.mes.to_f])
         @json_row.push(serie.valor.to_f)
+        @json_row.push(serie.meta.to_f)
         @json_rows.push(@json_row)
       end
 
       render :json => {
           :type => 'ColumnChart',
           :options => {
-              :colors => ['red'],
+              :colors => ['red','blue'],
               :title => 'Despesa Realizada',
               :is3D => 'true',
               :enableInteractivity => 'true',
-              :width => '800'
+              :width => '800',
+              :seriesType => 'bars',
+              :series => {1 => {:type => 'area', :pointSize => '6'}}
           },
-          :cols => [['string', 'mes'], ['number', 'valor']],
+          :cols => [['string', 'mes'], ['number', 'valor'], ['number','meta']],
           :rows => @json_rows
       }
     end
@@ -256,8 +259,8 @@ class ReportsController < ApplicationController
       @json_rows = Array.new
       @report_series.each do |serie|
         @json_row = Array.new
-        @json_row.push(serie.axis)
-        @json_row.push(serie.descricao)
+        @json_row.push(DateFormat(serie.axis))
+        #@json_row.push(serie.descricao)
         @json_row.push(serie.values.to_f)
         @json_rows.push(@json_row)
       end
@@ -269,10 +272,15 @@ class ReportsController < ApplicationController
               :is3D => 'true',
               :width => '800'
           },
-          :cols => [['string', 'data'], ['string', 'descricao'], ['number', 'valores']],
+         # :cols => [['number', 'data'], ['string', 'descricao'], ['number', 'valores']],
+          :cols => [['number', 'data'], ['number', 'valores']],
           :rows => @json_rows
       }
     end
+  end
+
+  def DateFormat(dateValue)
+     return Time.parse(dateValue).utc.to_i
   end
 
   #TODO: O grafico não está em escala de data

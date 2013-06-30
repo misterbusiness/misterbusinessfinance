@@ -34,9 +34,11 @@ module LancamentosHelper
     .select { sum(valor).as(valor) }
     .select { date_part('month', datavencimento).as(mes) }
 
-    return "SELECT valor, mes from ((#{@despesa_series_part1.to_sql})
-                  UNION (#{@despesa_series_part2.to_sql})) as realizado order by mes"
+    @meta_serias = Target.despesas.por_mes.este_ano(dt).select{sum(valor).as(valor)}.select{date_part('month', data).as(mes) }
 
+    return "SELECT realizado.valor as valor, realizado.mes, meta.valor as meta from ((#{@despesa_series_part1.to_sql})
+                    UNION (#{@despesa_series_part2.to_sql})) as realizado
+                    INNER JOIN (#{@meta_serias.to_sql}) as meta on realizado.mes = meta.mes order by mes"
   end
 
   #@report_series_zone_1 = Lancamento.find_by_sql(despesa_series_query(@dt))
@@ -114,13 +116,15 @@ module LancamentosHelper
   def contas_a_receber_report_chart
     @today = DateTime.now
     @dt = DateTime.now + (Configurable.number_of_days_range).days
-    return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { sum(valor).as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis)}.group { datavencimento }
+    #return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { sum(valor).as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis)}.group { datavencimento }
+    return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { sum(valor).as(values) }.select { datavencimento.as(axis)}.group { datavencimento }
   end
 
   def contas_a_receber_report_table
     @today = DateTime.now
     @dt = DateTime.now + (Configurable.number_of_days_range).days
-    return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { valor.as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis) }.select { descricao }
+    #return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { valor.as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis) }.select { descricao }
+    return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { valor.as(values) }.select { datavencimento.as(axis) }.select { descricao }
   end
 
   def recebimentos_atrasados_report_chart
