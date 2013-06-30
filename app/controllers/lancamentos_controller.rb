@@ -1,3 +1,5 @@
+#!/bin/env ruby
+# encoding: utf-8
 class LancamentosController < ApplicationController
   include ApplicationHelper
   include LancamentosHelper
@@ -81,23 +83,47 @@ class LancamentosController < ApplicationController
     # TODO: Aguardar o término do desenvolvimento dos filtros do grid para poder linkar as notificações a ele. GR @ 20130629
 
     # Notificações
-    @notificacoes = {}
+    @notificacoes = Hash.new { |hash, key| hash[key] = Hash.new }
 
     # Receitas Atrasadas
     notif_receitas_atrasadas = Lancamento.receitas.abertos.ate(Date.today)
-    @notificacoes['rec_atrasadas'] = notif_receitas_atrasadas.count unless notif_receitas_atrasadas.count == 0
+    if notif_receitas_atrasadas.count > 0
+      @notificacoes[Random.new_seed] = {
+          :text => sprintf('Você tem %d Receitas Atrasadas.', notif_receitas_atrasadas.count),
+          :can_close => true,
+          :class => 'notification_information'
+      }
+    end
 
     # Despesas Vencidas
     notif_despesas_vencidas = Lancamento.despesas.abertos.ate(Date.today)
-    @notificacoes['desp_vencidas'] = notif_despesas_vencidas.count unless notif_despesas_vencidas.count == 0
+    if notif_receitas_atrasadas.count > 0
+      @notificacoes[Random.new_seed] = {
+          :text => sprintf('Você tem %d Despesas Vencidas.', notif_despesas_vencidas.count),
+          :can_close => true,
+          :class => 'notification_success'
+      }
+    end
 
     # Receitas a Receber
     notif_receitas_a_receber = Lancamento.receitas.abertos.range(Date.today, Date.today + Configurable.number_of_future_days)
-    @notificacoes['rec_receber'] = notif_receitas_a_receber.count unless notif_receitas_a_receber.count == 0
+    if notif_receitas_a_receber.count > 0
+      @notificacoes[Random.new_seed] = {
+          :text => sprintf('Você tem %d Receitas a Receber nos próximos %d dias.', notif_receitas_a_receber.count, Configurable.number_of_future_days),
+          :can_close => true,
+          :class => 'notification_warning'
+      }
+    end
 
     # Despesas Vincendas
     notif_despesas_vincendas = Lancamento.despesas.abertos.range(Date.today, Date.today + Configurable.number_of_future_days)
-    @notificacoes['desp_vincendas'] = notif_despesas_vincendas.count unless notif_despesas_vincendas.count == 0
+    if notif_despesas_vincendas.count > 0
+      @notificacoes[Random.new_seed] = {
+          :text => sprintf('Você tem %d Despesas Vincendas nos próximos %d dias.', notif_despesas_vincendas.count, Configurable.number_of_future_days),
+          :can_close => true,
+          :class => 'notification_attention'
+      }
+    end
   end
 
   def new

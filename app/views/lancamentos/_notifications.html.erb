@@ -1,21 +1,16 @@
 Aba de Notificações
 <%
-   @notificacoes.each do |key, value|
-     case key
-       when 'rec_atrasadas'
-         key = 'Receitas Atrasadas.'
-       when 'desp_vencidas'
-         key = 'Despesas Vencidas.'
-       when 'rec_receber'
-         key = 'Receitas a receber nos próximos ' + Configurable.number_of_future_days.to_s + ' dias.'
-       when 'desp_vincendas'
-         key = 'Despesas vincendas nos próximos ' + Configurable.number_of_future_days.to_s + ' dias.'
-       else
-     end
-     if value > 0
+   @notificacoes.each do |notification_id, notification|
 %>
-        <p><%= sprintf('Você tem %d %s', value, key) %></p>
-    <%
-       end
-       end
-    %>
+    <% if notification.has_key?(:text) %>
+        <div class="<%= notification[:class] %>">
+    <% end %>
+    <% if notification.has_key?(:can_close) %>
+        <a class="notification_close" onclick="close_notification(this)">&times;</a>
+    <% end %>
+    <% if notification.has_key?(:link) %>
+        <a href="<%= notification[:link] %>"><%= notification[:text] %></a></div>
+    <% else %>
+        <%= notification[:text] %></div>
+    <% end %>
+<% end %>
