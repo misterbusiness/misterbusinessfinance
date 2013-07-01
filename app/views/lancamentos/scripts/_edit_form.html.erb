@@ -19,7 +19,8 @@
                 $("#lancamento_valor").autoNumeric();
                 $("#lancamento_valor").blur();
             }
-            else {
+            else 
+			{
                 $('[id^="edit_lancamento_row_"]').removeClass('info');
                 $("#<%=@edit_row_id%>").addClass("info");
                 $.ajax({

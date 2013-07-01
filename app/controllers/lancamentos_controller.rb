@@ -13,8 +13,8 @@ class LancamentosController < ApplicationController
 
     query = build_query()
     @lancamentos = query
+    render :layout => nil
 
-    render :layout => false
 
   end
 
