@@ -17,7 +17,8 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'populator'
 gem 'faker'
-
+gem 'pdfkit'
+gem 'wkhtmltopdf-binary'
 
 
 # Bundle edge Rails instead:

@@ -1,6 +1,12 @@
 Misterbusinessfinance::Application.routes.draw do
    
 
+  # Reports - Estatisticas
+  match 'lancamentos/reports/receita_estatisticas', to: 'reports#receita_estatisticas'
+  match 'lancamentos/reports/despesa_estatisticas', to: 'reports#despesa_estatisticas'
+  match 'lancamentos/reports/fluxo_caixa_estatisticas', to: 'reports#fluxo_caixa_estatisticas'
+
+
   # Reports - Lançamentos
   match 'lancamentos/reports/receita_realizada', to: 'reports#receita_realizada'
 
@@ -95,7 +101,7 @@ Misterbusinessfinance::Application.routes.draw do
      member do
        put :quitar
        put :estornar
-       put :destroy
+#       put :destroy
      end
 
     get :filter

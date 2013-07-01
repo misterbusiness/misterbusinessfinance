@@ -1,0 +1,420 @@
+/**
+ * Created with JetBrains RubyMine.
+ * User: administrator
+ * Date: 29/06/13
+ * Time: 13:35
+ * To change this template use File | Settings | File Templates.
+ *
+ * <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+ *
+ */
+
+$(document).ready(function () {
+    drawVisualization('bar', 'receita_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_receita_estatisticas_path %>');
+    drawVisualization('bar', 'despesa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_despesa_estatisticas_path %>');
+    drawVisualization('line', 'caixa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_fluxo_caixa_estatisticas_path %>');
+});
+
+google.load('visualization', '1.0', {'packages': ['corechart']});
+
+function selectChartTab(chartName) {
+    $("#" + chartName).click();
+}
+function drawVisualization(chartType, chartArea, reportUrl, dashboard) {
+    hideDiv('report_zone_1_div');
+    hideDiv('report_zone_2_div');
+    hideDiv('report_zone_3_div');
+    hideDiv('report_slider');
+
+    $("#" + chartArea).html("");
+    $.getJSON(reportUrl, function (data) {
+        var table = new google.visualization.DataTable();
+        $.each(data.cols, function () {
+            table.addColumn.apply(table, this);
+        });
+        table.addRows(data.rows);
+
+        if (typeof dashboard === "undefined" || dashboard === null) {
+            // Do nothing
+        }
+        else {
+
+            //Define a slider control for the Age column.
+            var slider = new google.visualization.ControlWrapper({
+                'controlType': 'ChartRangeFilter',
+                'containerId': 'report_slider',
+                'options': {
+                    'filterColumnLabel': 'mes',
+                    'ui': {
+                        'labelStacking': 'vertical',
+                        'chartOptions': {
+                            'chartArea': {'height': '90%', 'width': '70%'}
+                        }
+                    }
+                }
+            });
+        }
+
+
+        var container = document.getElementById(chartArea);
+        if (typeof dashboard === "undefined" || dashboard === null) {
+            switch (chartType) {
+                case 'column':
+                    var chart = new google.visualization.ColumnChart(container);
+                    break;
+                case 'bar':
+                    var chart = new google.visualization.BarChart(container);
+                    break;
+                case 'pie':
+                    var chart = new google.visualization.PieChart(container);
+                    break;
+                case 'line':
+                    var chart = new google.visualization.LineChart(container);
+                    break;
+                case 'table':
+                    var chart = new google.visualization.Table(container);
+                    break;
+                case 'combo':
+                    var chart = new google.visualization.ComboChart(container);
+                    break;
+                default:
+                    var chart = new google.visualization.ColumnChart(container);
+            }
+        }
+
+        //var formatter = new google.visualization.NumberFormat(
+        //        {prefix: 'R$', negativeColor: 'red', negativeParens: true});
+        //formatter.format(table, 1);
+
+        if (typeof dashboard === "undefined" || dashboard === null) {
+            chart.draw(table, data.options);
+        }
+        else {
+            chart = new google.visualization.ChartWrapper(
+                    {
+                        'chartType': 'LineChart',
+                        'containerId': 'report_zone_1_div',
+                        'options': {
+                            'width': 800
+                        }
+
+                    }
+            );
+            var chart2 = new google.visualization.ChartWrapper(
+                    {
+                        'chartType': 'Table',
+                        'containerId': 'report_zone_2_div',
+                        'options': {
+                            'width': 800
+                        }
+
+                    }
+            );
+            var dashboardArea = new google.visualization.Dashboard(document.getElementById('chartsArea'));
+            dashboardArea.bind(slider, chart);
+            dashboardArea.bind(slider, chart2);
+            dashboardArea.draw(table);
+
+            //new google.visualization.Dashboard(document.getElementById('chartsArea')).bind(slider, chart).draw(table, data.options);
+        }
+    });
+}
+
+function drawDashboard(reportUrl, filterType, filterColumn, chartType) {
+    hideDiv('report_zone_1_div');
+    hideDiv('report_zone_2_div');
+    hideDiv('report_zone_3_div');
+    hideDiv('report_slider');
+
+    $.getJSON(reportUrl, function (data) {
+        var table = new google.visualization.DataTable();
+        $.each(data.cols, function () {
+            table.addColumn.apply(table, this);
+        });
+        table.addRows(data.rows);
+
+        //Define a slider control for the Age column.
+        var slider = new google.visualization.ControlWrapper({
+            'controlType': filterType,
+            'containerId': 'report_slider',
+            'options': {
+                'filterColumnLabel': filterColumn,
+                'ui': {
+                    'chartType': 'LineChart',
+                    'labelStacking': 'vertical',
+                    'chartOptions': {
+                        'chartArea': {'height': '90%', 'width': '70%'}
+                    }
+                }
+            }
+        });
+        $.each(data.options, function (key, value) {
+            slider.setOption('ui.chartOptions.' + key, value);
+        });
+
+        //var formatter = new google.visualization.NumberFormat(
+        //        {prefix: 'R$', negativeColor: 'red', negativeParens: true});
+        //formatter.format(table, 1);
+        var chart = new google.visualization.ChartWrapper(
+                {
+                    'chartType': chartType,
+                    'containerId': 'report_zone_1_div',
+                    'options': {
+                        'width': 800
+                    }
+                }
+        );
+        $.each(data.options, function (key, value) {
+            chart.setOption(key, value);
+        });
+
+        var tableChart = new google.visualization.ChartWrapper(
+                {
+                    'chartType': 'Table',
+                    'containerId': 'report_zone_2_div',
+                    'options': {
+                        'width': 800
+                    }
+                }
+        );
+
+        var dashboardArea = new google.visualization.Dashboard(document.getElementById('chartsArea'));
+        dashboardArea.bind(slider, chart);
+        dashboardArea.bind(slider, tableChart);
+        dashboardArea.draw(table);
+    });
+}
+
+function drawDashboardTimeSeries(reportUrl, filterType, filterColumn, chartType) {
+    hideDiv('report_zone_1_div');
+    hideDiv('report_zone_2_div');
+    hideDiv('report_zone_3_div');
+    hideDiv('report_slider');
+
+    var xAxisFilterColumn = 0;
+    var xAxisChartColumn = 0;
+    var yAxisFilterColumn = 2;
+    var yAxisChartColumn = 2;
+
+    $.getJSON(reportUrl, function (data) {
+        var table = new google.visualization.DataTable();
+        $.each(data.cols, function () {
+            table.addColumn.apply(table, this);
+        });
+
+        //table.addRows(data.rows);
+        $.each(data.rows, function () {
+            var row = this
+            row[xAxisFilterColumn] = new Date(this[xAxisFilterColumn]);
+            //dateTemp = new Date(this[0]);
+            //table.addRow([new Date(dateTemp.getYear(), dateTemp.getMonth(), dateTemp.getDay()),''+row[1]+'',row[2]]);
+            table.addRow(row);
+        })
+        //Define a slider control for the Age column.
+        var slider = new google.visualization.ControlWrapper({
+            'controlType': filterType,
+            'containerId': 'report_slider',
+            'options': {
+                'filterColumnLabel': filterColumn,
+                'interpolateNulls': 'true',
+                'ui': {
+                    'chartType': 'ComboChart',
+                    'labelStacking': 'vertical',
+                    'chartOptions': {
+                        'chartArea': {'height': '90%', 'width': '70%'}
+                    },
+                    'chartView': {
+                        'columns': [xAxisFilterColumn, yAxisFilterColumn]
+                    },
+                    'minRangeSize': 86400000
+                }
+            }
+        });
+        $.each(data.options, function (key, value) {
+            slider.setOption('ui.chartOptions.' + key, value);
+        });
+
+        //var formatter = new google.visualization.NumberFormat(
+        //        {prefix: 'R$', negativeColor: 'red', negativeParens: true});
+        //formatter.format(table, 1);
+        var chart = new google.visualization.ChartWrapper(
+                {
+                    'chartType': chartType,
+                    'containerId': 'report_zone_1_div',
+                    'options': {
+                        'width': 800
+                    },
+                    'view': {'columns': [xAxisChartColumn, yAxisChartColumn]}
+
+                }
+        );
+        $.each(data.options, function (key, value) {
+            chart.setOption(key, value);
+        });
+
+        var tableChart = new google.visualization.ChartWrapper(
+                {
+                    'chartType': 'Table',
+                    'containerId': 'report_zone_2_div',
+                    'options': {
+                        'width': 800
+                    }
+                }
+        );
+
+        var dashboardArea = new google.visualization.Dashboard(document.getElementById('chartsArea'));
+        dashboardArea.bind(slider, chart);
+        dashboardArea.bind(slider, tableChart);
+        dashboardArea.draw(table);
+        var result = google.visualization.data.group(table, [xAxisChartColumn], [
+            {'column': yAxisChartColumn, 'aggregation': google.visualization.data.sum, 'type': 'number'}
+        ])
+        chart.draw(result, 'report_zone_1_div');
+    });
+}
+function drawDashboardGroupChart(reportUrl, filterType, filterColumn, chartType) {
+    hideDiv('report_zone_1_div');
+    hideDiv('report_zone_2_div');
+    hideDiv('report_zone_3_div');
+    hideDiv('report_slider');
+
+    var xAxisFilterColumn = 1;
+    var xAxisChartColumn = 0;
+    var yAxisFilterColumn = 3;
+    var yAxisChartColumn = 3;
+
+    $.getJSON(reportUrl, function (data) {
+        var table = new google.visualization.DataTable();
+        $.each(data.cols, function () {
+            table.addColumn.apply(table, this);
+        });
+
+        //table.addRows(data.rows);
+        $.each(data.rows, function () {
+            var row = this
+            row[xAxisFilterColumn] = new Date(this[xAxisFilterColumn]);
+            //dateTemp = new Date(this[0]);
+            //table.addRow([new Date(dateTemp.getYear(), dateTemp.getMonth(), dateTemp.getDay()),''+row[1]+'',row[2]]);
+            table.addRow(row);
+        })
+        //Define a slider control for the Age column.
+        var slider = new google.visualization.ControlWrapper({
+            'controlType': filterType,
+            'containerId': 'report_slider',
+            'options': {
+                'filterColumnLabel': filterColumn,
+                'interpolateNulls': 'false',
+                'ui': {
+                    'chartType': 'LineChart',
+                    'labelStacking': 'vertical',
+                    'chartOptions': {
+                        'chartArea': {'height': '90%', 'width': '70%'}
+                    },
+                    'chartView': {
+                        'columns': [xAxisFilterColumn, yAxisFilterColumn]
+                    },
+                    'minRangeSize': 86400000
+                }
+            }
+        });
+        $.each(data.options, function (key, value) {
+            slider.setOption('ui.chartOptions.' + key, value);
+        });
+
+        //var formatter = new google.visualization.NumberFormat(
+        //        {prefix: 'R$', negativeColor: 'red', negativeParens: true});
+        //formatter.format(table, 1);
+        var chart = new google.visualization.ChartWrapper(
+                {
+                    //'chartType': chartType,
+                    'chartType': chartType,
+                    'containerId': 'report_zone_1_div',
+                    'options': {
+                        'width': 800
+                    },
+                    //'view': {'columns': [xAxisChartColumn, yAxisChartColumn]}
+                    'dataTable': google.visualization.data.group(
+                            table,
+                            [xAxisChartColumn],
+                            [
+                                {'column': yAxisChartColumn, 'aggregation': google.visualization.data.sum, 'type': 'number'}
+                            ]
+                    )
+                }
+        );
+
+        $.each(data.options, function (key, value) {
+            chart.setOption(key, value);
+        });
+
+        chart.draw();
+        var tableChart = new google.visualization.ChartWrapper(
+                {
+                    'chartType': 'Table',
+                    'containerId': 'report_zone_2_div',
+                    'options': {
+                        'width': 800
+                    }
+                }
+        );
+
+        var dashboardArea = new google.visualization.Dashboard(document.getElementById('chartsArea'));
+        dashboardArea.bind(slider, tableChart);
+        dashboardArea.draw(table);
+
+        google.visualization.events.addListener(slider, 'statechange',
+                function (event) {
+                    // group the data of the filtered table and set the result in the pie chart.
+                    chart.setDataTable(google.visualization.data.group(
+                            // get the filtered results
+                            tableChart.getDataTable(),
+                            [xAxisChartColumn],
+                            [
+                                {'column': yAxisChartColumn, 'aggregation': google.visualization.data.sum, 'type': 'number'}
+                            ]
+                    ));
+                    // redraw the pie chart to reflect changes
+                    chart.draw();
+                });
+
+    });
+}
+
+
+function drawToolbar() {
+    var components = [
+        {type: 'igoogle', datasource: 'http://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA&pub=1',
+            gadget: 'http://www.google.com/ig/modules/pie-chart.xml',
+            userprefs: {'3d': 1}},
+        {type: 'html', datasource: 'http://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA&pub=1'},
+        {type: 'csv', datasource: 'http://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA&pub=1'},
+        {type: 'htmlcode', datasource: 'http://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA&pub=1',
+            gadget: 'http://www.google.com/ig/modules/pie-chart.xml'}
+    ];
+
+    var container = document.getElementById('toolbar_div');
+    google.visualization.drawToolbar(container, components);
+}
+;
+
+function showReportMenu() {
+    $("#reportsSideMenu").show();
+
+    $("#report_slider").html("");
+    $("#report_zone_1_div").html("");
+    $("#report_zone_2_div").html("");
+    $("#report_zone_3_div").html("");
+}
+
+function hideReportMenu() {
+    $("#reportsSideMenu").hide();
+
+    $("#report_slider").html("");
+    $("#report_zone_1_div").html("");
+    $("#report_zone_2_div").html("");
+    $("#report_zone_3_div").html("");
+}
+
+function hideDiv(divName) {
+    $("#" + divName).html("");
+}

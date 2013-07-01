@@ -1,3 +1,5 @@
+#!/bin/env ruby
+# encoding: utf-8
 class LancamentosController < ApplicationController
   include ApplicationHelper
   include LancamentosHelper
@@ -10,7 +12,6 @@ class LancamentosController < ApplicationController
   def filter
 
 
-
     query = build_query()
     @lancamentos = query
     render :layout => nil
@@ -21,7 +22,7 @@ class LancamentosController < ApplicationController
   def load
 
     @lancamento = Lancamento.new
-	@lancamentos = Lancamento.all
+    @lancamentos = Lancamento.all
     @lancamentorapidos = Lancamentorapido.all
     @categorias = Category.all
     @centrosdecusto = Centrodecusto.all
@@ -31,39 +32,41 @@ class LancamentosController < ApplicationController
     render :partial => 'grid'
 
   end
-  #def reports
-  #  @tabSelection = params[:tab]
-  #  @dt = DateTime.now
-  #
-  #  case @tabSelection
-  #    when 'receita' then
-  #      @report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
-  #      @report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
-  #      @report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
-  #    when 'despesa' then
-  #      #@report_series_zone_1 = Lancamento.find_by_sql(despesa_series_query(@dt))
-  #      #@report_series_zone_2 = Lancamento.find_by_sql(despesa_por_categoria_series_query(@dt).to_sql)
-  #      #@report_series_zone_3 = Lancamento.find_by_sql(despesa_por_centrodecusto_series_query(@dt).to_sql)
-  #      #@report_series_zone_3 = Lancamento.find_by_sql(despesa_por_categoria_series_query(@dt).to_sql)
-  #
-  #      @report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
-  #      @report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
-  #      @report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
-  #    else
-  #      @report_series_zone_1 = Lancamento.find_by_sql(receita_series_query(@dt))
-  #      @report_series_zone_2 = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
-  #      @report_series_zone_3 = Lancamento.find_by_sql(receita_por_status_series_query(@dt).to_sql)
-  #  end
-  #end
 
   def build_query
     queryapoio = Lancamento.unscoped
     queryapoio = queryapoio.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
     queryapoio = queryapoio.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
     queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
-    queryapoio = queryapoio.receitas  unless params[:receitas].nil?
-	  queryapoio = queryapoio.scoped_by_status_cd(params[:status]) unless params[:status].nil?
-	
+    queryapoio = queryapoio.scoped_by_status_cd(params[:status]) unless params[:status].nil?
+    queryapoio = queryapoio.a_partir_de(params[:datavencimentode])  unless params[:datavencimentode].nil?
+    queryapoio = queryapoio.ate(params[:datavencimentoate])  unless params[:datavencimentoate].nil?
+
+    if (params[:receita] == 'S' and params[:despesa] == 'N')
+      queryapoio = queryapoio.receitas
+
+    elsif (params[:receita] == 'N' and params[:despesa] == 'S')
+      queryapoio = queryapoio.despesas
+
+    end
+
+    if not params[:valor].nil? then
+         case params[:seletorvalor]
+           when "="
+             queryapoio = queryapoio.valor_igual(params[:valor])
+
+           when "<"
+
+            queryapoio = queryapoio.valor_menor(params[:valor])
+
+           when ">"
+
+             queryapoio = queryapoio.valor_maior(params[:valor])
+
+         end
+
+    end
+
     if params[:page].nil? then
 
       queryapoio = queryapoio.paginate(:page => "1", :per_page => 20)
@@ -75,10 +78,7 @@ class LancamentosController < ApplicationController
     end
 
 
-
-
-
-    query =  queryapoio
+    query = queryapoio
   end
 
   # GET /lancamentos
@@ -93,13 +93,54 @@ class LancamentosController < ApplicationController
 
       @tabSelection = params[:tab]
 
-      @receita_series = Lancamento.find_by_sql(receita_series_query(@dt))
-      @despesa_series = Lancamento.find_by_sql(despesa_series_query(@dt))
-      @caixa_series = Lancamento.find_by_sql(caixa_series_query(@dt))
     rescue
       @err = "Error #{$!}"
     ensure
+    end
 
+    # TODO: Aguardar o término do desenvolvimento dos filtros do grid para poder linkar as notificações a ele. GR @ 20130629
+
+    # Notificações
+    @notificacoes = Hash.new { |hash, key| hash[key] = Hash.new }
+
+    # Receitas Atrasadas
+    notif_receitas_atrasadas = Lancamento.receitas.abertos.ate(Date.today)
+    if notif_receitas_atrasadas.count > 0
+      @notificacoes[Random.new_seed] = {
+          :text => sprintf('Você tem %d Receitas Atrasadas.', notif_receitas_atrasadas.count),
+          :can_close => true,
+          :class => 'notification_information'
+      }
+    end
+
+    # Despesas Vencidas
+    notif_despesas_vencidas = Lancamento.despesas.abertos.ate(Date.today)
+    if notif_receitas_atrasadas.count > 0
+      @notificacoes[Random.new_seed] = {
+          :text => sprintf('Você tem %d Despesas Vencidas.', notif_despesas_vencidas.count),
+          :can_close => true,
+          :class => 'notification_success'
+      }
+    end
+
+    # Receitas a Receber
+    notif_receitas_a_receber = Lancamento.receitas.abertos.range(Date.today, Date.today + Configurable.number_of_future_days)
+    if notif_receitas_a_receber.count > 0
+      @notificacoes[Random.new_seed] = {
+          :text => sprintf('Você tem %d Receitas a Receber nos próximos %d dias.', notif_receitas_a_receber.count, Configurable.number_of_future_days),
+          :can_close => true,
+          :class => 'notification_warning'
+      }
+    end
+
+    # Despesas Vincendas
+    notif_despesas_vincendas = Lancamento.despesas.abertos.range(Date.today, Date.today + Configurable.number_of_future_days)
+    if notif_despesas_vincendas.count > 0
+      @notificacoes[Random.new_seed] = {
+          :text => sprintf('Você tem %d Despesas Vincendas nos próximos %d dias.', notif_despesas_vincendas.count, Configurable.number_of_future_days),
+          :can_close => true,
+          :class => 'notification_attention'
+      }
     end
   end
 

@@ -1,35 +1,51 @@
-﻿<div id="lancamento_index">
-  <div>
-    <table class="table">
-      <tr height="60%">
-        <td width="45%">
-          <div style="overflow:scroll;overflow:auto">
+﻿<div class="quadrante">
+<div id="lancamento_index">
+    <!--<table class="table">-->
+      <!--<tr height="60%">-->
+        <!--<td width="45%">-->
+        <div style="width:30%; float: left;">
+          <div>
             <div id="lancamento_form"><%= render :partial => 'form' %></div>
           </div>
-        </td>
-        <td width="10%">
+        </div>
+  <div style="width: 2%; float:left">&nbsp;</div>
+        <!--</td>-->
+        <!--<td width="10%">-->
+        <div style="width: 30%; float: left;">
           <%= render 'notifications' %>
-        </td>
-        <td width="45%">
+        </div>
+  <div style="width: 2%; float:left">&nbsp;</div>
+        <div style="width: 35%; float: left;">
+        <!--</td>-->
+        <!--<td width="45%">-->
           <%= render 'charts' %>
-          <div id="reportsArea">
-            <!-- Button to trigger modal -->
-            <a href="#reportsModal" role="button" class="btn" data-toggle="modal">Relatórios Mister</a>
-            <%= render 'reports' %></div>
-        </td>
-      </tr>
-    </table>
+          <!--<div id="reportsArea">-->
+            <%= render 'reports' %>
+        </div>
+        <!--</td>-->
+      <!--</tr>-->
+    <!--</table>-->
   </div>
-  <div>
-    <%= render 'lancamentos/scripts/filtros' %>
+  <div style="width: 1%; float:left">&nbsp;</div>
+</div>
+  </br>
+<div class="quadrante">
+  <div style="width: 100%; float: none">
     <button id="botaoGrid" class="btn btn-primary" >Todos</button>
-    <button id="botaoReceitas" class="btn btn-primary filtro_parametro" >Receitas</button>
-    <button id="botaoDespesas" class="btn btn-primary filtro_parametro" >Despesas</button>
 
-  </div>
+        <input type="checkbox"  id="inputReceitas" checked="true"  value="S"/> Receitas
+        <input type="checkbox"  id="inputDespesas" checked="true" value="S"/>  Despesas
+
+    <input type="hidden" id="hiddenReceita" class="filtro_parametro"   />
+    <input type="hidden" id="hiddenDespesa" class="filtro_parametro"  />
+    Data de Vencimento : De<input type="text"  id="filtro_DataVencimentoDe" class="filtro_parametro"  style="width: 100px"/>
+    Até<input type="text"  id="filtro_DataVencimentoAte" class="filtro_parametro"  style="width: 100px" />
+    Data da Ação : De<input type="text"  id="filtro_DataAcaoDe" class="filtro_parametro"  style="width: 100px"/>
+    Até<input type="text"  id="filtro_DataAcaoAte" class="filtro_parametro"  style="width: 100px" />
 
   <div id="lancamento_grid">
     <%= render :partial => 'grid' %>
 
   </div>
+</div>
 </div>

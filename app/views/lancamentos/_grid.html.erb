@@ -23,10 +23,21 @@
     <td> <%= text_field(:filtro, :descricao, :class => "filtro_parametro") %></td>
     <td>
     		
-    	 <%= text_field :filtro, :datavencimento,:class => "filtro_parametro"%>
+
     </td>
-    <td>  <%= text_field :filtro, :dataacao,:class => "filtro_parametro"%></td>
-    <td>  <%= text_field :filtro, :valor,:class => "filtro_parametro"%></td>
+    <td> </td>
+    <td>
+        <div class ="span3" style="border: 0px">
+            <select id="seletor_valor" class="filtro_parametro" style="width: 50px">
+                <option value="=">=</option>
+                <option value="<"><</option>
+                <option value=">">></option>
+            </select>
+          <input type="text" id="filtro_valor" class="filtro_parametro" style="width: 170px">
+
+        </div>
+
+    </td>
     <td>  <%= collection_select :filtro, :categoria, Category.all, :id,:descricao,{},{:class => "filtro_parametro"}%></td>
     <td>  <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id,:descricao,{},{:class => "filtro_parametro"}%></td>
 	<td>	<select id="filtro_status" class="filtro_parametro">

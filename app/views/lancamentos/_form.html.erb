@@ -1,193 +1,187 @@
 <%= form_for(@lancamento, :remote => true) do |f| %>
-<% if @lancamento.errors.any? %>
-<div id="error_explanation">
-	<h2><%= pluralize(@lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>
+    <% if @lancamento.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>
 
-	<ul>
-		<% @lancamento.errors.full_messages.each do |msg| %>
-		<li>
-			<%= msg %>
-		</li>
-		<% end %>
-	</ul>
-</div>
-<% end %>
-<div class="container">
+          <ul>
+            <% @lancamento.errors.full_messages.each do |msg| %>
+                <li>
+                  <%= msg %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="container">
 
-<!-- ********************************************************************************************************* 
-	Tipo
-	-->
-<%= render 'lancamentos/scripts/change_tipo_class'%>
-<div class="row">	
-	<div class="offset1 span0">
-	<%= f.radio_button :tipo, :receita, :style => "float:left; display:none" %> <a id="receita_label" class="label label-success" style="color:white"> Receita </a>
-	</div>
-	<div class="span0">
-	<%= f.radio_button :tipo, :despesa, :style => "float:left; display:none" %> <a id="despesa_label" class="label label-default" style="color:white"> Despesa </a>
-	</div>
-</div>
+      <!-- ********************************** Tipo **************************************************************** -->
+      <!-- moved to assets <%= render 'lancamentos/scripts/change_tipo_class' %> -->
+      <div class="row">
+        <div class="offset1 span0">
+          <%= f.radio_button :tipo, :receita, :style => "float:left; display:none" %>
+          <a id="receita_label" class="label label-success" style="color:white"> Receita </a>
+        </div>
+        <div class="span0">
+          <%= f.radio_button :tipo, :despesa, :style => "float:left; display:none" %>
+          <a id="despesa_label" class="label label-default" style="color:white"> Despesa </a>
+        </div>
+      </div>
 
-<div class="row"><\br></div>
+      <div class="row"><br></div>
 
-<!-- ********************************************************************************************************* 
-	Descrição
-	-->
-<% @page_item_id = "lancamento_descricao"%>
-<% @placeholder_value = "Entre com a descrição" %>
-<% @iterator = @lancamentorapidos %>
-<%= render 'lancamentos/scripts/select2_for_descricao' %> 
-<div class = "container-fluid">
-	<div class = "span1">
-		<%= f.label :descricao%>
-	</div>
-		
-	<div class="span3">
-		<%= f.text_field :descricao, :as => :text %>
-	</div>	
-</div>
+      <!-- *******************************  Descrição  *********************************************************** -->
+      <% @page_item_id = "lancamento_descricao" %>
+      <% @placeholder_value = "Entre com a descrição" %>
+      <% @iterator = @lancamentorapidos %>
+      <%= render 'lancamentos/scripts/select2_for_descricao' %>
+      <div class="container-fluid">
+        <div class="span1">
+          <%= f.label :descricao %>
+        </div>
 
-<div class="row"><\br></div>
+        <div class="span3">
+          <%= f.text_field :descricao, :as => :text %>
+        </div>
+      </div>
 
-<!-- ********************************************************************************************************* 
-	Data de vencimento
-	-->
+      <div class="row"><br></div>
 
-<%= render 'lancamentos/scripts/datepicker'%>
-<div class="container-fluid">
-	<div class="span1">
-		<%= f.label :datavencimento %>
-	</div>
-	
-	<div class="span3">	
-		<%= f.text_field :datavencimento, :as => :text, :id => :data_vencimento_picker,
-                         :value=> (@lancamento.datavencimento.strftime("%d-%m-%Y") unless @lancamento.nil? or @lancamento.datavencimento.nil?) %>
-	</div>
-</div>
+      <!-- ******************************* Data vencimento ******************************************************  -->
 
-<div class="row"><\br></div>
+      <!-- moved to assets <%= render 'lancamentos/scripts/datepicker' %> -->
+      <div class="container-fluid">
+        <div class="span1">
+          <%= f.label :datavencimento %>
+        </div>
 
-<!-- ********************************************************************************************************* 
-	Valor
-	-->
+        <div class="span3">
+          <%= f.text_field :datavencimento, :as => :text, :id => :data_vencimento_picker,
+                           :value => (@lancamento.datavencimento.strftime("%d-%m-%Y") unless @lancamento.nil? or @lancamento.datavencimento.nil?) %>
+        </div>
+      </div>
 
-<%= render 'lancamentos/scripts/change_tipo' %>
-<div class="container-fluid input-prepend">
-	<div class="span1">
-		<%= f.label :valor %>
-	</div>
-	<div class="span3">
-	<span class="add-on">R$</span>
-	<%= f.text_field :valor, :class=> 'auto', :alt=> 'n0p3c2S', :style => 'text-align:right;' %>
-	</div>
-</div>
+      <div class="row"><br></div>
 
-<div class="row"><\br></div>
-<!-- ********************************************************************************************************* 
-	Categoria
-	-->
+      <!-- ******************************** Valor *************************************************************** -->
 
-<% @page_item_id = "categoria_place"%>
-<% @placeholder_value = "Selecione uma categoria" %>
-<% @iterator = @categorias %>
-<% @hidden_item_id = "category_hidden"%>
-<%= render 'lancamentos/scripts/select2_for_categoria'%>
-<div class="container-fluid">
-	<div class="span1">
-		<%= f.label :categoria%>
-	</div>
-	<div class="span3">
-		<%= f.text_field :category_id, :as=> :text, :id=> @page_item_id %>
-	</div>
-</div>
+      <!-- moved to assets <%= render 'lancamentos/scripts/change_tipo' %> -->
+      <div class="container-fluid input-prepend">
+        <div class="span1">
+          <%= f.label :valor %>
+        </div>
+        <div class="span3">
+          <span class="add-on">R$</span>
+          <%= f.text_field :valor, :class => 'auto', :alt => 'n0p3c2S', :style => 'text-align:right;' %>
+        </div>
+      </div>
 
-  <%= hidden_field_tag :category,"", :id => @hidden_item_id%>
+      <div class="row"><br></div>
+      <!-- ********************************* Categoria ************************************************************ -->
+
+      <% @page_item_id = "categoria_place" %>
+      <% @placeholder_value = "Selecione uma categoria" %>
+      <% @iterator = @categorias %>
+      <% @hidden_item_id = "category_hidden" %>
+      <%= render 'lancamentos/scripts/select2_for_categoria' %>
+      <div class="container-fluid">
+        <div class="span1">
+          <%= f.label :categoria %>
+        </div>
+        <div class="span3">
+          <%= f.text_field :category_id, :as => :text, :id => @page_item_id %>
+        </div>
+      </div>
+
+      <%= hidden_field_tag :category, "", :id => @hidden_item_id %>
 
 
-<div class="row"><\br></div>
-<!-- ********************************************************************************************************* 
-	Centro de custo
-	--> 
-<% @page_item_id = "centrodecusto_place"%>
-<% @hidden_item_id = "centrodecusto_hidden"%>
-<% @placeholder_value = "Selecione um centro de custo" %>
-<% @iterator = @centrosdecusto %>
-<%= render 'lancamentos/scripts/select2_for_centrodecusto'%>
-<div class="container-fluid">
-	<div class="span1">
-	<%= f.label :centrodecusto %>
-	</div>
-<!-- 	<input type="text" id="centrodecusto_place" style="width:200px;"> -->
-	<div class="span3">
-	<%= f.text_field :centrodecusto_id, :as=> :text, :id=> @page_item_id%>
-	</div>
-</div>
- <%= hidden_field_tag :centrodecusto, "", :id => @hidden_item_id%>
+      <div class="row"><br></div>
+      <!-- ***************************** Centro de custo ********************************************************** -->
+      <% @page_item_id = "centrodecusto_place" %>
+      <% @hidden_item_id = "centrodecusto_hidden" %>
+      <% @placeholder_value = "Selecione um centro de custo" %>
+      <% @iterator = @centrosdecusto %>
+      <%= render 'lancamentos/scripts/select2_for_centrodecusto' %>
+      <div class="container-fluid">
+        <div class="span1">
+          <%= f.label :centrodecusto %>
+        </div>
+        <div class="span3">
+          <%= f.text_field :centrodecusto_id, :as => :text, :id => @page_item_id %>
+        </div>
+      </div>
+      <%= hidden_field_tag :centrodecusto, "", :id => @hidden_item_id %>
 
-<div class="row"><\br></div>
+      <div class="row"><br></div>
 
 
-  <!-- *********************************************************************************************************
-   Parcelamento
-   -->
-<%= render 'lancamentos/scripts/calculo_parcela' %>
-<%= render 'lancamentos/scripts/select2_for_parcela' %>
-<label>Parcelamento</label>
-<div class="container">
-<div class="span1">
-	<input type="text" placeholder="Nº de parcelas" id="numero_parcelas" class="span1"/>
-	<%= hidden_field_tag :numParcelas, 0, :id => "numero_parcelas_hidden" %>
-</div>
-<div class="span2">
-	<input type="text" placeholder="Frequencia" id="frequencia_parcelas" style="width:120px;"/>
-	<%= hidden_field_tag :freqParcelas, "Semanal", :id => "frequencia_parcelas_hidden" %>
-</div>	
-<div class="span1">
-	<label id="total_parcela">0</label>
-</div>
-</div>
+      <div class="accordion" id="accordion2" style="width:400px;">
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+              <i class=" icon-info-sign"></i> Opções adicionais
+            </a>
+          </div>
+          <div id="collapseOne" class="accordion-body collapse">
+            <div class="accordion-inner">
 
-  <!-- *********************************************************************************************************
-	Agendamento
-	-->
+              <!-- ******************************** Parcelamento ********************************************************* -->
+              <!-- moved to assets <%= render 'lancamentos/scripts/calculo_parcela' %> -->
+              <%= render 'lancamentos/scripts/select2_for_parcela' %>
+              <label>Parcelamento</label>
 
-<%= render 'lancamentos/scripts/calculo_agendamento' %>
-<%= render 'lancamentos/scripts/select2_for_agendamento' %>
-<label>Agendamento</label>
-<div class="container">
-<div class="span1">
-	<input type="text" placeholder="Nº de repetições" id="numero_agendamentos" class="span1"/>
-	<%= hidden_field_tag :numAgendamentos, 0, :id => "numero_agendamentos_hidden" %>
-</div>
-<div class="span2">
-	<input type="text" placeholder="Frequencia" id="frequencia_agendamentos" style="width:120px;"/>
-	<%= hidden_field_tag :freqAgendamentos, "Semanal", :id => "frequencia_agendamentos_hidden" %>
-</div>	
-<div class="span1">
-	<label id="total_agendamento">0</label>
-</div>
-</div>
+              <div class="container">
+                <div class="span1">
+                  <input type="text" placeholder="Nº de parcelas" id="numero_parcelas" class="span1"/>
+                  <%= hidden_field_tag :numParcelas, 0, :id => "numero_parcelas_hidden" %>
+                </div>
+                <div class="span2">
+                  <input type="text" placeholder="Frequencia" id="frequencia_parcelas" style="width:120px;"/>
+                  <%= hidden_field_tag :freqParcelas, "Semanal", :id => "frequencia_parcelas_hidden" %>
+                </div>
+                <div class="span1">
+                  <label id="total_parcela">0</label>
+                </div>
+              </div>
 
-  <!-- *********************************************************************************************************
-	Quitado checkbox
-	-->
+              <!-- ******************************* Agendamento *********************************************************** -->
+              <!-- moved to assets <%= render 'lancamentos/scripts/calculo_agendamento' %> -->
+              <%= render 'lancamentos/scripts/select2_for_agendamento' %>
+              <label>Agendamento</label>
 
-<%= render 'lancamentos/scripts/quitado_checkbox'%>
-<div class = "container">
-<label class="checkbox">
-	<input id= "quitado_checkbox" type="checkbox">	Quitado? &nbsp;&nbsp; 
-</label>
-<%= hidden_field_tag :quitado, false, :id => "quitado_hidden" %>
-</div>
+              <div class="container">
+                <div class="span1">
+                  <input type="text" placeholder="Nº de repetições" id="numero_agendamentos" class="span1"/>
+                  <%= hidden_field_tag :numAgendamentos, 0, :id => "numero_agendamentos_hidden" %>
+                </div>
+                <div class="span2">
+                  <input type="text" placeholder="Frequencia" id="frequencia_agendamentos" style="width:120px;"/>
+                  <%= hidden_field_tag :freqAgendamentos, "Semanal", :id => "frequencia_agendamentos_hidden" %>
+                </div>
+                <div class="span1">
+                  <label id="total_agendamento">0</label>
+                </div>
+              </div>
 
-<!-- ********************************************************************************************************* 
-	Submit
--->
-	
-<%=  render 'lancamentos/scripts/set_form_mode' %>
-<div id="lancamento_quitado" class="actions">
-	<%= f.submit :class => "btn btn-primary", :id=> "submit_btn" %>
-</div>
-<%=  hidden_field_tag :form_mode, "Insert", :id => "form_mode_hidden" %>
-</div>
+              <!-- ********************************* Quitado Checkbox ***************************************************** -->
+              <!-- moved to assets <%= render 'lancamentos/scripts/quitado_checkbox' %> -->
+              <div class="container">
+                <label class="checkbox">
+                  <input id="quitado_checkbox" type="checkbox"> Quitado? &nbsp;&nbsp;
+                </label>                                s
+                <%= hidden_field_tag :quitado, false, :id => "quitado_hidden" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div><br></div>
+
+      <!-- ********************************** Submit ************************************************** -->
+      <div id="lancamento_quitado" class="actions">
+        <%= f.submit :class => "btn btn-primary", :id => "submit_btn" %>
+      </div>
+      <%= hidden_field_tag :form_mode, "Insert", :id => "form_mode_hidden" %>
+    </div>
 <% end %>

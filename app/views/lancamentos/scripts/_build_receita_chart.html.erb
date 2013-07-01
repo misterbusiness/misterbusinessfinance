@@ -1,10 +1,23 @@
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
+    //google.load('visualization', '1.0', {packages: ['controls']});
 
+    //google.load('visualization', '1', {packages: ['table']});
+
+    // Load the Visualization API and the piechart package.
+    //google.load('visualization', '1.0', {'packages': ['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+
+
+ </script>
+
+  <script type="text/javascript">
     // Load the Visualization API and the piechart package.
     google.load('visualization', '1.0', {'packages': ['corechart']});
 
     // Set a callback to run when the Google Visualization API is loaded.
-    google.setOnLoadCallback(drawChart);
+    //google.setOnLoadCallback(drawChart);
 
     // Callback that creates and populates a data table,
     // instantiates the pie chart, passes in the data and
@@ -16,6 +29,14 @@
         data.addColumn('string', 'Mês');
         data.addColumn('number', 'Receita');
 
+        <% if not @receita_series.nil? then %>
+            data.addRows([
+                <% @receita_series.each do |serie| %>
+                ['<%= serie.mes %>' , <%= serie.valor %>],
+                <% end %>
+
+            ]);
+        <% end %>
 
         // Set chart options
         var options = {'title': 'Estatísticas - Receita',
@@ -48,8 +69,14 @@
         data.addColumn('string', 'Mês');
         data.addColumn('number', 'Despesa');
 
+        <% if not @despesa_series.nil? then %>
+            data.addRows([
+                <% @despesa_series.each do |serie| %>
+                ['<%= serie.mes %>' , <%= serie.valor %>],
+                <% end %>
 
-
+            ]);
+        <%end%>
         // Set chart options
         var options = {'title': 'Estatísticas - Despesa',
             'width': 400,
@@ -68,7 +95,7 @@
     google.load('visualization', '1.0', {'packages': ['corechart']});
 
     // Set a callback to run when the Google Visualization API is loaded.
-    google.setOnLoadCallback(drawChart);
+   google.setOnLoadCallback(drawChart);
 
     // Callback that creates and populates a data table,
     // instantiates the pie chart, passes in the data and
@@ -80,8 +107,14 @@
         data.addColumn('string', 'Mês');
         data.addColumn('number', 'Caixa');
 
+        <% if not @caixa_series.nil? then %>
+            data.addRows([
+                <% @caixa_series.each do |serie| %>
+                ['<%= serie.mes %>' , <%= serie.valor %>],
+                <% end %>
 
-
+            ]);
+        <%end%>
         // Set chart options
         var options = {'title': 'Estatísticas - Caixa',
             'width': 400,
