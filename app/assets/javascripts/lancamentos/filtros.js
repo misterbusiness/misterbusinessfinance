@@ -49,19 +49,28 @@ function insertQuitarEstornarCancelarEvent()
 {
 	$('.quitar_button').click(function()
 	{
-		alert('Vamos quitar!');
+		td = $(this).parent();
+		tr = td.parent();
+		alert(tr.prop('id'));
+		
 	
 	});
 
 	$('.estornar_button').click(function()
 	{
-		alert('Vamos estornar!');
+		td = $(this).parent();
+		tr = td.parent();
+		alert(tr.prop('id'));
+		
 	
 	});
 	
 	$('.cancelar_button').click(function()
 	{
-		alert('Vamos cancelar! Mas sem deletar hein ?');
+		td = $(this).parent();
+		tr = td.parent();
+		alert(tr.prop('id'));
+		
 	
 	});
 	
