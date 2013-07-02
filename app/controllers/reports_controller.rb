@@ -2,10 +2,10 @@ class ReportsController < ApplicationController
   include ApplicationHelper
   include LancamentosHelper
 
-
   def DateFormat(dateValue)
     return Time.parse(dateValue).utc.to_i*1000
   end
+
 
   # ************************************************************************************************************
   # Receitas actions

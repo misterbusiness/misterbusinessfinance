@@ -1,0 +1,44 @@
+function MakeSelect2(item_id, placeholder_value, tags) {
+    $("#" + item_id + "").select2({
+        width: "resolve",
+        maximumSelectionSize: 1,
+        placeholder: placeholder_value,
+        tags: [tags]
+    });
+}
+
+function GetTags() {
+
+}
+
+function printHtml(div1id, div2id, div3id) {
+
+    var bodyHtml = "";
+    var headHtml = "";
+    var w = window.open('<%= Rails.application.routes.url_helpers.lancamentos_print_path %>');
+    //var w = window.open();
+
+    w.onload = function()
+    {
+                bodyHtml = bodyHtml.concat("<div class='span12'>");
+                bodyHtml = bodyHtml.concat($("#" + div1id).html());
+                bodyHtml = bodyHtml.concat("</div>");
+
+                bodyHtml = bodyHtml.concat("<div class='span12'>");
+                bodyHtml = bodyHtml.concat("&nbsp;");
+                bodyHtml = bodyHtml.concat("</div>");
+
+                bodyHtml = bodyHtml.concat("<div class='span12'>");
+                bodyHtml = bodyHtml.concat($("#" + div2id).html());
+                bodyHtml = bodyHtml.concat("</div>");
+
+                bodyHtml = bodyHtml.concat("<div class='span12'>");
+                bodyHtml = bodyHtml.concat("&nbsp;");
+                bodyHtml = bodyHtml.concat("</div>");
+
+                bodyHtml = bodyHtml.concat("<div class='span12'>");
+                bodyHtml = bodyHtml.concat($("#" + div3id).html());
+                bodyHtml = bodyHtml.concat("</div>");
+        w.document.getElementById("printArea").innerHTML = bodyHtml;
+    }
+}

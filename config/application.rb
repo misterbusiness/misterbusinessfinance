@@ -60,5 +60,6 @@ module Misterbusinessfinance
     config.assets.version = '1.0'
 	
 	config.encoding = "utf-8"
+  config.middleware.use "PDFKit::Middleware"
   end
 end

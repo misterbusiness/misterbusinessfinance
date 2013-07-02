@@ -10,13 +10,9 @@ class LancamentosController < ApplicationController
   # GET /lancamentos/filter.json
 
   def filter
-
-
     query = build_query()
     @lancamentos = query
     render :layout => nil
-
-
   end
 
   def load
@@ -30,7 +26,6 @@ class LancamentosController < ApplicationController
 
   def loadgrid
     render :partial => 'grid'
-
   end
 
   def build_query
@@ -485,5 +480,7 @@ class LancamentosController < ApplicationController
     @lancamento = Lancamento.new
   end
 
-
+  def print
+      render :print, :layout => false
+  end
 end

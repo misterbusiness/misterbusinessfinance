@@ -87,7 +87,8 @@ Misterbusinessfinance::Application.routes.draw do
   match 'categories/reports/categories_lista', to: 'reports#categories_lista'
   match 'centrodecustos/reports/centrodecustos_lista', to: 'reports#centrodecustos_lista'
 
-
+  # Print reports page
+  match 'lancamentos/print', to: 'lancamentos#print'
 
   resources :targets
 
