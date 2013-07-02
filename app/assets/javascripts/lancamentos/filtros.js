@@ -22,6 +22,7 @@ function buildfilter() {
                 {
                     $('#grid_results').html(data);
                     insertPaginationEvent();
+					insertQuitarEstornarCancelarEvent();
                 }
 
         );
@@ -41,6 +42,24 @@ function insertPaginationEvent()
     });
 
 
+
+}
+
+function insertQuitarEstornarCancelarEvent()
+{
+	$('.quitar_button').click(function()
+	{
+		alert('Vamos quitar!');
+	
+	});
+
+	$('.estornar_button').click(function()
+	{
+		alert('Vamos estornar!');
+	
+	});
+	
+	
 
 }
 

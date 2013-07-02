@@ -7,14 +7,18 @@
             <% @current_lancamento = lancamento %>
 
                 <tr id="<%= @edit_row_id %>">
-                  <td>
-                    <table border="0px">
-                      <tr>
-                        <td><%= if !lancamento.estornado? then button_to(if lancamento.aberto? then "Quitar" else "Desquitar" end , {:action => "quitar", :id => lancamento.id}, :method => :put, :remote => :true) end %> </td>
-                        <td><%= if lancamento.quitado? then button_to("Estornar", {:action => "estornar", :id => lancamento.id}, :method => :put, :remote => :true) end %> </td>
-                        <td><%= if lancamento.aberto? then button_to("Cancelar", {:action => "destroy", :id => lancamento.id}, :method => :put, :remote => :true) end %> </td>
-                      </tr>
-                    </table>
+                  <td>                                          
+                        <% if lancamento.quitado? then %>
+							<input type="image" src="estornar.gif" class="estornar_button" title="Estornar" alt="Estornar" width="20" height="20">
+						
+						<% end %>
+                        <% if lancamento.aberto? then %>
+
+							<input type="image" src="quitar.gif" class="quitar_button" title="Quitar" alt="Quitar" width="20" height="20">
+						
+						<% end %>
+                      
+                    
                   </td>
                   <td><%= lancamento.descricao %></td>
                   <td><%= lancamento.datavencimento %></td>
