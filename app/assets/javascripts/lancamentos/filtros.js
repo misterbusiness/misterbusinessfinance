@@ -59,6 +59,11 @@ function insertQuitarEstornarCancelarEvent()
 	
 	});
 	
+	$('.cancelar_button').click(function()
+	{
+		alert('Vamos cancelar! Mas sem deletar hein ?');
+	
+	});
 	
 
 }

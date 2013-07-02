@@ -8,13 +8,21 @@
 
                 <tr id="<%= @edit_row_id %>">
                   <td>                                          
-                        <% if lancamento.quitado? then %>
+						<% if !lancamento.estornado? then %>
+						
+							<input type="image" src="quitar.gif" class="quitar_button" title="Quitar" alt="Quitar" width="20" height="20">
+						
+						<% end %>
+						
+						
+						
+						<% if lancamento.quitado? then %>
 							<input type="image" src="estornar.gif" class="estornar_button" title="Estornar" alt="Estornar" width="20" height="20">
 						
 						<% end %>
                         <% if lancamento.aberto? then %>
 
-							<input type="image" src="quitar.gif" class="quitar_button" title="Quitar" alt="Quitar" width="20" height="20">
+							<input type="image" src="cancelar.gif" class="cancelar_button" title="Cancelar" alt="Cancelar" width="20" height="20">
 						
 						<% end %>
                       
