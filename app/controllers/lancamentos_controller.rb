@@ -483,4 +483,20 @@ class LancamentosController < ApplicationController
   def print
       render :print, :layout => false
   end
+
+  def getLancamento
+
+    if not Lancamento.find(params[:id]).nil?
+
+      @lancamento = Lancamento.find(params[:id])
+
+      render :json => {
+          :rows => @lancamento
+
+      }
+
+    end
+
+  end
+
 end

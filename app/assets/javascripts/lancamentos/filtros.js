@@ -29,6 +29,16 @@ function buildfilter() {
 
 }
 
+function updateRowTable(id)
+{
+   //Essa função localiza pela row que contém o ID e obtém da base de dados o valor.
+   //Obter o valor usando ajax
+
+   //Obter os dados do banco utilizando JSON. Preciso criar um controller para isso, para retornar o meu JSON
+
+   alert(id);
+}
+
 function insertPaginationEvent()
 {
 
@@ -52,7 +62,6 @@ function insertQuitarEstornarCancelarEvent()
 		td = $(this).parent();
 		tr = td.parent();
 		alert(tr.prop('id'));
-		
 	
 	});
 

@@ -102,7 +102,6 @@ Misterbusinessfinance::Application.routes.draw do
      member do
        put :quitar
        put :estornar
-#       put :destroy
      end
 
     get :filter
@@ -127,6 +126,8 @@ Misterbusinessfinance::Application.routes.draw do
 
 
     match 'filter' => 'lancamentos#filter'
+
+    match 'getLancamento' => 'lancamentos#getLancamento'
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
