@@ -6,10 +6,14 @@
       </div>
       <div class="span11">
         <div class="span4"><h3 id="reportsModalLabel">Relatórios Mister Business</h3></div>
-        <div class="btn-group span6">
-          <a class="btn" href="#" onclick="printHtml('report_zone_1_div','report_zone_2_div','report_zone_3_div');"><i class="icon-print"></i></a>
-          <a class="btn" href="#"><i class="icon-list-alt"></i></a>
+        <div class="span4">
+          <input id="report_period_begin">
+          <p> até </p>
+          <input id="report_period_end">
           <a class="btn" href="#"><i class="icon-calendar"></i></a>
+        </div>
+        <div class="btn-group span2">
+          <a class="btn" href="#" onclick="printHtml('report_zone_1_div','report_zone_2_div','report_zone_3_div');"><i class="icon-print"></i></a>
         </div>
       </div>
     </div>

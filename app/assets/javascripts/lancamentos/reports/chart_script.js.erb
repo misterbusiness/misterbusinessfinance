@@ -9,6 +9,20 @@
  *
  */
 
+$(document).ready(function(){
+    $('#report_period_begin').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true,
+        todaybtn: true
+    });
+    $('#report_period_end').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true,
+        todaybtn: true
+    });
+});
+
+
 $(document).ready(function () {
     drawVisualization('bar', 'receita_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_receita_estatisticas_path %>');
     drawVisualization('bar', 'despesa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_despesa_estatisticas_path %>');
