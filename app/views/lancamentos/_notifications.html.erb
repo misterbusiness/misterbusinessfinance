@@ -7,8 +7,8 @@
     <% if notification.has_key?(:can_close) %>
         <a class="notification_close" onclick="close_notification(this)">&times;</a>
     <% end %>
-    <% if notification.has_key?(:link) %>
-        <a href="<%= notification[:link] %>"><%= notification[:text] %></a></div>
+    <% if notification.has_key?(:filter_string) %>
+        <a onclick="notification_build_filter(<%= '"' + notification[:filter_string].to_s + '"' %>)"><%= notification[:text] %></a></div>
     <% else %>
         <%= notification[:text] %></div>
     <% end %>

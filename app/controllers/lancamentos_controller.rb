@@ -34,8 +34,8 @@ class LancamentosController < ApplicationController
     queryapoio = queryapoio.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
     queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
     queryapoio = queryapoio.scoped_by_status_cd(params[:status]) unless params[:status].nil?
-    queryapoio = queryapoio.a_partir_de(params[:datavencimentode])  unless params[:datavencimentode].nil?
-    queryapoio = queryapoio.ate(params[:datavencimentoate])  unless params[:datavencimentoate].nil?
+    queryapoio = queryapoio.a_partir_de(params[:datavencimentode]) unless params[:datavencimentode].nil?
+    queryapoio = queryapoio.ate(params[:datavencimentoate]) unless params[:datavencimentoate].nil?
 
     if (params[:receita] == 'S' and params[:despesa] == 'N')
       queryapoio = queryapoio.receitas
@@ -46,19 +46,19 @@ class LancamentosController < ApplicationController
     end
 
     if not params[:valor].nil? then
-         case params[:seletorvalor]
-           when "="
-             queryapoio = queryapoio.valor_igual(params[:valor])
+      case params[:seletorvalor]
+        when "="
+          queryapoio = queryapoio.valor_igual(params[:valor])
 
-           when "<"
+        when "<"
 
-            queryapoio = queryapoio.valor_menor(params[:valor])
+          queryapoio = queryapoio.valor_menor(params[:valor])
 
-           when ">"
+        when ">"
 
-             queryapoio = queryapoio.valor_maior(params[:valor])
+          queryapoio = queryapoio.valor_maior(params[:valor])
 
-         end
+      end
 
     end
 
@@ -93,7 +93,6 @@ class LancamentosController < ApplicationController
     ensure
     end
 
-    # TODO: Aguardar o término do desenvolvimento dos filtros do grid para poder linkar as notificações a ele. GR @ 20130629
 
     # Notificações
     @notificacoes = Hash.new { |hash, key| hash[key] = Hash.new }
@@ -104,7 +103,8 @@ class LancamentosController < ApplicationController
       @notificacoes[Random.new_seed] = {
           :text => sprintf('Você tem %d Receitas Atrasadas.', notif_receitas_atrasadas.count),
           :can_close => true,
-          :class => 'notification_information'
+          :class => 'notification_information',
+          :filter_string => sprintf('receita=S&despesa=N&datavencimentode=1970-01-01&datavencimentoate=%s&status=%s', Date.today.strftime('%Y-%m-%d'), Lancamento.aberto)
       }
     end
 
@@ -114,7 +114,8 @@ class LancamentosController < ApplicationController
       @notificacoes[Random.new_seed] = {
           :text => sprintf('Você tem %d Despesas Vencidas.', notif_despesas_vencidas.count),
           :can_close => true,
-          :class => 'notification_success'
+          :class => 'notification_success',
+          :filter_string => sprintf('receita=N&despesa=S&datavencimentode=1970-01-01&datavencimentoate=%s&status=%s', Date.today.strftime('%Y-%m-%d'), Lancamento.aberto)
       }
     end
 
@@ -122,9 +123,10 @@ class LancamentosController < ApplicationController
     notif_receitas_a_receber = Lancamento.receitas.abertos.range(Date.today, Date.today + Configurable.number_of_future_days)
     if notif_receitas_a_receber.count > 0
       @notificacoes[Random.new_seed] = {
-          :text => sprintf('Você tem %d Receitas a Receber nos próximos %d dias.', notif_receitas_a_receber.count, Configurable.number_of_future_days),
+          :text => sprintf('Você tem %d Receitas a receber nos próximos %d dias.', notif_receitas_a_receber.count, Configurable.number_of_future_days),
           :can_close => true,
-          :class => 'notification_warning'
+          :class => 'notification_warning',
+          :filter_string => sprintf('receita=S&despesa=N&datavencimentode=%s&datavencimentoate=%s&status=%s', Date.today.strftime('%Y-%m-%d'), (Date.today + Configurable.number_of_future_days).strftime('%Y-%m-%d'), Lancamento.aberto)
       }
     end
 
@@ -132,9 +134,10 @@ class LancamentosController < ApplicationController
     notif_despesas_vincendas = Lancamento.despesas.abertos.range(Date.today, Date.today + Configurable.number_of_future_days)
     if notif_despesas_vincendas.count > 0
       @notificacoes[Random.new_seed] = {
-          :text => sprintf('Você tem %d Despesas Vincendas nos próximos %d dias.', notif_despesas_vincendas.count, Configurable.number_of_future_days),
+          :text => sprintf('Você tem %d Despesas a vencer nos próximos %d dias.', notif_despesas_vincendas.count, Configurable.number_of_future_days),
           :can_close => true,
-          :class => 'notification_attention'
+          :class => 'notification_attention',
+          :filter_string => sprintf('receita=N&despesa=S&datavencimentode=%s&datavencimentoate=%s&status=%s', Date.today.strftime('%Y-%m-%d'), (Date.today + Configurable.number_of_future_days).strftime('%Y-%m-%d'), Lancamento.aberto)
       }
     end
   end
