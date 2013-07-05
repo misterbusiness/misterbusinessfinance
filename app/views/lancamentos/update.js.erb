@@ -12,6 +12,8 @@ $(":input:not(input[type=submit])").val("");
 <% @lancamento = Lancamento.new %>
 $("#lancamento_form").html("<%= escape_javascript(render(:partial => 'form'))%>");
 
+drawCharts();
+
 buildfilter();
 
 var freqRepeticoes = $("#frequencia_agendamentos");

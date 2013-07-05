@@ -10,13 +10,19 @@ class ReportsController < ApplicationController
   # ************************************************************************************************************
   # Receitas actions
   # ************************************************************************************************************
+  before_filter :load
 
-  #@receita_series = Lancamento.find_by_sql(receita_series_query(@dt))
-  #@despesa_series = Lancamento.find_by_sql(despesa_series_query(@dt))
-  #@caixa_series = Lancamento.find_by_sql(caixa_series_query(@dt))
+  def load
+    @dt_inicio = Time.now.beginning_of_month
+    @dt_fim = Time.now.end_of_month
+
+    @dt_inicio = params[:ts_inicio] unless params[:ts_inicio].nil?
+    @dt_fim = params[:ts_fim] unless params[:ts_fim].nil?
+  end
+
 
   def receita_estatisticas
-    @dt = DateTime.now
+    @dt = @dt_inicio
     @report_series = Lancamento.find_by_sql(receita_series_query(@dt))
     unless @report_series.nil?
       @json_rows = Array.new

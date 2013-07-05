@@ -1,5 +1,21 @@
+<!-- TODO: Move this ref to assets
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<style>
+    #draggable { width: 150px; height: 150px; padding: 0.5em; }
+</style>
+<script>
+    $(function() {
+        $( "#reportsModal" ).draggable();
+    });
+</script>
+-->
+
+
 <div class="divReportsDialog">
-  <div id="reportsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="reportsModalLabel" aria-hidden="true">
+  <div id="reportsModal" class="modal hide fade ui-widget-content" tabindex="-1" role="dialog" aria-labelledby="reportsModalLabel" aria-hidden="true">
     <div class="modal-header span11">
       <div class="span11">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -7,10 +23,13 @@
       <div class="span11">
         <div class="span4"><h3 id="reportsModalLabel">Relatórios Mister Business</h3></div>
         <div class="span4">
-          <input id="report_period_begin">
-          <p> até </p>
-          <input id="report_period_end">
-          <a class="btn" href="#"><i class="icon-calendar"></i></a>
+          <input id="report_period_begin" class="input-small" style="float:left" data-mask="99-99-9999"
+                 value="<%= Time.now.beginning_of_month.strftime("%d-%m-%Y") %>">
+          <p style="float: left"> &nbsp;a&nbsp; </p>
+          <input id="report_period_end" class="input-small" style="float: left" data-mask="99-99-9999"
+                 value="<%= Time.now.end_of_month.strftime("%d-%m-%Y") %>">
+          <a class="btn" href="#" style="float: left"
+             onclick="changeReportDateRange($('#report_period_begin').val());"><i class="icon-calendar"></i></a>
         </div>
         <div class="btn-group span2">
           <a class="btn" href="#" onclick="printHtml('report_zone_1_div','report_zone_2_div','report_zone_3_div');"><i class="icon-print"></i></a>

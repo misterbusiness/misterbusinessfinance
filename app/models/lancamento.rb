@@ -52,6 +52,7 @@ class Lancamento < ActiveRecord::Base
 
   # O escopo padrão será de lançamentos válidos, ou seja, não cancelados e não estornados
   default_scope where(Lancamento.arel_table[:status_cd].not_eq(Lancamento.cancelado))
+  scope :padrao, lambda{ abertos.ate(Time.now.end_of_month).order('datavencimento desc') }
 
   scope :parcelados, where(Lancamento.arel_table[:parcela_id].not_eq(nil)).group(:parcela_id)
   scope :a_vista, where(Lancamento.arel_table[:parcela_id].eq(nil))

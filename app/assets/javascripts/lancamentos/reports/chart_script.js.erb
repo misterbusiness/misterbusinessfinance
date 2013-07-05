@@ -29,6 +29,12 @@ $(document).ready(function () {
     drawVisualization('line', 'caixa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_fluxo_caixa_estatisticas_path %>');
 });
 
+function drawCharts(){
+    drawVisualization('bar', 'receita_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_receita_estatisticas_path %>');
+    drawVisualization('bar', 'despesa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_despesa_estatisticas_path %>');
+    drawVisualization('line', 'caixa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_fluxo_caixa_estatisticas_path %>');
+}
+
 google.load('visualization', '1.0', {'packages': ['corechart']});
 
 function selectChartTab(chartName) {
@@ -432,3 +438,16 @@ function hideReportMenu() {
 function hideDiv(divName) {
     $("#" + divName).html("");
 }
+
+function changeReportDateRange(beginDate){
+    var year = beginDate.substring(6);
+    var month = beginDate.substring(4,5);
+    var day = beginDate.substring(1,2);
+
+    alert(new Date(year,day,month));
+    alert(new Date(year,day,month).getTime());
+}
+
+$(document).ready(function(){
+
+});

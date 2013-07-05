@@ -23,7 +23,10 @@ $(":input:not(input[type=submit])").val("");
 /*Replace the html of the div post_lists with the updated new one*/
 
 <% @lancamento = Lancamento.new %>
-//$("#lancamento_form").html("<%= #escape_javascript( render(:partial => "form") ) %>");
+$("#lancamento_form").html("<%= escape_javascript( render(:partial => "form") ) %>");
+
+drawCharts();
+
 
 buildfilter();
 
