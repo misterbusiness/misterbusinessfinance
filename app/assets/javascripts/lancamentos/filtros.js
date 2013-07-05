@@ -23,7 +23,7 @@ function buildfilter() {
             insertPaginationEvent();
             insertQuitarEstornarCancelarEvent();
             $('#tableResults').dataTable({
-                'aaSorting': [[2,'asc'] ]
+                'aaSorting': [[2,'asc'] ],'bJQueryUI':true
             });
         }
 
