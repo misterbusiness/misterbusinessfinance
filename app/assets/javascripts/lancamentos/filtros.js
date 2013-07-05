@@ -30,7 +30,8 @@ function buildfilter() {
                     "sZeroRecords": "Nenhum registro encontrado",
                     "sInfo": "Exibindo _START_ de _END_. Total: _TOTAL_ lançamentos.",
                     "sInfoEmpty": "Exibindo 0 de 0. Total: 0 lançamentos",
-                    "sInfoFiltered": "(filtrado de um total de _MAX_ lançamentos)"
+                    "sInfoFiltered": "(filtrado de um total de _MAX_ lançamentos)",
+                    "sSearch": "Refinar busca:"
                 }
             });
         }
