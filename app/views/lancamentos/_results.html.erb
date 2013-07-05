@@ -1,6 +1,7 @@
 <% if !@lancamentos.nil? then%>
 
-    <table id="tableResults" class="table table-hover table-condensed">
+    <table id="tableResults" class="table table-hover table-condensed display">
+      <thead>
       <tr id="header">
 
         <th></th>
@@ -12,9 +13,9 @@
         <th>Centro de Custo</th>
         <th>Status</th>
       </tr>
+      </thead>
 
-
-
+      <tbody>
       <% for lancamento in @lancamentos %>
             <% @edit_row_id = "edit_lancamento_row_#{lancamento.id}" %>
             <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
@@ -73,7 +74,7 @@
             </tr>
         <% end %>
 
-
+      </tbody>
 
     </table>
 

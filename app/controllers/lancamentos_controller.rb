@@ -69,11 +69,11 @@ class LancamentosController < ApplicationController
 
     if params[:page].nil? then
 
-      queryapoio = queryapoio.paginate(:page => "1", :per_page => 20)
+      queryapoio = queryapoio.paginate(:page => "1", :per_page => 1000)
 
     else
 
-      queryapoio = queryapoio.paginate(:page => params[:page], :per_page => 20)
+      queryapoio = queryapoio.paginate(:page => params[:page], :per_page => 1000)
 
     end
 

@@ -22,6 +22,9 @@ function buildfilter() {
             $('#grid_results').html(data);
             insertPaginationEvent();
             insertQuitarEstornarCancelarEvent();
+            $('#tableResults').dataTable({
+                'aaSorting': [[2,'asc'] ]
+            });
         }
 
     );
