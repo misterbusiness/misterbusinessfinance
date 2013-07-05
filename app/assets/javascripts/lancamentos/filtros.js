@@ -23,7 +23,15 @@ function buildfilter() {
             insertPaginationEvent();
             insertQuitarEstornarCancelarEvent();
             $('#tableResults').dataTable({
-                'aaSorting': [[2,'asc'] ],'bJQueryUI':true
+                'aaSorting': [[2,'asc'] ]
+                ,'bJQueryUI':true
+                ,'oLanguage' :{
+                    "sLengthMenu": "Exibir _MENU_ lançamentos por página",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sInfo": "Exibindo _START_ de _END_. Total: _TOTAL_ lançamentos.",
+                    "sInfoEmpty": "Exibindo 0 de 0. Total: 0 lançamentos",
+                    "sInfoFiltered": "(filtrado de um total de _MAX_ lançamentos)"
+                }
             });
         }
 
