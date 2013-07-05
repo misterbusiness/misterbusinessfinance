@@ -12,7 +12,11 @@ class LancamentosController < ApplicationController
   def filter
     query = build_query()
     @lancamentos = query
+
     render :layout => nil
+
+
+    #render :layout => nil
   end
 
   def load

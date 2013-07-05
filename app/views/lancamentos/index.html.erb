@@ -33,19 +33,14 @@
   </br>
 <div class="quadrante">
   <div style="width: 100%; float: none">
-    <button id="botaoGrid" class="btn btn-primary" >Todos</button>
-
-        <input type="checkbox"  id="inputReceitas" checked="true"  value="S"/> Receitas
-        <input type="checkbox"  id="inputDespesas" checked="true" value="S"/>  Despesas
-
-    <input type="hidden" id="hiddenReceita" class="filtro_parametro"   />
-    <input type="hidden" id="hiddenDespesa" class="filtro_parametro"  />
-    Data de Vencimento : De<input type="text"  id="filtro_DataVencimentoDe" class="filtro_parametro"  style="width: 100px"/>
-    Até<input type="text"  id="filtro_DataVencimentoAte" class="filtro_parametro"  style="width: 100px" />
 
   <div id="lancamento_grid">
     <%= render :partial => 'grid' %>
 
   </div>
+
+  <div id="table_div"/>
+
+
 </div>
 </div>

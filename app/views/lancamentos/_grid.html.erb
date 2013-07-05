@@ -1,55 +1,82 @@
-<table class="table table-hover table-condensed">
-  <thead>
-  <tr height="30%">
-    <td colspan=3>
-      <div style="overflow:scroll;height:100%;width:100%;overflow:auto">
-        <tr>
+<table id="tableGrid">
 
-          <th></th>
-          <th>Descrição</th>
-          <th>Vencimento</th>
-          <th>Data Ação</th>
-          <th>Valor</th>
-          <th>Categoria</th>
-          <th>Centro de Custo</th>
-          <th>Status</th>
-        </tr>
-      </div>
-  </thead>
   <tbody>
   <tr>
-    <td></td>
+      <td>
+            <table id="tableParametros" border="1px" >
 
-    <td> <%= text_field(:filtro, :descricao, :class => "filtro_parametro") %></td>
-    <td>
-    		
+              <tr>
+                <td >              <button id="botaoGrid" class="btn btn-primary" >Todos</button></td>
+                <td>
+                  <input type="checkbox"  id="inputReceitas" checked="true"  value="S"/> Receitas
+                  <input type="checkbox"  id="inputDespesas" checked="true" value="S"/>  Despesas
+                  <input type="hidden" id="hiddenReceita" class="filtro_parametro"   />
+                  <input type="hidden" id="hiddenDespesa" class="filtro_parametro"  />
 
+                </td>
+                <td>
+                  Data de Vencimento : De<input type="text"  id="filtro_DataVencimentoDe" class="filtro_parametro"  style="width: 100px"/>
+                  Até<input type="text"  id="filtro_DataVencimentoAte" class="filtro_parametro"  style="width: 100px" />
+
+                </td>
+
+                <td>
+                  Status:
+                  <select id="filtro_status" class="filtro_parametro">
+                    <option value=""></option>
+                    <option value="<%= Lancamento.aberto%>">Aberto</option>
+                    <option value="<%= Lancamento.quitado%>">Quitado</option>
+                    <option value="<%= Lancamento.cancelado%>">Cancelado</option>
+                    <option value="<%= Lancamento.estornado%>">Estornado</option>
+                  </select>
+
+
+                </td>
+              </tr>
+              <tr>
+                <td> Descrição: <%= text_field(:filtro, :descricao, :class => "filtro_parametro") %> </td>
+                <td>
+                  <div class ="span3" style="border: 2px">
+                    Valor:
+                    <select id="seletor_valor" class="filtro_parametro" style="width: 50px">
+                      <option value="=">=</option>
+                      <option value="<"><</option>
+                      <option value=">">></option>
+                    </select>
+                    <input type="text" id="filtro_valor" class="filtro_parametro" style="width: 150px">
+
+                  </div>
+
+                </td>
+                <td>Categoria: <%= collection_select :filtro, :categoria, Category.all, :id,:descricao,{:include_blank => true},{:class => "filtro_parametro"}%></td>
+                <td>Centro de Custo: <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id,:descricao,{:include_blank => true},{:class => "filtro_parametro"}%></td>
+
+
+              </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </table>
     </td>
-    <td> </td>
-    <td>
-        <div class ="span3" style="border: 0px">
-            <select id="seletor_valor" class="filtro_parametro" style="width: 50px">
-                <option value="=">=</option>
-                <option value="<"><</option>
-                <option value=">">></option>
-            </select>
-          <input type="text" id="filtro_valor" class="filtro_parametro" style="width: 170px">
-
-        </div>
-
-    </td>
-    <td>  <%= collection_select :filtro, :categoria, Category.all, :id,:descricao,{:include_blank => true},{:class => "filtro_parametro"}%></td>
-    <td>  <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id,:descricao,{:include_blank => true},{:class => "filtro_parametro"}%></td>
-	<td>	<select id="filtro_status" class="filtro_parametro">
-		<option value=""></option>
-		<option value="<%= Lancamento.aberto%>">Aberto</option>
-		<option value="<%= Lancamento.quitado%>">Quitado</option>
-		<option value="<%= Lancamento.cancelado%>">Cancelado</option>
-		<option value="<%= Lancamento.estornado%>">Estornado</option>
-		</select>
-
-	</td>
-  </tr>
   <tr>
     <td colspan="8"><div id="grid_results"> </div> </td>
   </tr>

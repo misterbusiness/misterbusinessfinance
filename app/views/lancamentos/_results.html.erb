@@ -1,7 +1,21 @@
 <% if !@lancamentos.nil? then%>
 
-    <table class="table table-hover table-condensed">
-        <% for lancamento in @lancamentos %>
+    <table id="tableResults" class="table table-hover table-condensed">
+      <tr id="header">
+
+        <th></th>
+        <th>Descrição</th>
+        <th>Vencimento</th>
+        <th>Data Ação</th>
+        <th>Valor</th>
+        <th>Categoria</th>
+        <th>Centro de Custo</th>
+        <th>Status</th>
+      </tr>
+
+
+
+      <% for lancamento in @lancamentos %>
             <% @edit_row_id = "edit_lancamento_row_#{lancamento.id}" %>
             <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
             <% @current_lancamento = lancamento %>

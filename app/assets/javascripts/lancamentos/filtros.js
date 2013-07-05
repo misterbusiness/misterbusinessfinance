@@ -78,6 +78,54 @@ function insertPaginationEvent() {
 
 }
 
+
+function buildDataTable()
+{
+  var tableData = new google.visualization.DataTable();
+
+    /*data.addColumn('string', '');
+    data.addColumn('string', 'Descrição');
+    data.addColumn('string', 'Data de Vencimento');
+    data.addColumn('string', 'Data da Ação');
+    data.addColumn('number', 'Valor');
+    data.addColumn('string', 'Categoria');
+    data.addColumn('string', 'Centro de Custo');
+    data.addColumn('string', 'Status');
+    */
+
+    $.getJSON('filter', function(data) {
+
+        //tableData.addRows(data.rows);
+
+        $.each(data,function(index,rows) {
+
+            $.each(rows,function(key,value) {
+               //alert(this);
+
+            });
+
+
+        });
+
+    });
+
+     /*
+    data.addRows([
+        ['','Teste', '123','123',502,'teste','teste','teste'],
+        ['','Teste2', '123','123',502,'teste','teste','teste'],
+        ['','Teste3', '123','123',502,'teste','teste','teste'],
+        ['','Teste4', '123','123',502,'teste','teste','teste'],
+        ['','Teste5', '123','123',502,'teste','teste','teste']
+    ]);
+
+       */
+   var table = new google.visualization.Table(document.getElementById("table_div"));
+
+
+   table.draw(tableData);
+}
+
+
 function insertQuitarEstornarCancelarEvent() {
     $('.quitar_button').click(function () {
         td = $(this).parent();
@@ -130,6 +178,8 @@ $(document).ready(function () {
         changeMonth: true,
         changeYear: true
     });
+
+    buildDataTable();
 
     $('#filtro_DataVencimentoAte').datepicker({
         format: 'dd-mm-yyyy',
