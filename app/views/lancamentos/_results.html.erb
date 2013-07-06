@@ -21,25 +21,25 @@
             <% @edit_btn_id = "edit_lancamento_btn_#{lancamento.id}" %>
             <% @current_lancamento = lancamento %>
 
-                <tr id="<%= @edit_row_id %>">
+                <tr class="resultsRow" id="<%= @edit_row_id %>">
                   <td>                                          
 						<% if !lancamento.estornado? then %>
 						
-							<input type="image" src="/assets/images/rails.png" class="quitar_button" title="Quitar" alt="Quitar" width="20" height="20">
+							<input type="image" src="/rails.png" class="quitar_button" title="Quitar" alt="Quitar" width="20" height="20">
 						
 						<% end %>
 						
 						
 						
 						<% if lancamento.quitado? then %>
-							<input type="image" src="estornar.gif" class="estornar_button" title="Estornar" alt="Estornar" width="20" height="20">
+							<input type="image" src="/rails.png" class="estornar_button" title="Estornar" alt="Estornar" width="20" height="20">
 						
 						<% end %>
 						
 						
                         <% if lancamento.aberto? then %>
 
-							<input type="image" src="cancelar.gif" class="cancelar_button" title="Cancelar" alt="Cancelar" width="20" height="20">
+							<input type="image" src="/rails.png" class="cancelar_button" title="Cancelar" alt="Cancelar" width="20" height="20">
 						
 						<% end %>
                       
@@ -64,7 +64,7 @@
                   <%= hidden_field_tag :hasParcelamento, lancamento.has_parcelamento?, :id => "has_parcelamento_row_#{lancamento.id}" %>
                   <%= hidden_field_tag :hasAgendamento, lancamento.has_agendamento?, :id => "has_agendamento_row_#{lancamento.id}" %>
                   <%= hidden_field_tag :hasEstorno, lancamento.has_estorno?, :id => "has_estorno_row_#{lancamento.id}" %>
-                  <%= render 'lancamentos/scripts/edit_form' %>
+
                 </tr>
 
             <% end %>

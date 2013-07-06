@@ -22,6 +22,7 @@ function buildfilter() {
             $('#grid_results').html(data);
             insertPaginationEvent();
             insertQuitarEstornarCancelarEvent();
+            insertOnClickResultEvent();
             $('#tableResults').dataTable({
                 'aaSorting': [[2,'asc'] ]
                 ,'bJQueryUI':true
@@ -36,6 +37,37 @@ function buildfilter() {
             });
         }
 
+    );
+
+}
+
+function insertOnClickResultEvent()
+{
+
+    $('.resultsRow').click(
+
+        function () {
+
+            if ($(this).hasClass("info"))
+            {
+                $(this).removeClass("info");
+                //$("#lancamento_form").html("<%= escape_javascript(render(:partial => "form"))%>");
+
+                // O ajax causa a "perda" do efeito autoNumeric, por isso o mesmo deve ser refreshed
+                $("#lancamento_valor").autoNumeric();
+                $("#lancamento_valor").blur();
+            }
+            else
+            {
+                $(this).addClass("info");
+                //$.ajax({
+                //    url: "<%= edit_lancamento_path(@current_lancamento) %>",
+                //    data: {}
+                //});
+            }
+
+
+        }
     );
 
 }
