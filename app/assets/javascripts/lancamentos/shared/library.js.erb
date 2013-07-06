@@ -1,16 +1,3 @@
-function MakeSelect2(item_id, placeholder_value, tags) {
-    $("#" + item_id + "").select2({
-        width: "resolve",
-        maximumSelectionSize: 1,
-        placeholder: placeholder_value,
-        tags: [tags]
-    });
-}
-
-function GetTags() {
-
-}
-
 function printHtml(div1id, div2id, div3id) {
 
     var bodyHtml = "";
@@ -41,4 +28,56 @@ function printHtml(div1id, div2id, div3id) {
                 bodyHtml = bodyHtml.concat("</div>");
         w.document.getElementById("printArea").innerHTML = bodyHtml;
     }
+};
+
+function buildSelect2asjd(elementId, placeHolderValue, contentUrl)
+{
+    var element = $("#"+ elementId +"");
+
+    $.getJSON(contentUrl, function (data)
+    {
+        $("#" + elementId + "").select2({
+            width: "resolve",
+            maximumSelectionSize: 1,
+            placeholder: "" + placeHolderValue + "",
+            tags: data
+
+        });
+
+    });
+
 }
+
+function buildSelect2(elementId, placeHolderValue, contentUrl, hiddenFieldId)
+{
+    var element = $("#"+ elementId +"");
+
+    $.getJSON(contentUrl, function (data)
+    {
+        $("#" + elementId + "").select2({
+            width: "resolve",
+            maximumSelectionSize: 1,
+            placeholder: "" + placeHolderValue + "",
+            tags: data,
+            createSearchChoice:function(term, data) {
+                if ($(data).filter(function() {
+                    return this.text.localeCompare(term) === 0;
+                }).length === 0) {
+                    return {id:term, text: term, isNew: true};
+                }
+            },
+            formatResult: function(term) {
+                if (term.isNew) {
+                    return '<span class="label label-important">Novo</span> ' + term.text;
+                }
+                else {
+                    return term.text;
+                }
+            }
+        });
+        $("#" + hiddenFieldId + "").val(selectedText);
+    });
+
+}
+
+

@@ -15,6 +15,13 @@ class LancamentorapidosController < ApplicationController
     end
   end
 
+   def list
+     @list = Lancamentorapido.all(:select=> 'id, descricao as text')
+     respond_to do |format|
+       format.json { render json: @list }
+     end
+   end
+
   # GET /lancamentorapidos/1
   # GET /lancamentorapidos/1.json
   def show

@@ -10,6 +10,13 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def list
+    @list = Category.all(:select => 'id, descricao as text')
+    respond_to do |format|
+      format.json { render json: @list }
+    end
+  end
+
   # GET /categories/1
   # GET /categories/1.json
   def show

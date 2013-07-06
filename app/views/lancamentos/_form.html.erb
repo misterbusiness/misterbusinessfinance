@@ -26,15 +26,11 @@
           <a id="despesa_label" class="label label-default" style="color:white"> Despesa </a>
         </div>
       </div>
-
       <div class="row"><br></div>
 
       <!-- *******************************  Descrição  *********************************************************** -->
-      <!-- <% @page_item_id = "lancamento_descricao" %>          -->
-      <!-- <% @placeholder_value = "Entre com a descrição" %> -->
-      <!-- <% @iterator = @lancamentorapidos %> -->
-      <!-- <%= render 'lancamentos/scripts/select2_for_descricao' %> -->
-      <div class="container-fluid">
+
+      <div class="container-fluid" onload="loadDescription('<%= lancamentorapidos_path %>', '<%= lancamentos_path %>')">
         <div class="span1">
           <%= f.label :descricao %>
         </div>
@@ -78,21 +74,16 @@
       <div class="row"><br></div>
       <!-- ********************************* Categoria ************************************************************ -->
 
-      <% @page_item_id = "categoria_place" %>
-      <% @placeholder_value = "Selecione uma categoria" %>
-      <% @iterator = @categorias %>
-      <% @hidden_item_id = "category_hidden" %>
-      <%= render 'lancamentos/scripts/select2_for_categoria' %>
       <div class="container-fluid">
         <div class="span1">
           <%= f.label :categoria %>
         </div>
         <div class="span3">
-          <%= f.text_field :category_id, :as => :text, :id => @page_item_id %>
+          <%= f.text_field :category_id, :as => :text %>
         </div>
       </div>
 
-      <%= hidden_field_tag :category, "", :id => @hidden_item_id %>
+      <%= hidden_field_tag :category, "", :id => 'category_hidden' %>
 
 
       <div class="row"><br></div>
