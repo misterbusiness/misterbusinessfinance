@@ -10,13 +10,12 @@ class LancamentosController < ApplicationController
   # GET /lancamentos/filter.json
 
   def filter
-    #query = build_query()
-    #@lancamentos = query
-
-    #render :layout => nil
+    query = build_query()
+    @lancamentos = query
 
 
-    #render :layout => nil
+
+    render :layout => nil
   end
 
   def load
