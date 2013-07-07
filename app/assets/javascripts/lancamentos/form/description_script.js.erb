@@ -45,8 +45,10 @@ $(document).ready(function(){
                                 $("#data_vencimento_picker").datepicker("setDate", selectedDate);
                                 $("#data_vencimento_picker").datepicker({ format: 'dd-mm-yyyy' });
 
-                                $("#categoria_place").val(response.category_id).trigger("change");
-                                $("#centrodecusto_place").val(response.centrodecusto_id).trigger("change");
+                                //$("#lancamento_category").select2('val',response.category_id).trigger("change");
+                                //$("#lancamento_centrodecusto").select2('val',response.centrodecusto_id).trigger("change");
+                                $("#lancamento_category").select2('val', response.category_id);
+                                $("#lancamento_centrodecusto").select2('val', response.centrodecusto_id);
                             })
                             .error(function () {
                                 // Erro ocorre quando não encontra nenhum registro

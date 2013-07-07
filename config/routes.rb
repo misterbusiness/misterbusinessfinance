@@ -97,6 +97,7 @@ Misterbusinessfinance::Application.routes.draw do
   match 'list/lancamentosrapidos', to: 'lancamentorapidos#list'
 
   resources :centrodecustos
+  match 'list/centrodecustos', to: 'centrodecustos#list'
 
   resources :categories
   match 'list/categories', to: 'categories#list'

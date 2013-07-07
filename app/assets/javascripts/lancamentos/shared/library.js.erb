@@ -30,35 +30,20 @@ function printHtml(div1id, div2id, div3id) {
     }
 };
 
-function buildSelect2asjd(elementId, placeHolderValue, contentUrl)
+function buildSelect2(fieldId, placeHolderValue, contentUrl, hiddenFieldId)
 {
-    var element = $("#"+ elementId +"");
+    var element = $("#"+ fieldId +"");
+    var hiddenElement = $("#"+ hiddenFieldId +"");
 
     $.getJSON(contentUrl, function (data)
     {
-        $("#" + elementId + "").select2({
+        element.select2({
             width: "resolve",
             maximumSelectionSize: 1,
+            triggerChange: true,
+            selectOnBlur: true,
             placeholder: "" + placeHolderValue + "",
-            tags: data
-
-        });
-
-    });
-
-}
-
-function buildSelect2(elementId, placeHolderValue, contentUrl, hiddenFieldId)
-{
-    var element = $("#"+ elementId +"");
-
-    $.getJSON(contentUrl, function (data)
-    {
-        $("#" + elementId + "").select2({
-            width: "resolve",
-            maximumSelectionSize: 1,
-            placeholder: "" + placeHolderValue + "",
-            tags: data,
+            data: data,
             createSearchChoice:function(term, data) {
                 if ($(data).filter(function() {
                     return this.text.localeCompare(term) === 0;
@@ -75,9 +60,7 @@ function buildSelect2(elementId, placeHolderValue, contentUrl, hiddenFieldId)
                 }
             }
         });
-        $("#" + hiddenFieldId + "").val(selectedText);
     });
-
 }
 
 

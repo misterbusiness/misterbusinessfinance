@@ -1,20 +1,11 @@
 $(document).ready(function(){
-    var lancamentoCategory = $("#lancamento_category_id");
-    buildSelect2("lancamento_category_id", "Entre com a categoria",
+
+    buildSelect2("lancamento_category", "Entre com a categoria",
             '<%= Rails.application.routes.url_helpers.list_categories_path %>',
             'category_hidden');
 
-    $("#lancamento_category_id").change(function()
+    $("#lancamento_category").change(function(e)
     {
-        var selectedText = $("#lancamento_category_id").select2('data').text;
-        $("#category_hidden").val(selectedText);
+        $("#category_hidden").val(e.added.text);
     });
-
-    lancamentoCategory.on("open", function () {
-        if (lancamentoCategory.val() != "") {
-            lancamentoCategory.val("").trigger("change");
-            lancamentoCategory.select2("open");
-        }
-    });
-
 });

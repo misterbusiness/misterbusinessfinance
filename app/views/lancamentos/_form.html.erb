@@ -79,7 +79,7 @@
           <%= f.label :categoria %>
         </div>
         <div class="span3">
-          <%= f.text_field :category_id, :as => :text %>
+          <%= f.text_field :category_id, :as => :text, :id => "lancamento_category" %>
         </div>
       </div>
 
@@ -88,20 +88,15 @@
 
       <div class="row"><br></div>
       <!-- ***************************** Centro de custo ********************************************************** -->
-      <% @page_item_id = "centrodecusto_place" %>
-      <% @hidden_item_id = "centrodecusto_hidden" %>
-      <% @placeholder_value = "Selecione um centro de custo" %>
-      <% @iterator = @centrosdecusto %>
-      <%= render 'lancamentos/scripts/select2_for_centrodecusto' %>
       <div class="container-fluid">
         <div class="span1">
           <%= f.label :centrodecusto %>
         </div>
         <div class="span3">
-          <%= f.text_field :centrodecusto_id, :as => :text, :id => @page_item_id %>
+          <%= f.text_field :centrodecusto_id, :as => :text, :id => "lancamento_centrodecusto" %>
         </div>
       </div>
-      <%= hidden_field_tag :centrodecusto, "", :id => @hidden_item_id %>
+      <%= hidden_field_tag :centrodecusto, "", :id => "centrodecusto_hidden" %>
 
       <div class="row"><br></div>
 
