@@ -1,3 +1,11 @@
+$(document).ready(function() {
+    var data = [{id:'Semanal', text:'Semanal'}, {id:'Mensal', text:'Mensal'}, {id:'Semestral', text:'Semestral'},
+        {id:'Anual',text:'Anual'}];
+
+    buildStdSelect2('frequencia_parcelas','',data)
+
+});
+
 $(document).ready(function () {
 
     var freqRepeticoes = $("#frequencia_agendamentos");
@@ -18,12 +26,14 @@ $(document).ready(function () {
         var valorParcelas = $.fn.autoNumeric.Strip('lancamento_valor');
         var agendamentoBox = $("#numero_agendamentos");
         var agendamentoFreq = $("#frequencia_agendamentos");
+
         if (numeroParcelas.val() > 0) {
             var matematics = Math;
             $("#total_parcela").text(matematics.abs(valorParcelas) / numeroParcelas.val());
 
 
             if (numeroParcelas.val() > 1) {
+                numeroRepeticoes.val("");
                 numeroRepeticoes.prop('disabled', true);
                 freqRepeticoes.select2('disable');
 
@@ -46,6 +56,7 @@ $(document).ready(function () {
         }
 
     });
+
     freqParcelas.change(function () {
         $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
         $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());

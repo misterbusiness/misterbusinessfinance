@@ -30,6 +30,27 @@ function printHtml(div1id, div2id, div3id) {
     }
 };
 
+function buildStdSelect2(fieldId, placeHolderValue, data)
+{
+    var element = $("#" + fieldId + "");
+
+    element.select2({
+        width: "resolve",
+        height: "resolve",
+        maximumSelectionSize: 1,
+        data: data
+    });
+
+    element.on("open", function () {
+        if (element.val() != "") {
+            element.val("").trigger("change");
+            element.select2("open");
+        }
+    });
+
+    element.val('Mensal').trigger("change");
+}
+
 function buildSelect2(fieldId, placeHolderValue, contentUrl, hiddenFieldId)
 {
     var element = $("#"+ fieldId +"");

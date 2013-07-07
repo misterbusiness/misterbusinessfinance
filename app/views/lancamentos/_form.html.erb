@@ -15,7 +15,6 @@
     <div class="container">
 
       <!-- ********************************** Tipo **************************************************************** -->
-      <!-- moved to assets <%= render 'lancamentos/scripts/change_tipo_class' %> -->
       <div class="row">
         <div class="offset1 span0">
           <%= f.radio_button :tipo, :receita, :style => "float:left; display:none" %>
@@ -43,8 +42,6 @@
       <div class="row"><br></div>
 
       <!-- ******************************* Data vencimento ******************************************************  -->
-
-      <!-- moved to assets <%= render 'lancamentos/scripts/datepicker' %> -->
       <div class="container-fluid">
         <div class="span1">
           <%= f.label :datavencimento %>
@@ -58,9 +55,9 @@
 
       <div class="row"><br></div>
 
-      <!-- ******************************** Valor *************************************************************** -->
+      <%=  hidden_field_tag :datavencimento, "", :id => 'datavencimento_hidden'   %>
 
-      <!-- moved to assets <%= render 'lancamentos/scripts/change_tipo' %> -->
+      <!-- ******************************** Valor *************************************************************** -->
       <div class="container-fluid input-prepend">
         <div class="span1">
           <%= f.label :valor %>
@@ -73,7 +70,6 @@
 
       <div class="row"><br></div>
       <!-- ********************************* Categoria ************************************************************ -->
-
       <div class="container-fluid">
         <div class="span1">
           <%= f.label :categoria %>
@@ -111,14 +107,12 @@
           <div id="collapseOne" class="accordion-body collapse">
             <div class="accordion-inner">
 
-              <!-- ******************************** Parcelamento ********************************************************* -->
-              <!-- moved to assets <%= render 'lancamentos/scripts/calculo_parcela' %> -->
-              <%= render 'lancamentos/scripts/select2_for_parcela' %>
+      <!-- ******************************** Parcelamento ********************************************************* -->
               <label>Parcelamento</label>
-
               <div class="container">
                 <div class="span1">
-                  <input type="text" placeholder="Nº de parcelas" id="numero_parcelas" class="span1"/>
+                  <input type="text" placeholder="Nº de parcelas" id="numero_parcelas"
+                         class="span1"/>
                   <%= hidden_field_tag :numParcelas, 0, :id => "numero_parcelas_hidden" %>
                 </div>
                 <div class="span2">
@@ -130,14 +124,13 @@
                 </div>
               </div>
 
-              <!-- ******************************* Agendamento *********************************************************** -->
-              <!-- moved to assets <%= render 'lancamentos/scripts/calculo_agendamento' %> -->
-              <%= render 'lancamentos/scripts/select2_for_agendamento' %>
+      <!-- ******************************* Agendamento *********************************************************** -->
               <label>Agendamento</label>
 
               <div class="container">
                 <div class="span1">
-                  <input type="text" placeholder="Nº de repetições" id="numero_agendamentos" class="span1"/>
+                  <input type="text" placeholder="Nº de repetições" id="numero_agendamentos"
+                         class="span1"/>
                   <%= hidden_field_tag :numAgendamentos, 0, :id => "numero_agendamentos_hidden" %>
                 </div>
                 <div class="span2">
@@ -150,7 +143,6 @@
               </div>
 
               <!-- ********************************* Quitado Checkbox ***************************************************** -->
-              <!-- moved to assets <%= render 'lancamentos/scripts/quitado_checkbox' %> -->
               <div class="container">
                 <label class="checkbox">
                   <input id="quitado_checkbox" type="checkbox"> Quitado? &nbsp;&nbsp;

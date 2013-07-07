@@ -113,7 +113,13 @@ Misterbusinessfinance::Application.routes.draw do
   end
   resources :lancamentos
 
-    
+  resources :support do
+    get :datestring
+    #member do
+    #  post :getdatestring
+    #end
+  end
+  match 'support/datestring', to: 'support#datestring'
   
 
 
