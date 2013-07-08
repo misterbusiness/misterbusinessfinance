@@ -53,7 +53,7 @@ function insertOnClickResultEvent()
             if ($(this).hasClass("info"))  //Marcar a tabela
             {
                 $(this).removeClass("info");
-                //$("#lancamento_form").html("<%= escape_javascript(render(:partial => "form"))%>");
+
 
                 // O ajax causa a "perda" do efeito autoNumeric, por isso o mesmo deve ser refreshed
                 $.ajax({

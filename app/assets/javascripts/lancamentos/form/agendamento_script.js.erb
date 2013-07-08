@@ -1,4 +1,5 @@
-$(document).ready(function () {
+function prepareAgendamento(){
+//$(document).ready(function () {
     var data = [
         {id: 'Semanal', text: 'Semanal'},
         {id: 'Mensal', text: 'Mensal'},
@@ -7,9 +8,9 @@ $(document).ready(function () {
     ];
 
     buildStdSelect2('frequencia_agendamentos', '', data)
-});
+//});
 
-$(document).ready(function () {
+//$(document).ready(function () {
 
     var freqRepeticoes = $("#frequencia_agendamentos");
     var freqParcelas = $("#frequencia_parcelas");
@@ -100,4 +101,5 @@ $(document).ready(function () {
 
     });
 
-});
+//});
+}
