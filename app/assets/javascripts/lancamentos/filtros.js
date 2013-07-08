@@ -20,7 +20,7 @@ function buildfilter() {
     $('#grid_results').html('Aguarde...');
     $.get(href, function (data) {
             $('#grid_results').html(data);
-            insertPaginationEvent();
+
             insertQuitarEstornarCancelarEvent();
             insertOnClickResultEvent();
             $('#tableResults').dataTable({
@@ -48,22 +48,33 @@ function insertOnClickResultEvent()
 
         function () {
 
-            if ($(this).hasClass("info"))
+            var id = $(this).prop('id').replace('edit_lancamento_row_','');
+
+            if ($(this).hasClass("info"))  //Marcar a tabela
             {
                 $(this).removeClass("info");
                 //$("#lancamento_form").html("<%= escape_javascript(render(:partial => "form"))%>");
 
                 // O ajax causa a "perda" do efeito autoNumeric, por isso o mesmo deve ser refreshed
+                $.ajax({
+                    url: "lancamentos/new",
+                    data: {}
+                });
+
                 $("#lancamento_valor").autoNumeric();
                 $("#lancamento_valor").blur();
+
             }
             else
             {
-                $(this).addClass("info");
-                //$.ajax({
-                //    url: "<%= edit_lancamento_path(@current_lancamento) %>",
-                //    data: {}
-                //});
+
+                $('.resultsRow').removeClass("info");
+                $(this).addClass("info");  //Desmarcar a parada
+                ;
+                $.ajax({
+                    url: "lancamentos/"+id+"/edit",
+                    data: {}
+                });
             }
 
 

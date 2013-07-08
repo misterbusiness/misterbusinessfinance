@@ -25,21 +25,21 @@
                   <td>                                          
 						<% if !lancamento.estornado? then %>
 						
-							<input type="image" src="/rails.png" class="quitar_button" title="Quitar" alt="Quitar" width="20" height="20">
+							<input type="image" src="<%= asset_path('rails.png') %>" class="quitar_button" title="Quitar" alt="Quitar" width="20" height="20">
 						
 						<% end %>
 						
 						
 						
 						<% if lancamento.quitado? then %>
-							<input type="image" src="/rails.png" class="estornar_button" title="Estornar" alt="Estornar" width="20" height="20">
+							<input type="image" src="<%= asset_path('rails.png') %>"  class="estornar_button" title="Estornar" alt="Estornar" width="20" height="20">
 						
 						<% end %>
 						
 						
                         <% if lancamento.aberto? then %>
 
-							<input type="image" src="/rails.png" class="cancelar_button" title="Cancelar" alt="Cancelar" width="20" height="20">
+							<input type="image" src="<%= asset_path('rails.png') %>"  class="cancelar_button" title="Cancelar" alt="Cancelar" width="20" height="20">
 						
 						<% end %>
                       
@@ -77,6 +77,5 @@
       </tbody>
 
     </table>
-
 
 <% end %>
