@@ -187,7 +187,6 @@ function insertQuitarEstornarCancelarEvent() {
         tr = td.parent();
 
         var rowindex = $("#tableResults").dataTable().fnGetPosition($(this).closest("tr").get(0));
-        //$("#tableResults").dataTable().fnDeleteRow(rowindex);
         $("#tableResults").dataTable().fnUpdate('quitado',rowindex,7);
 
     });
