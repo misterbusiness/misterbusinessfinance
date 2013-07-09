@@ -55,6 +55,7 @@ function insertOnClickResultEvent()
             {
                 $(this).removeClass("info");
 
+                prepareForm();
 
                 // O ajax causa a "perda" do efeito autoNumeric, por isso o mesmo deve ser refreshed
                 $.ajax({

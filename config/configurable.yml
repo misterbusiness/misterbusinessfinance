@@ -50,3 +50,7 @@ number_of_days_range:
 number_of_future_days:
     name: Number of future days
     default: 180
+
+number_categories_fluxo_report:
+    name: Number of categories shown at Fluxo de Caixa Report
+    default: 4

@@ -70,6 +70,8 @@ class Lancamento < ActiveRecord::Base
   scope :caixa_dia, lambda {|dia| receitas.quitados.por_dia.select{sum(valor)} - despesas.quitados.por_dia.select{sum(valor)} }
   scope :caixa_mes, lambda {|mes| receitas.quitados.este_mes(mes).select{sum(valor)} - despesas.quitados.este_mes(mes).select{sum(valor)} }
 
+  scope :validos, where(status_cd: [Lancamento.quitado, Lancamento.aberto])
+
   scope :range, lambda {|dt_inicio, dt_fim| where(:datavencimento => dt_inicio..dt_fim )}
   scope :a_partir_de, lambda {|dt| where('datavencimento > (?) ', dt)}
   scope :ate, lambda {|dt| where('datavencimento < (?) ', dt)}

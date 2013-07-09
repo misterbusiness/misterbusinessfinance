@@ -20,6 +20,9 @@ Misterbusinessfinance::Application.routes.draw do
 
   match 'lancamentos/reports/despesa_por_centrodecusto', to: 'reports#despesa_por_centrodecusto'
 
+
+  match 'lancamentos/reports/fluxo_de_caixa', to: 'reports#fluxo_de_caixa'
+
   #Reports
   # ******************************************************************************************************
   # Receita

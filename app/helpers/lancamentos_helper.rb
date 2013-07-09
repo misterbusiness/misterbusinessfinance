@@ -41,6 +41,26 @@ module LancamentosHelper
                     INNER JOIN (#{@meta_serias.to_sql}) as meta on realizado.mes = meta.mes order by mes"
   end
 
+  def fluxo_caixa_receitas_report(inicio, fim)
+    @today = DateTime.now
+    @top_categoria_sql = (Lancamento.validos.receitas.por_categoria.range(inicio,fim).por_mes.joins { category }.group { category.descricao }
+        .select { sum(valor).as(values) }
+        .select { category.descricao.as(descricao) }
+        .select { date_part('month', datavencimento).as(mes)}).to_sql
+
+    @all_lancamentos_sql = (Lancamento.validos.receitas.range(inicio,fim).por_mes
+        .select{sum(valor).as(values)}
+        .select { date_part('month', datavencimento).as(mes)}).to_sql
+
+    @other_categoria_sql = "SELECT (other.values-top.values) as values, 'outros', other.mes
+                              FROM (#{@top_categoria_sql}) top JOIN (#{@all_lancamentos_sql}) other ON top.mes = other.mes"
+
+    @total_sql = "(#{@top_categoria_sql} UNION #{@other_categoria_sql})"
+
+    return @total_sql
+
+  end
+
   #@report_series_zone_1 = Lancamento.find_by_sql(despesa_series_query(@dt))
   #@report_series_zone_2 = Lancamento.find_by_sql(despesa_por_categoria_series_query(@dt).to_sql)
   #@report_series_zone_3 = Lancamento.find_by_sql(despesa_por_centrodecusto_series_query(@dt).to_sql)
@@ -264,4 +284,6 @@ module LancamentosHelper
               FROM (#{@lancamentos_futuros_part_1.to_sql}) as r
               FULL JOIN (#{@lancamentos_futuros_part_2.to_sql}) as d ON r.mes = d.mes ORDER BY mes"
   end
+
+
 end
