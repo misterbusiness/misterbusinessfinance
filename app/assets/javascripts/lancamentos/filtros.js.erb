@@ -198,7 +198,8 @@ function insertQuitarEstornarCancelarEvent() {
         //$("#tableResults").dataTable().fnDeleteRow(rowindex);
 
         $.ajax( {
-                    type: "POST",
+                    type: "PUT",
+                    //url: "lancamentos/quitar?id="+id,
                     url: "lancamentos/"+id+"/quitar",
                     sucess: function(msg)
                     {

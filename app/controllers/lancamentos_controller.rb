@@ -441,8 +441,7 @@ class LancamentosController < ApplicationController
       end
 
     end
-    @lancamentos = Lancamento.unscoped.all
-    @lancamento = Lancamento.new
+
   end
 
   def estornar
