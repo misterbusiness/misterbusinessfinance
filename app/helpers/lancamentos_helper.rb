@@ -113,35 +113,39 @@ module LancamentosHelper
   # **********************************************************************************************************
   # Receitas
   # **********************************************************************************************************
-  def contas_a_receber_report_table
+  def contas_a_receber_report_table (inicio, fim)
     @today = DateTime.now
-    @dt = DateTime.now + (Configurable.number_of_days_range).days
+    #@dt = DateTime.now + (Configurable.number_of_days_range).days
     #return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { valor.as(values) }.select { to_char(datavencimento, 'DD-MM').as(axis) }.select { descricao }
-    return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { valor.as(values) }.select { datavencimento.as(axis) }.select { descricao }
+    #return Lancamento.abertos.receitas.range(@today, @dt).order("datavencimento").select { valor.as(values) }.select { datavencimento.as(axis) }.select { descricao }
+    return Lancamento.abertos.receitas.range(@today, fim).order("datavencimento").select { valor.as(values) }.select { datavencimento.as(axis) }.select { descricao }
   end
 
-  def recebimentos_atrasados_report_table
+  def recebimentos_atrasados_report_table (inicio, fim)
     @today = DateTime.now
-    @dt = DateTime.now - (Configurable.number_of_days_range).days
-    return Lancamento.abertos.receitas.range(@dt, @today).order("datavencimento").select { valor.as(values) }.select {datavencimento.as(axis) }.select { descricao }
+    #@dt = DateTime.now - (Configurable.number_of_days_range).days
+    #return Lancamento.abertos.receitas.range(@dt, @today).order("datavencimento").select { valor.as(values) }.select {datavencimento.as(axis) }.select { descricao }
+    return Lancamento.abertos.receitas.range(inicio, @today).order("datavencimento").select { valor.as(values) }.select {datavencimento.as(axis) }.select { descricao }
   end
 
 
-  def top_receitas_report_table
-    @dt = DateTime.now
-    return Lancamento.receitas.este_mes(@dt).order("valor desc").limit(Configurable.number_of_top_records).select{valor.as(values)}.select{datavencimento.as(axis)}.select{descricao}
+  def top_receitas_report_table (inicio, fim)
+    #@dt = DateTime.now
+    #return Lancamento.receitas.este_mes(@dt).order("valor desc").limit(Configurable.number_of_top_records).select{valor.as(values)}.select{datavencimento.as(axis)}.select{descricao}
+    return Lancamento.receitas.range(inicio,fim).order("valor desc").limit(Configurable.number_of_top_records).select{valor.as(values)}.select{datavencimento.as(axis)}.select{descricao}
   end
 
-  def receitas_por_categoria_report_table
-    @dt = DateTime.now
+  def receitas_por_categoria_report_table(inicio, fim)
+    #@dt = DateTime.now
     #return Lancamento.receitas.por_categoria.este_mes(@dt).joins { category }.group{ category.descricao }.group{valor}.group{descricao}.group{datavencimento}.select{valor.as(values)}.select{category.descricao.as(axis)}.select{descricao}.select{datavencimento.as(dateselected)}.order("axis").order("valor desc")
-    return Lancamento.receitas.por_categoria.este_mes(@dt).joins { category }.group{ category.descricao }.group{valor}.group{descricao}.group{datavencimento}.select{valor.as(values)}.select{category.descricao.as(axis)}.select{descricao}.select{datavencimento.as(dateselected)}.order("axis").order("valor desc")
+    #return Lancamento.receitas.por_categoria.este_mes(dt).joins { category }.group{ category.descricao }.group{valor}.group{descricao}.group{datavencimento}.select{valor.as(values)}.select{category.descricao.as(axis)}.select{descricao}.select{datavencimento.as(dateselected)}.order("axis").order("valor desc")
+    return Lancamento.receitas.por_categoria.range(inicio,fim).joins { category }.group{ category.descricao }.group{valor}.group{descricao}.group{datavencimento}.select{valor.as(values)}.select{category.descricao.as(axis)}.select{descricao}.select{datavencimento.as(dateselected)}.order("axis").order("valor desc")
   end
 
-  #TODO: Verificar a necessidade de implementar outro grafico (por causa do espaço não ficou legal)
-  def receitas_por_status_report_table
-    @dt = DateTime.now
-    return Lancamento.receitas.por_status.este_mes(@dt).group { status_cd }.group{valor}.group{descricao}.group{datavencimento}
+  def receitas_por_status_report_table(inicio, fim)
+    #@dt = DateTime.now
+    #return Lancamento.receitas.por_status.este_mes(@dt).group { status_cd }.group{valor}.group{descricao}.group{datavencimento}
+    return Lancamento.receitas.por_status.range(inicio,fim).group { status_cd }.group{valor}.group{descricao}.group{datavencimento}
     .select { valor.as(values) }
     .select { "CASE WHEN status_cd=0 THEN 'aberto'
                                 WHEN status_cd=1 THEN 'quitado'
@@ -150,22 +154,24 @@ module LancamentosHelper
                             END AS axis" }.select{descricao}.select{datavencimento.as(dateselected)}.order("axis")
   end
 
-  def receitas_por_centrodecusto_report_table
-    @dt = DateTime.now
-    return Lancamento.receitas.por_centrodecusto.este_mes(@dt).joins { centrodecusto }.group { centrodecusto.descricao }.group{valor}.group{descricao}.group{datavencimento}
+  def receitas_por_centrodecusto_report_table(inicio, fim)
+    #@dt = DateTime.now
+    #return Lancamento.receitas.por_centrodecusto.este_mes(@dt).joins { centrodecusto }.group { centrodecusto.descricao }.group{valor}.group{descricao}.group{datavencimento}
+    return Lancamento.receitas.por_centrodecusto.range(inicio,fim).joins { centrodecusto }.group { centrodecusto.descricao }.group{valor}.group{descricao}.group{datavencimento}
           .select{valor.as(values)}.select{centrodecusto.descricao.as(axis)}.select{descricao}.select{datavencimento.as(dateselected)}.order("axis").order("valor desc")
   end
 
-  def prazo_medio_recebimento_report
-    @dt = DateTime.now
+  def prazo_medio_recebimento_report(inicio, fim)
+    #@dt = DateTime.now
     #return Lancamento.receitas.este_ano(@dt).quitados.por_mes.select('AVG(dataacao-datavencimento) AS values').select { date_part('month', datavencimento).as(axis) }.order("axis")
-    return Lancamento.receitas.este_ano(@dt).quitados.por_mes.select{avg(dataacao-datavencimento).as(values)}.select { date_part('month', datavencimento).as(axis) }.order("axis")
+    #return Lancamento.receitas.este_ano(@dt).quitados.por_mes.select{avg(dataacao-datavencimento).as(values)}.select { date_part('month', datavencimento).as(axis) }.order("axis")
+    return Lancamento.receitas.range(inicio,fim).quitados.por_mes.select{avg(dataacao-datavencimento).as(values)}.select { date_part('month', datavencimento).as(axis) }.order("axis")
   end
 
-  #TODO: Ver com o butch se para este grafico o realizado funciona da mesma forma que no informativo de receita
-  def ticket_medio_vendas_report
-    @dt = DateTime.now
-    return Lancamento.receitas.este_ano(@dt).por_mes.select {avg(valor).as(values) }.select { date_part('month', datavencimento).as(axis) }
+  def ticket_medio_vendas_report(inicio, fim)
+    #@dt = DateTime.now
+    #return Lancamento.receitas.este_ano(@dt).por_mes.select {avg(valor).as(values) }.select { date_part('month', datavencimento).as(axis) }
+    return Lancamento.receitas.range(inicio,fim).por_mes.select {avg(valor).as(values) }.select { date_part('month', datavencimento).as(axis) }
   end
   # **********************************************************************************************************
 

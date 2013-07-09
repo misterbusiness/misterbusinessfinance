@@ -64,7 +64,7 @@ function buildSelect2(fieldId, placeHolderValue, contentUrl, hiddenFieldId)
             triggerChange: true,
             selectOnBlur: true,
             placeholder: "" + placeHolderValue + "",
-            data: data,
+            tags: data,
             createSearchChoice:function(term, data) {
                 if ($(data).filter(function() {
                     return this.text.localeCompare(term) === 0;
@@ -81,6 +81,13 @@ function buildSelect2(fieldId, placeHolderValue, contentUrl, hiddenFieldId)
                 }
             }
         });
+    });
+
+    element.on('select2-opening',function(){
+        if(element.val() != "")
+        {
+            element.select2('data',null);
+        }
     });
 }
 

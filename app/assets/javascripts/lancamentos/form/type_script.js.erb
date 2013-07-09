@@ -1,4 +1,5 @@
-$(document).ready(function(){
+//$(document).ready(function(){
+function prepareTipo(){
 // Inicializa os tipos -> o valor padrão é receita
     var radio_receita = $('#lancamento_tipo_receita');
     var radio_despesa = $('#lancamento_tipo_despesa');
@@ -17,22 +18,32 @@ $(document).ready(function(){
         label_despesa.removeClass('label-default').addClass('label-important');
         label_receita.removeClass('label-success').addClass('label-default');
     });
-});
+//});
 
-$(document).ready( function()
-{
+//$(document).ready( function()
+//{
+    radio_receita.change(function(){
+        alert("change1")
+    });
+
+    radio_despesa.on('change',function(){
+        alert("change2")
+    });
+
+
     $('#lancamento_valor').blur(function(){
         var valor = $.fn.autoNumeric.Strip('lancamento_valor');
         var valor_input = $('#lancamento_valor');
-        var radio_receita = $('#lancamento_tipo_receita');
-        var radio_despesa = $('#lancamento_tipo_despesa');
+        //var radio_receita = $('#lancamento_tipo_receita');
+        //var radio_despesa = $('#lancamento_tipo_despesa');
 // Adicionados labels para fazer a troca de cores na seleção
-        var label_receita = $("#receita_label");
-        var label_despesa = $("#despesa_label");
+       // var label_receita = $("#receita_label");
+        //var label_despesa = $("#despesa_label");
 
         // Altera a indicação das parcelas
         var input_parcela = $("#total_parcela");
         var numero_parcelas = $("#numero_parcelas");
+
         if (numero_parcelas.val() < 2)
         {
             input_parcela.text(valor);
@@ -56,4 +67,5 @@ $(document).ready( function()
             label_despesa.removeClass('label-important').addClass('label-default');
         }
     });
-});
+//});
+}

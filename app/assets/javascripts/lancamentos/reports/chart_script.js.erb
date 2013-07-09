@@ -24,9 +24,7 @@ $(document).ready(function(){
 
 
 $(document).ready(function () {
-    drawVisualization('bar', 'receita_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_receita_estatisticas_path %>');
-    drawVisualization('bar', 'despesa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_despesa_estatisticas_path %>');
-    drawVisualization('line', 'caixa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_fluxo_caixa_estatisticas_path %>');
+    drawCharts();
 });
 
 function drawCharts(){
@@ -34,8 +32,6 @@ function drawCharts(){
     drawVisualization('bar', 'despesa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_despesa_estatisticas_path %>');
     drawVisualization('line', 'caixa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_fluxo_caixa_estatisticas_path %>');
 }
-
-google.load('visualization', '1.0', {'packages': ['corechart']});
 
 function selectChartTab(chartName) {
     $("#" + chartName).click();
@@ -45,6 +41,9 @@ function drawVisualization(chartType, chartArea, reportUrl, dashboard) {
     hideDiv('report_zone_2_div');
     hideDiv('report_zone_3_div');
     hideDiv('report_slider');
+
+    reportUrl += "?ts_begin=" + $("#report_period_begin").val();
+    reportUrl += "&ts_end=" + $("#report_period_end").val();
 
     $("#" + chartArea).html("");
     $.getJSON(reportUrl, function (data) {
@@ -146,6 +145,9 @@ function drawDashboard(reportUrl, filterType, filterColumn, chartType) {
     hideDiv('report_zone_3_div');
     hideDiv('report_slider');
 
+    reportUrl += "?ts_begin=" + $("#report_period_begin").val();
+    reportUrl += "&ts_end=" + $("#report_period_end").val();
+
     $.getJSON(reportUrl, function (data) {
         var table = new google.visualization.DataTable();
         $.each(data.cols, function () {
@@ -215,6 +217,9 @@ function drawDashboardTimeSeries(reportUrl, filterType, filterColumn, chartType)
     var xAxisChartColumn = 0;
     var yAxisFilterColumn = 2;
     var yAxisChartColumn = 2;
+
+    reportUrl += "?ts_begin=" + $("#report_period_begin").val();
+    reportUrl += "&ts_end=" + $("#report_period_end").val();
 
     $.getJSON(reportUrl, function (data) {
         var table = new google.visualization.DataTable();
@@ -302,6 +307,9 @@ function drawDashboardGroupChart(reportUrl, filterType, filterColumn, chartType)
     var xAxisChartColumn = 0;
     var yAxisFilterColumn = 3;
     var yAxisChartColumn = 3;
+
+    reportUrl += "?ts_begin=" + $("#report_period_begin").val();
+    reportUrl += "&ts_end=" + $("#report_period_end").val();
 
     $.getJSON(reportUrl, function (data) {
         var table = new google.visualization.DataTable();
@@ -446,6 +454,10 @@ function changeReportDateRange(beginDate){
 
     alert(new Date(year,day,month));
     alert(new Date(year,day,month).getTime());
+}
+
+function setCurrentChart(chartId){
+    $("#current_report").val(chartId);
 }
 
 $(document).ready(function(){

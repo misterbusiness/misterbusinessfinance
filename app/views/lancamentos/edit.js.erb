@@ -20,6 +20,10 @@ var numeroParcelas = $("#numero_parcelas");
 
 // É necessário o carregamento da formatação já que o mesmo já foi executado pelo form
 formatedValue = $.fn.autoNumeric.Format('lancamento_valor', $('#lancamento_valor').autoNumeric('get').val());
+
+drawCharts();
+prepareForm();
+
 $("#lancamento_valor").val(formatedValue);
 $("#lancamento_valor").blur();
 

@@ -1,4 +1,5 @@
-$(document).ready(function(){
+//$(document).ready(function(){
+function prepareCentrodecusto(){
 
     buildSelect2("lancamento_centrodecusto", "Entre com o centro de custo",
             '<%= Rails.application.routes.url_helpers.list_centrodecustos_path %>',
@@ -8,4 +9,5 @@ $(document).ready(function(){
     {
         $("#centrodecusto_hidden").val(e.added.text);
     });
-});
+//});
+}

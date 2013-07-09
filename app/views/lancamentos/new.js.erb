@@ -1,6 +1,8 @@
-alert("newww");
 <% @lancamento = Lancamento.new %>
 $("#lancamento_form").html("<%= escape_javascript(render(:partial => 'form'))%>");
+
+drawCharts();
+prepareForm();
 
 $("#lancamento_valor").autoNumeric();
 $("#lancamento_valor").blur();

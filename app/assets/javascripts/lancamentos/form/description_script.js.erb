@@ -1,4 +1,5 @@
-$(document).ready(function(){
+//$(document).ready(function(){
+function prepareDescricao(){
 
     var lancamentoDescricao = $("#lancamento_descricao");
     buildSelect2("lancamento_descricao", "Entre com a descrição", '<%= Rails.application.routes.url_helpers.list_lancamentosrapidos_path %>');
@@ -55,4 +56,5 @@ $(document).ready(function(){
                             })
         }
     });
-});
+//});
+}
