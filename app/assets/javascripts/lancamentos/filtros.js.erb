@@ -11,82 +11,80 @@ function buildfilter() {
 
     $('.filtro_parametro').each(function () {
 
-            if (typeof($(this).data('valorparametro')) !== "undefined") {
-                href += $(this).data('nomeparametro') + "=" + $(this).data('valorparametro') + "&"
+                if (typeof($(this).data('valorparametro')) !== "undefined") {
+                    href += $(this).data('nomeparametro') + "=" + $(this).data('valorparametro') + "&"
+                }
             }
-        }
     );
 
     $('#grid_results').html('Aguarde...');
     $.get(href, function (data) {
-            $('#grid_results').html(data);
+                $('#grid_results').html(data);
 
-            insertQuitarEstornarCancelarEvent();
-            insertOnClickResultEvent();
-            $('#tableResults').dataTable({
-                'aaSorting': [[2,'asc'] ]
-                ,'bJQueryUI':true
-                ,'oLanguage' :{
-                    "sLengthMenu": "Exibir _MENU_ lançamentos por página",
-                    "sZeroRecords": "Nenhum registro encontrado",
-                    "sInfo": "Exibindo _START_ de _END_. Total: _TOTAL_ lançamentos.",
-                    "sInfoEmpty": "Exibindo 0 de 0. Total: 0 lançamentos",
-                    "sInfoFiltered": "(filtrado de um total de _MAX_ lançamentos)",
-                    "sSearch": "Refinar busca:"
-                }
-            });
-        }
+                insertQuitarEstornarCancelarEvent();
+                insertOnClickResultEvent();
+                $('#tableResults').dataTable({
+                    'aaSorting': [
+                        [2, 'asc']
+                    ], 'bJQueryUI': true, 'oLanguage': {
+                        "sLengthMenu": "Exibir _MENU_ lançamentos por página",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sInfo": "Exibindo _START_ de _END_. Total: _TOTAL_ lançamentos.",
+                        "sInfoEmpty": "Exibindo 0 de 0. Total: 0 lançamentos",
+                        "sInfoFiltered": "(filtrado de um total de _MAX_ lançamentos)",
+                        "sSearch": "Refinar busca:"
+                    }
+                });
+            }
 
     );
 
 
 }
 
-function insertOnClickResultEvent()
-{
+function insertOnClickResultEvent() {
 
     $('.resultsRow').click(
 
-        function () {
+            function () {
 
-            var id = $(this).prop('id').replace('edit_lancamento_row_','');
+                var id = $(this).prop('id').replace('edit_lancamento_row_', '');
 
-            if ($(this).hasClass("info"))  //Marcar a tabela
-            {
-                $(this).removeClass("info");
+                if ($(this).hasClass("info"))  //Marcar a tabela
+                {
+                    $(this).removeClass("info");
 
-                prepareForm();
+                    prepareForm();
 
-                // O ajax causa a "perda" do efeito autoNumeric, por isso o mesmo deve ser refreshed
-                $.ajax({
-                    url: "lancamentos/new",
-                    data: {}
-                });
+                    // O ajax causa a "perda" do efeito autoNumeric, por isso o mesmo deve ser refreshed
+                    $.ajax({
+                        url: "lancamentos/new",
+                        data: {}
+                    });
 
-                prepareForm();
+                    prepareForm();
 
-                $("#lancamento_valor").autoNumeric();
-                $("#lancamento_valor").blur();
+                    $("#lancamento_valor").autoNumeric();
+                    $("#lancamento_valor").blur();
+
+                }
+                else {
+
+                    $('.resultsRow').removeClass("info");
+                    $(this).addClass("info");  //Desmarcar a parada
+                    //;
+                    $.ajax({
+                        url: "lancamentos/" + id + "/edit",
+                        data: {}
+                    });
+
+                    prepareForm();
+                    $("#lancamento_valor").autoNumeric();
+                    $("#lancamento_valor").blur();
+                }
+
 
             }
-            else
-            {
-
-                $('.resultsRow').removeClass("info");
-                $(this).addClass("info");  //Desmarcar a parada
-                //;
-                $.ajax({
-                    url: "lancamentos/"+id+"/edit",
-                    data: {}
-                });
-
-                prepareForm();
-                $("#lancamento_valor").autoNumeric();
-                $("#lancamento_valor").blur();
-            }
-
-
-        }
     );
 
 }
@@ -95,12 +93,12 @@ function insertPaginationEventNotif(link) {
 
     $('.pagination a').click(
 
-        function () {
-            var pagenumber = (RegExp('page=' + '(.+?)(&|$)').exec($(this).prop('href')) || [, null])[1];
-            link += '&page=' + pagenumber;
-            notification_build_filter(link);
-            return false;
-        }
+            function () {
+                var pagenumber = (RegExp('page=' + '(.+?)(&|$)').exec($(this).prop('href')) || [, null])[1];
+                link += '&page=' + pagenumber;
+                notification_build_filter(link);
+                return false;
+            }
     );
 }
 
@@ -111,9 +109,23 @@ function notification_build_filter(link) {
 
     $('#grid_results').html('Aguarde...');
     $.get(href, function (data) {
-            $('#grid_results').html(data);
-            insertPaginationEventNotif(link);
-        }
+                $('#grid_results').html(data);
+
+                insertQuitarEstornarCancelarEvent();
+                insertOnClickResultEvent();
+                $('#tableResults').dataTable({
+                    'aaSorting': [
+                        [2, 'asc']
+                    ], 'bJQueryUI': true, 'oLanguage': {
+                        "sLengthMenu": "Exibir _MENU_ lançamentos por página",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sInfo": "Exibindo _START_ de _END_. Total: _TOTAL_ lançamentos.",
+                        "sInfoEmpty": "Exibindo 0 de 0. Total: 0 lançamentos",
+                        "sInfoFiltered": "(filtrado de um total de _MAX_ lançamentos)",
+                        "sSearch": "Refinar busca:"
+                    }
+                });
+            }
 
     );
 
@@ -128,42 +140,27 @@ function updateRowTable(id) {
     alert(id);
 }
 
-function insertPaginationEvent() {
-
-    $('.pagination a').click(function () {
-        $(this).data('nomeparametro', 'page');
-        $(this).data('valorparametro', (RegExp('page=' + '(.+?)(&|$)').exec($(this).prop('href')) || [, null])[1]);
-        $(this).addClass('filtro_parametro');
-        buildfilter();
-        return false;
-    });
-
-
-}
-
-
-function buildDataTable()
-{
-  var tableData = new google.visualization.DataTable();
+function buildDataTable() {
+    var tableData = new google.visualization.DataTable();
 
     /*data.addColumn('string', '');
-    data.addColumn('string', 'Descrição');
-    data.addColumn('string', 'Data de Vencimento');
-    data.addColumn('string', 'Data da Ação');
-    data.addColumn('number', 'Valor');
-    data.addColumn('string', 'Categoria');
-    data.addColumn('string', 'Centro de Custo');
-    data.addColumn('string', 'Status');
-    */
+     data.addColumn('string', 'Descrição');
+     data.addColumn('string', 'Data de Vencimento');
+     data.addColumn('string', 'Data da Ação');
+     data.addColumn('number', 'Valor');
+     data.addColumn('string', 'Categoria');
+     data.addColumn('string', 'Centro de Custo');
+     data.addColumn('string', 'Status');
+     */
 
-    $.getJSON('filter', function(data) {
+    $.getJSON('filter', function (data) {
 
         //tableData.addRows(data.rows);
 
-        $.each(data,function(index,rows) {
+        $.each(data, function (index, rows) {
 
-            $.each(rows,function(key,value) {
-               //alert(this);
+            $.each(rows, function (key, value) {
+                //alert(this);
 
             });
 
@@ -172,20 +169,20 @@ function buildDataTable()
 
     });
 
-     /*
-    data.addRows([
-        ['','Teste', '123','123',502,'teste','teste','teste'],
-        ['','Teste2', '123','123',502,'teste','teste','teste'],
-        ['','Teste3', '123','123',502,'teste','teste','teste'],
-        ['','Teste4', '123','123',502,'teste','teste','teste'],
-        ['','Teste5', '123','123',502,'teste','teste','teste']
-    ]);
+    /*
+     data.addRows([
+     ['','Teste', '123','123',502,'teste','teste','teste'],
+     ['','Teste2', '123','123',502,'teste','teste','teste'],
+     ['','Teste3', '123','123',502,'teste','teste','teste'],
+     ['','Teste4', '123','123',502,'teste','teste','teste'],
+     ['','Teste5', '123','123',502,'teste','teste','teste']
+     ]);
 
-       */
-   var table = new google.visualization.Table(document.getElementById("table_div"));
+     */
+    var table = new google.visualization.Table(document.getElementById("table_div"));
 
 
-   table.draw(tableData);
+    table.draw(tableData);
 }
 
 
@@ -194,17 +191,16 @@ function insertQuitarEstornarCancelarEvent() {
         td = $(this).parent();
         tr = td.parent();
 
-        var id = tr.prop('id').replace('edit_lancamento_row_','');
+        var id = tr.prop('id').replace('edit_lancamento_row_', '');
         var rowindex = $("#tableResults").dataTable().fnGetPosition($(this).closest("tr").get(0));
         //$("#tableResults").dataTable().fnDeleteRow(rowindex);
 
-        $.ajax( {
+        $.ajax({
                     type: "PUT",
                     //url: "lancamentos/quitar?id="+id,
-                    url: "lancamentos/"+id+"/quitar",
-                    sucess: function(msg)
-                    {
-                        $("#tableResults").dataTable().fnUpdate('quitado',rowindex,7);
+                    url: "lancamentos/" + id + "/quitar",
+                    sucess: function (msg) {
+                        $("#tableResults").dataTable().fnUpdate('quitado', rowindex, 7);
                     }
 
 
@@ -274,102 +270,102 @@ $(document).ready(function () {
 
     $('#botaoGrid').click
     (
-        function () {
-            $('.filtro_parametro').each
-            (function () {
-                    $(this).removeData('valorparametro');
-                    $(this).val('');
-                }
-            );
+            function () {
+                $('.filtro_parametro').each
+                (function () {
+                            $(this).removeData('valorparametro');
+                            $(this).val('');
+                        }
+                );
 
-            $('#hiddenReceita').data('valorparametro', 'S');
-            $('#hiddenDespesa').data('valorparametro', 'S');
-            $('#inputReceitas').prop('checked', true);
-            $('#inputDespesas').prop('checked', true);
-            buildfilter.call(this);
-        }
+                $('#hiddenReceita').data('valorparametro', 'S');
+                $('#hiddenDespesa').data('valorparametro', 'S');
+                $('#inputReceitas').prop('checked', true);
+                $('#inputDespesas').prop('checked', true);
+                buildfilter.call(this);
+            }
     );
 
     $('#inputReceitas').click
     (
-        function () {
-            var receitasChecked;
-            var despesasChecked;
+            function () {
+                var receitasChecked;
+                var despesasChecked;
 
-            receitasChecked = $('#inputReceitas').is(':checked');
-            despesasChecked = $('#inputDespesas').is(':checked');
+                receitasChecked = $('#inputReceitas').is(':checked');
+                despesasChecked = $('#inputDespesas').is(':checked');
 
-            if (receitasChecked) {
-                $('#hiddenReceita').data('valorparametro', 'S');
-                buildfilter();
-            }
-            else {
-                if (!despesasChecked) {
-                    //alert('Você precisa selecionar ao menos um tipo de valor.');
-                    $('#inputReceitas').prop('checked', true);
-                }
-                else {
-                    $('#hiddenReceita').data('valorparametro', 'N');
+                if (receitasChecked) {
+                    $('#hiddenReceita').data('valorparametro', 'S');
                     buildfilter();
                 }
+                else {
+                    if (!despesasChecked) {
+                        //alert('Você precisa selecionar ao menos um tipo de valor.');
+                        $('#inputReceitas').prop('checked', true);
+                    }
+                    else {
+                        $('#hiddenReceita').data('valorparametro', 'N');
+                        buildfilter();
+                    }
+
+                }
 
             }
-
-        }
     );
 
     $('#inputDespesas').click
     (
-        function () {
-            var receitasChecked;
-            var despesasChecked;
+            function () {
+                var receitasChecked;
+                var despesasChecked;
 
-            receitasChecked = $('#inputReceitas').is(':checked');
-            despesasChecked = $('#inputDespesas').is(':checked');
+                receitasChecked = $('#inputReceitas').is(':checked');
+                despesasChecked = $('#inputDespesas').is(':checked');
 
-            if (despesasChecked) {
-                $('#hiddenDespesa').data('valorparametro', 'S');
-                buildfilter();
-
-            }
-            else {
-                if (!receitasChecked) {
-                    //alert('Você precisa selecionar ao menos um tipo de valor.');
-                    $('#inputDespesas').prop('checked', true);
-
-                }
-                else {
-                    $('#hiddenDespesa').data('valorparametro', 'N');
+                if (despesasChecked) {
+                    $('#hiddenDespesa').data('valorparametro', 'S');
                     buildfilter();
 
                 }
+                else {
+                    if (!receitasChecked) {
+                        //alert('Você precisa selecionar ao menos um tipo de valor.');
+                        $('#inputDespesas').prop('checked', true);
+
+                    }
+                    else {
+                        $('#hiddenDespesa').data('valorparametro', 'N');
+                        buildfilter();
+
+                    }
+
+                }
 
             }
-
-        }
     );
 
     $('.filtro_parametro').change(function () {
-            if ($(this).prop('id') == 'filtro_valor') {
-                $('#seletor_valor').data('valorparametro', $('#seletor_valor').val());
-            }
-
-            if ($(this).prop('id') == 'seletor_valor') {
-                if ($.trim($('#filtro_valor').val()) == "") {
-                    $('#filtro_valor').focus();
-                    return;
+                if ($(this).prop('id') == 'filtro_valor') {
+                    $('#seletor_valor').data('valorparametro', $('#seletor_valor').val());
                 }
-            }
 
-            if ($.trim($(this).val()) != "") {
-                $(this).data('valorparametro', $.trim($(this).val()));
-            }
-            else {
-                $(this).removeData('valorparametro');
-            }
-            buildfilter.call(this);
+                if ($(this).prop('id') == 'seletor_valor') {
+                    if ($.trim($('#filtro_valor').val()) == "") {
+                        $('#filtro_valor').focus();
+                        return;
+                    }
+                }
 
-        }
+                if ($.trim($(this).val()) != "") {
+                    $(this).data('valorparametro', $.trim($(this).val()));
+                }
+                else {
+                    $(this).removeData('valorparametro');
+                }
+                buildfilter.call(this);
+
+            }
     )
 
 
