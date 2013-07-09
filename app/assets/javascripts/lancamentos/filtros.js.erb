@@ -192,14 +192,16 @@ function insertQuitarEstornarCancelarEvent() {
     $('.quitar_button').click(function () {
         td = $(this).parent();
         tr = td.parent();
-        alert(tr.prop('id'));
+
+        var rowindex = $("#tableResults").dataTable().fnGetPosition($(this).closest("tr").get(0));
+        $("#tableResults").dataTable().fnUpdate('quitado',rowindex,7);
 
     });
 
     $('.estornar_button').click(function () {
         td = $(this).parent();
         tr = td.parent();
-        alert(tr.prop('id'));
+        $("#tableResults").fnDeleteRow(0);
 
 
     });
