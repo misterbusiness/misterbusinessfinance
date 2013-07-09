@@ -26,24 +26,24 @@ Misterbusinessfinance::Application.routes.draw do
   # ******************************************************************************************************
 
   match 'lancamentos/reports/contas_a_receber_chart', to: 'reports#contas_a_receber_chart'
-  match 'lancamentos/reports/contas_a_receber_table', to: 'reports#contas_a_receber_table'
+  match 'lancamentos/reports/contas_a_receber_table', to: 'reports#contas_a_receber_table', :via => :get
 
   match 'lancamentos/reports/recebimentos_atrasados_chart', to: 'reports#recebimentos_atrasados_chart'
-  match 'lancamentos/reports/recebimentos_atrasados_table', to: 'reports#recebimentos_atrasados_table'
+  match 'lancamentos/reports/recebimentos_atrasados_table', to: 'reports#recebimentos_atrasados_table', :via => :get
 
   match 'lancamentos/reports/top_receitas_chart', to: 'reports#top_receitas_chart'
-  match 'lancamentos/reports/top_receitas_table', to: 'reports#top_receitas_table'
+  match 'lancamentos/reports/top_receitas_table', to: 'reports#top_receitas_table', :via => :get
 
   match 'lancamentos/reports/receitas_por_categoria_chart', to: 'reports#receitas_por_categoria_chart'
-  match 'lancamentos/reports/receitas_por_categoria_table', to: 'reports#receitas_por_categoria_table'
+  match 'lancamentos/reports/receitas_por_categoria_table', to: 'reports#receitas_por_categoria_table', :via => :get
 
-  match 'lancamentos/reports/receitas_por_status_table', to: 'reports#receitas_por_status_table'
+  match 'lancamentos/reports/receitas_por_status_table', to: 'reports#receitas_por_status_table', :via => :get
 
-  match 'lancamentos/reports/receitas_por_centrodecusto_table', to: 'reports#receitas_por_centrodecusto_table'
+  match 'lancamentos/reports/receitas_por_centrodecusto_table', to: 'reports#receitas_por_centrodecusto_table', :via => :get
 
-  match 'lancamentos/reports/prazo_medio_recebimento', to: 'reports#prazo_medio_recebimento'
+  match 'lancamentos/reports/prazo_medio_recebimento', to: 'reports#prazo_medio_recebimento', :via => :get
 
-  match 'lancamentos/reports/ticket_medio_vendas', to: 'reports#ticket_medio_vendas'
+  match 'lancamentos/reports/ticket_medio_vendas', to: 'reports#ticket_medio_vendas', :via => :get
 
   # ******************************************************************************************************
   # Despesas

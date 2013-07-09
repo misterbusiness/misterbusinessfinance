@@ -1,12 +1,13 @@
-$(document).ready(function() {
+//$(document).ready(function() {
+function prepareParcelamento(){
     var data = [{id:'Semanal', text:'Semanal'}, {id:'Mensal', text:'Mensal'}, {id:'Semestral', text:'Semestral'},
         {id:'Anual',text:'Anual'}];
 
     buildStdSelect2('frequencia_parcelas','',data)
 
-});
+//});
 
-$(document).ready(function () {
+//$(document).ready(function () {
 
     var freqRepeticoes = $("#frequencia_agendamentos");
     var freqParcelas = $("#frequencia_parcelas");
@@ -81,4 +82,5 @@ $(document).ready(function () {
             }
         }
     });
-});
+//});
+}

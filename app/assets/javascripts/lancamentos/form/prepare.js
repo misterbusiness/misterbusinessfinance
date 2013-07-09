@@ -11,12 +11,13 @@ $(document).ready(function(){
 
 function prepareForm()
 {
-    //prepareTipo();
-    //prepareDescricao();
-    //prepareDatavencimento();
+    prepareTipo();
+    prepareDescricao();
+    prepareDatavencimento();
     //prepareValor();
     prepareCategory();
-    //prepareCentrodecusto();
-    //prepareAgendamento();
-    //prepareParcelamento();
+    prepareCentrodecusto();
+    prepareAgendamento();
+    prepareParcelamento();
+    //prepareQuitado();
 }
