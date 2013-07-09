@@ -186,8 +186,23 @@ function insertQuitarEstornarCancelarEvent() {
         td = $(this).parent();
         tr = td.parent();
 
+        var id = tr.prop('id').replace('edit_lancamento_row_','');
         var rowindex = $("#tableResults").dataTable().fnGetPosition($(this).closest("tr").get(0));
-        $("#tableResults").dataTable().fnUpdate('quitado',rowindex,7);
+        //$("#tableResults").dataTable().fnDeleteRow(rowindex);
+
+        $.ajax( {
+                    type: "POST",
+                    url: "lancamentos/"+id+"/quitar",
+                    sucess: function(msg)
+                    {
+                        $("#tableResults").dataTable().fnUpdate('quitado',rowindex,7);
+                    }
+
+
+                }
+
+
+        );
 
     });
 
