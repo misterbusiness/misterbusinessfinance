@@ -11,6 +11,11 @@
  *= require_self
  *= require_tree .
  *= require select2
+ *= require jquery.ui.core
+ *= require jquery.ui.theme
+ *= require dataTables/src/demo_table_jui
+ *= require dataTables/extras/TableTools
+ *= require dataTables/extras/TableTools_JUI
  */
 .content {
   background-color: #eee;
@@ -42,7 +47,6 @@
   overflow: none;
 }
 
-
 .divReportsDialog .modal {
   width: 1200px;
   left: 40%;
@@ -61,7 +65,7 @@
   overflow: none;
 }
 
-.quadrante{
+.quadrante {
   width: 100%;
   margin-left: none;
   margin-right: none;
@@ -100,4 +104,12 @@
   cursor: pointer;
   background: none repeat scroll 0 0 transparent;
   border: 0 none;
+}
+
+.clear {
+  clear: both;
+}
+
+.results_actions input {
+  float: left;
 }
