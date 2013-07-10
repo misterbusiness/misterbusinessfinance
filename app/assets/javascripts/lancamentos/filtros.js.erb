@@ -34,9 +34,9 @@ function buildfilter() {
                     "oTableTools": {
                         "aButtons": [
                             {
-                                "sExtends": "pdf",
+                                "sExtends": "xls",
                                 "sButtonText": "Exportar dados para o Excel",
-                                "sFileName": "*.pdf",
+                                "sFileName": "*.xls",
                                 "mColumns": [1, 2, 4, 5, 6],
                                 "bFooter": true,
                                 "bHeader": true
@@ -139,16 +139,41 @@ function notification_build_filter(link) {
                 insertQuitarEstornarCancelarEvent();
                 insertOnClickResultEvent();
                 $('#tableResults').dataTable({
+                    'sPaginationType': 'full_numbers',
                     'aaSorting': [
                         [2, 'asc']
-                    ], 'bJQueryUI': true, 'oLanguage': {
+                    ],
+                    'bJQueryUI': true,
+                    sDom: '<"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip><"clear">T',
+                    //'sDom': '<"fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lf><"table table-hover table-condensed dataTable"t><"fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"iTp>',
+                    "oTableTools": {
+                        "aButtons": [
+                            {
+                                "sExtends": "xls",
+                                "sButtonText": "Exportar dados para o Excel",
+                                "sFileName": "*.xls",
+                                "mColumns": [1, 2, 4, 5, 6],
+                                "bFooter": true,
+                                "bHeader": true
+                            }
+                        ]
+                    },
+                    'oLanguage': {
                         "sLengthMenu": "Exibir _MENU_ lançamentos por página",
                         "sZeroRecords": "Nenhum registro encontrado",
                         "sInfo": "Exibindo _START_ de _END_. Total: _TOTAL_ lançamentos.",
                         "sInfoEmpty": "Exibindo 0 de 0. Total: 0 lançamentos",
                         "sInfoFiltered": "(filtrado de um total de _MAX_ lançamentos)",
-                        "sSearch": "Refinar busca:"
+                        "sSearch": "Refinar busca:",
+                        "oPaginate": {
+                            "sFirst": "<<",
+                            "sLast": ">>",
+                            "sNext": ">",
+                            "sPrevious": "<"
+                        }
                     }
+
+
                 });
             }
 
