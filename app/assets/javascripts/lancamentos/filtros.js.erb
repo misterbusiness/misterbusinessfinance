@@ -249,15 +249,15 @@ function insertQuitarEstornarCancelarEvent() {
                     type: "PUT",
                     //url: "lancamentos/quitar?id="+id,
                     url: "lancamentos/" + id + "/quitar",
-                    sucess: function (msg) {
-                        $("#tableResults").dataTable().fnUpdate('quitado', rowindex, 7);
-                    }
-
-
                 }
 
 
-        );
+        ).done(function(msg)
+                {
+                    $("#tableResults").dataTable().fnUpdate('quitado', rowindex, 7);
+                }
+
+                );
 
     });
 

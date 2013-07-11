@@ -31,8 +31,8 @@ class LancamentosController < ApplicationController
   end
 
   def build_query
-    #queryapoio = Lancamento.unscoped
-    queryapoio = Lancamento.padrao
+    queryapoio = Lancamento.unscoped
+    #queryapoio = Lancamento.padrao
     queryapoio = queryapoio.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
     queryapoio = queryapoio.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
     queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
@@ -423,24 +423,26 @@ class LancamentosController < ApplicationController
       @lancamento.status = :aberto
       @lancamento.dataacao = nil
       if @lancamento.save
-        flash[:notice] = 'Sucesso ao reverter quitar'
+        #flash[:notice] = 'Sucesso ao reverter quitar'
       else
-        flash[:notice] = 'Erro ao reverter quitar'
+        #flash[:notice] = 'Erro ao reverter quitar'
       end
     else
       if @lancamento.aberto?
         @lancamento.status = :quitado
         @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
         if @lancamento.save
-          flash[:notice] = 'Lancamento quitado com sucesso'
+         # flash[:notice] = 'Lancamento quitado com sucesso'
         else
-          flash[:notice] = 'Erro ao quitar lancamento'
+         # flash[:notice] = 'Erro ao quitar lancamento'
         end
       else
-        flash[:notice] = 'Lancamento so pode estar ou quitado ou aberto'
+        #flash[:notice] = 'Lancamento so pode estar ou quitado ou aberto'
       end
 
     end
+
+   # render :layout => false
 
   end
 
