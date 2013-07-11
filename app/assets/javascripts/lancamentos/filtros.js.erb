@@ -254,10 +254,10 @@ function insertQuitarEstornarCancelarEvent() {
 
         ).done(function(msg)
                 {
-                    $("#tableResults").dataTable().fnUpdate('quitado', rowindex, 7);
+                    $("#tableResults").dataTable().fnUpdate('quitado', rowindex, 7,false);
                 }
 
-                );
+          );
 
     });
 
