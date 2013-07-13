@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mister Business</title>
   <!--<title><%= content_for?(:title) ? yield(:title) : "Myapp" %></title> -->
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
@@ -16,38 +16,68 @@
   <%= csrf_meta_tags %>
   <%= yield(:head) %>
 </head>
-<body style="padding-top: 10px;">
-<table border=1 height="750px" width="1550px">
-  <tr height="5%">
-    <td><b>Mister Business</b></td>
+<body style="padding-top: 10px;height: 100%;width:  100%">
+<!--<table border=1 height="750px" width="1550px">-->
+<div class="container-fluid" style="height: 100%">
+  <div class="row-fluid" style="height: 100%">
+    <div class="span1" style="height: 100%">
+      <div class="span12 well" style="height: 10%">
+        <b>Mister Business</b>
+      </div>
 
-    <td> Bem-vindo, Usuário</td>
+      <div class="span12 well" style="height: 50%">
+        <ul class="nav nav-pills">
+          <li class="active span12"><a href="#">Financeiro</a></li>
+          <li class="span12"><a href="#">Comercial</a></li>
+          <li class="span12"><a href="#">Compras</a></li>
+          <li class="span12"><a href="#">RH</a></li>
+          <li class="span12"><a href="#">Empresa</a></li>
+        </ul>
+      </div>
+      <div class="span12 well" style="height: 40%">
+        <p>Anúncios</p>
+      </div>
+    </div>
+    <div class="span11">
+      <div class="span2 well" style="height: 100%"> Bem-vindo, Usuário</div>
+      <div class="span10 well" style="height: 100%">
+        <ul class="nav nav-pills">
+          <li class="<%= 'active' if current_page?(lancamentos_path) %>">
+            <a href="<%= lancamentos_path %>">Lançamentos</a>
+          </li>
+          <li class="<%= 'active' if current_page?(targets_path) %>">
+            <a href="<%= targets_path %>">Metas</a>
+          </li>
+          <li class="<%= 'active' if current_page?(lancamentorapidos_path) %>">
+            <a href="<%= lancamentorapidos_path %>">Lançamentos Rápidos</a>
+          </li>
+          <li class="<%= 'active' if current_page?(categories_path) %>">
+            <a href="<%= categories_path %>">Categorias</a>
+          </li>
+          <li class="<%= 'active' if current_page?(centrodecustos_path) %>">
+            <a href="<%= centrodecustos_path %>">Centros de custo</a>
+          </li>
+          <li>
+            <a href="#">Configurações</a>
+          </li>
+        </ul>
+      </div>
+      <div class="span12" id="container">
+        <div id="flash_notice" style="display:none" class="span12"></div>
+        <div class="span12">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
 
-  </tr>
-  <tr height="90%">
-    <td width="10%">
-      <table border=1 height="100%" width="100%">
-
-				<tr height = "50%">
-    <td> Menus dos Módulos</td>
-  </tr>
-
-  <tr height="50%">
-    <td> Anúncio</td>
-  </tr>
-
-</table>
-</td>
-    <td width="90%">
-  <div id="container">
-    <div id="flash_notice" style="display:none"></div>
-    <%= yield %>
   </div>
-</td>
-    </tr>
-<tr height="5%">
-  <td colspan="2"><b>MRBusiness. Todos os direitos reservados</b></td>
-</tr>
-</table>
+</div>
+</div>
+<div class="container-fluid">
+  <div class="row-fluid">
+  <div class="span12 well"><b>MRBusiness. Todos os direitos reservados</b></div>
+    </div>
+</div>
+
 </body>
 </html>

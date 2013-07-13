@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130530132016) do
+ActiveRecord::Schema.define(:version => 20130713194153) do
 
   create_table "agendamentos", :force => true do |t|
     t.integer  "num_agendamentos"
@@ -21,9 +21,10 @@ ActiveRecord::Schema.define(:version => 20130530132016) do
 
   create_table "categories", :force => true do |t|
     t.string   "descricao"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "ancestry"
+    t.boolean  "is_cash_flow"
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
@@ -71,6 +72,22 @@ ActiveRecord::Schema.define(:version => 20130530132016) do
     t.integer  "parcela_id"
     t.integer  "estorno_id"
     t.integer  "agendamento_id"
+  end
+
+  create_table "meta", :force => true do |t|
+    t.integer  "tipo_cd"
+    t.datetime "data"
+    t.string   "descricao"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "metas", :force => true do |t|
+    t.integer  "tipo_cd"
+    t.datetime "data"
+    t.string   "descricao"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "parcelas", :force => true do |t|

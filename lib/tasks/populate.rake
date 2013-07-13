@@ -18,9 +18,16 @@ namespace :db do
     end
 
 
-    Category.populate 6 do |category|
+    Category.populate 4 do |category|
       category.descricao = Faker::Company.name
+      category.is_cash_flow = true
     end
+
+    Category.populate 4 do |category|
+      category.descricao = Faker::Company.name
+      category.is_cash_flow = false
+    end
+
     Centrodecusto.populate 5 do |centrodecusto|
       centrodecusto.descricao = Faker::Company.name
     end

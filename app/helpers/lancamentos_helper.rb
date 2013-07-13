@@ -41,29 +41,53 @@ module LancamentosHelper
                     INNER JOIN (#{@meta_serias.to_sql}) as meta on realizado.mes = meta.mes order by mes"
   end
 
-  def fluxo_caixa_receitas_report(inicio, fim)
-    @today = DateTime.now
-    @top_categoria_sql = (Lancamento.validos.receitas.por_categoria.range(inicio,fim).por_mes.joins { category }.group { category.descricao }
-        .select { sum(valor).as(values) }
-        .select { category.descricao.as(descricao) }
-        .select { date_part('month', datavencimento).as(mes)}).to_sql
+  def fluxo_caixa_receitas_report
+    @dt = DateTime.now
+    @fluxo_caixa_sql = "SELECT * FROM ("
+    # Itera por cada mes construindo a query
+    (1..12).each do |mes|
+      @inicio = DateTime.new(@dt.year,mes,01)
+      @fim = @inicio.end_of_month
 
-    @all_lancamentos_sql = (Lancamento.validos.receitas.range(inicio,fim).por_mes
-        .select{sum(valor).as(values)}
-        .select { date_part('month', datavencimento).as(mes)}).to_sql
+      @projetado_sql = get_fluxo_caixa_query(Lancamento.aberto, Lancamento.receita, @inicio, @fim)
+      @realizado_sql = get_fluxo_caixa_query(Lancamento.quitado, Lancamento.receita, @inicio, @fim)
 
-    @other_categoria_sql = "SELECT (other.values-top.values) as values, 'outros', other.mes
-                              FROM (#{@top_categoria_sql}) top JOIN (#{@all_lancamentos_sql}) other ON top.mes = other.mes"
+      @receita_sql = "SELECT #{mes} as mes, projetado.values as projetado, realizado.values as realizado, "
+    end
 
-    @total_sql = "(#{@top_categoria_sql} UNION #{@other_categoria_sql})"
+    @fluxo_caixa_sql = "#{@fluxo_caixa_sql}) fluxo_caixa"
 
-    return @total_sql
+    return @fluxo_caixa_sql
 
   end
 
-  #@report_series_zone_1 = Lancamento.find_by_sql(despesa_series_query(@dt))
-  #@report_series_zone_2 = Lancamento.find_by_sql(despesa_por_categoria_series_query(@dt).to_sql)
-  #@report_series_zone_3 = Lancamento.find_by_sql(despesa_por_centrodecusto_series_query(@dt).to_sql)
+  def get_fluxo_caixa_query(status, tipo, inicio, fim)
+
+    @top_categorias_sql = (Lancamento.por_categoria.range(inicio,fim).por_mes.
+        joins { category }.group { category.descricao }
+    .where(:category_id => Category.cash_flow_flag)
+    .where(:status=>status)
+    .where(:tipo_cd=>tipo)
+    .order("sum(valor) desc")
+    .select { sum(valor).as(values) }
+    .select { category.descricao.as(descricao) }
+    .select { date_part('month', datavencimento).as(mes)}).to_sql
+
+    @other_categorias_sql = (Lancamento.range(inicio,fim).por_mes.
+        joins { category }
+    .where(:category_id => Category.no_cash_flow_flag)
+    .where(:status=>status)
+    .where(:tipo_cd=>tipo)
+    .select { sum(valor).as(values) }
+    .select { ("outros").as(descricao) }
+    .select { date_part('month', datavencimento).as(mes)}).to_sql
+
+#    @other_categorias_sql = "SELECT todas.total-top.total as values, 'outras' as descricao, todas.mes FROM
+#                  (SELECT sum(values) as total, mes FROM (#{@top_categorias_sql}) top_categorias GROUP BY mes) top INNER JOIN
+#                  (SELECT sum(values) as total, mes FROM (#{@all_categorias_sql}) todas_categorias GROUP BY mes) todas ON todas.mes = top.mes"
+
+    return "(#{@top_categorias_sql}) UNION( #{@other_categorias_sql})"
+  end
 
   def receita_report_series_query(dt)
     return Lancamento.receitas.este_ano(dt).por_mes

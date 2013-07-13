@@ -168,7 +168,8 @@ class ReportsController < ApplicationController
   end
 
   def fluxo_de_caixa
-    @report_series = Lancamento.find_by_sql(fluxo_caixa_receitas_report(@dt_inicio,@dt_fim))
+    #@report_series = Lancamento.find_by_sql(fluxo_caixa_receitas_report(@dt_inicio,@dt_fim))
+    @report_series = Lancamento.find_by_sql(fluxo_caixa_receitas_report())
   end
 
   def receita_por_categoria
