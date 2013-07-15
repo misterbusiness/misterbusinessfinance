@@ -1,0 +1,49 @@
+function buildFluxoCaixaReport(){
+    hideDiv('report_zone_1_div');
+    hideDiv('report_zone_2_div');
+    hideDiv('report_zone_3_div');
+    $('#report_zone_3_div').html("<iframe style='margin-left:-300px;margin-top:-50px; width:1200px;height:700px;' src='<%= Rails.application.routes.url_helpers.lancamentos_reports_fluxo_de_caixa_path %>'></iframe>");
+}
+
+$(document).ready(function(){
+    $('.mister-popover').popover();
+});
+
+
+var accordHTML = [];
+
+accordHTML.push('<div id="accordion">');
+
+for (i = 0; i < $('tr').length; i = i + 3) {
+    var $row1 = $('tr').eq(i);
+    var $row2 = $row1.next();
+    var $row3 = $row2.next();
+
+
+    accordHTML.push(getCell2($row1));
+    accordHTML.push('<div class="accord_content">');
+    accordHTML.push(getCell1($row2));
+    accordHTML.push(getCell2($row2) + '<br />');
+    accordHTML.push(getCell1($row3));
+    accordHTML.push(getCell2($row3));
+    accordHTML.push('</div>')
+
+
+}
+accordHTML.push('</div>');
+var $accord = $(accordHTML.join(""));
+$accord.find('h3').wrapInner('<a href="#" />');
+
+
+$('table').replaceWith($accord);
+$('#accordion').accordion()
+
+function getCell1($row) {
+    return $row.find('td').eq(0).html();
+}
+
+function getCell2($row) {
+    return $row.find('td').eq(1).html();
+}
+
+

@@ -1,0 +1,107 @@
+<!--
+   Fluxo de caixa series
+   Mês, Categoria,  Realizado,   Projetado
+
+-->
+<%= stylesheet_link_tag "application", :media => "all" %>
+<%= javascript_include_tag "application" %>
+
+<!--
+<% @asd.each_pair do |k, v| %>
+    <div><%= k.to_s %></div>
+    <% v.each do |item| %>
+        <div><%= item.realizado %></div>
+        <div><%= item.projetado %></div>
+    <% end %>
+<% end %>
+
+-->
+
+<div class="span12 breadcrumb">
+  <div class="span1">
+    <div class="span12">Fluxo de Caixa</div>
+  </div>
+  <div class="span11">
+    <% (1..12).each do |mes| %>
+        <div class="span1">
+          <center> <%= mes %></center>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="span12 breadcrumb">
+  <div class="span1">
+    <div class="span12">Saldo de abertura</div>
+  </div>
+  <div class="span11">
+    <% (1..12).each do |mes| %>
+        <div class="span1">&nbsp;</div>
+    <% end %>
+  </div>
+
+  <div class="span11">
+    <% (1..12).each do |mes| %>
+        <div class="span1">&nbsp;</div>
+    <% end %>
+  </div>
+
+
+  <div class="span12 breadcrumb">
+    <div class="span12 breadcrumb">
+      <div class="span1">
+        <div class="span12">Entradas de caixa</div>
+      </div>
+      <div class="mister-table-level1 mister-table-realizado span11">
+        <% (1..12).each do |mes| %>
+            <% if !@total_receitas[mes].blank? %>
+                <div class="span1 mister-number"><%= @total_receitas[mes.to_s].realizado %></div>
+            <% else %>
+                <div class="span1 mister-number">0</div>
+            <% end %>
+        <% end %>
+      </div>
+
+      <div class="span11 mister-table-projetado">
+        <% (1..12).each do |mes| %>
+            <% if !@total_receitas[mes].blank? %>
+                <div class="span1 mister-number"><%= @total_receitas[mes.to_s].projetado %></div>
+            <% else %>
+                <div class="span1 mister-number">0</div>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <% @asd.each_pair do |cat, values| %>
+        <% @atual = values.group_by(&:mes) %>
+        <% @string %>
+        <div class="span12 breadcrumb">
+          <div class="span1">
+            <div class="span12"><%= cat %><br>&nbsp;</div>
+          </div>
+          <div class="span11 mister-table-realizado">
+            <% (1..12).each do |mes| %>
+                <% if !@atual[mes.to_s].nil? and !@atual[mes.to_s][0].nil? %>
+                    <div class="span1 mister-number"><%= @atual[mes.to_s][0].realizado %></div>
+                <% else %>
+                    <div class="span1 mister-number">0</div>
+                <% end %>
+            <% end %>
+          </div>
+
+          <div class="span11 mister-table-projetado">
+            <% (1..12).each do |mes| %>
+                <% if !@atual[mes.to_s].nil? %>
+                    <div class="span1 mister-number"><%= @atual[mes.to_s][0].projetado %></div>
+                <% else %>
+                    <div class="span1 mister-number">0</div>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+
+  </div>
+  <!-- Entradas de caixa -->
+</div> <!-- Saldo de abertura -->

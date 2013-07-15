@@ -1,4 +1,3 @@
-
 class ReportsController < ApplicationController
   include ApplicationHelper
   include LancamentosHelper
@@ -169,7 +168,38 @@ class ReportsController < ApplicationController
 
   def fluxo_de_caixa
     #@report_series = Lancamento.find_by_sql(fluxo_caixa_receitas_report(@dt_inicio,@dt_fim))
-    @report_series = Lancamento.find_by_sql(fluxo_caixa_receitas_report())
+    @report_receitas_series = Lancamento.find_by_sql(fluxo_caixa_receitas_report())
+
+    @total_receitas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
+
+    @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+      @total_receitas[mes].realizado = sum + subitem.realizado.to_f
+    end}
+
+    @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+      @total_receitas[mes].projetado = sum + subitem.projetado.to_f
+    end}
+
+    @general_receitas = @report_receitas_series.group_by(&:descricao).to_hash
+
+
+
+    @report_despesas_series = Lancamento.find_by_sql(fluxo_caixa_despesas_report())
+
+    @total_despesas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
+
+    @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+      @total_despesas[mes].realizado = sum + subitem.realizado.to_f
+    end}
+
+    @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+      @total_despesas[mes].projetado = sum + subitem.projetado.to_f
+    end}
+
+    @general_despesas = @report_despesas_series.group_by(&:descricao).to_hash
+
+
+    render :layout => nil
   end
 
   def receita_por_categoria
@@ -815,5 +845,4 @@ class ReportsController < ApplicationController
     end
   end
 end
-
 
