@@ -4,14 +4,15 @@
 -->
 <%= stylesheet_link_tag "application", :media => "all" %>
 <%= javascript_include_tag "application" %>
+<body class="mister-iframe" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<% @current_month = DateTime.now.month %>
 
   <table class="table table-hover table-bordered">
     <thead>
-      <th>
-        <div class="mister-table-heading">Fluxo de Caixa</div>
-      </th>
+              <th><div class="mister-table-heading">Fluxo de Caixa</div></th>
+              <th><div class="mister-table-heading"><%= 1.year.ago.year  %></div></th>
       <% (1..12).each do |mes| %>
-          <th>
+          <th class="<%= 'mister-table-column-current' if mes == @current_month %>">
             <center> <%= mes %></center>
           </th>
       <% end %>
@@ -20,32 +21,66 @@
 
     <tr class="mister-table-realizado-level0">
       <td rowspan="2">
-        <div class="mister-table-heading">Saldo de abertura</div>
+        <div class="mister-table-heading">Saldo</div>
+      </td>
+      <td>
+        <div class="mister-number"><%= @saldo_inicial %></div>
       </td>
       <% (1..12).each do |mes| %>
-          <td>&nbsp;</td>
+          <% if !@total_receitas[mes].blank? %>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+                <div class="mister-number">
+                  <%=
+                      if !@acumulado_receitas[mes.to_s].realizado.nil? and !@acumulado_despesas[mes.to_s].realizado.nil?
+                        @acumulado_receitas[mes.to_s].realizado- @acumulado_despesas[mes.to_s].realizado
+                      end
+                  %>
+                </div>
+              </td>
+          <% else %>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+                <div class="mister-number">0</div>
+              </td>
+          <% end %>
       <% end %>
     </tr>
 
     <tr class="mister-table-projetado-level0">
+      <td>
+        <div class="mister-number"><%= @saldo_projetado_inicial %></div>
+      </td>
       <% (1..12).each do |mes| %>
-          <td>&nbsp;</td>
+          <% if !@total_receitas[mes].blank? %>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+                <div class="mister-number">
+                  <%=
+                      if !@acumulado_receitas[mes.to_s].projetado.nil? and !@acumulado_despesas[mes.to_s].projetado.nil?
+                        @acumulado_receitas[mes.to_s].projetado- @acumulado_despesas[mes.to_s].projetado
+                      end
+                  %>
+                </div>
+              </td>
+          <% else %>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+                <div class="mister-number">0</div>
+              </td>
+          <% end %>
       <% end %>
     </tr>
 
     <tr class="mister-table-realizado-level1">
-      <td rowspan="2">
+      <td  colspan="2" rowspan="2">
         <div class="mister-table-heading">Entradas de caixa</div>
       </td>
       <% (1..12).each do |mes| %>
           <% if !@total_receitas[mes].blank? %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">
                   <%= @total_receitas[mes.to_s].realizado %>
                 </div>
               </td>
           <% else %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">0</div>
               </td>
           <% end %>
@@ -54,13 +89,13 @@
     <tr class="mister-table-projetado-level1">
       <% (1..12).each do |mes| %>
           <% if !@total_receitas[mes].blank? %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">
                   <%= @total_receitas[mes.to_s].projetado %>
                 </div>
               </td>
           <% else %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">0</div>
               </td>
           <% end %>
@@ -70,17 +105,17 @@
 
     <% @general_receitas.each_pair do |cat, values| %>
         <tr class="mister-table-realizado-level2">
-          <td rowspan="2">
-            <div class="mister-table-heading">Despesas&nbsp;<%= cat.camelize %></div>
+          <td colspan="2" rowspan="2">
+            <div class="mister-table-heading">Receitas de <%= cat.camelize %></div>
           </td>
           <% @atual = values.group_by(&:mes) %>
           <% (1..12).each do |mes| %>
               <% if !@atual[mes.to_s].nil? %>
-                  <td>
+                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
                     <div class="mister-number"><%= @atual[mes.to_s][0].realizado %></div>
                   </td>
               <% else %>
-                  <td>
+                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
                     <div class="mister-number">0</div>
                   </td>
               <% end %>
@@ -90,11 +125,11 @@
           <tr class="mister-table-projetado-level2">
             <% (1..12).each do |mes| %>
                 <% if !@atual[mes.to_s].nil? %>
-                    <td>
+                    <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
                       <div class="mister-number"><%= @atual[mes.to_s][0].projetado %></div>
                     </td>
                 <% else %>
-                    <td>
+                    <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
                       <div class="mister-number">0</div>
                     </td>
                 <% end %>
@@ -104,18 +139,18 @@
 
 
     <tr class="mister-table-realizado-level1">
-      <td rowspan="2">
+      <td  colspan="2" rowspan="2">
         <div class="mister-table-heading">Saídas de caixa</div>
       </td>
       <% (1..12).each do |mes| %>
           <% if !@total_receitas[mes].blank? %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">
                   <%= @total_despesas[mes.to_s].realizado %>
                 </div>
               </td>
           <% else %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">0</div>
               </td>
           <% end %>
@@ -124,13 +159,13 @@
     <tr class="mister-table-projetado-level1">
       <% (1..12).each do |mes| %>
           <% if !@total_despesas[mes].blank? %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">
                   <%= @total_despesas[mes.to_s].projetado %>
                 </div>
               </td>
           <% else %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">0</div>
               </td>
           <% end %>
@@ -140,17 +175,17 @@
 
     <% @general_despesas.each_pair do |cat, values| %>
         <tr class="mister-table-realizado-level2">
-          <td rowspan="2">
-            <div class="mister-table-heading">Despesas&nbsp;<%= cat.camelize %></div>
+          <td  colspan="2" rowspan="2">
+            <div class="mister-table-heading">Despesas de <%= cat.camelize %></div>
           </td>
           <% @atual = values.group_by(&:mes) %>
           <% (1..12).each do |mes| %>
               <% if !@atual[mes.to_s].nil? %>
-                  <td>
+                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
                     <div class="mister-number"><%= @atual[mes.to_s][0].realizado %></div>
                   </td>
               <% else %>
-                  <td>
+                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
                     <div class="mister-number">0</div>
                   </td>
               <% end %>
@@ -160,11 +195,11 @@
         <tr class="mister-table-projetado-level2">
           <% (1..12).each do |mes| %>
               <% if !@atual[mes.to_s].nil? %>
-                  <td>
+                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
                     <div class="mister-number"><%= @atual[mes.to_s][0].projetado %></div>
                   </td>
               <% else %>
-                  <td>
+                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
                     <div class="mister-number">0</div>
                   </td>
               <% end %>
@@ -173,12 +208,12 @@
     <% end %>
 
     <tr class="mister-table-realizado-level1">
-      <td rowspan="2">
+      <td  colspan="2" rowspan="2">
         <div class="mister-table-heading">Geração do caixa</div>
       </td>
       <% (1..12).each do |mes| %>
           <% if !@total_receitas[mes].blank? %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">
                   <%= if !@total_receitas[mes.to_s].realizado.nil? and !@total_despesas[mes.to_s].realizado.nil?
                         @total_receitas[mes.to_s].realizado - @total_despesas[mes.to_s].realizado
@@ -187,7 +222,7 @@
                 </div>
               </td>
           <% else %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">0</div>
               </td>
           <% end %>
@@ -196,7 +231,7 @@
     <tr class="mister-table-projetado-level1">
       <% (1..12).each do |mes| %>
           <% if !@total_receitas[mes].blank? %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">
                   <%=
                       if !@total_receitas[mes.to_s].projetado.nil? and !@total_despesas[mes.to_s].projetado.nil?
@@ -206,7 +241,7 @@
                 </div>
               </td>
           <% else %>
-              <td>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
                 <div class="mister-number">0</div>
               </td>
           <% end %>
@@ -215,5 +250,5 @@
 
     </tbody>
     </table>
-
+</body>
 

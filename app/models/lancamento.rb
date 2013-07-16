@@ -58,23 +58,39 @@ class Lancamento < ActiveRecord::Base
   scope :a_vista, where(Lancamento.arel_table[:parcela_id].eq(nil))
   scope :receitas, where(:tipo_cd => Lancamento.receita)
   scope :despesas, where(:tipo_cd => Lancamento.despesa)
+
+  # Pela data de vencimento
   scope :por_mes, group{date_part('month',datavencimento)}.order{date_part('month',datavencimento)}
   scope :este_ano, lambda {|ano| where(:datavencimento => ano.beginning_of_year..ano.end_of_year)}
   scope :este_mes, lambda {|mes| where(:datavencimento => mes.beginning_of_month..mes.end_of_month)}
+  scope :este_dia, lambda {|dia| where(:datavencimento => dia.beginning_of_day..dia.end_of_day)}
+  scope :por_dia,  group{date_part('day',datavencimento)}.order{date_part('day',datavencimento)}
+  scope :range, lambda {|dt_inicio, dt_fim| where(:datavencimento => dt_inicio..dt_fim )}
+  scope :a_partir_de, lambda {|dt| where('datavencimento > (?) ', dt)}
+  scope :ate, lambda {|dt| where('datavencimento < (?) ', dt)}
+
+  # Pela data da ação
+  scope :acao_por_mes, group{date_part('month',dataacao)}.order{date_part('month',dataacao)}
+  scope :acao_este_ano, lambda {|ano| where(:dataacao => ano.beginning_of_year..ano.end_of_year)}
+  scope :acao_este_mes, lambda {|mes| where(:dataacao => mes.beginning_of_month..mes.end_of_month)}
+  scope :acao_este_dia, lambda {|dia| where(:dataacao => dia.beginning_of_day..dia.end_of_day)}
+  scope :acao_por_dia,  group{date_part('day',dataacao)}.order{date_part('day',dataacao)}
+  scope :acao_range, lambda {|dt_inicio, dt_fim| where(:dataacao => dt_inicio..dt_fim )}
+  scope :acao_a_partir_de, lambda {|dt| where('dataacao > (?) ', dt)}
+  scope :acao_ate, lambda {|dt| where('dataacao < (?) ', dt)}
+
+
   scope :parcelamentos_realizados, lambda {|ano| parcelados.este_ano(ano).por_mes}
   scope :lancamentos_realizados, lambda {|ano| a_vista.este_ano(ano).por_mes}
   scope :quitados, where(:status_cd => Lancamento.quitado)
   scope :abertos, where(:status_cd => Lancamento.aberto)
-  scope :este_dia, lambda {|dia| where(:datavencimento => dia.beginning_of_day..dia.end_of_day)}
-  scope :por_dia,  group{date_part('day',datavencimento)}.order{date_part('day',datavencimento)}
+
   scope :caixa_dia, lambda {|dia| receitas.quitados.por_dia.select{sum(valor)} - despesas.quitados.por_dia.select{sum(valor)} }
   scope :caixa_mes, lambda {|mes| receitas.quitados.este_mes(mes).select{sum(valor)} - despesas.quitados.este_mes(mes).select{sum(valor)} }
 
   scope :validos, where(status_cd: [Lancamento.quitado, Lancamento.aberto])
 
-  scope :range, lambda {|dt_inicio, dt_fim| where(:datavencimento => dt_inicio..dt_fim )}
-  scope :a_partir_de, lambda {|dt| where('datavencimento > (?) ', dt)}
-  scope :ate, lambda {|dt| where('datavencimento < (?) ', dt)}
+
 
   scope :por_categoria, group{category_id}
   scope :por_centrodecusto, group{centrodecusto_id}

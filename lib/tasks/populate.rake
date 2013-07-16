@@ -11,19 +11,19 @@ namespace :db do
 
     Category.populate 1 do |categoryBase|
       categoryBase.descricao = 'Sem categoria'
+      categoryBase.is_cash_flow = true
     end
 
     Centrodecusto.populate 1 do |categoryBase|
       categoryBase.descricao = 'Sem centro de custo'
     end
 
-
-    Category.populate 4 do |category|
+    Category.populate 2 do |category|
       category.descricao = Faker::Company.name
       category.is_cash_flow = true
     end
 
-    Category.populate 4 do |category|
+    Category.populate 6 do |category|
       category.descricao = Faker::Company.name
       category.is_cash_flow = false
     end
@@ -36,9 +36,9 @@ namespace :db do
       lancamento.descricao = Populator.words(1..3)
       lancamento.status_cd = [Lancamento.aberto]
       lancamento.tipo_cd = [Lancamento.receita, Lancamento.despesa]
-      lancamento.datavencimento = 6.months.ago..3.month.from_now
+      lancamento.datavencimento = 3.years.ago..2.years.from_now #6.months.ago..3.month.from_now
       lancamento.valor = 1..99
-      lancamento.created_at = 5.months.ago..Time.now
+      lancamento.created_at = 3.years.ago..Time.now #5.months.ago..Time.now
       lancamento.category_id = 1..7
       lancamento.centrodecusto_id = 1..6
     end
@@ -47,12 +47,12 @@ namespace :db do
       lancamento.descricao = Populator.words(1..3)
       lancamento.status_cd = [Lancamento.quitado]
       lancamento.tipo_cd = [Lancamento.receita, Lancamento.despesa]
-      lancamento.datavencimento = 6.months.ago..3.month.from_now
+      lancamento.datavencimento = 3.years.ago..2.years.from_now #6.months.ago..3.month.from_now
       lancamento.valor = 1..99
-      lancamento.created_at = 5.months.ago..Time.now
+      lancamento.created_at = 3.years.ago..Time.now #5.months.ago..Time.now
       lancamento.category_id = 1..7
       lancamento.centrodecusto_id = 1..6
-      lancamento.dataacao = DateTime.now
+      lancamento.dataacao = 3.years.ago..Time.now
     end
 
     Lancamentorapido.populate 10 do |lancamentorapido|

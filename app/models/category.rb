@@ -10,5 +10,5 @@ class Category < ActiveRecord::Base
   has_ancestry
 
   scope :cash_flow_flag, where(:is_cash_flow => true)
-  scope :no_cash_flow_flag, where(:is_cash_flow => false)
+  scope :no_cash_flow_flag, where(Category.arel_table[:is_cash_flow].eq(false).or(Category.arel_table[:is_cash_flow].eq(nil)))
 end

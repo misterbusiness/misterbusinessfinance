@@ -1,7 +1,7 @@
 module LancamentosHelper
   def caixa_series_query(dt)
-    @caixa_series_part1 = Lancamento.receitas.quitados.este_ano(@dt).por_mes.select { sum(valor).as(valor) }.select { date_part('month', datavencimento).as(mes) }
-    @caixa_series_part2 = Lancamento.despesas.quitados.este_ano(@dt).por_mes.select { sum(valor).as(valor) }.select { date_part('month', datavencimento).as(mes) }
+    @caixa_series_part1 = Lancamento.receitas.quitados.acao_este_ano(@dt).acao_por_mes.select { sum(valor).as(valor) }.select { date_part('month', dataacao).as(mes) }
+    @caixa_series_part2 = Lancamento.despesas.quitados.acao_este_ano(@dt).acao_por_mes.select { sum(valor).as(valor) }.select { date_part('month', dataacao).as(mes) }
 
     return "SELECT (COALESCE(r.valor,0)-COALESCE(d.valor,0)) as valor, r.mes as mes
             from (#{@caixa_series_part1.to_sql}) r
@@ -41,13 +41,10 @@ module LancamentosHelper
                     INNER JOIN (#{@meta_serias.to_sql}) as meta on realizado.mes = meta.mes order by mes"
   end
 
-  def fluxo_caixa_receitas_report
+  def fluxo_caixa_receitas_report(inicio, fim)
     @dt = DateTime.now
 
-    @inicio = @dt.beginning_of_year
-    @fim = @dt.end_of_year
-
-    @top_projetados_sql = (Lancamento.receitas.validos.por_categoria.por_mes.range(@inicio, @fim)
+    @top_projetados_sql = (Lancamento.receitas.validos.por_categoria.por_mes.range(inicio, fim)
     .joins { category }.group { category.descricao }
     .where(:category_id => Category.cash_flow_flag)
     .order("sum(valor) desc")
@@ -55,7 +52,7 @@ module LancamentosHelper
     .select { category.descricao.as(descricao) }
     .select { date_part('month', datavencimento).as(mes) }).to_sql
 
-    @outros_projetados_sql = (Lancamento.receitas.validos.por_mes.range(@inicio, @fim)
+    @outros_projetados_sql = (Lancamento.receitas.validos.por_mes.range(inicio, fim)
     .joins { category }
     .where(:category_id => Category.no_cash_flow_flag)
     .order("sum(valor) desc")
@@ -65,21 +62,21 @@ module LancamentosHelper
 
     @projetado_sql = "(#{@top_projetados_sql}) UNION (#{@outros_projetados_sql}) "
 
-    @top_realizados_sql = (Lancamento.receitas.quitados.por_categoria.por_mes.range(@inicio, @fim)
+    @top_realizados_sql = (Lancamento.receitas.quitados.por_categoria.acao_por_mes.acao_range(inicio, fim)
     .joins { category }.group { category.descricao }
     .where(:category_id => Category.cash_flow_flag)
     .order("sum(valor) desc")
     .select { sum(valor).as(values) }
     .select { category.descricao.as(descricao) }
-    .select { date_part('month', datavencimento).as(mes) }).to_sql
+    .select { date_part('month', dataacao).as(mes) }).to_sql
 
-    @outros_realizados_sql = (Lancamento.receitas.quitados.por_mes.range(@inicio, @fim)
+    @outros_realizados_sql = (Lancamento.receitas.quitados.acao_por_mes.acao_range(inicio, fim)
     .joins { category }
     .where(:category_id => Category.no_cash_flow_flag)
     .order("sum(valor) desc")
     .select { sum(valor).as(values) }
     .select { "'outros' as descricao" }
-    .select { date_part('month', datavencimento).as(mes) }).to_sql
+    .select { date_part('month', dataacao).as(mes) }).to_sql
 
     @realizado_sql = "(#{@top_realizados_sql}) UNION (#{@outros_realizados_sql})  "
 
@@ -93,13 +90,10 @@ module LancamentosHelper
     return @fluxo_caixa_sql
   end
 
-  def fluxo_caixa_despesas_report
+  def fluxo_caixa_despesas_report(inicio, fim)
     @dt = DateTime.now
 
-    @inicio = @dt.beginning_of_year
-    @fim = @dt.end_of_year
-
-    @top_projetados_sql = (Lancamento.despesas.validos.por_categoria.por_mes.range(@inicio, @fim)
+    @top_projetados_sql = (Lancamento.despesas.validos.por_categoria.por_mes.range(inicio, fim)
     .joins { category }.group { category.descricao }
     .where(:category_id => Category.cash_flow_flag)
     .order("sum(valor) desc")
@@ -107,7 +101,7 @@ module LancamentosHelper
     .select { category.descricao.as(descricao) }
     .select { date_part('month', datavencimento).as(mes) }).to_sql
 
-    @outros_projetados_sql = (Lancamento.despesas.validos.por_mes.range(@inicio, @fim)
+    @outros_projetados_sql = (Lancamento.despesas.validos.por_mes.range(inicio, fim)
     .joins { category }
     .where(:category_id => Category.no_cash_flow_flag)
     .order("sum(valor) desc")
@@ -117,21 +111,21 @@ module LancamentosHelper
 
     @projetado_sql = "(#{@top_projetados_sql}) UNION (#{@outros_projetados_sql}) "
 
-    @top_realizados_sql = (Lancamento.despesas.quitados.por_categoria.por_mes.range(@inicio, @fim)
+    @top_realizados_sql = (Lancamento.despesas.quitados.por_categoria.acao_por_mes.acao_range(inicio, fim)
     .joins { category }.group { category.descricao }
     .where(:category_id => Category.cash_flow_flag)
     .order("sum(valor) desc")
     .select { sum(valor).as(values) }
     .select { category.descricao.as(descricao) }
-    .select { date_part('month', datavencimento).as(mes) }).to_sql
+    .select { date_part('month', dataacao).as(mes) }).to_sql
 
-    @outros_realizados_sql = (Lancamento.despesas.quitados.por_mes.range(@inicio, @fim)
+    @outros_realizados_sql = (Lancamento.despesas.quitados.acao_por_mes.acao_range(inicio, fim)
     .joins { category }
     .where(:category_id => Category.no_cash_flow_flag)
     .order("sum(valor) desc")
     .select { sum(valor).as(values) }
     .select { "'outros' as descricao" }
-    .select { date_part('month', datavencimento).as(mes) }).to_sql
+    .select { date_part('month', dataacao).as(mes) }).to_sql
 
     @realizado_sql = "(#{@top_realizados_sql}) UNION (#{@outros_realizados_sql})  "
 
