@@ -486,6 +486,27 @@ class LancamentosController < ApplicationController
     @lancamentos = Lancamento.unscoped.all
     @lancamento = Lancamento.new
   end
+  
+  def cancelar
+    @lancamento = Lancamento.find(params[:id])
+    if @lancamento.aberto? #and !@lancamento.estornado?
+      @lancamento.status = :cancelado
+      @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
+      if @lancamento.save
+        #flash[:notice] = 'Sucesso ao reverter quitar'
+      else
+        #flash[:notice] = 'Erro ao reverter quitar'
+      end
+
+        #flash[:notice] = 'Lancamento so pode estar ou quitado ou abert
+    end
+
+   # render :layout => false
+
+  end
+  
+  
+  
 
   def print
       render :print, :layout => false

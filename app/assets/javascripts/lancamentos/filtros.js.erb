@@ -270,11 +270,31 @@ function insertQuitarEstornarCancelarEvent() {
     });
 
     $('.cancelar_button').click(function () {
-        td = $(this).parent();
+		
+		td = $(this).parent();
         tr = td.parent();
-        alert(tr.prop('id'));
+
+        var id = tr.prop('id').replace('edit_lancamento_row_', '');
+        var rowindex = $("#tableResults").dataTable().fnGetPosition($(this).closest("tr").get(0));
+        //$("#tableResults").dataTable().fnDeleteRow(rowindex);
+
+        $.ajax({
+                    type: "PUT",
+                    //url: "lancamentos/quitar?id="+id,
+                    url: "lancamentos/" + id + "/cancelar",
+                }
 
 
+        ).done(function(msg)
+                {
+                    $("#tableResults").dataTable().fnUpdate('cancelado', rowindex, 7,false);
+                }
+
+          );
+	
+	
+	
+	
     });
 
 
