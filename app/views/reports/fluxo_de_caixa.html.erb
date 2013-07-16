@@ -20,15 +20,15 @@
     <tbody>
 
     <tr class="mister-table-realizado-level0">
-      <td rowspan="2">
-        <div class="mister-table-heading">Saldo</div>
+      <td colspan="2" rowspan="2">
+        <div class="mister-table-heading">Saldo de Entrada</div>
       </td>
       <td>
         <div class="mister-number"><%= @saldo_inicial %></div>
       </td>
-      <% (1..12).each do |mes| %>
+      <% (1..11).each do |mes| %>
           <% if !@total_receitas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+              <td class="<%= 'mister-table-column-current-total' if mes+1 == @current_month %>">
                 <div class="mister-number">
                   <%=
                       if !@acumulado_receitas[mes.to_s].realizado.nil? and !@acumulado_despesas[mes.to_s].realizado.nil?
@@ -38,7 +38,7 @@
                 </div>
               </td>
           <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+              <td class="<%= 'mister-table-column-current-total' if mes+1 == @current_month %>">
                 <div class="mister-number">0</div>
               </td>
           <% end %>
@@ -49,9 +49,9 @@
       <td>
         <div class="mister-number"><%= @saldo_projetado_inicial %></div>
       </td>
-      <% (1..12).each do |mes| %>
+      <% (1..11).each do |mes| %>
           <% if !@total_receitas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+              <td class="<%= 'mister-table-column-current-total' if mes+1 == @current_month %>">
                 <div class="mister-number">
                   <%=
                       if !@acumulado_receitas[mes.to_s].projetado.nil? and !@acumulado_despesas[mes.to_s].projetado.nil?
@@ -61,7 +61,7 @@
                 </div>
               </td>
           <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+              <td class="<%= 'mister-table-column-current-total' if mes+1 == @current_month %>">
                 <div class="mister-number">0</div>
               </td>
           <% end %>
@@ -247,6 +247,51 @@
           <% end %>
       <% end %>
     </tr>
+
+
+    <tr class="mister-table-realizado-level0">
+      <td colspan="2" rowspan="2">
+        <div class="mister-table-heading">Saldo de Fechamento</div>
+      </td>
+      <% (1..12).each do |mes| %>
+          <% if !@total_receitas[mes].blank? %>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+                <div class="mister-number">
+                  <%=
+                      if !@acumulado_receitas[mes.to_s].realizado.nil? and !@acumulado_despesas[mes.to_s].realizado.nil?
+                        @acumulado_receitas[mes.to_s].realizado- @acumulado_despesas[mes.to_s].realizado
+                      end
+                  %>
+                </div>
+              </td>
+          <% else %>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+                <div class="mister-number">0</div>
+              </td>
+          <% end %>
+      <% end %>
+    </tr>
+
+    <tr class="mister-table-projetado-level0">
+      <% (1..12).each do |mes| %>
+          <% if !@total_receitas[mes].blank? %>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+                <div class="mister-number">
+                  <%=
+                      if !@acumulado_receitas[mes.to_s].projetado.nil? and !@acumulado_despesas[mes.to_s].projetado.nil?
+                        @acumulado_receitas[mes.to_s].projetado- @acumulado_despesas[mes.to_s].projetado
+                      end
+                  %>
+                </div>
+              </td>
+          <% else %>
+              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+                <div class="mister-number">0</div>
+              </td>
+          <% end %>
+      <% end %>
+    </tr>
+
 
     </tbody>
     </table>
