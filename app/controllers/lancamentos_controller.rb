@@ -1,5 +1,8 @@
 #!/bin/env ruby
 # encoding: utf-8
+require 'roo'
+require 'iconv'
+
 class LancamentosController < ApplicationController
   include ApplicationHelper
   include LancamentosHelper
@@ -12,7 +15,6 @@ class LancamentosController < ApplicationController
   def filter
     query = build_query()
     @lancamentos = query
-
 
 
     render :layout => nil
@@ -171,103 +173,12 @@ class LancamentosController < ApplicationController
     DebugLog('Lancamento - params: ' + params.inspect)
     params[:lancamento][:valor] = params[:lancamento][:valor].gsub('.', '').gsub(',', '.')
 
-    @lancamento = Lancamento.new(params[:lancamento])
-
-    @lancamento.category = Category.find_or_create_by_descricao(params[:category]) unless params[:category].blank?
-    @lancamento.centrodecusto = Centrodecusto.find_or_create_by_descricao(params[:centrodecusto]) unless params[:centrodecusto].blank?
-
-    @quitado = params[:quitado]
-    @freqParcelas = params[:freqParcelas] unless params[:freqParcelas].blank?
-    @numParcelas = Integer(params[:numParcelas]) unless params[:numParcelas].blank?
-
-    @freqAgendamentos = params[:freqAgendamentos] unless params[:freqAgendamentos].blank?
-    @numAgendamentos = Integer(params[:numAgendamentos]) unless params[:numAgendamentos].blank?
-
-    #Validações padrão
-    @lancamento.tipo = :receita if @lancamento.tipo.blank?
-    @lancamento.valor = 0 if @lancamento.valor.blank?
-
-    @numParcelas = 1 if @numParcelas.blank?
-    @numAgendamentos = 1 if @numAgendamentos.blank?
-
-    @freqParcelas = 'Mensal' if @freqParcelas.blank?
-    @freqAgendamentos = 'Mensal' if @freqAgendamentos.blank?
-
-
-    if @quitado == 'true'
-      @lancamento.status = :quitado
-      @lancamento.dataacao = Date.today.strftime('%d-%m-%Y')
+    if Lancamento.create_lancamento(params)
+      flash[:notice] = 'Lancamento com sucesso.'
+    else
+      flash[:notice] = 'Erro ao salvar o lancamento.'
     end
 
-    if @numParcelas > 1
-      # Cria o registro de parcela
-      @parcela = Parcela.new
-      @parcela.num_parcelas = @numParcelas
-
-      if @parcela.save then
-        (1..@numParcelas).each do |i|
-          @lancamento_parcela = Lancamento.new
-          @lancamento_parcela = @lancamento.dup
-          @lancamento_parcela.valor = @lancamento.valor/@numParcelas
-
-          @lancamento_parcela.datavencimento = case @freqParcelas
-                                                 when 'Semanal' then
-                                                   @lancamento_parcela.datavencimento + (i-1).weeks
-                                                 when 'Mensal' then
-                                                   @lancamento_parcela.datavencimento + (i-1).months
-                                                 when 'Semestral' then
-                                                   @lancamento_parcela.datavencimento + ((i-1)*6).months
-                                                 when 'Anual' then
-                                                   @lancamento_parcela.datavencimento + (i-1).years
-                                                 else
-                                                   @lancamento_parcela.datavencimento
-                                               end
-
-          @lancamento_parcela.descricao = "#{@lancamento.descricao} - #{@freqParcelas} - (#{i}/#{@numParcelas})"
-          @lancamento_parcela.parcela = @parcela
-
-          @lancamento_parcela.save
-        end #do     
-      end # if @parcela.save
-    end # @numParcelas > 1
-
-
-    if @numAgendamentos > 1
-      # Cria o registro de agendamento
-      @agendamento = Agendamento.new
-      @agendamento.num_agendamentos = @numAgendamentos
-
-      if @agendamento.save
-        (1..@numAgendamentos).each do |i|
-          @lancamento_agendamento = Lancamento.new
-          @lancamento_agendamento = @lancamento.dup
-
-          @lancamento_agendamento.datavencimento = case @freqAgendamentos
-                                                     when 'Semanal' then
-                                                       @lancamento_agendamento.datavencimento + (i-1).weeks
-                                                     when 'Mensal' then
-                                                       @lancamento_agendamento.datavencimento + (i-1).months
-                                                     when 'Semestral' then
-                                                       @lancamento_agendamento.datavencimento + ((i-1)*6).months
-                                                     when 'Anual' then
-                                                       @lancamento_agendamento.datavencimento + (i-1).years
-                                                     else
-                                                       @lancamento_agendamento.datavencimento
-                                                   end
-          @lancamento_agendamento.agendamento = @agendamento
-
-          @lancamento_agendamento.save
-        end #do
-      end #@agendamento.save
-    end
-    # TODO: Criar uma tabela com o registro de todas as mensagens do sistema
-    if (!(@numParcelas > 1) and !(@numAgendamentos > 1))
-      if @lancamento.save
-        flash[:notice] = 'Lancamento com sucesso.'
-      else
-        flash[:notice] = 'Erro ao salvar o lancamento.'
-      end
-    end
     @lancamentos = Lancamento.unscoped.all
   end
 
@@ -432,9 +343,9 @@ class LancamentosController < ApplicationController
         @lancamento.status = :quitado
         @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
         if @lancamento.save
-         # flash[:notice] = 'Lancamento quitado com sucesso'
+          # flash[:notice] = 'Lancamento quitado com sucesso'
         else
-         # flash[:notice] = 'Erro ao quitar lancamento'
+          # flash[:notice] = 'Erro ao quitar lancamento'
         end
       else
         #flash[:notice] = 'Lancamento so pode estar ou quitado ou aberto'
@@ -442,7 +353,7 @@ class LancamentosController < ApplicationController
 
     end
 
-   # render :layout => false
+    # render :layout => false
 
   end
 
@@ -509,7 +420,7 @@ class LancamentosController < ApplicationController
   
 
   def print
-      render :print, :layout => false
+    render :print, :layout => false
   end
 
   def getLancamento
@@ -527,4 +438,43 @@ class LancamentosController < ApplicationController
 
   end
 
+  def importar
+    if request.post?
+      uploaded_file = params[:file]
+      case File.extname(uploaded_file.original_filename.to_s)
+        when '.xls' then
+          spreadsheet = Roo::Excel::new(uploaded_file.path, nil, :ignore)
+        when '.xlsx' then
+          spreadsheet = Roo::Excelx::new(uploaded_file.path, nil, :ignore)
+        else
+          raise 'Formato de Arquivo Desconhecido!'
+      end
+      header = spreadsheet.row(1) #sempre considerar a primeira linha como cabeçalho
+      params[:lancamento] = {}
+      lastrow = spreadsheet.last_row
+      success = 0
+      (2..lastrow).each do |i|
+        case spreadsheet.cell(i, 'A')
+          when 'D' then
+            params[:lancamento][:tipo] = 'despesa'
+          when 'R' then
+            params[:lancamento][:tipo] = 'receita'
+          else
+            next
+        end
+        params[:lancamento][:descricao] = spreadsheet.cell(i, 'B')
+        params[:lancamento][:datavencimento] = spreadsheet.cell(i, 'C')
+        params[:lancamento][:valor] = spreadsheet.cell(i, 'D')
+        params[:category] = spreadsheet.cell(i, 'E')
+        params[:centrodecusto] = spreadsheet.cell(i, 'F')
+        params[:numParcelas] = spreadsheet.cell(i, 'G')
+
+        if Lancamento.create_lancamento(params)
+          success += 1
+        end
+
+      end
+      flash[:notice] = sprintf('%d de %d registros importados!', success, lastrow-1)
+    end
+  end
 end

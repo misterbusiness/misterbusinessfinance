@@ -84,13 +84,16 @@ class Lancamento < ActiveRecord::Base
   scope :lancamentos_realizados, lambda {|ano| a_vista.este_ano(ano).por_mes}
   scope :quitados, where(:status_cd => Lancamento.quitado)
   scope :abertos, where(:status_cd => Lancamento.aberto)
-
+  scope :este_dia, lambda {|dia| where(:datavencimento => dia.beginning_of_day..dia.end_of_day)}
+  scope :por_dia,  group{date_part('day',datavencimento)}.order{date_part('day',datavencimento)}
   scope :caixa_dia, lambda {|dia| receitas.quitados.por_dia.select{sum(valor)} - despesas.quitados.por_dia.select{sum(valor)} }
   scope :caixa_mes, lambda {|mes| receitas.quitados.este_mes(mes).select{sum(valor)} - despesas.quitados.este_mes(mes).select{sum(valor)} }
 
   scope :validos, where(status_cd: [Lancamento.quitado, Lancamento.aberto])
 
-
+  scope :range, lambda {|dt_inicio, dt_fim| where(:datavencimento => dt_inicio..dt_fim )}
+  scope :a_partir_de, lambda {|dt| where('datavencimento > (?) ', dt)}
+  scope :ate, lambda {|dt| where('datavencimento < (?) ', dt)}
 
   scope :por_categoria, group{category_id}
   scope :por_centrodecusto, group{centrodecusto_id}

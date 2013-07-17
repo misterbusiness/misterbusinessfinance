@@ -19,7 +19,7 @@ gem 'populator'
 gem 'faker'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
-
+gem 'roo'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
