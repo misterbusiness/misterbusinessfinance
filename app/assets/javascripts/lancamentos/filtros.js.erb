@@ -254,7 +254,16 @@ function insertQuitarEstornarCancelarEvent() {
 
         ).done(function(msg)
                 {
-                    $("#tableResults").dataTable().fnUpdate('quitado', rowindex, 7,false);
+                    
+					if ($('#filtro_status :selected').text() == 'Aberto')
+					{
+						$("#tableResults").dataTable().fnDeleteRow(rowindex);
+					}
+					else
+					{
+						$("#tableResults").dataTable().fnUpdate('quitado', rowindex, 7,false);
+					}	
+					
                 }
 
           );
@@ -287,7 +296,17 @@ function insertQuitarEstornarCancelarEvent() {
 
         ).done(function(msg)
                 {
-                    $("#tableResults").dataTable().fnUpdate('cancelado', rowindex, 7,false);
+                    
+					if ($('#filtro_status :selected').text() == 'Aberto')
+					{
+						$("#tableResults").dataTable().fnDeleteRow(rowindex);
+					}
+					else
+					{
+						$("#tableResults").dataTable().fnUpdate('cancelado', rowindex, 7,false);
+					}	
+					
+					
                 }
 
           );
