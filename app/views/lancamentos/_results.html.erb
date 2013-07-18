@@ -24,7 +24,7 @@
           <tr class="resultsRow" id="<%= @edit_row_id %>">
             <td>
               <div class="results_actions"></div>
-              <% if !lancamento.estornado? then %>
+              <% if lancamento.aberto? then %>
 
                   <input type="image" src="<%= asset_path('rails.png') %>" class="quitar_button" title="Quitar" alt="Quitar" width="20" height="20">
 

@@ -273,8 +273,35 @@ function insertQuitarEstornarCancelarEvent() {
     $('.estornar_button').click(function () {
         td = $(this).parent();
         tr = td.parent();
-        $("#tableResults").fnDeleteRow(0);
+		
+        var id = tr.prop('id').replace('edit_lancamento_row_', '');
+        var rowindex = $("#tableResults").dataTable().fnGetPosition($(this).closest("tr").get(0));		
+        
+        $.ajax({
+                    type: "PUT",
+                    //url: "lancamentos/quitar?id="+id,
+                    url: "lancamentos/" + id + "/estornar",
+                }
 
+
+        ).done(function(msg)
+                {
+                    
+					if ($('#filtro_status :selected').text() == 'Aberto')
+					{
+						$("#tableResults").dataTable().fnDeleteRow(rowindex);
+					}
+					else
+					{
+						$("#tableResults").dataTable().fnUpdate('estornado', rowindex, 7,false);
+					}	
+					
+					
+                }
+
+          );
+		
+		
 
     });
 

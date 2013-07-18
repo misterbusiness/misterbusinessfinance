@@ -365,8 +365,17 @@ class LancamentosController < ApplicationController
 # Altera os valores do lançamento duplicado      
       @lancamento_estornado = @lancamento.dup
       @lancamento_estornado.descricao = "#{@lancamento_estornado.descricao} - ESTORNO"
-      @lancamento_estornado.tipo = :receita unless @lancamento_estornado.receita?
-      @lancamento_estornado.tipo = :despesa unless @lancamento_estornado.despesa?
+	  
+	  if @lancamento.receita? then
+	  
+		@lancamento_estornado.tipo = :despesa
+	  
+	  else
+	  
+		@lancamento_estornado.tipo = :receita
+	  
+	  end
+	  
       @lancamento_estornado.dataacao = Date.today.strftime("%d-%m-%Y")
       @lancamento_estornado.status = :estornado
 # Salva o lançamento estornado para recuperar o id       

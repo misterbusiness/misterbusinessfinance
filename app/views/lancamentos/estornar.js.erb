@@ -1,6 +1,6 @@
 <% if @lancamento.errors.any? -%>
 /*Hide the flash notice div*/
-$("#flash_notice").hide(300);
+//$("#flash_notice").hide(300);
 
 /*Update the html of the div post_errors with the new one*/
 $("#error_explanation").html("<%= escape_javascript(error_messages_for(@lancamento))%>");
@@ -17,14 +17,15 @@ $("#flash_notice").html("<%= escape_javascript(flash[:notice])%>");
 /*Show the flash_notice div*/
 $("#flash_notice").show(300);
 
-/*Clear the entire form*/
-$(":input:not(input[type=submit])").val("");
 
 /*Replace the html of the div post_lists with the updated new one*/
-$("#lancamento_grid").html("<%= escape_javascript( render(:partial => 'grid') ) %>");
+
 <% @lancamento = Lancamento.new %>
 $("#lancamento_form").html("<%= escape_javascript( render(:partial => 'form') ) %>");
 
 $("#lancamento_valor").blur();
+
+drawCharts();
+prepareForm();
 
 <% end -%>
