@@ -1,7 +1,7 @@
 #!/bin/env ruby
 # encoding: utf-8
 require 'roo'
-require 'iconv'
+#require 'iconv'
 
 class LancamentosController < ApplicationController
   include ApplicationHelper
@@ -365,17 +365,17 @@ class LancamentosController < ApplicationController
 # Altera os valores do lançamento duplicado      
       @lancamento_estornado = @lancamento.dup
       @lancamento_estornado.descricao = "#{@lancamento_estornado.descricao} - ESTORNO"
-	  
-	  if @lancamento.receita? then
-	  
-		@lancamento_estornado.tipo = :despesa
-	  
-	  else
-	  
-		@lancamento_estornado.tipo = :receita
-	  
-	  end
-	  
+
+      if @lancamento.receita? then
+
+        @lancamento_estornado.tipo = :despesa
+
+      else
+
+        @lancamento_estornado.tipo = :receita
+
+      end
+
       @lancamento_estornado.dataacao = Date.today.strftime("%d-%m-%Y")
       @lancamento_estornado.status = :estornado
 # Salva o lançamento estornado para recuperar o id       
@@ -406,7 +406,7 @@ class LancamentosController < ApplicationController
     @lancamentos = Lancamento.unscoped.all
     @lancamento = Lancamento.new
   end
-  
+
   def cancelar
     @lancamento = Lancamento.find(params[:id])
     if @lancamento.aberto? #and !@lancamento.estornado?
@@ -418,15 +418,13 @@ class LancamentosController < ApplicationController
         #flash[:notice] = 'Erro ao reverter quitar'
       end
 
-        #flash[:notice] = 'Lancamento so pode estar ou quitado ou abert
+      #flash[:notice] = 'Lancamento so pode estar ou quitado ou abert
     end
 
-   # render :layout => false
+    # render :layout => false
 
   end
-  
-  
-  
+
 
   def print
     render :print, :layout => false

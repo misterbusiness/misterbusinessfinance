@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '1.9.3'
 gem 'rails', '3.2.12'
 gem 'ancestry'
 gem 'simple_enum'
@@ -20,6 +20,8 @@ gem 'faker'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 gem 'roo'
+gem 'jquery-datatables-rails', :github => 'rweng/jquery-datatables-rails'
+gem 'jquery-ui-rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -51,8 +53,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', ' 1.2.3'
-  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
-  gem 'jquery-ui-rails'
+
 end
 
 group :test do
