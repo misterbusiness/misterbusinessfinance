@@ -9,7 +9,7 @@ module CategoriesHelper
         ret += "<li>"
         ret += category.descricao
         ret += '  '
-        ret += link_to 'Editar', edit_category_path(category)
+        ret += link_to 'Editar', edit_category_path(category), :remote => true
         ret += find_all_subcategories(category)
         ret += "</li>"
       end
@@ -31,7 +31,7 @@ module CategoriesHelper
            ret +=  '<li>'
            ret += subcat.descricao
            ret += '  '
-           ret += link_to 'Editar', edit_category_path(subcat)
+           ret += link_to 'Editar', edit_category_path(subcat), :remote => true
            ret += find_all_subcategories(subcat)
 
            ret +=  '</li>'
@@ -41,7 +41,7 @@ module CategoriesHelper
            ret +=  '<li>'
            ret += subcat.descricao
            ret += '  '
-           ret += link_to 'Editar', edit_category_path(subcat)
+           ret += link_to 'Editar', edit_category_path(subcat), :remote => true
 
            ret +=  '</li>'
 

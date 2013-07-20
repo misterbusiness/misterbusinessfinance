@@ -104,6 +104,7 @@ Misterbusinessfinance::Application.routes.draw do
 
   resources :categories
   match 'list/categories', to: 'categories#list'
+  match 'tree/categories', to: 'categories#tree'
 
   #importar lançamentos
   match 'lancamentos/importar', to: 'lancamentos#importar', as: :import_lancamentos
