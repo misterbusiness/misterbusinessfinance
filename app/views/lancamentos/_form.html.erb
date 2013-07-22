@@ -1,3 +1,4 @@
+<div class="span12">
 <%= form_for(@lancamento, :remote => true) do |f| %>
     <% if @lancamento.errors.any? %>
         <div id="error_explanation">
@@ -163,3 +164,4 @@
       <%= hidden_field_tag :form_mode, "Insert", :id => "form_mode_hidden" %>
     </div>
 <% end %>
+</div>

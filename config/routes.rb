@@ -101,6 +101,8 @@ Misterbusinessfinance::Application.routes.draw do
 
   resources :centrodecustos
   match 'list/centrodecustos', to: 'centrodecustos#list'
+  match 'tree/centrodecustos', to: 'centrodecustos#tree'
+
 
   resources :categories
   match 'list/categories', to: 'categories#list'

@@ -1,0 +1,60 @@
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        drawTree('<%= tree_centrodecustos_path %>', 'tree_area');
+        drawVisualization();
+    });
+    google.load('visualization', '1', {packages: ['orgchart']});
+
+    function drawTree(treeUrl, chartArea) {
+
+        $("#" + chartArea).html("");
+        $.getJSON(treeUrl, function (data) {
+            var table = new google.visualization.DataTable();
+            $.each(data.cols, function () {
+                table.addColumn.apply(table, this);
+            });
+            table.addRows(data.rows);
+
+            var container = document.getElementById(chartArea);
+            var chart = new google.visualization.OrgChart(container);
+            chart.draw(table, null);
+
+            // Add our selection handler.
+            //google.visualization.events.addListener(chart, 'select', selectHandler);
+            google.visualization.events.addListener(chart, 'select', function () {
+                var selection = chart.getSelection();
+                var message = '';
+                for (var i = 0; i < selection.length; i++) {
+                    var item = selection[i];
+                    //var value = table.getFormattedValue(item.row, 0);
+                    var id = table.getFormattedValue(item.row, 3);
+                    var value = table.getFormattedValue(item.row, 0);
+
+                    //$("#selected_category_hidden").val("" + value + "");
+                    $("#selected_centrodecusto_hidden").val(id);
+
+                    var editUrl = '<%= centrodecustos_path %>' + "/" + id + "/edit"
+
+                    $.get(editUrl);
+
+                }
+            });
+        });
+    }
+
+    function fillParentWithSelected()
+    {
+        $("#fathercentrodecusto_place").select2('val',$("#selected_centrodecusto_hidden").val());
+    }
+
+</script>
+
+<div id="tree_area">
+
+</div>
+<div>
+  <%= hidden_field_tag :selected, false, :id => "selected_centrodecusto_hidden" %>
+</div>
+
+
