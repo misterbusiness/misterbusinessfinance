@@ -22,6 +22,7 @@ Misterbusinessfinance::Application.routes.draw do
 
 
   match 'lancamentos/reports/fluxo_de_caixa', to: 'reports#fluxo_de_caixa'
+  match 'lancamentos/reports/resultados', to: 'reports#resultados'
 
   #Reports
   # ******************************************************************************************************

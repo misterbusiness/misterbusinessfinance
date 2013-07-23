@@ -9,8 +9,7 @@
 
   <table class="table table-hover table-bordered">
     <thead>
-              <th><div class="mister-table-heading">Fluxo de Caixa</div></th>
-              <th><div class="mister-table-heading"><%= 1.year.ago.year  %></div></th>
+              <th colspan="2"><div class="mister-table-heading">Fluxo de Caixa</div></th>
       <% (1..12).each do |mes| %>
           <th class="<%= 'mister-table-column-current' if mes == @current_month %>">
             <center> <%= mes %></center>
