@@ -52,9 +52,9 @@
         </ul>
       </div>
     </div>
-    <div class="span11">
-      <div class="span2" style="height: 100%"> Bem-vindo, Usuário</div>
-      <div class="span10" style="height: 100%">
+    <div class="mister-span span11">
+      <div class="span1" style="height: 100%"> Bem-vindo, Usuário</div>
+      <div class="span11" style="height: 100%">
         <ul class="nav nav-pills">
           <li class="<%= 'active' if current_page?(lancamentos_path) %>">
             <a href="<%= lancamentos_path %>">Lançamentos</a>
@@ -81,7 +81,7 @@
       </div>
       <div class="span12" id="container">
         <div id="flash_notice" style="display:none" class="span12"></div>
-        <div class="span12">
+        <div>
           <%= yield %>
         </div>
       </div>

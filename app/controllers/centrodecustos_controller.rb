@@ -20,9 +20,9 @@ class CentrodecustosController < ApplicationController
 
   def list
     @list = Centrodecusto.all(:select => 'id, descricao as text')
-    #respond_to do |format|
-    #  format.json { render json: @list }
-    #end
+    respond_to do |format|
+      format.json { render json: @list }
+    end
   end
 
   # GET /centrodecustos/1

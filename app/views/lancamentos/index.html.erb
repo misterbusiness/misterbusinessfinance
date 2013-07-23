@@ -1,37 +1,26 @@
-﻿<div class="quadrante">
+﻿<div class="quadrante span12">
 <div id="lancamento_index">
-    <!--<table class="table">-->
-      <!--<tr height="60%">-->
-        <!--<td width="45%">-->
-        <div style="width:30%; float: left;">
+        <div class="span4">
           <div>
             <div id="lancamento_form"><%= render :partial => 'form' %></div>
           </div>
         </div>
-  <div style="width: 2%; float:left">&nbsp;</div>
-        <!--</td>-->
-        <!--<td width="10%">-->
-        <div style="width: 30%; float: left;">
+
+        <div class="span4">
           <%= render 'notifications' %>
         </div>
-  <div style="width: 2%; float:left">&nbsp;</div>
-        <div style="width: 35%; float: left;">
-        <!--</td>-->
-        <!--<td width="45%">-->
+
+        <div class="span4">
           <div id="charts">
           <%= render 'charts' %>
           </div>
-          <!--<div id="reportsArea">-->
             <%= render 'reports' %>
         </div>
-        <!--</td>-->
-      <!--</tr>-->
-    <!--</table>-->
   </div>
   <div style="width: 1%; float:left">&nbsp;</div>
 </div>
   </br>
-<div class="quadrante">
+<div class="quadrante span12">
   <div style="width: 100%; float: none">
 
   <div id="lancamento_grid">
