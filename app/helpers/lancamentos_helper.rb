@@ -159,8 +159,16 @@ module LancamentosHelper
     return Target.despesas.este_ano(dt).por_mes
   end
 
+  #def receita_por_categoria_series_query(dt)
+  #  return Lancamento.receitas.por_categoria.este_ano(dt).joins { category }.group { category.descricao }
+  #  .select { sum(valor).as(values) }
+  #  .select { category.descricao.as(axis) }
+  #end
+
+
   def receita_por_categoria_series_query(dt)
-    return Lancamento.receitas.por_categoria.este_ano(dt).joins { category }.group { category.descricao }
+    return Lancamento.receitas.por_categoria.este_ano(dt).joins { category }.group { category.descricao }.group{category_id }
+    .select { category_id.as(cat_id) }
     .select { sum(valor).as(values) }
     .select { category.descricao.as(axis) }
   end

@@ -342,32 +342,85 @@ class ReportsController < ApplicationController
 
 
 
-  def receita_por_categoria
-    @dt = @dt_inicio
-    @report_series = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
-    #@report_series = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt_inicio, @dt_fim).to_sql)
-    unless @report_series.nil?
-      @json_rows = Array.new
-      @report_series.each do |serie|
-        @json_row = Array.new
-        @json_row.push(serie.axis)
-        @json_row.push(serie.values.to_f)
-        @json_rows.push(@json_row)
-      end
+  #def receita_por_categoria
+  #  @dt = @dt_inicio
+  #  @report_series = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
+  #  #@report_series = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt_inicio, @dt_fim).to_sql)
+  #  unless @report_series.nil?
+  #    @json_rows = Array.new
+  #    @report_series.each do |serie|
+  #      @json_row = Array.new
+  #      @json_row.push(serie.axis)
+  #      @json_row.push(serie.values.to_f)
+  #      @json_rows.push(@json_row)
+  #    end
+  #
+  #    render :json => {
+  #        :type => 'PieChart',
+  #        :options => {
+  #            :title => 'Receita por categoria',
+  #            :is3D => 'true',
+  #            :enableInteractivity => 'true',
+  #            :width => '500'
+  #        },
+  #        :cols => [['string', 'categoria'], ['number', 'valores']],
+  #        :rows => @json_rows
+  #    }
+  #  end
+  #end
 
-      render :json => {
-          :type => 'PieChart',
-          :options => {
-              :title => 'Receita por categoria',
-              :is3D => 'true',
-              :enableInteractivity => 'true',
-              :width => '500'
-          },
-          :cols => [['string', 'categoria'], ['number', 'valores']],
-          :rows => @json_rows
-      }
+  def receita_por_categoria
+      @dt = @dt_inicio
+      @report_series = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt).to_sql)
+      #@report_series = Lancamento.find_by_sql(receita_por_categoria_series_query(@dt_inicio, @dt_fim).to_sql)
+      unless @report_series.nil?
+        @json_rows = Array.new
+        @json_row = Array.new
+        # Categoria root
+        @json_row.push("Categorias")
+        @json_row.push(nil)
+        @json_row.push(0)
+        @json_rows.push(@json_row)
+
+        @report_series.each do |serie|
+          @json_row = Array.new
+          #@json_row.push("#{serie.axis} \n (#{serie.values.to_s} %)")
+          @formatted_value = "{v: '#{serie.axis}', f: '#{serie.values.to_s}' }"
+          #@json_row.push(serie.axis)
+          @json_row.push(@formatted_value)
+          @category = Category.find(serie.cat_id)
+          if @category.parent.nil?
+            @json_row.push("Categorias")
+          else
+            @json_row.push(@category.parent.descricao)
+          end
+          @json_row.push(serie.values.to_f)
+          @json_rows.push(@json_row)
+        end
+
+        render :json => {
+            :type => 'PieChart',
+            :options => {
+                :title => 'Receita por categoria',
+                :is3D => 'true',
+                :enableInteractivity => 'true',
+                :width => '500',
+                :minColor => '#f00',
+                :midColor =>  '#ddd',
+                :maxColor =>  '#0d0',
+                :headerHeight =>  15,
+                :fontColor =>  'black',
+                :showScale =>  true,
+                :showTooltips =>  true,
+                :useWeightedAverageForAggregation => true
+            },
+
+            :cols => [['string', 'categoria'],['string', 'parent'], ['number', 'valores']],
+            :rows => @json_rows
+        }
+      end
     end
-  end
+
 
   def despesa_por_categoria
     @dt = DateTime.now
