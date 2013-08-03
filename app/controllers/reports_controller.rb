@@ -166,6 +166,12 @@ class ReportsController < ApplicationController
     end
   end
 
+
+  # ******************************************************************************************************************************
+
+  # FLUXO DE CAIXA
+
+  # ******************************************************************************************************************************
   def fluxo_de_caixa
     @dt = DateTime.now
 
@@ -175,169 +181,268 @@ class ReportsController < ApplicationController
     @inicio_anterior = @inicio - 1.year
     @fim_anterior = @fim - 1.year
 
+    # Busca de dados
 
-    # Busca pela serie de lançamentos no formato: mes categoria projetado realizado
-    @report_receitas_series = Lancamento.find_by_sql(fluxo_caixa_receitas_report(@inicio, @fim))
+    # Saldo inicial
 
-    # Calcula o total de receitas
-    # Realizado
-    @total_receitas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
-    @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
-      @total_receitas[mes].realizado = sum + subitem.realizado.to_f
-    end}
-    #Projetado
-    @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
-      @total_receitas[mes].projetado = sum + subitem.projetado.to_f
-    end}
+    @total_receitas_inicial_realizado = Lancamento.receitas.quitados.acao_ate(@inicio).sum(:valor)
+    @total_despesas_inicial_realizado = Lancamento.despesas.quitados.acao_ate(@inicio).sum(:valor)
+    @saldo_inicial_realizado = @total_receitas_inicial_realizado - @total_despesas_inicial_realizado
 
-    # Agrupa os lançamentos de fluxo de caixa de acordo com a categoria
-    @general_receitas = @report_receitas_series.group_by(&:descricao).to_hash
+    @total_receitas_inicial_projetado = Lancamento.receitas.validos.ate(@inicio).sum(:valor)
+    @total_despesas_inicial_projetado = Lancamento.despesas.validos.ate(@inicio).sum(:valor)
+    @saldo_inicial_projetado = @total_receitas_inicial_projetado - @total_despesas_inicial_projetado
 
-    @total_receitas_inicial = Lancamento.receitas.quitados.acao_ate(@inicio).sum(:valor)
-    @total_despesas_inicial = Lancamento.despesas.quitados.acao_ate(@inicio).sum(:valor)
+    # Receitas realizadas
 
-    # Calcula o total do ano anterior
-    #@total_despesas_anterior = Lancamento.despesas.quitados.acao_range(@inicio_anterior, @fim_anterior).sum(:valor)
-    #@total_receitas_anterior = Lancamento.receitas.quitados.acao_range(@inicio_anterior, @fim_anterior).sum(:valor)
-    @saldo_inicial = @total_receitas_inicial - @total_despesas_inicial
+    @receitas_realizadas_vendas = (Lancamento.find_by_sql(fluxo_caixa_receitas_vendas_realizado(@inicio,@fim))).index_by(&:mes)
+    @receitas_realizadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_receitas_financeiras_realizado(@inicio,@fim))).index_by(&:mes)
+    @receitas_realizadas_outros = (Lancamento.find_by_sql (fluxo_caixa_receitas_outros_realizado(@inicio,@fim))).index_by(&:mes)
 
-    @total_projetado_receitas_inicial = Lancamento.receitas.validos.ate(@inicio).sum(:valor)
-    @total_projetado_despesas_inicial = Lancamento.despesas.validos.ate(@inicio).sum(:valor)
-    @saldo_projetado_inicial = @total_projetado_receitas_inicial - @total_projetado_despesas_inicial
+    # Receitas projetadas
 
-    # Calcula o acumulado de receitas
-    # Realizado
-    @acumulado_receitas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
-    @total_receitas.inject(@total_receitas_inicial) do |sum, (mes,item)|
-      sum = sum + item.realizado
-      @acumulado_receitas[mes].realizado = sum
+    @receitas_projetadas_vendas = (Lancamento.find_by_sql(fluxo_caixa_receitas_vendas_projetado(@inicio,@fim))).index_by(&:mes)
+    @receitas_projetadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_receitas_financeiras_projetado(@inicio,@fim))).index_by(&:mes)
+    @receitas_projetadas_outros = (Lancamento.find_by_sql (fluxo_caixa_receitas_outros_projetado(@inicio,@fim))).index_by(&:mes)
+
+    # Despesas realizadas
+
+    @despesas_realizadas_adminstrativas = (Lancamento.find_by_sql(fluxo_caixa_despesas_administrativas_realizado(@inicio,@fim))).index_by(&:mes)
+    @despesas_realizadas_producao = (Lancamento.find_by_sql(fluxo_caixa_despesas_producao_realizado(@inicio,@fim))).index_by(&:mes)
+    @despesas_realizadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_despesas_financeiras_realizado(@inicio,@fim))).index_by(&:mes)
+    @despesas_realizadas_investimentos = (Lancamento.find_by_sql(fluxo_caixa_despesas_investimentos_realizado(@inicio,@fim))).index_by(&:mes)
+    @despesas_realizadas_outras = (Lancamento.find_by_sql(fluxo_caixa_despesas_outros_realizado(@inicio,@fim))).index_by(&:mes)
+
+    # Despesas projetadas
+
+    @despesas_projetadas_adminstrativas = (Lancamento.find_by_sql(fluxo_caixa_despesas_administrativas_projetado(@inicio,@fim))).index_by(&:mes)
+    @despesas_projetadas_producao = (Lancamento.find_by_sql(fluxo_caixa_despesas_producao_projetado(@inicio,@fim))).index_by(&:mes)
+    @despesas_projetadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_despesas_financeiras_projetado(@inicio,@fim))).index_by(&:mes)
+    @despesas_projetadas_investimentos = (Lancamento.find_by_sql(fluxo_caixa_despesas_investimentos_projetado(@inicio,@fim))).index_by(&:mes)
+    @despesas_projetadas_outras = (Lancamento.find_by_sql(fluxo_caixa_despesas_outros_projetado(@inicio,@fim))).index_by(&:mes)
+
+    # Constroi as estruturas de dados
+
+    @receitas_realizadas_soma = Hash.new
+    @receitas_projetadas_soma = Hash.new
+    @despesas_realizadas_soma = Hash.new
+    @despesas_projetadas_soma = Hash.new
+    @geracao_caixa_realizada = Hash.new
+    @geracao_caixa_projetada = Hash.new
+    @saldo_fechamento_realizado = Hash.new
+    @saldo_abertura_realizado = Hash.new
+
+    (1..12).each do |mes|
+      @receitas_realizadas_soma[mes.to_s] = @receitas_realizadas_vendas[mes.to_s].value + @receitas_realizadas_financeiras[mes.to_s].value + @receitas_realizadas_outros[mes.to_s].value
+      @receitas_projetadas_soma[mes.to_s] = @receitas_projetadas_vendas[mes.to_s].value + @receitas_projetadas_financeiras[mes.to_s].value + @receitas_projetadas_outros[mes.to_s].value
+      @despesas_realizadas_soma[mes.to_s] = @despesas_realizadas_adminstrativas[mes.to_s].value + @despesas_realizadas_financeiras[mes.to_s].value
+      + @despesas_realizadas_investimentos[mes.to_s].value + @despesas_realizadas_producao[mes.to_s].value + @despesas_realizadas_outras[mes.to_s].value
+      @despesas_projetadas_soma[mes.to_s] = @despesas_projetadas_adminstrativas[mes.to_s].value + @despesas_projetadas_financeiras[mes.to_s].value
+      + @despesas_projetadas_investimentos[mes.to_s].value + @despesas_projetadas_producao[mes.to_s].value + @despesas_projetadas_outras[mes.to_s].value
+      @geracao_caixa_realizada[mes.to_s] = @receitas_realizadas_soma[mes.to_s] - @despesas_realizadas_soma[mes.to_s]
+      @geracao_caixa_projetada[mes.to_s] = @receitas_projetadas_soma[mes.to_s] - @despesas_projetadas_soma[mes.to_s]
+
+      if mes = 1
+        @saldo_abertura_realizado[mes.to_s] = @saldo_inicial_realizado
+      else
+        @saldo_abertura_realizado[mes.to_s] = @saldo_fechamento_realizado[(mes-1).to_s]
+      end
+
+      if mes = 1
+        @saldo_fechamento_realizado[mes.to_s] = @saldo_inicial_realizado + @geracao_caixa_realizada[mes.to_s]
+      else
+        @saldo_fechamento_realizado[mes.to_s] = @saldo_abertura_realizado[(mes-1).to_s] + @geracao_caixa_realizada[mes.to_s]
+      end
+
+      if mes = 1
+        @saldo_abertura_projetado[mes.to_s] = @saldo_inicial_projetado
+      else
+        @saldo_abertura_projetado[mes.to_s] = @saldo_fechamento_projetado[(mes-1).to_s]
+      end
+
+      if mes = 1
+        @saldo_fechamento_projetado[mes.to_s] = @saldo_inicial_projetado + @geracao_caixa_realizada[mes.to_s]
+      else
+        @saldo_fechamento_projetado[mes.to_s] = @saldo_abertura_projetado[(mes-1).to_s] + @geracao_caixa_realizada[mes.to_s]
+      end
     end
-    #Projetado
-    @total_receitas.inject(@total_projetado_receitas_inicial) do |sum, (mes,item)|
-      sum = sum + item.projetado
-      @acumulado_receitas[mes].projetado = sum
-    end
-
-    # Busca pela serie de lançamentos no formato: mes categoria projetado realizado
-    @report_despesas_series = Lancamento.find_by_sql(fluxo_caixa_despesas_report(@inicio, @fim))
-
-    # Calcula o total de despesas
-    # Realizado
-    @total_despesas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
-    @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
-      @total_despesas[mes].realizado = sum + subitem.realizado.to_f
-    end}
-    #Projetado
-    @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
-      @total_despesas[mes].projetado = sum + subitem.projetado.to_f
-    end}
-    # Agrupa os lançamentos de fluxo de caixa de acordo com a categoria
-    @general_despesas = @report_despesas_series.group_by(&:descricao).to_hash
-
-    # Calcula o acumulado de despesas
-    # Realizado
-    @acumulado_despesas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
-    @total_despesas.inject(@total_despesas_inicial) do |sum, (mes,item)|
-      sum = sum + item.realizado
-      @acumulado_despesas[mes].realizado = sum
-    end
-    # Projetado
-    @total_despesas.inject(@total_projetado_despesas_inicial) do |sum, (mes,item)|
-      sum = sum + item.projetado
-      @acumulado_despesas[mes].projetado = sum
-    end
-
-
-    render :layout => nil
   end
 
-  def resultados
-    @dt = DateTime.now
-
-    @inicio = @dt.beginning_of_year
-    @fim = @dt.end_of_year
-
-    @inicio_anterior = @inicio - 1.year
-    @fim_anterior = @fim - 1.year
 
 
 
-
-
-    # Busca pela serie de lançamentos no formato: mes categoria projetado realizado
-    @report_receitas_series = Lancamento.find_by_sql(fluxo_caixa_receitas_report(@inicio, @fim))
-
-    # Calcula o total de receitas
-    # Realizado
-    @total_receitas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
-    @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
-      @total_receitas[mes].realizado = sum + subitem.realizado.to_f
-    end}
-    #Projetado
-    @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
-      @total_receitas[mes].projetado = sum + subitem.projetado.to_f
-    end}
-
-    # Agrupa os lançamentos de fluxo de caixa de acordo com a categoria
-    @general_receitas = @report_receitas_series.group_by(&:descricao).to_hash
-
-    @total_receitas_inicial = Lancamento.receitas.quitados.acao_ate(@inicio).sum(:valor)
-    @total_despesas_inicial = Lancamento.despesas.quitados.acao_ate(@inicio).sum(:valor)
-
-    # Calcula o total do ano anterior
-    #@total_despesas_anterior = Lancamento.despesas.quitados.acao_range(@inicio_anterior, @fim_anterior).sum(:valor)
-    #@total_receitas_anterior = Lancamento.receitas.quitados.acao_range(@inicio_anterior, @fim_anterior).sum(:valor)
-    @saldo_inicial = @total_receitas_inicial - @total_despesas_inicial
-
-    @total_projetado_receitas_inicial = Lancamento.receitas.validos.ate(@inicio).sum(:valor)
-    @total_projetado_despesas_inicial = Lancamento.despesas.validos.ate(@inicio).sum(:valor)
-    @saldo_projetado_inicial = @total_projetado_receitas_inicial - @total_projetado_despesas_inicial
-
-    # Calcula o acumulado de receitas
-    # Realizado
-    @acumulado_receitas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
-    @total_receitas.inject(@total_receitas_inicial) do |sum, (mes,item)|
-      sum = sum + item.realizado
-      @acumulado_receitas[mes].realizado = sum
-    end
-    #Projetado
-    @total_receitas.inject(@total_projetado_receitas_inicial) do |sum, (mes,item)|
-      sum = sum + item.projetado
-      @acumulado_receitas[mes].projetado = sum
-    end
-
-    # Busca pela serie de lançamentos no formato: mes categoria projetado realizado
-    @report_despesas_series = Lancamento.find_by_sql(fluxo_caixa_despesas_report(@inicio, @fim))
-
-    # Calcula o total de despesas
-    # Realizado
-    @total_despesas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
-    @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
-      @total_despesas[mes].realizado = sum + subitem.realizado.to_f
-    end}
-    #Projetado
-    @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
-      @total_despesas[mes].projetado = sum + subitem.projetado.to_f
-    end}
-    # Agrupa os lançamentos de fluxo de caixa de acordo com a categoria
-    @general_despesas = @report_despesas_series.group_by(&:descricao).to_hash
-
-    # Calcula o acumulado de despesas
-    # Realizado
-    @acumulado_despesas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
-    @total_despesas.inject(@total_despesas_inicial) do |sum, (mes,item)|
-      sum = sum + item.realizado
-      @acumulado_despesas[mes].realizado = sum
-    end
-    # Projetado
-    @total_despesas.inject(@total_projetado_despesas_inicial) do |sum, (mes,item)|
-      sum = sum + item.projetado
-      @acumulado_despesas[mes].projetado = sum
-    end
-
-
-    render :layout => nil
-  end
+  #def fluxo_de_caixa
+  #  @dt = DateTime.now
+  #
+  #  @inicio = @dt.beginning_of_year
+  #  @fim = @dt.end_of_year
+  #
+  #  @inicio_anterior = @inicio - 1.year
+  #  @fim_anterior = @fim - 1.year
+  #
+  #
+  #  # Busca pela serie de lançamentos no formato: mes categoria projetado realizado
+  #  @report_receitas_series = Lancamento.find_by_sql(fluxo_caixa_receitas_report(@inicio, @fim))
+  #
+  #  # Calcula o total de receitas
+  #  # Realizado
+  #  @total_receitas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
+  #  @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+  #    @total_receitas[mes].realizado = sum + subitem.realizado.to_f
+  #  end}
+  #  #Projetado
+  #  @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+  #    @total_receitas[mes].projetado = sum + subitem.projetado.to_f
+  #  end}
+  #
+  #  # Agrupa os lançamentos de fluxo de caixa de acordo com a categoria
+  #  @general_receitas = @report_receitas_series.group_by(&:descricao).to_hash
+  #
+  #  @total_receitas_inicial = Lancamento.receitas.quitados.acao_ate(@inicio).sum(:valor)
+  #  @total_despesas_inicial = Lancamento.despesas.quitados.acao_ate(@inicio).sum(:valor)
+  #
+  #  # Calcula o total do ano anterior
+  #  #@total_despesas_anterior = Lancamento.despesas.quitados.acao_range(@inicio_anterior, @fim_anterior).sum(:valor)
+  #  #@total_receitas_anterior = Lancamento.receitas.quitados.acao_range(@inicio_anterior, @fim_anterior).sum(:valor)
+  #  @saldo_inicial = @total_receitas_inicial - @total_despesas_inicial
+  #
+  #  @total_projetado_receitas_inicial = Lancamento.receitas.validos.ate(@inicio).sum(:valor)
+  #  @total_projetado_despesas_inicial = Lancamento.despesas.validos.ate(@inicio).sum(:valor)
+  #  @saldo_projetado_inicial = @total_projetado_receitas_inicial - @total_projetado_despesas_inicial
+  #
+  #  # Calcula o acumulado de receitas
+  #  # Realizado
+  #  @acumulado_receitas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
+  #  @total_receitas.inject(@total_receitas_inicial) do |sum, (mes,item)|
+  #    sum = sum + item.realizado
+  #    @acumulado_receitas[mes].realizado = sum
+  #  end
+  #  #Projetado
+  #  @total_receitas.inject(@total_projetado_receitas_inicial) do |sum, (mes,item)|
+  #    sum = sum + item.projetado
+  #    @acumulado_receitas[mes].projetado = sum
+  #  end
+  #
+  #  # Busca pela serie de lançamentos no formato: mes categoria projetado realizado
+  #  @report_despesas_series = Lancamento.find_by_sql(fluxo_caixa_despesas_report(@inicio, @fim))
+  #
+  #  # Calcula o total de despesas
+  #  # Realizado
+  #  @total_despesas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
+  #  @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+  #    @total_despesas[mes].realizado = sum + subitem.realizado.to_f
+  #  end}
+  #  #Projetado
+  #  @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+  #    @total_despesas[mes].projetado = sum + subitem.projetado.to_f
+  #  end}
+  #  # Agrupa os lançamentos de fluxo de caixa de acordo com a categoria
+  #  @general_despesas = @report_despesas_series.group_by(&:descricao).to_hash
+  #
+  #  # Calcula o acumulado de despesas
+  #  # Realizado
+  #  @acumulado_despesas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
+  #  @total_despesas.inject(@total_despesas_inicial) do |sum, (mes,item)|
+  #    sum = sum + item.realizado
+  #    @acumulado_despesas[mes].realizado = sum
+  #  end
+  #  # Projetado
+  #  @total_despesas.inject(@total_projetado_despesas_inicial) do |sum, (mes,item)|
+  #    sum = sum + item.projetado
+  #    @acumulado_despesas[mes].projetado = sum
+  #  end
+  #
+  #
+  #  render :layout => nil
+  #end
+  #
+  #def resultados
+  #  @dt = DateTime.now
+  #
+  #  @inicio = @dt.beginning_of_year
+  #  @fim = @dt.end_of_year
+  #
+  #  @inicio_anterior = @inicio - 1.year
+  #  @fim_anterior = @fim - 1.year
+  #
+  #
+  #
+  #
+  #
+  #  # Busca pela serie de lançamentos no formato: mes categoria projetado realizado
+  #  @report_receitas_series = Lancamento.find_by_sql(fluxo_caixa_receitas_report(@inicio, @fim))
+  #
+  #  # Calcula o total de receitas
+  #  # Realizado
+  #  @total_receitas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
+  #  @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+  #    @total_receitas[mes].realizado = sum + subitem.realizado.to_f
+  #  end}
+  #  #Projetado
+  #  @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+  #    @total_receitas[mes].projetado = sum + subitem.projetado.to_f
+  #  end}
+  #
+  #  # Agrupa os lançamentos de fluxo de caixa de acordo com a categoria
+  #  @general_receitas = @report_receitas_series.group_by(&:descricao).to_hash
+  #
+  #  @total_receitas_inicial = Lancamento.receitas.quitados.acao_ate(@inicio).sum(:valor)
+  #  @total_despesas_inicial = Lancamento.despesas.quitados.acao_ate(@inicio).sum(:valor)
+  #
+  #  # Calcula o total do ano anterior
+  #  #@total_despesas_anterior = Lancamento.despesas.quitados.acao_range(@inicio_anterior, @fim_anterior).sum(:valor)
+  #  #@total_receitas_anterior = Lancamento.receitas.quitados.acao_range(@inicio_anterior, @fim_anterior).sum(:valor)
+  #  @saldo_inicial = @total_receitas_inicial - @total_despesas_inicial
+  #
+  #  @total_projetado_receitas_inicial = Lancamento.receitas.validos.ate(@inicio).sum(:valor)
+  #  @total_projetado_despesas_inicial = Lancamento.despesas.validos.ate(@inicio).sum(:valor)
+  #  @saldo_projetado_inicial = @total_projetado_receitas_inicial - @total_projetado_despesas_inicial
+  #
+  #  # Calcula o acumulado de receitas
+  #  # Realizado
+  #  @acumulado_receitas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
+  #  @total_receitas.inject(@total_receitas_inicial) do |sum, (mes,item)|
+  #    sum = sum + item.realizado
+  #    @acumulado_receitas[mes].realizado = sum
+  #  end
+  #  #Projetado
+  #  @total_receitas.inject(@total_projetado_receitas_inicial) do |sum, (mes,item)|
+  #    sum = sum + item.projetado
+  #    @acumulado_receitas[mes].projetado = sum
+  #  end
+  #
+  #  # Busca pela serie de lançamentos no formato: mes categoria projetado realizado
+  #  @report_despesas_series = Lancamento.find_by_sql(fluxo_caixa_despesas_report(@inicio, @fim))
+  #
+  #  # Calcula o total de despesas
+  #  # Realizado
+  #  @total_despesas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
+  #  @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+  #    @total_despesas[mes].realizado = sum + subitem.realizado.to_f
+  #  end}
+  #  #Projetado
+  #  @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
+  #    @total_despesas[mes].projetado = sum + subitem.projetado.to_f
+  #  end}
+  #  # Agrupa os lançamentos de fluxo de caixa de acordo com a categoria
+  #  @general_despesas = @report_despesas_series.group_by(&:descricao).to_hash
+  #
+  #  # Calcula o acumulado de despesas
+  #  # Realizado
+  #  @acumulado_despesas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
+  #  @total_despesas.inject(@total_despesas_inicial) do |sum, (mes,item)|
+  #    sum = sum + item.realizado
+  #    @acumulado_despesas[mes].realizado = sum
+  #  end
+  #  # Projetado
+  #  @total_despesas.inject(@total_projetado_despesas_inicial) do |sum, (mes,item)|
+  #    sum = sum + item.projetado
+  #    @acumulado_despesas[mes].projetado = sum
+  #  end
+  #
+  #
+  #  render :layout => nil
+  #end
 
 
 

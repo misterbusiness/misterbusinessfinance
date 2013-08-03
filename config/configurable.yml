@@ -54,3 +54,28 @@ number_of_future_days:
 number_categories_fluxo_report:
     name: Number of categories shown at Fluxo de Caixa Report
     default: 4
+
+# Reporting categories
+sales_category_code:
+    name: Sales category code
+    default: sales
+
+finance_category_code:
+    name: Finance category code
+    default: finance
+
+administrative_category_code:
+    name: Administrative category code
+    default: administrative
+
+production_category_code:
+    name: Production category code
+    default: production
+
+investment_category_code:
+    name: Investment category code
+    default: investment
+
+tax_category_code:
+    name: Tax category code
+    default: tax

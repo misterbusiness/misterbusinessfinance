@@ -2,11 +2,17 @@ namespace :db do
   desc 'Erase and fill database'
   task :populate => :environment do
     require 'populator'
-    [Category, Centrodecusto, Lancamentorapido, Lancamento, Target].each(&:delete_all)
+    [Category, Centrodecusto, Lancamentorapido, Lancamento, Target, Months].each(&:delete_all)
 
     # Zera o sequence da categoria
     ActiveRecord::Base.connection.execute('ALTER SEQUENCE public.categories_id_seq RESTART 1')
     ActiveRecord::Base.connection.execute('ALTER SEQUENCE public.centrodecustos_id_seq RESTART 1')
+
+    @month = 1
+    Months.populate 12 do |month|
+      month.number = @month
+      @month = @month + 1
+    end
 
     Category.populate 1 do |categoryBase|
       categoryBase.descricao = 'Sem categoria'
@@ -15,17 +21,37 @@ namespace :db do
 
     Category.populate 1 do |categoryBase|
        categoryBase.descricao = 'Venda'
-       categoryBase.is_cash_flow = false
+       categoryBase.code = Configurable.sales_category_code
+
     end
 
     Category.populate 1 do |categoryBase|
-      categoryBase.descricao = 'Investimento'
-      categoryBase.is_cash_flow = false
+      categoryBase.descricao = 'Financeiro'
+      categoryBase.code = Configurable.finance_category_code
     end
 
     Category.populate 1 do |categoryBase|
       categoryBase.descricao = 'Administrativo'
-      categoryBase.is_cash_flow = false
+      categoryBase.code = Configurable.administrative_category_code
+#      categoryBase.is_cash_flow = false
+    end
+
+    Category.populate 1 do |categoryBase|
+      categoryBase.descricao = 'Produzir'
+      categoryBase.code = Configurable.production_category_code
+#      categoryBase.is_cash_flow = false
+    end
+
+    Category.populate 1 do |categoryBase|
+      categoryBase.descricao = 'Investimento'
+      categoryBase.code = Configurable.investment_category_code
+#      categoryBase.is_cash_flow = false
+    end
+
+    Category.populate 1 do |categoryBase|
+      categoryBase.descricao = 'Impostos'
+      categoryBase.code = Configurable.tax_category_code
+#      categoryBase.is_cash_flow = false
     end
 
     Centrodecusto.populate 1 do |categoryBase|
@@ -48,6 +74,18 @@ namespace :db do
       category.descricao = Faker::Company.name
       category.is_cash_flow = false
       category.ancestry = 4
+    end
+
+    Category.populate 2 do |category|
+      category.descricao = Faker::Company.name
+      category.is_cash_flow = false
+      category.ancestry = 5
+    end
+
+    Category.populate 2 do |category|
+      category.descricao = Faker::Company.name
+      category.is_cash_flow = false
+      category.ancestry = 6
     end
 
     Centrodecusto.populate 5 do |centrodecusto|

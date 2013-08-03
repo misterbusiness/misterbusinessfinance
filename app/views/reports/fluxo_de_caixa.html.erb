@@ -7,292 +7,336 @@
 <body class="mister-iframe" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <% @current_month = DateTime.now.month %>
 
-  <table class="table table-hover table-bordered">
-    <thead>
-              <th colspan="2"><div class="mister-table-heading">Fluxo de Caixa</div></th>
-      <% (1..12).each do |mes| %>
-          <th class="<%= 'mister-table-column-current' if mes == @current_month %>">
-            <center> <%= mes %></center>
-          </th>
-      <% end %>
-    </thead>
-    <tbody>
-
-    <tr class="mister-table-realizado-level0">
-      <td colspan="2" rowspan="2">
-        <div class="mister-table-heading">Saldo de Entrada</div>
+<table class="table table-hover table-bordered">
+<thead>
+<th colspan="2">
+  <div class="mister-table-heading">Fluxo de Caixa</div>
+</th>
+<% (1..12).each do |mes| %>
+    <th class="<%= 'mister-table-column-current' if mes == @current_month %>">
+      <center> <%= mes %></center>
+    </th>
+<% end %>
+</thead>
+<tbody>
+<!-- ************************************************************************************************  -->
+<!-- Saldo de entrada  -->
+<!-- ************************************************************************************************  -->
+<tr class="mister-table-realizado-level0">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Saldo de Entrada</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes+1 == @current_month %>">
+        <div class="mister-number">
+          <%= @saldo_abertura_projetado[mes.to_s] %>
+        </div>
       </td>
-      <td>
-        <div class="mister-number"><%= @saldo_inicial %></div>
+  <% end %>
+</tr>
+
+<tr class="mister-table-projetado-level0">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes+1 == @current_month %>">
+        <div class="mister-number">
+          <%= @saldo_abertura_realizado[mes.to_s] %>
+        </div>
       </td>
-      <% (1..11).each do |mes| %>
-          <% if !@total_receitas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes+1 == @current_month %>">
-                <div class="mister-number">
-                  <%=
-                      if !@acumulado_receitas[mes.to_s].realizado.nil? and !@acumulado_despesas[mes.to_s].realizado.nil?
-                        @acumulado_receitas[mes.to_s].realizado- @acumulado_despesas[mes.to_s].realizado
-                      end
-                  %>
-                </div>
-              </td>
-          <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes+1 == @current_month %>">
-                <div class="mister-number">0</div>
-              </td>
-          <% end %>
-      <% end %>
-    </tr>
+  <% end %>
+</tr>
 
-    <tr class="mister-table-projetado-level0">
-      <td>
-        <div class="mister-number"><%= @saldo_projetado_inicial %></div>
+<!-- ************************************************************************************************  -->
+<!-- Entradas de caixa -->
+<!-- ************************************************************************************************  -->
+
+<tr class="mister-table-realizado-level1">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Entradas de caixa</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_projetadas_soma[mes.to_s] %>
+        </div>
       </td>
-      <% (1..11).each do |mes| %>
-          <% if !@total_receitas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes+1 == @current_month %>">
-                <div class="mister-number">
-                  <%=
-                      if !@acumulado_receitas[mes.to_s].projetado.nil? and !@acumulado_despesas[mes.to_s].projetado.nil?
-                        @acumulado_receitas[mes.to_s].projetado- @acumulado_despesas[mes.to_s].projetado
-                      end
-                  %>
-                </div>
-              </td>
-          <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes+1 == @current_month %>">
-                <div class="mister-number">0</div>
-              </td>
-          <% end %>
-      <% end %>
-    </tr>
-
-    <tr class="mister-table-realizado-level1">
-      <td  colspan="2" rowspan="2">
-        <div class="mister-table-heading">Entradas de caixa</div>
+  <% end %>
+</tr>
+<tr class="mister-table-projetado-level1">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_realizadas_soma[mes.to_s] %>
+        </div>
       </td>
-      <% (1..12).each do |mes| %>
-          <% if !@total_receitas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">
-                  <%= @total_receitas[mes.to_s].realizado %>
-                </div>
-              </td>
-          <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">0</div>
-              </td>
-          <% end %>
-      <% end %>
-    </tr>
-    <tr class="mister-table-projetado-level1">
-      <% (1..12).each do |mes| %>
-          <% if !@total_receitas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">
-                  <%= @total_receitas[mes.to_s].projetado %>
-                </div>
-              </td>
-          <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">0</div>
-              </td>
-          <% end %>
-      <% end %>
-    </tr>
+  <% end %>
+</tr>
 
+<!-- ************************************************************************************************  -->
+<!-- Receitas  -->
+<!-- ************************************************************************************************  -->
 
-    <% @general_receitas.each_pair do |cat, values| %>
-        <tr class="mister-table-realizado-level2">
-          <td colspan="2" rowspan="2">
-            <div class="mister-table-heading">Receitas de <%= cat.camelize %></div>
-          </td>
-          <% @atual = values.group_by(&:mes) %>
-          <% (1..12).each do |mes| %>
-              <% if !@atual[mes.to_s].nil? %>
-                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
-                    <div class="mister-number"><%= @atual[mes.to_s][0].realizado %></div>
-                  </td>
-              <% else %>
-                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
-                    <div class="mister-number">0</div>
-                  </td>
-              <% end %>
-          <% end %>
-          </div>
-          </tr>
-          <tr class="mister-table-projetado-level2">
-            <% (1..12).each do |mes| %>
-                <% if !@atual[mes.to_s].nil? %>
-                    <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
-                      <div class="mister-number"><%= @atual[mes.to_s][0].projetado %></div>
-                    </td>
-                <% else %>
-                    <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
-                      <div class="mister-number">0</div>
-                    </td>
-                <% end %>
-            <% end %>
-          </tr>
-    <% end %>
-
-
-    <tr class="mister-table-realizado-level1">
-      <td  colspan="2" rowspan="2">
-        <div class="mister-table-heading">Saídas de caixa</div>
+<tr class="mister-table-realizado-level1">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Entradas de caixa</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_projetadas_vendas[mes.to_s].value %>
+        </div>
       </td>
-      <% (1..12).each do |mes| %>
-          <% if !@total_receitas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">
-                  <%= @total_despesas[mes.to_s].realizado %>
-                </div>
-              </td>
-          <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">0</div>
-              </td>
-          <% end %>
-      <% end %>
-    </tr>
-    <tr class="mister-table-projetado-level1">
-      <% (1..12).each do |mes| %>
-          <% if !@total_despesas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">
-                  <%= @total_despesas[mes.to_s].projetado %>
-                </div>
-              </td>
-          <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">0</div>
-              </td>
-          <% end %>
-      <% end %>
-    </tr>
-
-
-    <% @general_despesas.each_pair do |cat, values| %>
-        <tr class="mister-table-realizado-level2">
-          <td  colspan="2" rowspan="2">
-            <div class="mister-table-heading">Despesas de <%= cat.camelize %></div>
-          </td>
-          <% @atual = values.group_by(&:mes) %>
-          <% (1..12).each do |mes| %>
-              <% if !@atual[mes.to_s].nil? %>
-                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
-                    <div class="mister-number"><%= @atual[mes.to_s][0].realizado %></div>
-                  </td>
-              <% else %>
-                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
-                    <div class="mister-number">0</div>
-                  </td>
-              <% end %>
-          <% end %>
-          </div>
-        </tr>
-        <tr class="mister-table-projetado-level2">
-          <% (1..12).each do |mes| %>
-              <% if !@atual[mes.to_s].nil? %>
-                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
-                    <div class="mister-number"><%= @atual[mes.to_s][0].projetado %></div>
-                  </td>
-              <% else %>
-                  <td class="<%= 'mister-table-column-current' if mes == @current_month %>">
-                    <div class="mister-number">0</div>
-                  </td>
-              <% end %>
-          <% end %>
-        </tr>
-    <% end %>
-
-    <tr class="mister-table-realizado-level1">
-      <td  colspan="2" rowspan="2">
-        <div class="mister-table-heading">Geração do caixa</div>
+  <% end %>
+</tr>
+<tr class="mister-table-projetado-level1">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_realizadas_vendas[mes.to_s].value %>
+        </div>
       </td>
-      <% (1..12).each do |mes| %>
-          <% if !@total_receitas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">
-                  <%= if !@total_receitas[mes.to_s].realizado.nil? and !@total_despesas[mes.to_s].realizado.nil?
-                        @total_receitas[mes.to_s].realizado - @total_despesas[mes.to_s].realizado
-                      end
-                  %>
-                </div>
-              </td>
-          <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">0</div>
-              </td>
-          <% end %>
-      <% end %>
-    </tr>
-    <tr class="mister-table-projetado-level1">
-      <% (1..12).each do |mes| %>
-          <% if !@total_receitas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">
-                  <%=
-                      if !@total_receitas[mes.to_s].projetado.nil? and !@total_despesas[mes.to_s].projetado.nil?
-                        @total_receitas[mes.to_s].projetado- @total_despesas[mes.to_s].projetado
-                      end
-                  %>
-                </div>
-              </td>
-          <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">0</div>
-              </td>
-          <% end %>
-      <% end %>
-    </tr>
+  <% end %>
+</tr>
 
-
-    <tr class="mister-table-realizado-level0">
-      <td colspan="2" rowspan="2">
-        <div class="mister-table-heading">Saldo de Fechamento</div>
+<tr class="mister-table-realizado-level1">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Entradas de caixa</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_projetadas_financeiras[mes.to_s].value %>
+        </div>
       </td>
-      <% (1..12).each do |mes| %>
-          <% if !@total_receitas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">
-                  <%=
-                      if !@acumulado_receitas[mes.to_s].realizado.nil? and !@acumulado_despesas[mes.to_s].realizado.nil?
-                        @acumulado_receitas[mes.to_s].realizado- @acumulado_despesas[mes.to_s].realizado
-                      end
-                  %>
-                </div>
-              </td>
-          <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">0</div>
-              </td>
-          <% end %>
-      <% end %>
-    </tr>
+  <% end %>
+</tr>
+<tr class="mister-table-projetado-level1">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_realizadas_financeiras[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
 
-    <tr class="mister-table-projetado-level0">
-      <% (1..12).each do |mes| %>
-          <% if !@total_receitas[mes].blank? %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">
-                  <%=
-                      if !@acumulado_receitas[mes.to_s].projetado.nil? and !@acumulado_despesas[mes.to_s].projetado.nil?
-                        @acumulado_receitas[mes.to_s].projetado- @acumulado_despesas[mes.to_s].projetado
-                      end
-                  %>
-                </div>
-              </td>
-          <% else %>
-              <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
-                <div class="mister-number">0</div>
-              </td>
-          <% end %>
-      <% end %>
-    </tr>
+<tr class="mister-table-realizado-level1">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Entradas de caixa</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_projetadas_outras[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+<tr class="mister-table-projetado-level1">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_realizadas_outras[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<!-- ************************************************************************************************  -->
+<!-- Saídas de caixa  -->
+<!-- ************************************************************************************************  -->
+
+<tr class="mister-table-realizado-level1">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Saídas de caixa</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_projetadas_soma[mes.to_s] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+<tr class="mister-table-projetado-level1">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_realizadas_soma[mes.to_s] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<!-- ************************************************************************************************  -->
+<!-- Despesas -->
+<!-- ************************************************************************************************  -->
+<tr class="mister-table-realizado-level1">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Entradas de caixa</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_projetadas_adminstrativas[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+<tr class="mister-table-projetado-level1">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_realizadas_adminstrativas[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level1">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Entradas de caixa</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_projetadas_producao[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+<tr class="mister-table-projetado-level1">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_realizadas_producao[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
 
 
-    </tbody>
-    </table>
+<tr class="mister-table-realizado-level1">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Entradas de caixa</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_projetadas_financeiras[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+<tr class="mister-table-projetado-level1">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_realizadas_financeiras[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level1">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Entradas de caixa</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_projetadas_investimentos[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+<tr class="mister-table-projetado-level1">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_realizadas_investimentos[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level1">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Entradas de caixa</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_projetadas_outras[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+<tr class="mister-table-projetado-level1">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_realizadas_outras[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<!-- ************************************************************************************************  -->
+<!-- Geração de caixa  -->
+<!-- ************************************************************************************************  -->
+
+<tr class="mister-table-realizado-level1">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Entradas de caixa</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @geracao_caixa_projetada[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+<tr class="mister-table-projetado-level1">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @geracao_caixa_realizada[mes.to_s].value %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+
+<!-- ************************************************************************************************  -->
+<!-- Saldo Final  -->
+<!-- ************************************************************************************************  -->
+
+<tr class="mister-table-realizado-level0">
+  <td colspan="2" rowspan="2">
+    <div class="mister-table-heading">Saldo de Fechamento</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @saldo_fechamento_projetado[mes.to_s] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-projetado-level0">
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-column-current-total' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @saldo_fechamento_realizado[mes.to_s] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+
+</tbody>
+</table>
 </body>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130713194153) do
+ActiveRecord::Schema.define(:version => 20130803202151) do
 
   create_table "agendamentos", :force => true do |t|
     t.integer  "num_agendamentos"
@@ -25,9 +25,11 @@ ActiveRecord::Schema.define(:version => 20130713194153) do
     t.datetime "updated_at",   :null => false
     t.string   "ancestry"
     t.boolean  "is_cash_flow"
+    t.string   "code"
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
+  add_index "categories", ["code"], :name => "index_categories_on_code"
 
   create_table "centrodecustos", :force => true do |t|
     t.string   "descricao"
@@ -72,6 +74,28 @@ ActiveRecord::Schema.define(:version => 20130713194153) do
     t.integer  "parcela_id"
     t.integer  "estorno_id"
     t.integer  "agendamento_id"
+  end
+
+  create_table "meta", :force => true do |t|
+    t.integer  "tipo_cd"
+    t.datetime "data"
+    t.string   "descricao"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "metas", :force => true do |t|
+    t.integer  "tipo_cd"
+    t.datetime "data"
+    t.string   "descricao"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "months", :force => true do |t|
+    t.integer  "number"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "parcelas", :force => true do |t|
