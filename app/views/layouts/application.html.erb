@@ -25,7 +25,7 @@
         <b>Mister Business</b>
       </div>
 
-      <div class="span12 well" style="height: 50%">
+      <div class="span12" style="height: 50%">
         <ul class="nav nav-pills">
           <li class="active span12"><a href="#">Financeiro</a></li>
           <li class="span12"><a href="#">Comercial</a></li>
@@ -40,7 +40,7 @@
           <li class="span12">&nbsp;</li>
         </ul>
       </div>
-      <div class="span12 well" style="height: 40%">
+      <div class="span12" style="height: 40%">
         <ul>
           <li class="span12"><p>Anúncios</p></li>
           <li class="span12">&nbsp;</li>
@@ -59,6 +59,12 @@
           <li class="<%= 'active' if current_page?(lancamentos_path) %>">
             <a href="<%= lancamentos_path %>">Lançamentos</a>
           </li>
+          <li class="<%= 'active' if current_page?(lancamentos_reports_fluxo_de_caixa_path) %>">
+            <a href="<%= lancamentos_reports_fluxo_de_caixa_path %>">Fluxo de caixa</a>
+          </li>
+          <li class="<%= 'active' if current_page?(lancamentos_reports_resultados_path) %>">
+            <a href="<%= lancamentos_reports_resultados_path %>">Resultados</a>
+          </li>
           <li class="<%= 'active' if current_page?(targets_path) %>">
             <a href="<%= targets_path %>">Metas</a>
           </li>
@@ -72,7 +78,7 @@
             <a href="<%= centrodecustos_path %>">Centros de custo</a>
           </li>
           <li class="<%= 'active' if current_page?(import_lancamentos_path) %>">
-            <a href="<%= import_lancamentos_path %>">Importar Lançamentos</a>
+            <a href="<%= import_lancamentos_path %>">Importar</a>
           </li>
           <li>
             <a href="#">Configurações</a>

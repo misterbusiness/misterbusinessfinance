@@ -173,7 +173,13 @@ class ReportsController < ApplicationController
 
   # ******************************************************************************************************************************
   def fluxo_de_caixa
-    @dt = DateTime.now
+    @referencia = params[:ano_referencia].to_i
+
+    if @referencia == 0 or !@referencia.is_a? Integer
+      @referencia = DateTime.now.year
+    end
+
+    @dt = DateTime.new(@referencia,1,1)
 
     @inicio = @dt.beginning_of_year
     @fim = @dt.end_of_year
@@ -195,31 +201,31 @@ class ReportsController < ApplicationController
 
     # Receitas realizadas
 
-    @receitas_realizadas_vendas = (Lancamento.find_by_sql(fluxo_caixa_receitas_vendas_realizado(@inicio,@fim))).index_by(&:mes)
-    @receitas_realizadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_receitas_financeiras_realizado(@inicio,@fim))).index_by(&:mes)
-    @receitas_realizadas_outros = (Lancamento.find_by_sql (fluxo_caixa_receitas_outros_realizado(@inicio,@fim))).index_by(&:mes)
+    @receitas_realizadas_vendas = (Lancamento.find_by_sql(fluxo_caixa_receitas_vendas_realizado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @receitas_realizadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_receitas_financeiras_realizado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @receitas_realizadas_outros = (Lancamento.find_by_sql (fluxo_caixa_receitas_outros_realizado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
 
     # Receitas projetadas
 
-    @receitas_projetadas_vendas = (Lancamento.find_by_sql(fluxo_caixa_receitas_vendas_projetado(@inicio,@fim))).index_by(&:mes)
-    @receitas_projetadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_receitas_financeiras_projetado(@inicio,@fim))).index_by(&:mes)
-    @receitas_projetadas_outros = (Lancamento.find_by_sql (fluxo_caixa_receitas_outros_projetado(@inicio,@fim))).index_by(&:mes)
+    @receitas_projetadas_vendas = (Lancamento.find_by_sql(fluxo_caixa_receitas_vendas_projetado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @receitas_projetadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_receitas_financeiras_projetado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @receitas_projetadas_outros = (Lancamento.find_by_sql (fluxo_caixa_receitas_outros_projetado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
 
     # Despesas realizadas
 
-    @despesas_realizadas_adminstrativas = (Lancamento.find_by_sql(fluxo_caixa_despesas_administrativas_realizado(@inicio,@fim))).index_by(&:mes)
-    @despesas_realizadas_producao = (Lancamento.find_by_sql(fluxo_caixa_despesas_producao_realizado(@inicio,@fim))).index_by(&:mes)
-    @despesas_realizadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_despesas_financeiras_realizado(@inicio,@fim))).index_by(&:mes)
-    @despesas_realizadas_investimentos = (Lancamento.find_by_sql(fluxo_caixa_despesas_investimentos_realizado(@inicio,@fim))).index_by(&:mes)
-    @despesas_realizadas_outras = (Lancamento.find_by_sql(fluxo_caixa_despesas_outros_realizado(@inicio,@fim))).index_by(&:mes)
+    @despesas_realizadas_adminstrativas = (Lancamento.find_by_sql(fluxo_caixa_despesas_administrativas_realizado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @despesas_realizadas_producao = (Lancamento.find_by_sql(fluxo_caixa_despesas_producao_realizado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @despesas_realizadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_despesas_financeiras_realizado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @despesas_realizadas_investimentos = (Lancamento.find_by_sql(fluxo_caixa_despesas_investimentos_realizado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @despesas_realizadas_outras = (Lancamento.find_by_sql(fluxo_caixa_despesas_outros_realizado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
 
     # Despesas projetadas
 
-    @despesas_projetadas_adminstrativas = (Lancamento.find_by_sql(fluxo_caixa_despesas_administrativas_projetado(@inicio,@fim))).index_by(&:mes)
-    @despesas_projetadas_producao = (Lancamento.find_by_sql(fluxo_caixa_despesas_producao_projetado(@inicio,@fim))).index_by(&:mes)
-    @despesas_projetadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_despesas_financeiras_projetado(@inicio,@fim))).index_by(&:mes)
-    @despesas_projetadas_investimentos = (Lancamento.find_by_sql(fluxo_caixa_despesas_investimentos_projetado(@inicio,@fim))).index_by(&:mes)
-    @despesas_projetadas_outras = (Lancamento.find_by_sql(fluxo_caixa_despesas_outros_projetado(@inicio,@fim))).index_by(&:mes)
+    @despesas_projetadas_adminstrativas = (Lancamento.find_by_sql(fluxo_caixa_despesas_administrativas_projetado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @despesas_projetadas_producao = (Lancamento.find_by_sql(fluxo_caixa_despesas_producao_projetado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @despesas_projetadas_financeiras = (Lancamento.find_by_sql(fluxo_caixa_despesas_financeiras_projetado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @despesas_projetadas_investimentos = (Lancamento.find_by_sql(fluxo_caixa_despesas_investimentos_projetado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @despesas_projetadas_outras = (Lancamento.find_by_sql(fluxo_caixa_despesas_outros_projetado(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
 
     # Constroi as estruturas de dados
 
@@ -231,47 +237,110 @@ class ReportsController < ApplicationController
     @geracao_caixa_projetada = Hash.new
     @saldo_fechamento_realizado = Hash.new
     @saldo_abertura_realizado = Hash.new
+    @saldo_fechamento_projetado = Hash.new
+    @saldo_abertura_projetado = Hash.new
 
     (1..12).each do |mes|
-      @receitas_realizadas_soma[mes.to_s] = @receitas_realizadas_vendas[mes.to_s].value + @receitas_realizadas_financeiras[mes.to_s].value + @receitas_realizadas_outros[mes.to_s].value
-      @receitas_projetadas_soma[mes.to_s] = @receitas_projetadas_vendas[mes.to_s].value + @receitas_projetadas_financeiras[mes.to_s].value + @receitas_projetadas_outros[mes.to_s].value
-      @despesas_realizadas_soma[mes.to_s] = @despesas_realizadas_adminstrativas[mes.to_s].value + @despesas_realizadas_financeiras[mes.to_s].value
-      + @despesas_realizadas_investimentos[mes.to_s].value + @despesas_realizadas_producao[mes.to_s].value + @despesas_realizadas_outras[mes.to_s].value
-      @despesas_projetadas_soma[mes.to_s] = @despesas_projetadas_adminstrativas[mes.to_s].value + @despesas_projetadas_financeiras[mes.to_s].value
-      + @despesas_projetadas_investimentos[mes.to_s].value + @despesas_projetadas_producao[mes.to_s].value + @despesas_projetadas_outras[mes.to_s].value
-      @geracao_caixa_realizada[mes.to_s] = @receitas_realizadas_soma[mes.to_s] - @despesas_realizadas_soma[mes.to_s]
-      @geracao_caixa_projetada[mes.to_s] = @receitas_projetadas_soma[mes.to_s] - @despesas_projetadas_soma[mes.to_s]
+      @receitas_realizadas_soma[mes] = @receitas_realizadas_vendas[mes] + @receitas_realizadas_financeiras[mes] + @receitas_realizadas_outros[mes]
+      @receitas_projetadas_soma[mes] = @receitas_projetadas_vendas[mes] + @receitas_projetadas_financeiras[mes] + @receitas_projetadas_outros[mes]
+      @despesas_realizadas_soma[mes] = @despesas_realizadas_adminstrativas[mes] + @despesas_realizadas_financeiras[mes] + @despesas_realizadas_investimentos[mes] + @despesas_realizadas_producao[mes] + @despesas_realizadas_outras[mes]
+      @despesas_projetadas_soma[mes] = @despesas_projetadas_adminstrativas[mes] + @despesas_projetadas_financeiras[mes] + @despesas_projetadas_investimentos[mes] + @despesas_projetadas_producao[mes] + @despesas_projetadas_outras[mes]
+      @geracao_caixa_realizada[mes] = @receitas_realizadas_soma[mes] - @despesas_realizadas_soma[mes]
+      @geracao_caixa_projetada[mes] = @receitas_projetadas_soma[mes] - @despesas_projetadas_soma[mes]
 
-      if mes = 1
-        @saldo_abertura_realizado[mes.to_s] = @saldo_inicial_realizado
+      if mes == 1
+        @saldo_abertura_realizado[mes] = @saldo_inicial_realizado
       else
-        @saldo_abertura_realizado[mes.to_s] = @saldo_fechamento_realizado[(mes-1).to_s]
+        @saldo_abertura_realizado[mes] = @saldo_fechamento_realizado[(mes-1)]
       end
 
-      if mes = 1
-        @saldo_fechamento_realizado[mes.to_s] = @saldo_inicial_realizado + @geracao_caixa_realizada[mes.to_s]
+      if mes == 1
+        @saldo_fechamento_realizado[mes] = @saldo_inicial_realizado + @geracao_caixa_realizada[mes]
       else
-        @saldo_fechamento_realizado[mes.to_s] = @saldo_abertura_realizado[(mes-1).to_s] + @geracao_caixa_realizada[mes.to_s]
+        @saldo_fechamento_realizado[mes] = @saldo_abertura_realizado[(mes-1)] + @geracao_caixa_realizada[mes]
       end
 
-      if mes = 1
-        @saldo_abertura_projetado[mes.to_s] = @saldo_inicial_projetado
+      if mes == 1
+        @saldo_abertura_projetado[mes] = @saldo_inicial_projetado
       else
-        @saldo_abertura_projetado[mes.to_s] = @saldo_fechamento_projetado[(mes-1).to_s]
+        @saldo_abertura_projetado[mes] = @saldo_fechamento_projetado[(mes-1)]
       end
 
-      if mes = 1
-        @saldo_fechamento_projetado[mes.to_s] = @saldo_inicial_projetado + @geracao_caixa_realizada[mes.to_s]
+      if mes == 1
+        @saldo_fechamento_projetado[mes] = @saldo_inicial_projetado + @geracao_caixa_projetada[mes]
       else
-        @saldo_fechamento_projetado[mes.to_s] = @saldo_abertura_projetado[(mes-1).to_s] + @geracao_caixa_realizada[mes.to_s]
+        @saldo_fechamento_projetado[mes] = @saldo_abertura_projetado[(mes-1)] + @geracao_caixa_projetada[mes]
       end
     end
   end
 
+  def resultados
+    @referencia = params[:ano_referencia].to_i
+
+    if @referencia == 0 or !@referencia.is_a? Integer
+      @referencia = DateTime.now.year
+    end
+
+    @dt = DateTime.new(@referencia,1,1)
+
+    @inicio = @dt.beginning_of_year
+    @fim = @dt.end_of_year
+
+    @inicio_anterior = @inicio - 1.year
+    @fim_anterior = @fim - 1.year
 
 
+    @receitas_operacionais_vendas = (Lancamento.find_by_sql(resultados_receitas_vendas(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @receitas_operacionais_outros = (Lancamento.find_by_sql(resultados_receitas_outros(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
 
-  #def fluxo_de_caixa
+    @receitas_operacionais = Hash.new
+    (1..12).each do |mes|
+      @receitas_operacionais[mes] = @receitas_operacionais_vendas[mes] + @receitas_operacionais_outros[mes]
+    end
+
+    @despesas_produtos_vendidos = (Lancamento.find_by_sql(resultados_despesas_producao(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @lucro_bruto = Hash.new
+    (1..12).each do |mes|
+      @lucro_bruto[mes] = @receitas_operacionais[mes] - @despesas_produtos_vendidos[mes]
+    end
+
+    @despesas_administrativas = (Lancamento.find_by_sql(resultados_despesas_administrativas(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+    @despesas_comerciais = (Lancamento.find_by_sql(resultados_despesas_vendas(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+
+    @despesas_administrativas_comerciais = Hash.new
+    (1..12).each do |mes|
+      @despesas_administrativas_comerciais[mes] = @despesas_administrativas[mes] + @despesas_comerciais[mes]
+    end
+
+    @lucro_operacional = Hash.new
+    (1..12).each do |mes|
+      @lucro_operacional[mes] = @lucro_bruto[mes] - (@despesas_administrativas[mes] + @despesas_comerciais[mes])
+    end
+
+    @receitas_financeiras = (Lancamento.find_by_sql(resultados_receitas_financeiras(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+
+    @despesas_financeiras = (Lancamento.find_by_sql(resultados_despesas_financeiras(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+
+    @despesas_impostos = (Lancamento.find_by_sql(resultados_despesas_impostos(@inicio,@fim))).inject({}){|h,item| h[item.mes.to_i] = item.value.to_f; h}
+
+    @lucro_liquido = Hash.new
+    (1..12).each do |mes|
+      @lucro_liquido[mes] = @lucro_operacional[mes] + @receitas_financeiras[mes]
+    end
+
+    @margem_operacional = Hash.new
+    (1..12).each do |mes|
+      @margem_operacional[mes] = @receitas_operacionais[mes]==0 ? 0 : @lucro_operacional[mes]/@receitas_operacionais[mes]*100
+    end
+
+    @margem_liquida = Hash.new
+    (1..12).each do |mes|
+      @margem_liquida[mes] = @receitas_operacionais[mes]==0 ? 0 : @lucro_liquido[mes]/@receitas_operacionais[mes]*100
+    end
+  end
+
+
+#def fluxo_de_caixa
   #  @dt = DateTime.now
   #
   #  @inicio = @dt.beginning_of_year
@@ -288,11 +357,11 @@ class ReportsController < ApplicationController
   #  # Realizado
   #  @total_receitas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
   #  @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
-  #    @total_receitas[mes].realizado = sum + subitem.realizado.to_f
+  #    @total_receitas[mes].realizado = sum + subitem.realizado.to_i
   #  end}
   #  #Projetado
   #  @report_receitas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
-  #    @total_receitas[mes].projetado = sum + subitem.projetado.to_f
+  #    @total_receitas[mes].projetado = sum + subitem.projetado.to_i
   #  end}
   #
   #  # Agrupa os lançamentos de fluxo de caixa de acordo com a categoria
@@ -330,7 +399,7 @@ class ReportsController < ApplicationController
   #  # Realizado
   #  @total_despesas = Hash.new { |hash, key| hash[key] = CaixaMes.new }
   #  @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|
-  #    @total_despesas[mes].realizado = sum + subitem.realizado.to_f
+  #    @total_despesas[mes].realizado = sum + subitem.realizado.to_i
   #  end}
   #  #Projetado
   #  @report_despesas_series.group_by(&:mes).map {|mes,item| item.inject(0) do |sum, subitem|

@@ -1,0 +1,212 @@
+<!--
+   Fluxo de caixa series
+   Mês, Categoria,  Realizado,   Projetado
+-->
+<%= stylesheet_link_tag "application", :media => "all" %>
+<%= javascript_include_tag "application" %>
+<body class="mister-iframe" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<% @current_month = DateTime.now.month %>
+<div class="span12">
+  <%= form_tag(lancamentos_reports_resultados_path, method: "get") do %>
+      <div class="span1">
+        <%= text_field_tag :ano_referencia, "", :placeholder => "Referência", :class => "input-small" %>
+      </div>
+      <div class="span1">
+        <%= submit_tag "Go!", :class => "btn" %>
+      </div>
+  <% end %>
+</div>
+
+<div class="span12">
+<table class="table table-hover table-bordered">
+<thead>
+<th colspan="2">
+  <div class="mister-table-heading">Demonstrativo de Resultado de Exercício - <%= @referencia %></div>
+</th>
+<% (1..12).each do |mes| %>
+    <th class="<%= 'mister-table-column-current' if mes == @current_month %>">
+      <center> <%= mes %></center>
+    </th>
+<% end %>
+</thead>
+<tbody>
+<!-- ************************************************************************************************  -->
+<!-- Receitas operacionais -->
+<!-- ************************************************************************************************  -->
+<tr class="mister-table-realizado-level0">
+  <td>
+    <div class="mister-table-heading">Receita Operacional</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_operacionais[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<!-- ************************************************************************************************  -->
+<!-- Entradas de caixa -->
+<!-- ************************************************************************************************  -->
+
+<tr class="mister-table-realizado-level2">
+  <td>
+    <div class="mister-table-heading">(+) Receitas de vendas</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_operacionais_vendas[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level2">
+  <td>
+    <div class="mister-table-heading">(+) Outras receitas</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_operacionais_outros[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level2">
+  <td>
+    <div class="mister-table-heading">(-) Despesas dos produtos vendidos</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_produtos_vendidos[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level1">
+  <td>
+    <div class="mister-table-heading">Lucro Bruto</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @lucro_bruto[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level2">
+  <td>
+    <div class="mister-table-heading">(-) Despesas administrativas e comerciais</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_administrativas_comerciais[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level1">
+  <td>
+    <div class="mister-table-heading">Lucro Operacional</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @lucro_operacional[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level2">
+  <td>
+    <div class="mister-table-heading">(+) Receitas Financeiras</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @receitas_financeiras[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level2">
+  <td>
+    <div class="mister-table-heading">(-) Despesas financeiras</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_financeiras[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level2">
+  <td>
+    <div class="mister-table-heading">(-) Impostos</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @despesas_impostos[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level1">
+  <td>
+    <div class="mister-table-heading">Lucro Liquido</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @lucro_liquido[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level1">
+  <td>
+    <div class="mister-table-heading">Margem Operacional (%)</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @margem_operacional[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+<tr class="mister-table-realizado-level1">
+  <td>
+    <div class="mister-table-heading">Margem liquida (%)</div>
+  </td>
+  <% (1..12).each do |mes| %>
+      <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
+        <div class="mister-number">
+          <%= @margem_liquida[mes] %>
+        </div>
+      </td>
+  <% end %>
+</tr>
+
+</tbody>
+</table>
+</div>
+</body>
