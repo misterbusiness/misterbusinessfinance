@@ -47,9 +47,9 @@ module LancamentosHelper
 # ******************************************************************************************************************************
   def fluxo_caixa_receitas_vendas_realizado(inicio, fim)
 
-    @sql = Lancamento.receitas.quitados.por_mes.acao_range(inicio, fim)
+    @sql = Lancamento.receitas.quitados.acao_por_mes.acao_range(inicio, fim)
     .where(:category_id => Category.find_by_code(Configurable.sales_category_code).subtree_ids)
-    .select { date_part('month', datavencimento).as(mes) }
+    .select { date_part('month', dataacao).as(mes) }
     .select{sum(valor).as(value)}.to_sql
 
     return "SELECT COALESCE(q.mes, m.number) as mes, COALESCE(q.value,0) AS value FROM (" + @sql + ") q RIGHT JOIN months m ON q.mes = m.number"
@@ -65,9 +65,9 @@ module LancamentosHelper
   end
 
   def fluxo_caixa_receitas_financeiras_realizado(inicio, fim)
-    @sql = Lancamento.receitas.quitados.por_mes.acao_range(inicio, fim)
+    @sql = Lancamento.receitas.quitados.acao_por_mes.acao_range(inicio, fim)
     .where(:category_id => Category.find_by_code(Configurable.finance_category_code).subtree_ids)
-    .select { date_part('month', datavencimento).as(mes) }
+    .select { date_part('month', dataacao).as(mes) }
     .select{sum(valor).as(value)}.to_sql
 
     return "SELECT COALESCE(q.mes, m.number) as mes, COALESCE(q.value,0) AS value FROM (" + @sql + ") q RIGHT JOIN months m ON q.mes = m.number"
@@ -85,10 +85,9 @@ module LancamentosHelper
     @receita_categories = Category.find_by_code(Configurable.sales_category_code).subtree_ids + Category.find_by_code(Configurable.finance_category_code).subtree_ids
     @other_categories = Category.pluck(:id)- @receita_categories
 
-
-    @sql = Lancamento.receitas.quitados.por_mes.acao_range(inicio, fim)
+    @sql = Lancamento.receitas.quitados.acao_por_mes.acao_range(inicio, fim)
     .where(:category_id => @other_categories)
-    .select { date_part('month', datavencimento).as(mes) }
+    .select { date_part('month', dataacao).as(mes) }
     .select{sum(valor).as(value)}.to_sql
 
     return "SELECT COALESCE(q.mes, m.number) as mes, COALESCE(q.value,0) AS value FROM (" + @sql + ") q RIGHT JOIN months m ON q.mes = m.number"
@@ -114,9 +113,9 @@ module LancamentosHelper
   # ******************************************************************************************************************************
   def fluxo_caixa_despesas_administrativas_realizado(inicio, fim)
 
-    @sql = Lancamento.despesas.quitados.por_mes.acao_range(inicio, fim)
+    @sql = Lancamento.despesas.quitados.acao_por_mes.acao_range(inicio, fim)
     .where(:category_id => Category.find_by_code(Configurable.administrative_category_code).subtree_ids)
-    .select { date_part('month', datavencimento).as(mes) }
+    .select { date_part('month', dataacao).as(mes) }
     .select{sum(valor).as(value)}.to_sql
 
     return "SELECT COALESCE(q.mes, m.number) as mes, COALESCE(q.value,0) AS value FROM (" + @sql + ") q RIGHT JOIN months m ON q.mes = m.number"
@@ -134,9 +133,9 @@ module LancamentosHelper
 
   def fluxo_caixa_despesas_producao_realizado(inicio, fim)
 
-    @sql = Lancamento.despesas.quitados.por_mes.acao_range(inicio, fim)
+    @sql = Lancamento.despesas.quitados.acao_por_mes.acao_range(inicio, fim)
     .where(:category_id => Category.find_by_code(Configurable.production_category_code).subtree_ids)
-    .select { date_part('month', datavencimento).as(mes) }
+    .select { date_part('month', dataacao).as(mes) }
     .select{sum(valor).as(value)}.to_sql
 
     return "SELECT COALESCE(q.mes, m.number) as mes, COALESCE(q.value,0) AS value FROM (" + @sql + ") q RIGHT JOIN months m ON q.mes = m.number"
@@ -154,9 +153,9 @@ module LancamentosHelper
 
   def fluxo_caixa_despesas_financeiras_realizado(inicio, fim)
 
-    @sql = Lancamento.despesas.quitados.por_mes.acao_range(inicio, fim)
+    @sql = Lancamento.despesas.quitados.acao_por_mes.acao_range(inicio, fim)
     .where(:category_id => Category.find_by_code(Configurable.finance_category_code).subtree_ids)
-    .select { date_part('month', datavencimento).as(mes) }
+    .select { date_part('month', dataacao).as(mes) }
     .select{sum(valor).as(value)}.to_sql
 
     return "SELECT COALESCE(q.mes, m.number) as mes, COALESCE(q.value,0) AS value FROM (" + @sql + ") q RIGHT JOIN months m ON q.mes = m.number"
@@ -174,9 +173,9 @@ module LancamentosHelper
 
   def fluxo_caixa_despesas_investimentos_realizado(inicio, fim)
 
-    @sql = Lancamento.despesas.quitados.por_mes.acao_range(inicio, fim)
+    @sql = Lancamento.despesas.quitados.acao_por_mes.acao_range(inicio, fim)
     .where(:category_id => Category.find_by_code(Configurable.investment_category_code).subtree_ids)
-    .select { date_part('month', datavencimento).as(mes) }
+    .select { date_part('month', dataacao).as(mes) }
     .select{sum(valor).as(value)}.to_sql
 
     return "SELECT COALESCE(q.mes, m.number) as mes, COALESCE(q.value,0) AS value FROM (" + @sql + ") q RIGHT JOIN months m ON q.mes = m.number"
@@ -196,10 +195,9 @@ module LancamentosHelper
     @despesas_categories = Category.find_by_code(Configurable.administrative_category_code).subtree_ids + Category.find_by_code(Configurable.finance_category_code).subtree_ids + Category.find_by_code(Configurable.production_category_code).subtree_ids + Category.find_by_code(Configurable.investment_category_code).subtree_ids
     @other_categories = Category.pluck(:id)- @despesas_categories
 
-
-    @sql = Lancamento.despesas.quitados.por_mes.acao_range(inicio, fim)
+    @sql = Lancamento.despesas.quitados.acao_por_mes.acao_range(inicio, fim)
     .where(:category_id => @other_categories)
-    .select { date_part('month', datavencimento).as(mes) }
+    .select { date_part('month', dataacao).as(mes) }
     .select{sum(valor).as(value)}.to_sql
 
     return "SELECT COALESCE(q.mes, m.number) as mes, COALESCE(q.value,0) AS value FROM (" + @sql + ") q RIGHT JOIN months m ON q.mes = m.number"
@@ -398,10 +396,16 @@ module LancamentosHelper
 
 
   def receita_por_categoria_series_query(dt)
-    return Lancamento.receitas.por_categoria.este_ano(dt).joins { category }.group { category.descricao }.group{category_id }
-    .select { category_id.as(cat_id) }
-    .select { sum(valor).as(values) }
-    .select { category.descricao.as(axis) }
+    #return Lancamento.receitas.por_categoria.este_ano(dt)
+    #.joins { category }.group { category.descricao }.group{category_id }
+    #.select { category_id.as(cat_id) }
+    #.select { sum(valor).as(values) }
+    #.select { category.descricao.as(axis) }
+
+    @categories = Category.roots.select{id}.select{descricao}.select{ancestry}.to_sql
+    @lancamentos_por_categoria = Lancamento.receitas.por_categoria.este_ano(dt).select{category_id}.select{sum(valor).as(values)}.to_sql
+
+    return "SELECT cat.id as cat_id, COALESCE(lan.values,0) as values, cat.descricao as axis FROM (#{@categories}) cat LEFT JOIN (#{@lancamentos_por_categoria}) lan ON cat.id = lan.category_id "
   end
 
   def receita_por_status_series_query(dt)

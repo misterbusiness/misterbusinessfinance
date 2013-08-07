@@ -22,7 +22,8 @@
   <div class="row-fluid" style="height: 100%">
     <div class="span1" style="height: 100%">
       <div class="span12" style="height: 10%">
-        <b>Mister Business</b>
+        <!-- <b>Mister Business</b> -->
+        <%=  image_tag "Logo mister.png", size: '102' %>
       </div>
 
       <div class="span12" style="height: 50%">
@@ -65,6 +66,10 @@
           <li class="<%= 'active' if current_page?(lancamentos_reports_resultados_path) %>">
             <a href="<%= lancamentos_reports_resultados_path %>">Resultados</a>
           </li>
+          <!--<li class="<%= 'active' if current_page?(lancamentos_reports_indicadores_path) %>">
+            <a href="<%= lancamentos_reports_indicadores_path %>">Relatórios</a>
+          </li> -->
+
           <li class="<%= 'active' if current_page?(targets_path) %>">
             <a href="<%= targets_path %>">Metas</a>
           </li>

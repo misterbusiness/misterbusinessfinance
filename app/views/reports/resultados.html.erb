@@ -20,7 +20,7 @@
 <div class="span12">
 <table class="table table-hover table-bordered">
 <thead>
-<th colspan="2">
+<th>
   <div class="mister-table-heading">Demonstrativo de Resultado de Exercício - <%= @referencia %></div>
 </th>
 <% (1..12).each do |mes| %>
@@ -187,7 +187,7 @@
   <% (1..12).each do |mes| %>
       <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
         <div class="mister-number">
-          <%= @margem_operacional[mes] %>
+          <%= number_to_percentage(@margem_operacional[mes], precision: 2) %>
         </div>
       </td>
   <% end %>
@@ -200,7 +200,7 @@
   <% (1..12).each do |mes| %>
       <td class="<%= 'mister-table-realizado-level1' if mes == @current_month %>">
         <div class="mister-number">
-          <%= @margem_liquida[mes] %>
+          <%= number_to_percentage(@margem_liquida[mes], precision: 2) %>
         </div>
       </td>
   <% end %>

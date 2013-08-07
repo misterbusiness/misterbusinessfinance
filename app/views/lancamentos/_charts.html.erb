@@ -39,7 +39,8 @@
       </a>
     </div>
     <div class="item">
-      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsCaixa')">
+<!--      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsCaixa')"> -->
+      <a href="<%= lancamentos_reports_fluxo_de_caixa_path %>" role="button" class="btn">
         <div id="caixa_chart_div"
              onload="drawVisualization('column', 'caixa_chart_div', '<%= lancamentos_reports_fluxo_caixa_estatisticas_path %>');"></div>
       </a>
