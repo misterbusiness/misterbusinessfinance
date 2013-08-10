@@ -7,7 +7,9 @@
 
         <tr>
           <td>
-            <button id="botaoGrid" class="btn btn-primary">Todos</button>
+            Data de Criação:
+            De<input type="text" id="filtro_DataCriacaoDe" class="filtro_parametro" style="width: 100px"/>
+            Até<input type="text" id="filtro_DataCriacaoAte" class="filtro_parametro" style="width: 100px"/>
           </td>
           <td>
             <input type="checkbox" id="inputReceitas" checked="true" value="S"/> Receitas
@@ -25,45 +27,62 @@
 
           <td>
             Status:
-            <select id="filtro_status" class="filtro_parametro">
-              <option value=""></option>
-              <option value="<%= Lancamento.aberto %>">Aberto</option>
-              <option value="<%= Lancamento.quitado %>">Quitado</option>
-              <option value="<%= Lancamento.cancelado %>">Cancelado</option>
-              <option value="<%= Lancamento.estornado %>">Estornado</option>
-            </select>
+
 
 
           </td>
         </tr>
-        <tr>
-          <td> Descrição: <%= text_field(:filtro, :descricao, :class => "filtro_parametro") %> </td>
-          <td>
-            <div class="span3" style="border: 2px">
-              Valor:
-              <select id="seletor_valor" class="filtro_parametro" style="width: 50px">
-                <option value="=">=</option>
-                <option value="<"><</option>
-                <option value=">">></option>
-              </select>
-              <input type="text" id="filtro_valor" class="filtro_parametro" style="width: 150px">
 
-            </div>
-
-          </td>
-          <td>Categoria: <%= collection_select :filtro, :categoria, Category.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro"} %></td>
-          <td>Centro de
-            Custo: <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro"} %></td>
-
-
-        </tr>
 
 
       </table>
     </td>
   <tr>
     <td colspan="8">
-      <div id="grid_results"></div>
+      <div id="grid_results">
+
+        <table id="tableResults" class="table table-hover table-condensed">
+          <thead>
+          <tr id="header">
+
+            <th>Ações <br/></th>
+            <th>Descrição  <br/>
+              <%= text_field(:filtro, :descricao, :class => "filtro_parametro") %>
+            </th>
+            <th>Vencimento <br/></th>
+            <th>Data Ação <br/></th>
+            <th>Valor  <br/>
+              <select id="seletor_valor" class="filtro_parametro" style="width: 50px">
+                <option value="=">=</option>
+                <option value="<"><</option>
+                <option value=">">></option>
+              </select>
+              <input type="text" id="filtro_valor" class="filtro_parametro" style="width: 100px">
+
+            </th>
+            <th>Categoria <br/>
+              <%= collection_select :filtro, :categoria, Category.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro"} %>
+            </th>
+            <th>Centro de Custo <br/>
+              <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro"} %>
+
+            </th>
+            <th>Status  <br/>
+              <select id="filtro_status" class="filtro_parametro" style="width: 100px">
+                <option value=""></option>
+                <option value="<%= Lancamento.aberto %>">Aberto</option>
+                <option value="<%= Lancamento.quitado %>">Quitado</option>
+                <option value="<%= Lancamento.cancelado %>">Cancelado</option>
+                <option value="<%= Lancamento.estornado %>">Estornado</option>
+              </select>
+            </th>
+          </tr>
+          </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+      </div>
     </td>
   </tr>
 
