@@ -23,7 +23,9 @@ Misterbusinessfinance::Application.routes.draw do
 
   match 'lancamentos/reports/fluxo_de_caixa', to: 'reports#fluxo_de_caixa', :via => :get
   match 'lancamentos/reports/resultados', to: 'reports#resultados', :via => :get
-  match 'lancamentos/reports/indicadores', to: 'reports#indicadores', :via => :get
+  match 'lancamentos/reports/reports', to: 'reports#index', :via => :get
+
+  #resources :reports
 
   #Reports
   # ******************************************************************************************************
@@ -41,6 +43,7 @@ Misterbusinessfinance::Application.routes.draw do
 
   match 'lancamentos/reports/receitas_por_categoria_chart', to: 'reports#receitas_por_categoria_chart'
   match 'lancamentos/reports/receitas_por_categoria_table', to: 'reports#receitas_por_categoria_table', :via => :get
+  match 'lancamentos/reports/receitas_por_categoria_parent_table', to: 'reports#receitas_por_categoria_parent_table', :via => :get
 
   match 'lancamentos/reports/receitas_por_status_table', to: 'reports#receitas_por_status_table', :via => :get
 
@@ -55,24 +58,25 @@ Misterbusinessfinance::Application.routes.draw do
   # ******************************************************************************************************
 
   match 'lancamentos/reports/contas_a_pagar_chart', to: 'reports#contas_a_pagar_chart'
-  match 'lancamentos/reports/contas_a_pagar_table', to: 'reports#contas_a_pagar_table'
+  match 'lancamentos/reports/contas_a_pagar_table', to: 'reports#contas_a_pagar_table', :via => :get
 
   match 'lancamentos/reports/contas_vencidas_chart', to: 'reports#contas_vencidas_chart'
-  match 'lancamentos/reports/contas_vencidas_table', to: 'reports#contas_vencidas_table'
+  match 'lancamentos/reports/contas_vencidas_table', to: 'reports#contas_vencidas_table', :via => :get
 
   match 'lancamentos/reports/top_despesas_chart', to: 'reports#top_despesas_chart'
-  match 'lancamentos/reports/top_despesas_table', to: 'reports#top_despesas_table'
+  match 'lancamentos/reports/top_despesas_table', to: 'reports#top_despesas_table', :via => :get
 
   match 'lancamentos/reports/despesas_por_categoria_chart', to: 'reports#despesas_por_categoria_chart'
-  match 'lancamentos/reports/despesas_por_categoria_table', to: 'reports#despesas_por_categoria_table'
+  match 'lancamentos/reports/despesas_por_categoria_table', to: 'reports#despesas_por_categoria_table', :via => :get
+  match 'lancamentos/reports/despesas_por_categoria_parent_table', to: 'reports#despesas_por_categoria_parent_table', :via => :get
 
-  match 'lancamentos/reports/despesas_por_status_table', to: 'reports#despesas_por_status_table'
+  match 'lancamentos/reports/despesas_por_status_table', to: 'reports#despesas_por_status_table', :via => :get
 
-  match 'lancamentos/reports/despesas_por_centrodecusto_table', to: 'reports#despesas_por_centrodecusto_table'
+  match 'lancamentos/reports/despesas_por_centrodecusto_table', to: 'reports#despesas_por_centrodecusto_table', :via => :get
 
-  match 'lancamentos/reports/prazo_medio_pagamento', to: 'reports#prazo_medio_pagamento'
+  match 'lancamentos/reports/prazo_medio_pagamento', to: 'reports#prazo_medio_pagamento', :via => :get
 
-  match 'lancamentos/reports/aderencia', to: 'reports#aderencia'
+  match 'lancamentos/reports/aderencia', to: 'reports#aderencia', :via => :get
 
   # ******************************************************************************************************
   # Outros

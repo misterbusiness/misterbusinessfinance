@@ -3,8 +3,8 @@ function buildFluxoCaixaReport(){
     hideDiv('report_zone_2_div');
     hideDiv('report_zone_3_div');
 
-    hideDiv('reportsSideMenu');
-    $('#report_zone_3_div').html("<iframe style='margin-left:-300px;margin-top:-50px; width:1200px;height:700px;' src='<%= Rails.application.routes.url_helpers.lancamentos_reports_fluxo_de_caixa_path %>'></iframe>");
+    //$('#report_zone_3_div').html("<iframe style='margin-left:-300px;margin-top:-50px; width:1200px;height:700px;' src=''></iframe>");
+    $('#report_zone_4_div').html("<iframe style='width:1800px;height:700px;' src='<%= Rails.application.routes.url_helpers.lancamentos_reports_fluxo_de_caixa_path %>'></iframe>");
 }
 
 $(document).ready(function(){

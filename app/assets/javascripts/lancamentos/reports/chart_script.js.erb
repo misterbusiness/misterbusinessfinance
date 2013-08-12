@@ -15,6 +15,7 @@ $(document).ready(function(){
         autoclose: true,
         todaybtn: true
     });
+
     $('#report_period_end').datepicker({
         format: 'dd-mm-yyyy',
         autoclose: true,
@@ -28,8 +29,8 @@ $(document).ready(function () {
 });
 
 function drawCharts(){
-    drawVisualization('bar', 'receita_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_receita_estatisticas_path %>');
-    drawVisualization('bar', 'despesa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_despesa_estatisticas_path %>');
+    drawVisualization('column', 'receita_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_receita_estatisticas_path %>');
+    drawVisualization('column', 'despesa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_despesa_estatisticas_path %>');
     drawVisualization('line', 'caixa_chart_div', '<%= Rails.application.routes.url_helpers.lancamentos_reports_fluxo_caixa_estatisticas_path %>');
 }
 
@@ -40,6 +41,7 @@ function drawVisualization(chartType, chartArea, reportUrl, dashboard) {
     hideDiv('report_zone_1_div');
     hideDiv('report_zone_2_div');
     hideDiv('report_zone_3_div');
+    hideDiv('report_zone_4_div');
     hideDiv('report_slider');
 
     reportUrl += "?ts_begin=" + $("#report_period_begin").val();
@@ -146,6 +148,7 @@ function drawDashboard(reportUrl, filterType, filterColumn, chartType) {
     hideDiv('report_zone_1_div');
     hideDiv('report_zone_2_div');
     hideDiv('report_zone_3_div');
+    hideDiv('report_zone_4_div');
     hideDiv('report_slider');
 
     reportUrl += "?ts_begin=" + $("#report_period_begin").val();
@@ -165,9 +168,10 @@ function drawDashboard(reportUrl, filterType, filterColumn, chartType) {
             'options': {
                 'filterColumnLabel': filterColumn,
                 'ui': {
-                    'chartType': 'LineChart',
+                    'chartType': 'ScatterChart',
                     'labelStacking': 'vertical',
                     'chartOptions': {
+                        'colors': ['pink'],
                         'chartArea': {'height': '90%', 'width': '70%'}
                     }
                 }
@@ -214,6 +218,7 @@ function drawDashboardTimeSeries(reportUrl, filterType, filterColumn, chartType)
     hideDiv('report_zone_1_div');
     hideDiv('report_zone_2_div');
     hideDiv('report_zone_3_div');
+    hideDiv('report_zone_4_div');
     hideDiv('report_slider');
 
     var xAxisFilterColumn = 0;
@@ -246,9 +251,10 @@ function drawDashboardTimeSeries(reportUrl, filterType, filterColumn, chartType)
                 'filterColumnLabel': filterColumn,
                 'interpolateNulls': 'true',
                 'ui': {
-                    'chartType': 'ComboChart',
+                    'chartType': 'ScatterChart',
                     'labelStacking': 'vertical',
                     'chartOptions': {
+                        'colors': ['pink'],
                         'chartArea': {'height': '90%', 'width': '70%'}
                     },
                     'chartView': {
@@ -304,6 +310,7 @@ function drawDashboardGroupChart(reportUrl, filterType, filterColumn, chartType)
     hideDiv('report_zone_1_div');
     hideDiv('report_zone_2_div');
     hideDiv('report_zone_3_div');
+    hideDiv('report_zone_4_div');
     hideDiv('report_slider');
 
     var xAxisFilterColumn = 1;
@@ -336,9 +343,10 @@ function drawDashboardGroupChart(reportUrl, filterType, filterColumn, chartType)
                 'filterColumnLabel': filterColumn,
                 'interpolateNulls': 'false',
                 'ui': {
-                    'chartType': 'LineChart',
+                    'chartType': 'ScatterChart',
                     'labelStacking': 'vertical',
                     'chartOptions': {
+                        'colors': ['pink'],
                         'chartArea': {'height': '90%', 'width': '70%'}
                     },
                     'chartView': {
@@ -429,21 +437,31 @@ function drawToolbar() {
 ;
 
 function showReportMenu() {
-    $("#reportsSideMenu").show();
+    $("#divReportsSideMenu").show();
 
     $("#report_slider").html("");
     $("#report_zone_1_div").html("");
     $("#report_zone_2_div").html("");
     $("#report_zone_3_div").html("");
+    $("#report_zone_4_div").html("");
 }
 
 function hideReportMenu() {
-    $("#reportsSideMenu").hide();
+    $("#divReportsSideMenu").hide();
 
     $("#report_slider").html("");
     $("#report_zone_1_div").html("");
     $("#report_zone_2_div").html("");
     $("#report_zone_3_div").html("");
+    $("#report_zone_4_div").html("");
+}
+
+function showRangeMenu() {
+    $("#divRangeMenu").show();
+}
+
+function hideRangeMenu() {
+    $("#divRangeMenu").hide();
 }
 
 function hideDiv(divName) {
@@ -462,7 +480,3 @@ function changeReportDateRange(beginDate){
 function setCurrentChart(chartId){
     $("#current_report").val(chartId);
 }
-
-$(document).ready(function(){
-
-});

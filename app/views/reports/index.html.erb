@@ -1,0 +1,211 @@
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    //google.load('visualization', '1.0', {packages: ['controls']});
+
+    //google.load('visualization', '1', {packages: ['table']});
+
+    // Load the Visualization API and the piechart package.
+    //google.load('visualization', '1.0', {'packages': ['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    //google.load('visualization', '1.0', {'packages': ['corechart']});
+
+    google.load('visualization', '1', {packages: ['table']});
+    google.load('visualization', '1.0', {packages: ['controls']});
+    google.load('visualization', '1.0', {'packages': ['corechart']});
+
+</script>
+
+<div class="span12">
+  <div class="tab-content span4" id="reportsTab">
+    <ul class="nav nav-pills">
+      <li class="active">
+        <a href="#receitas" data-toggle="tab" id="reportsReceita"
+           onclick="
+           hideReportMenu();
+                   drawVisualization('combo', 'report_zone_1_div','<%= lancamentos_reports_receita_realizada_path %>');
+                   drawVisualization('pie', 'report_zone_2_div','<%= lancamentos_reports_receita_por_categoria_path %>') ;
+                   drawVisualization('pie', 'report_zone_3_div','<%= lancamentos_reports_receita_por_status_path %>');">Receitas</a>
+      </li>
+      <li><a href="#despesas" data-toggle="tab" id="reportsDespesa"
+             onclick="
+             hideReportMenu();
+                     drawVisualization('column', 'report_zone_1_div','<%= lancamentos_reports_despesa_realizada_path %>');
+                     drawVisualization('pie', 'report_zone_2_div','<%= lancamentos_reports_despesa_por_categoria_path %>');
+                     drawVisualization('pie', 'report_zone_3_div','<%= lancamentos_reports_despesa_por_centrodecusto_path %>');">Despesas</a>
+      </li>
+
+      <li><a href="#diversos" data-toggle="tab" id="reportsDiversos" onclick="showReportMenu()">Diversos</a></li>
+    </ul>
+  </div>
+  <div class="span8">
+      <div class="span4">
+        <input id="report_period_begin" class="input-small" style="float:left" data-mask="99-99-9999"
+               value="<%= Time.now.beginning_of_month.strftime("%d-%m-%Y") %>">
+
+        <p style="float: left"> &nbsp;a&nbsp; </p>
+        <input id="report_period_end" class="input-small" style="float: left" data-mask="99-99-9999"
+               value="<%= Time.now.end_of_month.strftime("%d-%m-%Y") %>">
+        <a class="btn" href="#" style="float: left"
+           onclick=" $('#'+ $('#current_report').val() + '').trigger('click');"><i class="icon-calendar"></i></a>
+      </div>
+      <div class="btn-group span2">
+        <a class="btn" href="#" onclick="printHtml('report_zone_1_div','report_zone_2_div','report_zone_3_div');"><i class="icon-print"></i></a>
+      </div>
+  </div>
+  </div>
+
+
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span3" id="divReportsSideMenu">
+        <ul class="nav nav-list" id="reportsSideMenu">
+          <div class="accordion" id="accordionReports">
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <ul class="nav nav-list">
+                  <li>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseReceitas">
+                      <i class=" icon-signal"></i> Receitas
+                    </a></li>
+                </ul>
+              </div>
+              <div id="collapseReceitas" class="accordion-body collapse in">
+                <div class="accordion-inner">
+                  <!--<li class="nav-header">Receita</li>-->
+
+                  <li><a id="contas_a_receber_report" href="#"
+                         onclick="setCurrentChart(this.id);
+                                 drawDashboardTimeSeries('<%= lancamentos_reports_contas_a_receber_table_path %>','ChartRangeFilter','data', 'LineChart');">Contas
+                    a receber</a></li>
+                  <li><a id="recebimentos_atrasados_report" href="#"
+                         onclick=" setCurrentChart(this.id);
+                                 drawDashboardTimeSeries('<%= lancamentos_reports_recebimentos_atrasados_table_path %>', 'ChartRangeFilter','data', 'LineChart');">Recebimentos
+                    atrasados</a></li>
+                  <li><a id="top_receitas_report" href="#"
+                         onclick=" setCurrentChart(this.id);
+                                 drawDashboardTimeSeries('<%= lancamentos_reports_top_receitas_table_path %>','ChartRangeFilter','data', 'LineChart');">TOP
+                    receitas</a></li>
+                  <li><a id="receitas_por_categoria_report" href="#"
+                         onclick=" setCurrentChart(this.id);
+                                 drawDashboardGroupChart('<%= lancamentos_reports_receitas_por_categoria_table_path %>','ChartRangeFilter','data', 'PieChart');">Receitas
+                    por categoria</a></li>
+                  <li><a id="receitas_por_status_report" href="#"
+                         onclick=" setCurrentChart(this.id);
+                                 drawDashboardGroupChart('<%= lancamentos_reports_receitas_por_status_table_path %>','ChartRangeFilter','data', 'PieChart');
+                         ">Receitas por status</a></li>
+                  <li><a id="receitas_por_centrodecusto_reports" href="#"
+                         onclick="setCurrentChart(this.id);
+                                 drawDashboardGroupChart('<%= lancamentos_reports_receitas_por_centrodecusto_table_path %>','ChartRangeFilter','data', 'PieChart');
+                                 drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_receitas_por_centrodecusto_table_path %>');
+                         ">Receitas
+                    por centro de custo</a></li>
+                  <li><a href="#" id="prazo_medio_recebimento_report"
+                         onclick="setCurrentChart(this.id);
+                                 drawDashboard('<%= lancamentos_reports_prazo_medio_recebimento_path %>','ChartRangeFilter','mes', 'LineChart');">Prazo
+                    médio de recebimento</a></li>
+                  <li><a href="#" id="ticket_medio_vendas_report"
+                         onclick="setCurrentChart(this.id);
+                                 drawDashboard('<%= lancamentos_reports_ticket_medio_vendas_path %>','ChartRangeFilter','mes', 'LineChart');">Ticket
+                    médio das vendas</a></li>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <ul class="nav nav-list">
+                  <li>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseDespesas">
+                      <i class=" icon-signal"></i> Despesas
+                    </a></li>
+                </ul>
+              </div>
+              <div id="collapseDespesas" class="accordion-body collapse in">
+                <div class="accordion-inner">
+                  <!-- <li class="nav-header">Despesa</li> -->
+
+                  <li><a href="#"
+                         onclick="
+                         drawDashboardTimeSeries('<%= lancamentos_reports_contas_a_pagar_table_path %>','ChartRangeFilter','data', 'LineChart');">Contas
+                    a pagar</a></li>
+                  <li><a href="#"
+                         onclick="
+                         drawDashboardTimeSeries('<%= lancamentos_reports_contas_vencidas_table_path %>','ChartRangeFilter','data', 'LineChart');">Contas
+                    Vencidas
+                  </a></li>
+                  <li><a href="#"
+                         onclick="
+                         drawDashboardTimeSeries('<%= lancamentos_reports_top_despesas_table_path %>','ChartRangeFilter','data', 'ColumnChart');">TOP
+                    despesas</a></li>
+                  <li><a href="#"
+                         onclick="
+                         drawDashboardGroupChart('<%= lancamentos_reports_despesas_por_categoria_table_path %>','ChartRangeFilter','data', 'PieChart');">Despesas
+                    por categoria</a></li>
+                  <li><a href="#"
+                         onclick="
+                         drawDashboardGroupChart('<%= lancamentos_reports_despesas_por_status_table_path %>','ChartRangeFilter','data', 'PieChart');">Despesas
+                    por status</a></li>
+                  <li><a href="#"
+                         onclick="
+                         drawDashboardGroupChart('<%= lancamentos_reports_despesas_por_centrodecusto_table_path %>','ChartRangeFilter','data', 'PieChart');">Despesas
+                    por centro de custo</a></li>
+                  <li><a href="#"
+                         onclick="drawDashboard('<%= lancamentos_reports_prazo_medio_pagamento_path  %>','ChartRangeFilter','mes', 'LineChart');">Prazo
+                    médio de pagamento</a></li>
+                  <li><a href="#"
+                         onclick="
+                         drawDashboard('<%= lancamentos_reports_aderencia_path %>','NumberRangeFilter','mes', 'ColumnChart');">Aderência</a>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <ul class="nav nav-list">
+                  <li>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOutros">
+                      <i class=" icon-signal"></i> Outros
+                    </a></li>
+                </ul>
+              </div>
+              <div id="collapseOutros" class="accordion-body collapse in">
+                <div class="accordion-inner">
+                  <li><a href="#"
+                         onclick="
+                         drawVisualization('table','report_zone_1_div','<%= lancamentos_reports_ultimos_lancamentos_path %>');">Ultimos
+                    Lancamentos</a></li>
+                  <!--<li><a href="#"
+                             onclick="drawDashboard('<%= lancamentos_reports_lancamentos_futuros_path %>','NumberRangeFilter','mes', 'ComboChart' );">Lançamentos
+                        Futuros</a></li>-->
+                  <li><a href="#"
+                         onclick="drawVisualization('combo', 'report_zone_1_div','<%= lancamentos_reports_lancamentos_futuros_path %>');
+                                 drawVisualization('table','report_zone_2_div','<%= lancamentos_reports_lancamentos_futuros_path %>');">Lancamentos
+                    Futuros</a></li>
+                  <li><a href="#"
+                         onclick="
+                         drawVisualization('table','report_zone_1_div','<%= categories_reports_categories_lista_path %>');
+                                 hideDiv('report_zone_2_div');">Lista de categorias</a></li>
+                  <li><a href="#"
+                         onclick="
+                         drawVisualization('table','report_zone_1_div','<%= centrodecustos_reports_centrodecustos_lista_path %>');
+                                 hideDiv('report_zone_2_div');">Lista de Centros de custo</a></li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+      <div id="chartsArea" class="span9">
+        <input type="hidden" id="current_report">
+
+        <div id="message_div"></div>
+        <div id="toolbar_div"></div>
+        <div id="report_zone_1_div"></div>
+        <div id="report_slider" style="height: 50px;"></div>
+        <div id="report_zone_2_div" style="float:left"></div>
+        <div id="report_zone_3_div" style="float: left"></div>
+      </div>
+    </div>
+  </div>
+</div>

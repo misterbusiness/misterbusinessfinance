@@ -92,22 +92,22 @@ namespace :db do
       centrodecusto.descricao = Faker::Company.name
     end
 
-    Lancamento.populate 200 do |lancamento|
+    Lancamento.populate 400 do |lancamento|
       lancamento.descricao = Populator.words(1..3)
       lancamento.status_cd = [Lancamento.aberto]
       lancamento.tipo_cd = [Lancamento.receita, Lancamento.despesa]
-      lancamento.datavencimento = 3.years.ago..2.years.from_now #6.months.ago..3.month.from_now
+      lancamento.datavencimento = 3.years.ago..2.years.from_now
       lancamento.valor = 1..99
       lancamento.created_at = 3.years.ago..Time.now #5.months.ago..Time.now
       lancamento.category_id = 1..12
       lancamento.centrodecusto_id = 1..6
     end
 
-    Lancamento.populate 100 do |lancamento|
+    Lancamento.populate 200 do |lancamento|
       lancamento.descricao = Populator.words(1..3)
       lancamento.status_cd = [Lancamento.quitado]
       lancamento.tipo_cd = [Lancamento.receita, Lancamento.despesa]
-      lancamento.datavencimento = 3.years.ago..2.years.from_now #6.months.ago..3.month.from_now
+      lancamento.datavencimento = 3.years.ago..2.years.from_now
       lancamento.valor = 1..99
       lancamento.created_at = 3.years.ago..Time.now #5.months.ago..Time.now
       lancamento.category_id = 1..12
@@ -130,7 +130,7 @@ namespace :db do
       target.descricao = Populator.words(1)
       target.tipo_cd = [Target.receita]
       target.data = DateTime.new(Time.now.year, @index, 1)
-      target.valor = 100..999
+      target.valor = 1..99
       @index = @index + 1
     end
 
@@ -139,7 +139,7 @@ namespace :db do
       target.descricao = Populator.words(1)
       target.tipo_cd = [Target.despesa]
       target.data = DateTime.new(Time.now.year, @index, 1)
-      target.valor = 100..999
+      target.valor = 1..99
       @index = @index + 1
     end
   end
