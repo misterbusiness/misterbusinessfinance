@@ -104,6 +104,9 @@ class Lancamento < ActiveRecord::Base
   scope :valor_maior, lambda { |valor| where('valor > (?) ', valor) }
   scope :valor_igual, lambda { |valor| where('valor = (?) ', valor) }
 
+  # Lançamentos por categoria-macro
+  #scope :vendas, where(category_id => Category.find_by_descricao("Vendas").id)
+
 # public methods
   def has_parcelamento?
     !self.parcela.nil?

@@ -1,0 +1,15 @@
+<% if @centrodecusto.errors.any? -%>
+$("#flash_notice").hide(300);
+$("#error_explanation").html("<%= escape_javascript(error_messages_for(@centrodecusto))%>");
+$("#error_explanation").show(300);
+<% else -%>
+$("#error_explanation").hide(300);
+$("#flash_notice").html("<%= escape_javascript(flash[:notice])%>");
+$("#flash_notice").show(300);
+
+$(":input:not(input[type=submit])").val("");
+
+<% @centrodecusto = Centrodecusto.new %>
+$("#centrodecusto_form").html("<%= escape_javascript(render(:partial => 'form'))%>");
+$("#centrodecusto_tree").html("<%= escape_javascript(render(:partial => 'tree'))%>");
+<% end -%>

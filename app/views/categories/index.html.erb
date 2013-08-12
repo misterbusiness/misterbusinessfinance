@@ -1,11 +1,12 @@
 <h1>Categorias</h1>
 
+<div class="span3 well" id="category_form">
+    <%= render "form" %>
+</div>
 
+<div class="span8 well" id="category_tree" style="overflow: auto">
+  <%= render "tree" %>
+</div>
+<%= link_to 'Nova Categoria', new_category_path, :remote => true, :class => "btn" %>
+<!--  <%= link_to 'Destroy', @category, :remote => true , method: :delete, data: { confirm: 'Are you sure?' } %> -->
 
-  <%= raw display_categories_tree(@categories) %>
-
-
-
-<br />
-
-<%= link_to 'New Category', new_category_path %>
