@@ -1,23 +1,12 @@
-<h1>Listing centrodecustos</h1>
+<h1>Centros de Custo</h1>
 
-<table>
-  <tr>
-    <th>Descricao</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="span3 well" id="centrodecusto_form">
+    <%= render "form" %>
+</div>
 
-<% @centrodecustos.each do |centrodecusto| %>
-  <tr>
-    <td><%= centrodecusto.descricao %></td>
-    <td><%= link_to 'Show', centrodecusto %></td>
-    <td><%= link_to 'Edit', edit_centrodecusto_path(centrodecusto) %></td>
-    <td><%= link_to 'Destroy', centrodecusto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<div class="span8 well" id="centrodecusto_tree" style="overflow: auto">
+  <%= render "tree" %>
+</div>
+<%= link_to 'Novo Centro de Custo', new_centrodecusto_path, :remote => true, :class => "btn" %>
+<!--  <%= link_to 'Destroy', @centrodecusto, :remote => true , method: :delete, data: { confirm: 'Are you sure?' } %> -->
 
-<br />
-
-<%= link_to 'New Centrodecusto', new_centrodecusto_path %>

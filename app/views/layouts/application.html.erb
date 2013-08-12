@@ -21,11 +21,12 @@
 <div class="container-fluid" style="height: 100%">
   <div class="row-fluid" style="height: 100%">
     <div class="span1" style="height: 100%">
-      <div class="span12 well" style="height: 10%">
-        <b>Mister Business</b>
+      <div class="span12" style="height: 10%">
+        <!-- <b>Mister Business</b> -->
+        <%=  image_tag "Logo mister.png", size: '102' %>
       </div>
 
-      <div class="span12 well" style="height: 50%">
+      <div class="span12" style="height: 50%">
         <ul class="nav nav-pills">
           <li class="active span12"><a href="#">Financeiro</a></li>
           <li class="span12"><a href="#">Comercial</a></li>
@@ -40,7 +41,7 @@
           <li class="span12">&nbsp;</li>
         </ul>
       </div>
-      <div class="span12 well" style="height: 40%">
+      <div class="span12" style="height: 40%">
         <ul>
           <li class="span12"><p>Anúncios</p></li>
           <li class="span12">&nbsp;</li>
@@ -52,13 +53,23 @@
         </ul>
       </div>
     </div>
-    <div class="span11">
-      <div class="span2 well" style="height: 100%"> Bem-vindo, Usuário</div>
-      <div class="span10 well" style="height: 100%">
+    <div class="mister-span span11">
+      <div class="span1" style="height: 100%"> Bem-vindo, Usuário</div>
+      <div class="span11" style="height: 100%">
         <ul class="nav nav-pills">
           <li class="<%= 'active' if current_page?(lancamentos_path) %>">
             <a href="<%= lancamentos_path %>">Lançamentos</a>
           </li>
+          <li class="<%= 'active' if current_page?(lancamentos_reports_fluxo_de_caixa_path) %>">
+            <a href="<%= lancamentos_reports_fluxo_de_caixa_path %>">Fluxo de caixa</a>
+          </li>
+          <li class="<%= 'active' if current_page?(lancamentos_reports_resultados_path) %>">
+            <a href="<%= lancamentos_reports_resultados_path %>">Resultados</a>
+          </li>
+          <!--<li class="<%= 'active' if current_page?(lancamentos_reports_indicadores_path) %>">
+            <a href="<%= lancamentos_reports_indicadores_path %>">Relatórios</a>
+          </li> -->
+
           <li class="<%= 'active' if current_page?(targets_path) %>">
             <a href="<%= targets_path %>">Metas</a>
           </li>
@@ -72,7 +83,7 @@
             <a href="<%= centrodecustos_path %>">Centros de custo</a>
           </li>
           <li class="<%= 'active' if current_page?(import_lancamentos_path) %>">
-            <a href="<%= import_lancamentos_path %>">Importar Lançamentos</a>
+            <a href="<%= import_lancamentos_path %>">Importar</a>
           </li>
           <li>
             <a href="#">Configurações</a>
@@ -81,7 +92,7 @@
       </div>
       <div class="span12" id="container">
         <div id="flash_notice" style="display:none" class="span12"></div>
-        <div class="span12">
+        <div>
           <%= yield %>
         </div>
       </div>

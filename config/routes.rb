@@ -21,7 +21,9 @@ Misterbusinessfinance::Application.routes.draw do
   match 'lancamentos/reports/despesa_por_centrodecusto', to: 'reports#despesa_por_centrodecusto'
 
 
-  match 'lancamentos/reports/fluxo_de_caixa', to: 'reports#fluxo_de_caixa'
+  match 'lancamentos/reports/fluxo_de_caixa', to: 'reports#fluxo_de_caixa', :via => :get
+  match 'lancamentos/reports/resultados', to: 'reports#resultados', :via => :get
+  match 'lancamentos/reports/indicadores', to: 'reports#indicadores', :via => :get
 
   #Reports
   # ******************************************************************************************************
@@ -101,9 +103,12 @@ Misterbusinessfinance::Application.routes.draw do
 
   resources :centrodecustos
   match 'list/centrodecustos', to: 'centrodecustos#list'
+  match 'tree/centrodecustos', to: 'centrodecustos#tree'
+
 
   resources :categories
   match 'list/categories', to: 'categories#list'
+  match 'tree/categories', to: 'categories#tree'
 
   #importar lançamentos
   match 'lancamentos/importar', to: 'lancamentos#importar', as: :import_lancamentos

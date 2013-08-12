@@ -87,6 +87,9 @@ function drawVisualization(chartType, chartArea, reportUrl, dashboard) {
                 case 'pie':
                     var chart = new google.visualization.PieChart(container);
                     break;
+                case 'treemap':
+                    var chart = new google.visualization.TreeMap(container);
+                    break;
                 case 'line':
                     var chart = new google.visualization.LineChart(container);
                     break;
