@@ -66,10 +66,11 @@
           <li class="<%= 'active' if current_page?(lancamentos_reports_resultados_path) %>">
             <a href="<%= lancamentos_reports_resultados_path %>">Resultados</a>
           </li>
-          <!--<li class="<%= 'active' if current_page?(lancamentos_reports_indicadores_path) %>">
-            <a href="<%= lancamentos_reports_indicadores_path %>">Relatórios</a>
-          </li> -->
-
+          <li class="">
+            <a href="#reportsModal" role="button" data-toggle="modal" onclick="selectChartTab('reportsReceita')">
+              Relatórios
+            </a>
+          </li>
           <li class="<%= 'active' if current_page?(targets_path) %>">
             <a href="<%= targets_path %>">Metas</a>
           </li>
@@ -106,6 +107,18 @@
     <div class="span12 well"><b>MRBusiness. Todos os direitos reservados</b></div>
   </div>
 </div>
-
+<!-- #########################################################################################################
+    Relatórios
+#############################################################################################################-->
+<!-- ############################################################################
+      Google library to load reports
+#################################################################################-->
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load('visualization', '1', {packages: ['table']});
+    google.load('visualization', '1.0', {packages: ['controls']});
+    google.load('visualization', '1.0', {'packages': ['corechart']});
+</script>
+<%= render 'lancamentos/reports' %>
 </body>
 </html>

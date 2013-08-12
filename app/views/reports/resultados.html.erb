@@ -6,7 +6,7 @@
 <%= javascript_include_tag "application" %>
 <body class="mister-iframe" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <% @current_month = DateTime.now.month %>
-<div class="span12">
+<div class="span12 mister-span">
   <%= form_tag(lancamentos_reports_resultados_path, method: "get") do %>
       <div class="span1">
         <%= text_field_tag :ano_referencia, "", :placeholder => "Referência", :class => "input-small" %>
@@ -17,7 +17,7 @@
   <% end %>
 </div>
 
-<div class="span12">
+<div class="span12 mister-span">
 <table class="table table-hover table-bordered">
 <thead>
 <th>

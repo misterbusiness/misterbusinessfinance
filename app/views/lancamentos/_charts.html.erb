@@ -1,3 +1,4 @@
+<!--
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
     //google.load('visualization', '1.0', {packages: ['controls']});
@@ -16,7 +17,7 @@
     google.load("visualization", "1", {packages:["treemap"]});
 
 </script>
-
+-->
 <div id="ChartsCarousel" class="carousel slide">
   <ol class="carousel-indicators">
     <li data-target="#ChartsCarousel" data-slide-to="0" class="active"></li>
@@ -26,32 +27,36 @@
   <!-- Carousel items -->
   <div class="carousel-inner">
     <div class="active item">
-      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsReceita')">
         <div id="receita_chart_div"
-             onload="drawVisualization('column', 'receita_chart_div', '<%= lancamentos_reports_receita_estatisticas_path %>');">
+             onload="drawVisualization('bar', 'receita_chart_div', '<%= lancamentos_reports_receita_estatisticas_path %>');">
         </div>
-      </a>
+        <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsReceita')">
+            Ver mais indicadores
+        </a>
     </div>
     <div class="item">
-      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsDespesa')">
         <div id="despesa_chart_div"
-             onload="drawVisualization('column', 'despesa_chart_div', '<%= lancamentos_reports_despesa_estatisticas_path %>');"></div>
+             onload="drawVisualization('bar', 'despesa_chart_div', '<%= lancamentos_reports_despesa_estatisticas_path %>');"></div>
+      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsDespesa')">
+        Ver mais estatisticas
       </a>
     </div>
     <div class="item">
 <!--      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsCaixa')"> -->
-      <a href="<%= lancamentos_reports_fluxo_de_caixa_path %>" role="button" class="btn">
         <div id="caixa_chart_div"
              onload="drawVisualization('column', 'caixa_chart_div', '<%= lancamentos_reports_fluxo_caixa_estatisticas_path %>');"></div>
+      <a href="<%= lancamentos_reports_fluxo_de_caixa_path %>" role="button" class="btn">
+        Ver Fluxo de Caixa
       </a>
     </div>
-    <div class="item">
+
+    <!--<div class="item">
       <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsDiversos')">
         <div style="width:540px; height:450px; vertical-align: center">
             <center>Relatórios Mister Business</center>
         </div>
       </a>
-    </div>
+    </div>-->
   </div>
   <!-- Carousel nav -->
   <a class="carousel-control left" href="#ChartsCarousel" data-slide="prev">&lsaquo;</a>
