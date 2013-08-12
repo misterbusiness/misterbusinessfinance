@@ -11,6 +11,14 @@
   margin-left: 0%;
 }
 
+.mister-chart-area
+{
+  height: 670px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+
 .mister-textbox
 {
   margin-left: 2%;
@@ -101,6 +109,21 @@
   color: white;
   background-color: green;
   font-weight: bolder;
+}
+
+.mister-quadrante-box
+{
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgray;
+  height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.span12
+{
+  margin-left: 0;
 }
 
 .content {

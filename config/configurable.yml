@@ -55,6 +55,11 @@ number_categories_fluxo_report:
     name: Number of categories shown at Fluxo de Caixa Report
     default: 4
 
+number_top_categories:
+  name: Number of top categories on pie chart
+  default: 5
+
+
 # Reporting categories
 sales_category_code:
     name: Sales category code

@@ -1,31 +1,31 @@
 ﻿<div class="quadrante span12">
 <div id="lancamento_index">
-        <div class="span4">
+        <div class="span4 mister-quadrante-box">
           <div>
             <div class="span12 mister-quadrante-label" style="background-color: green">Formulário</div>
             <div id="lancamento_form" class="span12"><%= render :partial => 'form' %></div>
           </div>
         </div>
 
-        <div class="span4">
+        <div class="span4 mister-quadrante-box">
           <div class="span12 mister-quadrante-label" style="background-color: green">Notificações</div>
           <div class="span12">
             <%= render 'notifications' %>
           </div>
         </div>
 
-        <div class="span4">
+        <div class="span4 mister-quadrante-box">
           <div class="span12 mister-quadrante-label" >Gráficos</div>
           <div id="charts" class="span12">
-          <%= render 'charts' %>
+            <%= render 'charts' %>
           </div>
-            <%= render 'reports' %>
         </div>
   </div>
   <div style="width: 1%; float:left">&nbsp;</div>
 </div>
   </br>
-<div class="quadrante span12">
+<div class="span12" style="height: 2px;" ></div>
+<div class="quadrante mister-quadrante-box">
   <div class="span12 mister-quadrante-label" >Grid</div>
   <div style="width: 100%; float: none">
 
