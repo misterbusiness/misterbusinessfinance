@@ -26,6 +26,10 @@
   margin-top: 2%;
   margin-bottom: 2%;
 }
+.mister-table-filter
+{
+
+}
 
 .mister-table-level1
   {
@@ -113,6 +117,7 @@
 
 .mister-quadrante-box
 {
+  margin-left: 0px;
   border-width: 1px;
   border-style: solid;
   border-color: lightgray;
@@ -176,7 +181,7 @@
 
 .quadrante {
   width: 100%;
-  margin-left: none;
+  margin-left: 0px;
   margin-right: none;
   display: table;
 }

@@ -5,8 +5,8 @@
  * Time: 20:59
  * To change this template use File | Settings | File Templates.
  */
+
 function buildfilter() {
-    //alert("we are here!");
     var href = "/filter?"
 
     $('.filtro_parametro').each(function () {
@@ -17,7 +17,7 @@ function buildfilter() {
             }
     );
 
-    alert (href);
+    alert(href);
     $('#grid_results').html('Aguarde...');
     $.get(href, function (data) {
                 $('#grid_results').html(data);
@@ -146,7 +146,11 @@ function notification_build_filter(link) {
                     'aaSorting': [
                         [2, 'asc']
                     ],
-                    'bJQueryUI': true,
+                    'bJQueryUI': false,
+                    'bProcessing': true,
+                    'bAutoWidth': true,
+                    'bDeferRender': true,
+
                     sDom: '<"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip><"clear">T',
                     //'sDom': '<"fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lf><"table table-hover table-condensed dataTable"t><"fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"iTp>',
                     "oTableTools": {
@@ -175,13 +179,9 @@ function notification_build_filter(link) {
                             "sPrevious": "<"
                         }
                     }
-
-
                 });
             }
-
     );
-
 }
 
 function updateRowTable(id) {
@@ -206,66 +206,59 @@ function insertQuitarEstornarCancelarEvent() {
         $.ajax({
                     type: "PUT",
                     //url: "lancamentos/quitar?id="+id,
-                    url: "lancamentos/" + id + "/quitar",
+                    url: "lancamentos/" + id + "/quitar"
                 }
 
 
-        ).done(function(msg)
-                {
-                    
-					if ($('#filtro_status :selected').text() == 'Aberto')
-					{
-						$("#tableResults").dataTable().fnDeleteRow(rowindex);
-					}
-					else
-					{
-						$("#tableResults").dataTable().fnUpdate('quitado', rowindex, 7,false);
-					}	
-					
+        ).done(function (msg) {
+
+                    if ($('#filtro_status :selected').text() == 'Aberto') {
+                        $("#tableResults").dataTable().fnDeleteRow(rowindex);
+                    }
+                    else {
+                        $("#tableResults").dataTable().fnUpdate('quitado', rowindex, 7, false);
+                    }
+
                 }
 
-          );
+        );
 
     });
 
     $('.estornar_button').click(function () {
         td = $(this).parent();
         tr = td.parent();
-		
+
         var id = tr.prop('id').replace('edit_lancamento_row_', '');
-        var rowindex = $("#tableResults").dataTable().fnGetPosition($(this).closest("tr").get(0));		
-        
+        var rowindex = $("#tableResults").dataTable().fnGetPosition($(this).closest("tr").get(0));
+
         $.ajax({
                     type: "PUT",
                     //url: "lancamentos/quitar?id="+id,
-                    url: "lancamentos/" + id + "/estornar",
+                    url: "lancamentos/" + id + "/estornar"
                 }
 
 
-        ).done(function(msg)
-                {
-                    
-					if ($('#filtro_status :selected').text() == 'Quitado')
-					{
-						$("#tableResults").dataTable().fnDeleteRow(rowindex);
-					}
-					else
-					{
-						$("#tableResults").dataTable().fnUpdate('estornado', rowindex, 7,false);
-					}	
-					
-					
+        ).done(function (msg) {
+
+                    if ($('#filtro_status :selected').text() == 'Quitado') {
+                        $("#tableResults").dataTable().fnDeleteRow(rowindex);
+                    }
+                    else {
+                        $("#tableResults").dataTable().fnUpdate('estornado', rowindex, 7, false);
+                    }
+
+
                 }
 
-          );
-		
-		
+        );
+
 
     });
 
     $('.cancelar_button').click(function () {
-		
-		td = $(this).parent();
+
+        td = $(this).parent();
         tr = td.parent();
 
         var id = tr.prop('id').replace('edit_lancamento_row_', '');
@@ -275,231 +268,237 @@ function insertQuitarEstornarCancelarEvent() {
         $.ajax({
                     type: "PUT",
                     //url: "lancamentos/quitar?id="+id,
-                    url: "lancamentos/" + id + "/cancelar",
+                    url: "lancamentos/" + id + "/cancelar"
                 }
+        ).done(function (msg) {
 
-
-        ).done(function(msg)
-                {
-                    
-					if ($('#filtro_status :selected').text() == 'Aberto')
-					{
-						$("#tableResults").dataTable().fnDeleteRow(rowindex);
-					}
-					else
-					{
-						$("#tableResults").dataTable().fnUpdate('cancelado', rowindex, 7,false);
-					}	
-					
-					
+                    if ($('#filtro_status :selected').text() == 'Aberto') {
+                        $("#tableResults").dataTable().fnDeleteRow(rowindex);
+                    }
+                    else {
+                        $("#tableResults").dataTable().fnUpdate('cancelado', rowindex, 7, false);
+                    }
                 }
+        );
 
-          );
-	
-	
-	
-	
     });
-
-
 }
 
-$(document).ready(function () {
-    $('#filtro_descricao').data('nomeparametro', 'descricao');
-    $('#filtro_datavencimento').data('nomeparametro', 'datavencimento');
-    $('#filtro_dataacao').data('nomeparametro', 'dataacao');
-    $('#filtro_status').data('nomeparametro', 'status');
-    $('#filtro_valor').data('nomeparametro', 'valor');
-    $('#filtro_categoria').data('nomeparametro', 'categoria');
-    $('#filtro_centrodecusto').data('nomeparametro', 'centrodecusto');
-    $('#filtro_DataVencimentoDe').data('nomeparametro', 'datavencimentode');
-    $('#filtro_DataVencimentoAte').data('nomeparametro', 'datavencimentoate');
-    $('#filtro_DataCriacaoDe').data('nomeparametro', 'datacriacaode');
-    $('#filtro_DataCriacaoAte').data('nomeparametro', 'datacriacaoate');
-
-    $('#seletor_valor').data('nomeparametro', 'seletorvalor');
-    $('#hiddenReceita').data('nomeparametro', 'receita');
-    $('#hiddenDespesa').data('nomeparametro', 'despesa');
-    $('#hiddenReceita').data('valorparametro', 'S');
-    $('#hiddenDespesa').data('valorparametro', 'S');
-
-    $('#filtro_DataVencimentoDe').datepicker({
-        format: 'dd-mm-yyyy',
-        autoclose: true,
-        todaybtn: true,
-        showButtonPanel: true,
-        changeMonth: true,
-        changeYear: true
-    });
-
-    $('#filtro_DataVencimentoAte').datepicker({
-        format: 'dd-mm-yyyy',
-        autoclose: true,
-        todaybtn: true,
-        showButtonPanel: true,
-        changeMonth: true,
-        changeYear: true
-    });
-
-    $('#filtro_DataCriacaoDe').datepicker({
-        format: 'dd-mm-yyyy',
-        autoclose: true,
-        todaybtn: true,
-        showButtonPanel: true,
-        changeMonth: true,
-        changeYear: true
-    });
-
-    $('#filtro_DataCriacaoAte').datepicker({
-        format: 'dd-mm-yyyy',
-        autoclose: true,
-        todaybtn: true,
-        showButtonPanel: true,
-        changeMonth: true,
-        changeYear: true
-    });
-
-
-    $('#tableResults').dataTable({
-        'sPaginationType': 'full_numbers',
-        'aaSorting': [
-            [2, 'asc']
+$(document).ready(function(){
+//    alert("here");
+    $("#tableResults").dataTable({
+      "sDom": '<"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip><"clear">T',
+      "aaSorting": [
+            [3, 'asc']
         ],
-        'bJQueryUI': true,
-        'bProcessing': true,
-
-        sDom: '<"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip><"clear">T',
-        //'sDom': '<"fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lf><"table table-hover table-condensed dataTable"t><"fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"iTp>',
-        "oTableTools": {
-            "aButtons": [
-                {
-                    "sExtends": "xls",
-                    "sButtonText": "Exportar dados para o Excel",
-                    "sFileName": "*.xls",
-                    "mColumns": [1, 2, 4, 5, 6],
-                    "bFooter": true,
-                    "bHeader": true
-                }
-            ]
-        },
-        'oLanguage': {
-            "sLengthMenu": "Exibir _MENU_ lançamentos por página",
-            "sZeroRecords": "Nenhum registro encontrado",
-            "sInfo": "Exibindo _START_ de _END_. Total: _TOTAL_ lançamentos.",
-            "sInfoEmpty": "Exibindo 0 de 0. Total: 0 lançamentos",
-            "sSearch": "Refinar busca:",
-            "sInfoFiltered": "(filtrado de um total de _MAX_ lançamentos)",
-            "oPaginate": {
-                "sFirst": "<<",
-                "sLast": ">>",
-                "sNext": ">",
-                "sPrevious": "<"
-            }
-        }
-
-
-    });
-
-
-    $('#botaoGrid').click
-    (
-            function () {
-                $('.filtro_parametro').each
-                (function () {
-                            $(this).removeData('valorparametro');
-                            $(this).val('');
-                        }
-                );
-
-                $('#hiddenReceita').data('valorparametro', 'S');
-                $('#hiddenDespesa').data('valorparametro', 'S');
-                $('#inputReceitas').prop('checked', true);
-                $('#inputDespesas').prop('checked', true);
-                buildfilter.call(this);
-            }
-    );
-
-    $('#inputReceitas').click
-    (
-            function () {
-                var receitasChecked;
-                var despesasChecked;
-
-                receitasChecked = $('#inputReceitas').is(':checked');
-                despesasChecked = $('#inputDespesas').is(':checked');
-
-                if (receitasChecked) {
-                    $('#hiddenReceita').data('valorparametro', 'S');
-                    buildfilter();
-                }
-                else {
-                    if (!despesasChecked) {
-                        //alert('Você precisa selecionar ao menos um tipo de valor.');
-                        $('#inputReceitas').prop('checked', true);
-                    }
-                    else {
-                        $('#hiddenReceita').data('valorparametro', 'N');
-                        buildfilter();
-                    }
-
-                }
-
-            }
-    );
-
-    $('#inputDespesas').click
-    (
-            function () {
-                var receitasChecked;
-                var despesasChecked;
-
-                receitasChecked = $('#inputReceitas').is(':checked');
-                despesasChecked = $('#inputDespesas').is(':checked');
-
-                if (despesasChecked) {
-                    $('#hiddenDespesa').data('valorparametro', 'S');
-                    buildfilter();
-
-                }
-                else {
-                    if (!receitasChecked) {
-                        //alert('Você precisa selecionar ao menos um tipo de valor.');
-                        $('#inputDespesas').prop('checked', true);
-
-                    }
-                    else {
-                        $('#hiddenDespesa').data('valorparametro', 'N');
-                        buildfilter();
-
-                    }
-
-                }
-
-            }
-    );
-
-    $('.filtro_parametro').change(function () {
-                if ($(this).prop('id') == 'filtro_valor') {
-                    $('#seletor_valor').data('valorparametro', $('#seletor_valor').val());
-                }
-
-                if ($(this).prop('id') == 'seletor_valor') {
-                    if ($.trim($('#filtro_valor').val()) == "") {
-                        $('#filtro_valor').focus();
-                        return;
-                    }
-                }
-
-                if ($.trim($(this).val()) != "") {
-                    $(this).data('valorparametro', $.trim($(this).val()));
-                }
-                else {
-                    $(this).removeData('valorparametro');
-                }
-                buildfilter.call(this);
-
-            }
-    )
-
-
+      "sPaginationType": 'full_numbers',
+      "bServerSide": true,
+      "bProcessing": true,
+      "sAjaxSource": '<%= Rails.application.routes.url_helpers.filter_path %>'
+  });
 });
+
+//$(document).ready(function () {
+//function montarDataTable(){
+//    $('#filtro_descricao').data('nomeparametro', 'descricao');
+//    $('#filtro_datavencimento').data('nomeparametro', 'datavencimento');
+//    $('#filtro_dataacao').data('nomeparametro', 'dataacao');
+//    $('#filtro_status').data('nomeparametro', 'status');
+//    $('#filtro_valor').data('nomeparametro', 'valor');
+//    $('#filtro_categoria').data('nomeparametro', 'categoria');
+//    $('#filtro_centrodecusto').data('nomeparametro', 'centrodecusto');
+//
+//    $('#filtro_DataVencimentoDe').data('nomeparametro', 'datavencimentode');
+//    $('#filtro_DataVencimentoAte').data('nomeparametro', 'datavencimentoate');
+//    $('#filtro_DataCriacaoDe').data('nomeparametro', 'datacriacaode');
+//    $('#filtro_DataCriacaoAte').data('nomeparametro', 'datacriacaoate');
+//
+//    $('#seletor_valor').data('nomeparametro', 'seletorvalor');
+//    $('#hiddenReceita').data('nomeparametro', 'receita');
+//    $('#hiddenDespesa').data('nomeparametro', 'despesa');
+//    $('#hiddenReceita').data('valorparametro', 'S');
+//    $('#hiddenDespesa').data('valorparametro', 'S');
+//
+//    $('#filtro_DataVencimentoDe').datepicker({
+//        format: 'dd-mm-yyyy',
+//        autoclose: true,
+//        todaybtn: true,
+//        showButtonPanel: true,
+//        changeMonth: true,
+//        changeYear: true
+//    });
+//
+//    $('#filtro_DataVencimentoAte').datepicker({
+//        format: 'dd-mm-yyyy',
+//        autoclose: true,
+//        todaybtn: true,
+//        showButtonPanel: true,
+//        changeMonth: true,
+//        changeYear: true
+//    });
+//
+//    $('#filtro_DataCriacaoDe').datepicker({
+//        format: 'dd-mm-yyyy',
+//        autoclose: true,
+//        todaybtn: true,
+//        showButtonPanel: true,
+//        changeMonth: true,
+//        changeYear: true
+//    });
+//
+//    $('#filtro_DataCriacaoAte').datepicker({
+//        format: 'dd-mm-yyyy',
+//        autoclose: true,
+//        todaybtn: true,
+//        showButtonPanel: true,
+//        changeMonth: true,
+//        changeYear: true
+//    });
+//
+//
+//    $('#tableResults').dataTable({
+//        'sPaginationType': 'full_numbers',
+//        'aaSorting': [
+//            [2, 'asc']
+//        ],
+//        'bJQueryUI': false,
+//        'bProcessing': true,
+//        'bAutoWidth': true,
+//        'bDeferRender': true,
+//
+//        'sAjaxSource': '<%= Rails.application.routes.url_helpers.filter_path %>',
+//
+//        sDom: '<"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip><"clear">T',
+//        //'sDom': '<"fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lf><"table table-hover table-condensed dataTable"t><"fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"iTp>',
+//        "oTableTools": {
+//            "aButtons": [
+//                {
+//                    "sExtends": "xls",
+//                    "sButtonText": "Exportar dados para o Excel",
+//                    "sFileName": "*.xls",
+//                    "mColumns": [1, 2, 4, 5, 6],
+//                    "bFooter": true,
+//                    "bHeader": true
+//                }
+//            ]
+//        },
+//        'oLanguage': {
+//            "sLengthMenu": "Exibir _MENU_ lançamentos por página",
+//            "sZeroRecords": "Nenhum registro encontrado",
+//            "sInfo": "Exibindo _START_ de _END_. Total: _TOTAL_ lançamentos.",
+//            "sInfoEmpty": "Exibindo 0 de 0. Total: 0 lançamentos",
+//            "sSearch": "Refinar busca:",
+//            "sInfoFiltered": "(filtrado de um total de _MAX_ lançamentos)",
+//            "oPaginate": {
+//                "sFirst": "<<",
+//                "sLast": ">>",
+//                "sNext": ">",
+//                "sPrevious": "<"
+//            }
+//        }
+//
+//
+//    });
+//
+//    //new FixedHeader( $("#tableResults") );
+//
+//    $('#botaoGrid').click
+//    (
+//            function () {
+//                $('.filtro_parametro').each
+//                (function () {
+//                            $(this).removeData('valorparametro');
+//                            $(this).val('');
+//                        }
+//                );
+//
+//                $('#hiddenReceita').data('valorparametro', 'S');
+//                $('#hiddenDespesa').data('valorparametro', 'S');
+//                $('#inputReceitas').prop('checked', true);
+//                $('#inputDespesas').prop('checked', true);
+//                buildfilter.call(this);
+//            }
+//    );
+//
+//    $('#inputReceitas').click
+//    (
+//            function () {
+//                var receitasChecked;
+//                var despesasChecked;
+//
+//                receitasChecked = $('#inputReceitas').is(':checked');
+//                despesasChecked = $('#inputDespesas').is(':checked');
+//
+//                if (receitasChecked) {
+//                    $('#hiddenReceita').data('valorparametro', 'S');
+//                    buildfilter();
+//                }
+//                else {
+//                    if (!despesasChecked) {
+//                        //alert('Você precisa selecionar ao menos um tipo de valor.');
+//                        $('#inputReceitas').prop('checked', true);
+//                    }
+//                    else {
+//                        $('#hiddenReceita').data('valorparametro', 'N');
+//                        buildfilter();
+//                    }
+//
+//                }
+//
+//            }
+//    );
+//
+//    $('#inputDespesas').click
+//    (
+//            function () {
+//                var receitasChecked;
+//                var despesasChecked;
+//
+//                receitasChecked = $('#inputReceitas').is(':checked');
+//                despesasChecked = $('#inputDespesas').is(':checked');
+//
+//                if (despesasChecked) {
+//                    $('#hiddenDespesa').data('valorparametro', 'S');
+//                    buildfilter();
+//
+//                }
+//                else {
+//                    if (!receitasChecked) {
+//                        //alert('Você precisa selecionar ao menos um tipo de valor.');
+//                        $('#inputDespesas').prop('checked', true);
+//
+//                    }
+//                    else {
+//                        $('#hiddenDespesa').data('valorparametro', 'N');
+//                        buildfilter();
+//
+//                    }
+//
+//                }
+//
+//            }
+//    );
+//
+//    $('.filtro_parametro').change(function () {
+//                if ($(this).prop('id') == 'filtro_valor') {
+//                    $('#seletor_valor').data('valorparametro', $('#seletor_valor').val());
+//                }
+//
+//                if ($(this).prop('id') == 'seletor_valor') {
+//                    if ($.trim($('#filtro_valor').val()) == "") {
+//                        $('#filtro_valor').focus();
+//                        return;
+//                    }
+//                }
+//
+//                if ($.trim($(this).val()) != "") {
+//                    $(this).data('valorparametro', $.trim($(this).val()));
+//                }
+//                else {
+//                    $(this).removeData('valorparametro');
+//                }
+//                buildfilter.call(this);
+//            }
+//    )
+////}); Fim do document ready (retornar com esse code quando acabarem os testes
+//}

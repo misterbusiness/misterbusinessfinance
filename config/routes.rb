@@ -127,6 +127,8 @@ Misterbusinessfinance::Application.routes.draw do
     get :filter
 
   end
+
+  match 'filter', to: 'lancamentos#filter', :via => :get
   resources :lancamentos
 
   resources :support do
@@ -151,9 +153,9 @@ Misterbusinessfinance::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
 
-    match 'filter' => 'lancamentos#filter'
+    #match 'filter' => 'lancamentos#filter'
 
-    match 'getLancamento' => 'lancamentos#getLancamento'
+    #match 'getLancamento' => 'lancamentos#getLancamento'
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

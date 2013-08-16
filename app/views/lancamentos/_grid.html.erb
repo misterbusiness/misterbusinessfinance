@@ -1,56 +1,41 @@
-<table id="tableGrid">
-
+<table id="tableGrid" class="mister-table-filter table" xmlns="http://www.w3.org/1999/html">
   <tbody>
   <tr>
     <td>
-      <table id="tableParametros" border="1px">
-
+      <table id="tableParametros" class="table">
         <tr>
           <td>
-            Data de Criação:
-            De<input type="text" id="filtro_DataCriacaoDe" class="filtro_parametro" style="width: 100px"/>
-            Até<input type="text" id="filtro_DataCriacaoAte" class="filtro_parametro" style="width: 100px"/>
-          </td>
-          <td>
-            <input type="checkbox" id="inputReceitas" checked="true" value="S"/> Receitas
-            <input type="checkbox" id="inputDespesas" checked="true" value="S"/> Despesas
+            <input type="checkbox" class="checkbox inline" id="inputReceitas" checked="true" value="S"/> Receitas
+            <input type="checkbox" class="checkbox inline" id="inputDespesas" checked="true" value="S"/> Despesas
+
             <input type="hidden" id="hiddenReceita" class="filtro_parametro"/>
             <input type="hidden" id="hiddenDespesa" class="filtro_parametro"/>
-
-          </td>
-          <td>
-            Data de Vencimento :
-            De<input type="text" id="filtro_DataVencimentoDe" class="filtro_parametro" style="width: 100px"/>
-            Até<input type="text" id="filtro_DataVencimentoAte" class="filtro_parametro" style="width: 100px"/>
-
-          </td>
-
-          <td>
-            Status:
-
-
-
+            <!--
+            <input type="text" id="filtro_DataCriacaoDe" class="filtro_parametro input-small" placeholder="Criação"/>
+            <input type="text" id="filtro_DataCriacaoAte" class="filtro_parametro input-small" placeholder="Criação"/>
+            -->
           </td>
         </tr>
-
-
-
       </table>
     </td>
   <tr>
     <td colspan="8">
       <div id="grid_results">
-
         <table id="tableResults" class="table table-hover table-condensed">
-          <thead>
+          <thead id="tableFilter">
           <tr id="header">
-
             <th>Ações <br/></th>
             <th>Descrição  <br/>
               <%= text_field(:filtro, :descricao, :class => "filtro_parametro") %>
             </th>
-            <th>Vencimento <br/></th>
-            <th>Data Ação <br/></th>
+            <th>Vencimento </br>
+              <input type="text" id="filtro_DataVencimentoDe" class="filtro_parametro input-small" placeholder="De" />
+              <input type="text" id="filtro_DataVencimentoAte" class="filtro_parametro input-small" placeholder="Até"/>
+            </th>
+            <th>Data Ação <br/>
+              <input type="text" id="filtro_DataAcaoDe" class="filtro_parametro input-small" placeholder="De" />
+              <input type="text" id="filtro_DataAcaoAte" class="filtro_parametro input-small" placeholder="Até"/>
+            </th>
             <th>Valor  <br/>
               <select id="seletor_valor" class="filtro_parametro" style="width: 50px">
                 <option value="=">=</option>
@@ -79,11 +64,48 @@
           </tr>
           </thead>
             <tbody>
+            <!--
+            <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                -->
             </tbody>
-        </table>
+          <tfoot>
 
+          </tfoot>
+        </table>
       </div>
     </td>
   </tr>
+</table>
+
+<!--
+<table id="tableResults2">
+  <thead>
+    <th>Descrição</th>
+    <th>Descrição</th>
+    <th>Descrição</th>
+    <th>Descrição</th>
+    <th>Descrição</th>
+    <th>Descrição</th>
+    <th>Descrição</th>
+    <th>Valor</th>
+  </thead>
+  <tbody>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tbody>
 
 </table>
+-->

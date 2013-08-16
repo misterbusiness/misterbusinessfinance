@@ -13,11 +13,71 @@ class LancamentosController < ApplicationController
   # GET /lancamentos/filter.json
 
   def filter
-    query = build_query()
-    @lancamentos = query
+    #@lancamentos = build_query
 
+    # Build Query functionality
+    query = Lancamento.unscoped
 
-    render :layout => nil
+    #query = Lancamento.padrao
+    query = query.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
+    query = query.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
+    query = query.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
+    query = query.scoped_by_status_cd(params[:status]) unless params[:status].nil?
+    query = query.a_partir_de(params[:datavencimentode]) unless params[:datavencimentode].nil?
+    query = query.ate(params[:datavencimentoate]) unless params[:datavencimentoate].nil?
+
+    if (params[:receita] == 'S' and params[:despesa] == 'N')
+      query = query.receitas
+
+    elsif (params[:receita] == 'N' and params[:despesa] == 'S')
+      query = query.despesas
+
+    end
+
+    if not params[:valor].nil? then
+      case params[:seletorvalor]
+        when "="
+          query = query.valor_igual(params[:valor])
+        when "<"
+          query = query.valor_menor(params[:valor])
+        when ">"
+          query = query.valor_maior(params[:valor])
+      end
+
+    end
+
+    number_of_records = query.count
+
+    # Fixed to accept datatable params
+    if params[:sEcho].nil? then
+      @lancamentos = query.paginate(:page => "1", :per_page => 10)
+    else
+      @lancamentos = query.paginate(:page => params[:sEcho], :per_page => 10)
+    end
+
+    # Teste retorno json
+    json_rows = Array.new
+    @lancamentos.each do |serie|
+      json_row = Array.new
+      json_row.push("")
+      json_row.push(serie.descricao)
+      json_row.push(serie.datavencimento)
+      json_row.push(serie.dataacao)
+      json_row.push(serie.valor.to_f)
+      json_row.push(serie.category.descricao)
+      json_row.push(serie.centrodecusto.descricao)
+      json_row.push(serie.status)
+      json_rows.push(json_row)
+    end
+
+    render :json => {
+        :sEcho => params[:sEcho],
+        :iTotalRecords => number_of_records,
+        :iTotalDisplayRecords => number_of_records,
+        :aaData => json_rows
+    }
+
+    #render :layout => nil
   end
 
   def load
@@ -33,52 +93,51 @@ class LancamentosController < ApplicationController
   end
 
   def build_query
-    queryapoio = Lancamento.unscoped
-    #queryapoio = Lancamento.padrao
-    queryapoio = queryapoio.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
-    queryapoio = queryapoio.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
-    queryapoio = queryapoio.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
-    queryapoio = queryapoio.scoped_by_status_cd(params[:status]) unless params[:status].nil?
-    queryapoio = queryapoio.a_partir_de(params[:datavencimentode]) unless params[:datavencimentode].nil?
-    queryapoio = queryapoio.ate(params[:datavencimentoate]) unless params[:datavencimentoate].nil?
+    query = Lancamento.unscoped
+
+    #query = Lancamento.padrao
+    query = query.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
+    query = query.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
+    query = query.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
+    query = query.scoped_by_status_cd(params[:status]) unless params[:status].nil?
+    query = query.a_partir_de(params[:datavencimentode]) unless params[:datavencimentode].nil?
+    query = query.ate(params[:datavencimentoate]) unless params[:datavencimentoate].nil?
 
     if (params[:receita] == 'S' and params[:despesa] == 'N')
-      queryapoio = queryapoio.receitas
+      query = query.receitas
 
     elsif (params[:receita] == 'N' and params[:despesa] == 'S')
-      queryapoio = queryapoio.despesas
+      query = query.despesas
 
     end
 
     if not params[:valor].nil? then
       case params[:seletorvalor]
         when "="
-          queryapoio = queryapoio.valor_igual(params[:valor])
-
+          query = query.valor_igual(params[:valor])
         when "<"
-
-          queryapoio = queryapoio.valor_menor(params[:valor])
-
+          query = query.valor_menor(params[:valor])
         when ">"
-
-          queryapoio = queryapoio.valor_maior(params[:valor])
-
+          query = query.valor_maior(params[:valor])
       end
 
     end
 
-    if params[:page].nil? then
-
-      queryapoio = queryapoio.paginate(:page => "1", :per_page => 1000)
-
+    # Fixed to accept datatable params
+    if params[:sEcho].nil? then
+      query = query.paginate(:page => "1", :per_page => 10)
     else
-
-      queryapoio = queryapoio.paginate(:page => params[:page], :per_page => 1000)
-
+      query = query.paginate(:page => params[:sEcho], :per_page => 10)
     end
 
+    #if params[:page].nil? then
+    #  query = query.paginate(:page => "1", :per_page => 10)
+    #else
+    #  query = query.paginate(:page => params[:page], :per_page => 10)
+    #end
 
-    query = queryapoio
+
+    return query
   end
 
   # GET /lancamentos
@@ -88,10 +147,11 @@ class LancamentosController < ApplicationController
     begin
       @ano = Time.now.year
       @ano = params[:ano] unless params[:ano].blank?
-
       @dt = DateTime.new(@ano, 1, 1)
 
       @tabSelection = params[:tab]
+
+      @lancamentos = Lancamento.padrao
 
     rescue
       @err = "Error #{$!}"
@@ -440,9 +500,7 @@ class LancamentosController < ApplicationController
           :rows => @lancamento
 
       }
-
     end
-
   end
 
   def importar
