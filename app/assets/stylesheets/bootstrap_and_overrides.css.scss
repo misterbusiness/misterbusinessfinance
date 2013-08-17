@@ -18,3 +18,25 @@ body { padding-top: 60px; }
   {
   margin-left: 1%;
 }
+
+.table-stripped tr.odd
+{
+  background-color: mediumspringgreen;
+}
+
+.table-stripped tr.even
+  {
+  background-color: white;
+}
+
+.table-stripped tr.odd td.sorting_1
+  {
+  background-color: seagreen;
+  color: white;
+}
+
+.table-stripped tr.even td.sorting_1
+  {
+  background-color: mediumspringgreen;
+  color: black;
+}

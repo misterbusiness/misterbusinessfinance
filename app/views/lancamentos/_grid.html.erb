@@ -26,13 +26,13 @@
   <tr>
     <td colspan="8">
       <div id="grid_results">
-        <table id="tableResults" class="table table-hover table-condensed">
+        <table id="tableResults" class="table table-hover table-condensed table-stripped">
           <thead id="tableFilter">
           <tr id="header">
             <th style="vertical-align: top">Estornar</th>
             <th style="vertical-align: top">Quitar</th>
             <th>Descrição <br/>
-              <%= text_field(:filtro, :descricao, :class => "filtro_parametro") %>
+              <%= text_field(:filtro, :descricao, :class => "filtro_parametro input-large") %>
               <%= %>
             </th>
             <th>Vencimento </br>
@@ -44,13 +44,7 @@
               <input type="text" id="filtro_DataAcaoAte" class="filtro_parametro input-small" placeholder="Até"/>
             </th>
             <th>Valor <br/>
-              <select id="seletor_valor" class="filtro_parametro" style="width: 50px">
-                <option value="=">=</option>
-                <option value="<"><</option>
-                <option value=">">></option>
-              </select>
-              <input type="text" id="filtro_valor" class="filtro_parametro" style="width: 100px">
-
+              <input type="text" id="filtro_valor" class="filtro_parametro input-medium" placeholder="= X, [ X Y ], < X, >= X,...">
             </th>
             <th>Categoria <br/>
               <%= collection_select :filtro, :categoria, Category.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro"} %>
@@ -71,6 +65,10 @@
           </tr>
           </thead>
           <tfoot>
+          <tr>
+            <td colspan="5">Total:</td>
+            <td colspan="4"><p id="totalPlace"></p></td>
+          </tr>
           <tr>
             <td colspan="9">
                 <div class="span12">

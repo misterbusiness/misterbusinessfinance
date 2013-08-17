@@ -100,17 +100,14 @@ class LancamentosController < ApplicationController
       # Build Query functionality
       query = Lancamento.unscoped
 
-      query = query.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
-      query = query.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
-      query = query.scoped_by_status_cd(params[:status]) unless params[:status].nil?
+      query = query.scoped_by_centrodecusto_id(params[:filtro_centrodecusto]) unless  params[:filtro_centrodecusto].blank?
+      query = query.scoped_by_category_id(params[:filtro_categoria]) unless  params[:filtro_categoria].blank?
+      query = query.scoped_by_status_cd(params[:filtro_status]) unless params[:filtro_status].blank?
 
       query = query.por_descricao('%' + params[:filtro_descricao] + '%') unless params[:filtro_descricao].blank?
       query = query.a_partir_de(params[:filtro_vencimento_ini]) unless params[:filtro_vencimento_ini].blank?
       query = query.ate(params[:filtro_vencimento_final]) unless params[:filtro_vencimento_final].blank?
 
-      #query = query.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
-      #query = query.ate(params[:datavencimentoate]) unless params[:datavencimentoate].nil?
-      #query = query.a_partir_de(params[:datavencimentode]) unless params[:datavencimentode].nil?
 
       if (params[:filtro_receita] == 'S' and params[:filtro_despesa] == 'N')
         query = query.receitas
@@ -119,16 +116,34 @@ class LancamentosController < ApplicationController
         query = query.despesas
       end
 
-      if not params[:valor].nil? then
-        case params[:seletorvalor]
-          when "="
-            query = query.valor_igual(params[:valor])
-          when "<"
-            query = query.valor_menor(params[:valor])
-          when ">"
-            query = query.valor_maior(params[:valor])
-        end
+      # Se não estiver na sintaxe correta, não faz nada
+      begin
+        if !params[:filtro_valor].blank?
 
+          valor_split = params[:filtro_valor].split(" ")
+          operator = valor_split[0]
+          valor1 = valor_split[1].to_f
+          valor2 = valor_split[2].to_f unless valor_split.count < 2
+
+
+          case operator
+            when "="
+              query = query.valor_igual(valor1)
+            when "<"
+              query = query.valor_menor(valor1)
+            when ">"
+              query = query.valor_maior(valor1)
+            when ">="
+              query = query.valor_menor_igual(valor1)
+            when "<="
+              query = query.valor_maior_igual(valor1)
+            when "["
+              query = query.valor_entre(valor1,valor2)
+          end
+
+        end
+      rescue
+        #Do nothing
       end
 
       number_of_records = query.count
@@ -142,8 +157,12 @@ class LancamentosController < ApplicationController
       sort_direction = params[:sSortDir_0] unless params[:sSortDir_0].nil?
 
       query = query.order("#{sort_col} #{sort_direction}")
-
       @lancamentos = query.paginate(:page => curr_page, :per_page => per_page)
+
+
+      @page_total = @lancamentos.sum('valor')
+
+      @major_total = query.sum('valor')
 
     end
     # Teste retorno json
@@ -167,8 +186,8 @@ class LancamentosController < ApplicationController
         :sEcho => params[:sEcho],
         :iTotalRecords => number_of_records,
         :iTotalDisplayRecords => number_of_records,
-        #:iDisplayStart => params[:iDisplayStart],
-        #:iDisplayLength => params[:iDisplayLength],
+        :pageTotal => page_total,
+        :majorTotal => major_total,
         :aaData => json_rows
     }
 

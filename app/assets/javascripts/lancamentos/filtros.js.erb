@@ -309,7 +309,7 @@ $(document).ready(function () {
         changeYear: true
     });
 
-    $('#filtro_DataCriacaoDe').datepicker({
+    var fDataAcaoIni = $('#filtro_DataAcaoDe').datepicker({
         format: 'dd-mm-yyyy',
         autoclose: true,
         todaybtn: true,
@@ -318,7 +318,7 @@ $(document).ready(function () {
         changeYear: true
     });
 
-    $('#filtro_DataCriacaoAte').datepicker({
+    var fDataAcaoEnd = $('#filtro_DataAcaoAte').datepicker({
         format: 'dd-mm-yyyy',
         autoclose: true,
         todaybtn: true,
@@ -327,7 +327,14 @@ $(document).ready(function () {
         changeYear: true
     });
 
+    var fCategoria = $("#filtro_cateogira");
+    var fCategoria2 = $("#filtro_cateogira2");
 
+    var fCentrodeCusto = $("#filtro_centrodecusto");
+
+    var fStatus = $("#filtro_status");
+
+    var fValor = $("#filtro_valor");
 
     var oTable = $("#tableResults").dataTable({
         //"sDom": '<"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip><"clear">T',
@@ -361,10 +368,16 @@ $(document).ready(function () {
             aoData.push({ "name": "filtro_vencimento_final", "value": $("#filtro_DataVencimentoAte").val()});
             aoData.push({ "name": "filtro_receita", "value": $("#filtro_receita").val()});
             aoData.push({ "name": "filtro_despesa", "value": $("#filtro_despesa").val()});
+            aoData.push({ "name": "filtro_valor", "value": $("#filtro_valor").val()});
+            aoData.push({ "name": "filtro_categoria", "value": $("#filtro_categoria").val()});
+            aoData.push({ "name": "filtro_centrodecusto", "value": $("#filtro_centrodecusto").val()});
+            aoData.push({ "name": "filtro_status", "value": $("#filtro_status").val()});
         }
     });
 
     $('th').unbind('click.sorting');
+
+    fCategoria2.select2({tags:["a","b","c"]});
 
     fDataVencimentoIni.change(function(){
         oTable.fnDraw();
@@ -374,6 +387,21 @@ $(document).ready(function () {
         oTable.fnDraw();
     });
 
+    fValor.change(function(){
+       oTable.fnDraw();
+    });
+
+    fCategoria.change(function(){
+        oTable.fnDraw();
+    });
+
+    fCentrodeCusto.change(function(){
+        oTable.fnDraw();
+    });
+
+    fStatus.change(function(){
+        oTable.fnDraw();
+    });
 });
 
 

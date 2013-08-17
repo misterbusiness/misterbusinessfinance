@@ -101,7 +101,10 @@ class Lancamento < ActiveRecord::Base
   scope :por_descricao, lambda { |descricao| where('descricao like ? ', descricao) }
 
   scope :valor_menor, lambda { |valor| where('valor < (?) ', valor) }
+  scope :valor_menor_igual, lambda { |valor| where('valor <= (?) ', valor) }
   scope :valor_maior, lambda { |valor| where('valor > (?) ', valor) }
+  scope :valor_maior_igual, lambda { |valor| where('valor >= (?) ', valor) }
+  scope :valor_entre, lambda { |valor1,valor2| where('valor >= (?) and valor <= (?)', valor1,valor2) }
   scope :valor_igual, lambda { |valor| where('valor = (?) ', valor) }
 
   # Lançamentos por categoria-macro
