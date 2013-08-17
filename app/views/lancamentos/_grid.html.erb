@@ -1,42 +1,49 @@
 <table id="tableGrid" class="mister-table-filter table" xmlns="http://www.w3.org/1999/html">
   <tbody>
-  <tr>
-    <td>
-      <table id="tableParametros" class="table">
-        <tr>
-          <td>
-            <input type="checkbox" class="checkbox inline" id="inputReceitas" checked="true" value="S"/> Receitas
-            <input type="checkbox" class="checkbox inline" id="inputDespesas" checked="true" value="S"/> Despesas
+  <!--
+<tr>
+<td>
+  <table id="tableParametros" class="table">
+    <tr>
+      <td>
 
-            <input type="hidden" id="hiddenReceita" class="filtro_parametro"/>
-            <input type="hidden" id="hiddenDespesa" class="filtro_parametro"/>
-            <!--
-            <input type="text" id="filtro_DataCriacaoDe" class="filtro_parametro input-small" placeholder="Criação"/>
-            <input type="text" id="filtro_DataCriacaoAte" class="filtro_parametro input-small" placeholder="Criação"/>
-            -->
-          </td>
-        </tr>
-      </table>
+        <input type="checkbox" class="checkbox inline" id="inputReceitas" checked="true" value="S"/> Receitas
+        <input type="checkbox" class="checkbox inline" id="inputDespesas" checked="true" value="S"/> Despesas
+
+        <input type="hidden" id="hiddenReceita" class="filtro_parametro"/>
+        <input type="hidden" id="hiddenDespesa" class="filtro_parametro"/>
+
+
+        <input type="text" id="filtro_DataCriacaoDe" class="filtro_parametro input-small" placeholder="Criação"/>
+        <input type="text" id="filtro_DataCriacaoAte" class="filtro_parametro input-small" placeholder="Criação"/>
+
+      </td>
+    </tr>
+  </table>
     </td>
+    </tr>
+         -->
   <tr>
     <td colspan="8">
       <div id="grid_results">
         <table id="tableResults" class="table table-hover table-condensed">
           <thead id="tableFilter">
           <tr id="header">
-            <th>Ações <br/></th>
-            <th>Descrição  <br/>
+            <th style="vertical-align: top">Estornar</th>
+            <th style="vertical-align: top">Quitar</th>
+            <th>Descrição <br/>
               <%= text_field(:filtro, :descricao, :class => "filtro_parametro") %>
+              <%= %>
             </th>
             <th>Vencimento </br>
-              <input type="text" id="filtro_DataVencimentoDe" class="filtro_parametro input-small" placeholder="De" />
+              <input type="text" id="filtro_DataVencimentoDe" class="filtro_parametro input-small" placeholder="De"/>
               <input type="text" id="filtro_DataVencimentoAte" class="filtro_parametro input-small" placeholder="Até"/>
             </th>
             <th>Data Ação <br/>
-              <input type="text" id="filtro_DataAcaoDe" class="filtro_parametro input-small" placeholder="De" />
+              <input type="text" id="filtro_DataAcaoDe" class="filtro_parametro input-small" placeholder="De"/>
               <input type="text" id="filtro_DataAcaoAte" class="filtro_parametro input-small" placeholder="Até"/>
             </th>
-            <th>Valor  <br/>
+            <th>Valor <br/>
               <select id="seletor_valor" class="filtro_parametro" style="width: 50px">
                 <option value="=">=</option>
                 <option value="<"><</option>
@@ -52,7 +59,7 @@
               <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro"} %>
 
             </th>
-            <th>Status  <br/>
+            <th>Status <br/>
               <select id="filtro_status" class="filtro_parametro" style="width: 100px">
                 <option value=""></option>
                 <option value="<%= Lancamento.aberto %>">Aberto</option>
@@ -63,21 +70,43 @@
             </th>
           </tr>
           </thead>
-            <tbody>
-            <!--
-            <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                -->
-            </tbody>
           <tfoot>
-
+          <tr>
+            <td colspan="9">
+                <div class="span12">
+                  <div class="span4 btn-group" data-toggle="buttons-radio">
+                    <div class="span3"><%= button_to 'Hoje', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'todayFilter();' %></div>
+                    <div class="span3"><%= button_to 'Esta Semana', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'weekFilter();' %></div>
+                    <div class="span3"><%= button_to 'Este Mês', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'monthFilter();' %></div>
+                    <div class="span3"><%= button_to 'Este Ano', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'yearFilter();' %></div>
+                  </div>
+                  <div class="span4 btn-group" data-toggle="buttons-checkbox">
+                    <div class="span6"><%= button_to 'Receitas', '#', :class => 'btn btn-success mister-table-btn span12', :remote => true, :onclick => 'receitaFilter();' %></div>
+                    <%=  hidden_field_tag 'filtro_receita' %>
+                    <div class="span6"><%= button_to 'Despesas', '#', :class => 'btn btn-danger mister-table-btn span12', :remote => true, :onclick => 'despesaFilter();' %></div>
+                    <%=  hidden_field_tag 'filtro_despesa' %>
+                  </div>
+                  <div class="span4">
+                    <div class="span6"><%= button_to 'Limpar Filtro', '#', :class => 'btn btn-inverse mister-table-btn span12', :remote => true, :onclick => 'defaultFilter();' %></div>
+                    <div class="span6"><%= button_to 'Limpar Ordenação', '#', :class => 'btn btn-inverse mister-table-btn span12', :remote => true, :onclick => 'defaultSort();' %></div>
+                  </div>
+                </div>
+              <%=  hidden_field_tag 'command', :id => 'filtro_command'  %>
+            </td>
+          </tr>
           </tfoot>
+          <tbody>
+
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+
+          </tbody>
         </table>
       </div>
     </td>

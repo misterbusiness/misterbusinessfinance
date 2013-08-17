@@ -284,19 +284,191 @@ function insertQuitarEstornarCancelarEvent() {
     });
 }
 
-$(document).ready(function(){
-//    alert("here");
-    $("#tableResults").dataTable({
-      "sDom": '<"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip><"clear">T',
-      "aaSorting": [
-            [3, 'asc']
+$(document).ready(function () {
+    /// Initialize filter controls
+    $("#filtro_command").val("");
+
+    $("#filtro_receita").val("N");
+    $("#filtro_despesa").val("N");
+
+    var fDataVencimentoIni = $('#filtro_DataVencimentoDe').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true,
+        todaybtn: true,
+        showButtonPanel: true,
+        changeMonth: true,
+        changeYear: true
+    });
+
+    var fDataVencimentoEnd = $('#filtro_DataVencimentoAte').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true,
+        todaybtn: true,
+        showButtonPanel: true,
+        changeMonth: true,
+        changeYear: true
+    });
+
+    $('#filtro_DataCriacaoDe').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true,
+        todaybtn: true,
+        showButtonPanel: true,
+        changeMonth: true,
+        changeYear: true
+    });
+
+    $('#filtro_DataCriacaoAte').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true,
+        todaybtn: true,
+        showButtonPanel: true,
+        changeMonth: true,
+        changeYear: true
+    });
+
+
+
+    var oTable = $("#tableResults").dataTable({
+        //"sDom": '<"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip><"clear">T',
+        "sDom": 't<lp><i><r>T',
+        "aaSorting": [
+            [4, 'asc']
         ],
-      "sPaginationType": 'full_numbers',
-      "bServerSide": true,
-      "bProcessing": true,
-      "sAjaxSource": '<%= Rails.application.routes.url_helpers.filter_path %>'
-  });
+        "aoColumns": [
+            {"bSortable": false},
+            {"bSortable": false},
+            {"bSortable": true},
+            {"bSortable": true},
+            {"bSortable": true},
+            {"bSortable": true},
+            {"bSortable": true},
+            {"bSortable": true},
+            {"bSortable": true}
+        ],
+        "bSort": true,
+        "bSearchable": true,
+        "bRegex": true,
+        "bStateSave": true,
+        "sPaginationType": 'full_numbers',
+        "bServerSide": true,
+        "bProcessing": true,
+        "sAjaxSource": '<%= Rails.application.routes.url_helpers.filter_path %>',
+        "fnServerParams": function(aoData){
+            aoData.push({ "name": "filtro_command", "value": $("#filtro_command").val()});
+            aoData.push({ "name": "filtro_descricao", "value": $("#filtro_descricao").val()});
+            aoData.push({ "name": "filtro_vencimento_ini", "value": $("#filtro_DataVencimentoDe").val()});
+            aoData.push({ "name": "filtro_vencimento_final", "value": $("#filtro_DataVencimentoAte").val()});
+            aoData.push({ "name": "filtro_receita", "value": $("#filtro_receita").val()});
+            aoData.push({ "name": "filtro_despesa", "value": $("#filtro_despesa").val()});
+        }
+    });
+
+    $('th').unbind('click.sorting');
+
+    fDataVencimentoIni.change(function(){
+        oTable.fnDraw();
+    });
+
+    fDataVencimentoEnd.change(function(){
+        oTable.fnDraw();
+    });
+
 });
+
+
+function defaultFilter()
+{
+    $("#filtro_DataVencimentoDe").val("");
+    $("#filtro_DataVencimentoAte").val("");
+    $("#filtro_descricao").val("");
+
+    $("#filtro_command").val("default_filter");
+
+    $("#tableResults").dataTable().fnDraw();
+}
+
+function defaultSort()
+{
+    $("#filtro_command").val("default_sort");
+    $("#tableResults").dataTable().fnDraw();
+}
+
+function receitaFilter()
+{
+    var fReceita = $("#filtro_receita");
+    if (fReceita.val() == "S")
+    {
+        fReceita.val("N");
+    }
+    else
+    {
+        fReceita.val("S");
+    }
+
+    $("#tableResults").dataTable().fnDraw();
+}
+
+function despesaFilter()
+{
+    var fDespesa = $("#filtro_despesa");
+    if (fDespesa.val() == "S")
+    {
+        fDespesa.val("N");
+    }
+    else
+    {
+        fDespesa.val("S");
+    }
+
+    $("#tableResults").dataTable().fnDraw();
+}
+
+function todayFilter()
+{
+    inicio = '<%= Date.today.strftime('%d-%m-%Y') %>';
+    fim = '<%= Date.today.strftime('%d-%m-%Y') %>';
+
+    $("#filtro_DataVencimentoDe").val(inicio);
+    $("#filtro_DataVencimentoAte").val(fim);
+
+    $("#tableResults").dataTable().fnDraw();
+}
+
+function weekFilter()
+{
+    inicio = '<%= Date.today.beginning_of_week.strftime('%d-%m-%Y') %>';
+    fim = '<%= Date.today.end_of_week.strftime('%d-%m-%Y') %>';
+
+    $("#filtro_DataVencimentoDe").val(inicio);
+    $("#filtro_DataVencimentoAte").val(fim);
+
+    $("#tableResults").dataTable().fnDraw();
+}
+
+function monthFilter()
+{
+    inicio = '<%= Date.today.beginning_of_month.strftime('%d-%m-%Y') %>';
+    fim = '<%= Date.today.end_of_month.strftime('%d-%m-%Y') %>';
+
+    $("#filtro_DataVencimentoDe").val(inicio);
+    $("#filtro_DataVencimentoAte").val(fim);
+
+    $("#tableResults").dataTable().fnDraw();
+}
+
+function yearFilter()
+{
+    inicio = '<%= Date.today.beginning_of_year.strftime('%d-%m-%Y') %>';
+    fim = '<%= Date.today.end_of_year.strftime('%d-%m-%Y') %>';
+
+    $("#filtro_DataVencimentoDe").val(inicio);
+    $("#filtro_DataVencimentoAte").val(fim);
+
+    $("#tableResults").dataTable().fnDraw();
+}
+
+
 
 //$(document).ready(function () {
 //function montarDataTable(){
@@ -366,7 +538,8 @@ $(document).ready(function(){
 //        'bAutoWidth': true,
 //        'bDeferRender': true,
 //
-//        'sAjaxSource': '<%= Rails.application.routes.url_helpers.filter_path %>',
+//        'sAjaxSource': '
+// <%= Rails.application.routes.url_helpers.filter_path %>',
 //
 //        sDom: '<"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip><"clear">T',
 //        //'sDom': '<"fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lf><"table table-hover table-condensed dataTable"t><"fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"iTp>',
