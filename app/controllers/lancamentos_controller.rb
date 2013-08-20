@@ -147,7 +147,6 @@ class LancamentosController < ApplicationController
       end
 
       number_of_records = query.count
-
       start_of_page = params[:iDisplayStart] unless params[:iDisplayStart].nil?
 
       # Fixed to accept datatable params
@@ -159,18 +158,17 @@ class LancamentosController < ApplicationController
       query = query.order("#{sort_col} #{sort_direction}")
       @lancamentos = query.paginate(:page => curr_page, :per_page => per_page)
 
-
-      @page_total = @lancamentos.sum('valor')
-
-      @major_total = query.sum('valor')
+      #major_total = query.sum('valor')
+      major_total = query.inject(0) {|sum, lancamento| lancamento.receita? ? sum + lancamento.valor : sum - lancamento.valor}
+      major_total = number_to_currency(major_total, precision: 2, unit: "R$ ")
 
     end
     # Teste retorno json
     json_rows = Array.new
     @lancamentos.each do |serie|
       json_row = Array.new
-      json_row.push("<a href='#{estornar_lancamento_path(serie.id)}' class='btn'>E</a>")
-      json_row.push("<a href='#{quitar_lancamento_path(serie.id)}' class='btn'>Q</a>")
+      json_row.push("<a href='#{estornar_lancamento_path(serie.id)}' class='btn mister-table-button asd' data-remote='true'>E</a>")
+      json_row.push("<a href='#{quitar_lancamento_path(serie.id)}' class='btn mister-table-button' data-remote='true'>Q</a>")
       json_row.push(serie.descricao)
       json_row.push(!serie.datavencimento.nil? ? serie.datavencimento.strftime('%d-%m-%Y') : nil)
       json_row.push(!serie.dataacao.nil? ? serie.dataacao.strftime('%d-%m-%Y') : nil)
@@ -182,11 +180,11 @@ class LancamentosController < ApplicationController
       json_rows.push(json_row)
     end
 
+
     render :json => {
         :sEcho => params[:sEcho],
         :iTotalRecords => number_of_records,
         :iTotalDisplayRecords => number_of_records,
-        :pageTotal => page_total,
         :majorTotal => major_total,
         :aaData => json_rows
     }
