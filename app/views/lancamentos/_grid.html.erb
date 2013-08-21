@@ -1,36 +1,15 @@
 <table id="tableGrid" class="mister-table-filter table" xmlns="http://www.w3.org/1999/html">
   <tbody>
-  <!--
-<tr>
-<td>
-  <table id="tableParametros" class="table">
-    <tr>
-      <td>
-
-        <input type="checkbox" class="checkbox inline" id="inputReceitas" checked="true" value="S"/> Receitas
-        <input type="checkbox" class="checkbox inline" id="inputDespesas" checked="true" value="S"/> Despesas
-
-        <input type="hidden" id="hiddenReceita" class="filtro_parametro"/>
-        <input type="hidden" id="hiddenDespesa" class="filtro_parametro"/>
-
-
-        <input type="text" id="filtro_DataCriacaoDe" class="filtro_parametro input-small" placeholder="Criação"/>
-        <input type="text" id="filtro_DataCriacaoAte" class="filtro_parametro input-small" placeholder="Criação"/>
-
-      </td>
-    </tr>
-  </table>
-    </td>
-    </tr>
-         -->
   <tr>
-    <td colspan="8">
+    <td colspan="9">
       <div id="grid_results">
         <table id="tableResults" class="table table-hover table-condensed table-stripped">
           <thead id="tableFilter">
           <tr id="header">
-            <th style="vertical-align: top">Estornar</th>
+            <th style="vertical-align: top; visibility: hidden">Id</th>
+            <th style="vertical-align: top">Est</th>
             <th style="vertical-align: top">Quitar</th>
+            <th style="vertical-align: top">Can</th>
             <th>Descrição <br/>
               <%= text_field(:filtro, :descricao, :class => "filtro_parametro input-large") %>
               <%= %>
@@ -39,22 +18,18 @@
               <input type="text" id="filtro_DataVencimentoDe" class="filtro_parametro input-small" placeholder="De"/>
               <input type="text" id="filtro_DataVencimentoAte" class="filtro_parametro input-small" placeholder="Até"/>
             </th>
-            <th>Data Ação <br/>
-              <input type="text" id="filtro_DataAcaoDe" class="filtro_parametro input-small" placeholder="De"/>
-              <input type="text" id="filtro_DataAcaoAte" class="filtro_parametro input-small" placeholder="Até"/>
-            </th>
             <th>Valor <br/>
-              <input type="text" id="filtro_valor" class="filtro_parametro input-medium" placeholder="= X, [ X Y ], < X, >= X,...">
+              <input type="text" id="filtro_valor" class="filtro_parametro input-small" placeholder="= X, [ X Y ], < X, >= X,...">
             </th>
             <th>Categoria <br/>
-              <%= collection_select :filtro, :categoria, Category.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro"} %>
+              <%= collection_select :filtro, :categoria, Category.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro mister-select", :multiple=> true } %>
             </th>
             <th>Centro de Custo <br/>
-              <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro"} %>
+              <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro mister-select", :multiple=> true } %>
 
             </th>
             <th>Status <br/>
-              <select id="filtro_status" class="filtro_parametro" style="width: 100px">
+              <select id="filtro_status" multiple="true" class="filtro_parametro input-large mister-select">
                 <option value=""></option>
                 <option value="<%= Lancamento.aberto %>">Aberto</option>
                 <option value="<%= Lancamento.quitado %>">Quitado</option>
@@ -62,15 +37,19 @@
                 <option value="<%= Lancamento.estornado %>">Estornado</option>
               </select>
             </th>
+            <th>Data Ação <br/>
+              <input type="text" id="filtro_DataAcaoDe" class="filtro_parametro input-small" placeholder="De"/>
+              <input type="text" id="filtro_DataAcaoAte" class="filtro_parametro input-small" placeholder="Até"/>
+            </th>
           </tr>
           </thead>
           <tfoot>
           <tr>
             <td colspan="5">Total:</td>
-            <td colspan="4"><div id="majorTotalPlace"></div></td>
+            <td colspan="5"><div id="majorTotalPlace"></div></td>
           </tr>
           <tr>
-            <td colspan="9">
+            <td colspan="10">
                 <div class="span12">
                   <div class="span4 btn-group" data-toggle="buttons-radio">
                     <div class="span3"><%= button_to 'Hoje', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'todayFilter();' %></div>
@@ -94,7 +73,7 @@
           </tr>
           </tfoot>
           <tbody>
-
+          <!--<td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
@@ -103,36 +82,11 @@
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
-
+          <td>&nbsp;</td>
+-->
           </tbody>
         </table>
       </div>
     </td>
   </tr>
 </table>
-
-<!--
-<table id="tableResults2">
-  <thead>
-    <th>Descrição</th>
-    <th>Descrição</th>
-    <th>Descrição</th>
-    <th>Descrição</th>
-    <th>Descrição</th>
-    <th>Descrição</th>
-    <th>Descrição</th>
-    <th>Valor</th>
-  </thead>
-  <tbody>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tbody>
-
-</table>
--->

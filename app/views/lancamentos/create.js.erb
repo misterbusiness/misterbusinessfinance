@@ -26,10 +26,9 @@ $(":input:not(input[type=submit])").val("");
 $("#lancamento_form").html("<%= escape_javascript( render(:partial => "form") ) %>");
 
 drawCharts();
-
 prepareForm();
-
-buildfilter();
+refreshDataTable();
+//buildfilter();
 
 $("#lancamento_valor").blur();
 

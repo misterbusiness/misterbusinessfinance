@@ -16,6 +16,7 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/extras/TableTools
 //= require dataTables/extras/ZeroClipboard
+//= require dataTables/jquery.dataTables.bootstrap
 //= require select2
 //= require rails.validations
 //= require_tree .

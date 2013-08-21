@@ -13,96 +13,40 @@ class LancamentosController < ApplicationController
   # GET /lancamentos/filter
   # GET /lancamentos/filter.json
 
-  #default params
 
-
-  # Testando a funcionalidade de levar apenas os dados para o cliente
-  def filter_no_server
-
-    # Build Query functionality
-    query = Lancamento.unscoped
-
-    #query = Lancamento.padrao
-    query = query.scoped_by_centrodecusto_id(params[:centrodecusto]) unless  params[:centrodecusto].nil?
-    query = query.scoped_by_category_id(params[:categoria]) unless  params[:categoria].nil?
-    query = query.scoped_by_status_cd(params[:status]) unless params[:status].nil?
-
-    query = query.por_descricao('%' + params[:filtro_descricao] + '%') unless params[:filtro_descricao].blank?
-    query = query.a_partir_de(params[:filtro_vencimento_ini]) unless params[:filtro_vencimento_ini].blank?
-    query = query.ate(params[:filtro_vencimento_final]) unless params[:filtro_vencimento_final].blank?
-
-    #query = query.por_descricao('%' + params[:descricao] + '%') unless params[:descricao].nil?
-    #query = query.ate(params[:datavencimentoate]) unless params[:datavencimentoate].nil?
-    #query = query.a_partir_de(params[:datavencimentode]) unless params[:datavencimentode].nil?
-
-    if (params[:receita] == 'S' and params[:despesa] == 'N')
-      query = query.receitas
-
-    elsif (params[:receita] == 'N' and params[:despesa] == 'S')
-      query = query.despesas
-
-    end
-
-    if not params[:valor].nil? then
-      case params[:seletorvalor]
-        when "="
-          query = query.valor_igual(params[:valor])
-        when "<"
-          query = query.valor_menor(params[:valor])
-        when ">"
-          query = query.valor_maior(params[:valor])
-      end
-
-    end
-
-    @lancamentos = query
-
-
-    # Teste retorno json
-    json_rows = Array.new
-    @lancamentos.each do |serie|
-      json_row = Array.new
-      json_row.push("<a href='#{estornar_lancamento_path(serie.id)}' class='btn'>E</a>")
-      json_row.push("<a href='#{quitar_lancamento_path(serie.id)}' class='btn'>Q</a>")
-      json_row.push(serie.descricao)
-      json_row.push(serie.datavencimento)
-      json_row.push(serie.dataacao)
-      json_row.push(serie.valor.to_f)
-      json_row.push(serie.category.descricao)
-      json_row.push(serie.centrodecusto.descricao)
-      json_row.push(serie.status)
-      json_rows.push(json_row)
-    end
-
-    render :json => {
-        :aaData => json_rows
-    }
-  end
-
-
-  # Testando a funcionalidade de processamento completo pelo servidor
+  # Processamento datatable server-side
   def filter
 
     if params[:filtro_command] == "default_filter"
-      @lancamento = Lancamento.padrao.paginate(:page => 1, :per_page => 10)
+      @lancamentos = Lancamento.padrao.paginate(:page => 1, :per_page => 10)
     else
-
       # Params collect default
       per_page = 10
       curr_page = 1
       start_of_page = 0
-      columns = {"2" => "descricao", "3" => "datavencimento",
-                 "4" => "dataacao", "5" => "valor", "6" => "category_id",
-                 "7" => "centrodecusto_id", "8" => "status_cd"}
+      columns = {"4" => "descricao", "5" => "datavencimento",
+                 "6" => "valor", "7" => "category_id",
+                 "8" => "centrodecusto_id", "9" => "status_cd",
+                 "10" => "dataacao",}
       sort_col = "datavencimento"
       sort_direction = "asc"
 
       # Build Query functionality
       query = Lancamento.unscoped
 
-      query = query.scoped_by_centrodecusto_id(params[:filtro_centrodecusto]) unless  params[:filtro_centrodecusto].blank?
-      query = query.scoped_by_category_id(params[:filtro_categoria]) unless  params[:filtro_categoria].blank?
-      query = query.scoped_by_status_cd(params[:filtro_status]) unless params[:filtro_status].blank?
+      # Filtro de categoria
+      #query = query.scoped_by_centrodecusto_id(params[:filtro_centrodecusto]) unless  params[:filtro_centrodecusto].blank?
+      query = query.where("centrodecusto_id in (#{params[:filtro_centrodecusto]})") unless params[:filtro_centrodecusto].blank?
+
+
+      # Filtro de categoria
+      #query = query.scoped_by_category_id(params[:filtro_categoria]) unless  params[:filtro_categoria].blank?
+      query = query.where("category_id in (#{params[:filtro_categoria]})") unless params[:filtro_categoria].blank?
+
+      # Filtro status
+
+      #query = query.scoped_by_status_cd(params[:filtro_status]) unless params[:filtro_status].blank?
+      query = query.where("status_cd in (#{params[:filtro_status]})") unless params[:filtro_status].blank?
 
       query = query.por_descricao('%' + params[:filtro_descricao] + '%') unless params[:filtro_descricao].blank?
       query = query.a_partir_de(params[:filtro_vencimento_ini]) unless params[:filtro_vencimento_ini].blank?
@@ -120,6 +64,8 @@ class LancamentosController < ApplicationController
       begin
         if !params[:filtro_valor].blank?
 
+          #filtro_valor = params[:filtro_valor]
+
           valor_split = params[:filtro_valor].split(" ")
           operator = valor_split[0]
           valor1 = valor_split[1].to_f
@@ -132,7 +78,7 @@ class LancamentosController < ApplicationController
             when "<"
               query = query.valor_menor(valor1)
             when ">"
-              query = query.valor_maior(valor1)
+             query = query.valor_maior(valor1)
             when ">="
               query = query.valor_menor_igual(valor1)
             when "<="
@@ -163,20 +109,49 @@ class LancamentosController < ApplicationController
       major_total = number_to_currency(major_total, precision: 2, unit: "R$ ")
 
     end
+
     # Teste retorno json
     json_rows = Array.new
     @lancamentos.each do |serie|
       json_row = Array.new
-      json_row.push("<a href='#{estornar_lancamento_path(serie.id)}' class='btn mister-table-button asd' data-remote='true'>E</a>")
-      json_row.push("<a href='#{quitar_lancamento_path(serie.id)}' class='btn mister-table-button' data-remote='true'>Q</a>")
+
+      json_row.push("#{serie.id}")
+      # O lançamento aberto pode ser quitado ou cancelado
+      if serie.aberto?
+        json_row.push("<p></p>")
+        json_row.push("<a href='#{quitar_lancamento_path(serie.id)}' class='btn mister-table-button' data-remote='true'>X</a>")
+        json_row.push("<a href='#{cancelar_lancamento_path(serie.id)}' class='btn mister-table-button' data-remote='true'>X</a>")
+      end
+
+      # O lançamento quitado pode ser des-quitado ou estornado
+      if serie.quitado?
+        json_row.push("<a href='#{estornar_lancamento_path(serie.id)}' class='btn mister-table-button asd' data-remote='true'>X</a>")
+        json_row.push("<a href='#{quitar_lancamento_path(serie.id)}' class='btn mister-table-button' data-remote='true'>X</a>")
+        json_row.push("<p></p>")
+      end
+
+      # O lançamento estornado só pode ser des-estornado (para depois sofrer qualquer outra ação)
+      if serie.estornado?
+        json_row.push("<a href='#{estornar_lancamento_path(serie.id)}' class='btn mister-table-button asd' data-remote='true'>X</a>")
+        json_row.push("<p></p>")
+        json_row.push("<p></p>")
+      end
+
+      # O lançamento cancelado só pode ser re-aberto
+      if serie.cancelado?
+        json_row.push("<p></p>")
+        json_row.push("<p></p>")
+        json_row.push("<a href='#{cancelar_lancamento_path(serie.id)}' class='btn mister-table-button' data-remote='true'>X</a>")
+      end
+
       json_row.push(serie.descricao)
       json_row.push(!serie.datavencimento.nil? ? serie.datavencimento.strftime('%d-%m-%Y') : nil)
-      json_row.push(!serie.dataacao.nil? ? serie.dataacao.strftime('%d-%m-%Y') : nil)
       serie.receita? ? sinal = "+" : sinal = "-"
-      json_row.push(number_to_currency(("#{sinal}#{serie.valor}").to_f, precision: 2, unit: "R$ "))
+      json_row.push(number_to_currency("#{sinal}#{serie.valor}", precision: 2, unit: "R$ "))
       json_row.push(serie.category.descricao)
       json_row.push(serie.centrodecusto.descricao)
       json_row.push(serie.status)
+      json_row.push(!serie.dataacao.nil? ? serie.dataacao.strftime('%d-%m-%Y') : nil)
       json_rows.push(json_row)
     end
 
@@ -581,7 +556,7 @@ class LancamentosController < ApplicationController
 
   def cancelar
     @lancamento = Lancamento.find(params[:id])
-    if @lancamento.aberto? #and !@lancamento.estornado?
+    if @lancamento.aberto?
       @lancamento.status = :cancelado
       @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
       if @lancamento.save
@@ -590,7 +565,7 @@ class LancamentosController < ApplicationController
         #flash[:notice] = 'Erro ao reverter quitar'
       end
 
-      #flash[:notice] = 'Lancamento so pode estar ou quitado ou abert
+      #flash[:notice] = 'Lancamento só pode estar ou quitado ou abert
     end
 
     # render :layout => false

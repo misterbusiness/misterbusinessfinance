@@ -119,9 +119,9 @@ Misterbusinessfinance::Application.routes.draw do
 
   resources :lancamentos do
      member do
-       get :quitar
-       get :estornar
-	   put :cancelar
+      get :quitar
+      get :estornar
+	    get :cancelar
      end
 
     get :filter

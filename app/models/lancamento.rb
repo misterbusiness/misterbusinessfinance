@@ -25,7 +25,6 @@ class Lancamento < ActiveRecord::Base
   before_validation :set_default_categoria_if_null
   before_validation :set_default_centrodecusto_if_null
 
-
   before_validation :set_valor_two_decimal_places
 
   validates :descricao, :presence => true
@@ -52,7 +51,15 @@ class Lancamento < ActiveRecord::Base
 
 # O escopo padrão será de lançamentos válidos, ou seja, não cancelados e não estornados
   default_scope where(Lancamento.arel_table[:status_cd].not_eq(Lancamento.cancelado))
-  scope :padrao, lambda { abertos.ate(Time.now.end_of_month).order('datavencimento desc') }
+
+  # Para a visão índice deverão ser carregados todos os lançamentos não cancelados ordenados por data
+  # do vencimento crescente dentro da faixa de tempo determinada. O lançamento default será composto de um
+  # range de 48 horas adiantadas e atrasadas. Os lançamentos depois serão reorganizados na própria visão de
+  # acordo com a data que estiver exibida, a partir de paginação. Ver action FILTROS para as opções de filtragem
+  # e os dados que serão resgatados para os mesmos
+
+
+  scope :padrao, lambda { validos.range(Time.now.beginning_of_month, Time.now.end_of_month).order('datavencimento desc') }
 
   scope :parcelados, where(Lancamento.arel_table[:parcela_id].not_eq(nil)).group(:parcela_id)
   scope :a_vista, where(Lancamento.arel_table[:parcela_id].eq(nil))

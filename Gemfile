@@ -20,7 +20,7 @@ gem 'faker'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 gem 'roo'
-gem 'jquery-datatables-rails'#, :github => 'rweng/jquery-datatables-rails'
+gem 'jquery-datatables-rails' #, :github => 'rweng/jquery-datatables-rails'
 gem 'jquery-ui-rails'
 
 # Bundle edge Rails instead:

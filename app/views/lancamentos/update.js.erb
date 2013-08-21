@@ -13,10 +13,9 @@ $(":input:not(input[type=submit])").val("");
 $("#lancamento_form").html("<%= escape_javascript(render(:partial => 'form'))%>");
 
 drawCharts();
-
 prepareForm();
-
-buildfilter();
+refreshDataTable();
+//buildfilter();
 
 var freqRepeticoes = $("#frequencia_agendamentos");
 var freqParcelas = $("#frequencia_parcelas");
