@@ -7,14 +7,13 @@
  */
 
 $(document).ready(function () {
+    $("#filtro_command").val("default_filter");
     buildDataTable();
 });
 
 function buildDataTable() {
     /// Initialize filter controls
     try {
-        $("#filtro_command").val("");
-
         $("#filtro_receita").val("N");
         $("#filtro_despesa").val("N");
 
@@ -54,8 +53,6 @@ function buildDataTable() {
             changeYear: true
         });
 
-        //$('#tableResults tbody').delegate("tr", "click", rowClick);
-
         var fCategoria = $("#filtro_cateogira");
 
         var fCentrodeCusto = $("#filtro_centrodecusto");
@@ -69,8 +66,9 @@ function buildDataTable() {
                 "aaSorting": [
                     [4, 'asc']
                 ],
+                /*
                 "aoColumns": [
-                    {"bVisible": false},
+                    {"bSortable": false, "bVisible":true},
                     {"bSortable": false},
                     {"bSortable": false},
                     {"bSortable": false},
@@ -82,6 +80,7 @@ function buildDataTable() {
                     {"bSortable": true},
                     {"bSortable": true}
                 ],
+                */
                 "bSort": true,
                 "bJQueryUI": false,
                 "bSearchable": true,
@@ -110,7 +109,6 @@ function buildDataTable() {
                     "sRowSelect": "single",
                     "sSwfPath": "http://localhost:3000/swf/copy_csv_xls_pdf.swf",
                     "fnRowSelected": function (nodes) {
-                        //alert("row selected: " + nodes[0][0]);
                         $.get("/lancamentos/" + nodes[0].cells[0].innerHTML  + "/edit")
                     },
                     "fnRowDeselected": function (nodes) {
@@ -118,19 +116,26 @@ function buildDataTable() {
                     }
                 },
                 /*
-                "aoColumns": [
-                    {"mDataProp": "estornar"},// "bSortable": false},
-                    {"mDataProp": "quitar"},//, "bSortable": false},
-                    {"mDataProp": "cancelar"},//, "bSortable": false},
-                    {"mDataProp": "descricao"},//, "bSortable": true},
-                    {"mDataProp": "datavencimento"},//, "bSortable": true},
-                    {"mDataProp": "valor"},//, "bSortable": true},
-                    {"mDataProp": "category"},//, "bSortable": true},
-                    {"mDataProp": "centrodecusto"},//, "bSortable": true},
-                    {"mDataProp": "status"},//, "bSortable": true},
-                    {"mDataProp": "dataacao"}//, "bSortable": true}
+                "aoColumnDefs": [
+                    {
+                        sDefaultContent: '',
+                        aTargets: [ '_all' ]
+                    }
                 ],
                 */
+                "aoColumns": [
+                    {"mData": "id", "bSortable": false},
+                    {"mData": "estornar_format", "bSortable": false},
+                    {"mData": "quitar_format", "bSortable": false},
+                    {"mData": "cancelar_format", "bSortable": false},
+                    {"mData": "descricao", "bSortable": true},
+                    {"mData": "datavencimento_format", "bSortable": true},
+                    {"mData": "valor_format", "bSortable": true},
+                    {"mData": "category_format", "bSortable": true},
+                    {"mData": "centrodecusto_format", "bSortable": true},
+                    {"mData": "status_format", "bSortable": true},
+                    {"mData": "dataacao_format", "bSortable": true}
+                ],
                 "oLanguage": {
                     "sLengthMenu": "Exibir _MENU_ lançamentos por página",
                     "sZeroRecords": "Nenhum registro encontrado",
@@ -153,7 +158,6 @@ function buildDataTable() {
             txt += "Click OK to continue.\n\n";
             alert(txt);
         }
-
         $('th').unbind('click.sorting');
 
         $("#filtro_status").select2();

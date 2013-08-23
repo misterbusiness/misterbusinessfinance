@@ -1,3 +1,5 @@
+include ActionView::Helpers::NumberHelper
+
 class Lancamento < ActiveRecord::Base
   attr_accessible :datavencimento, :descricao, :status, :tipo, :valor,
                   :dataacao, :category, :centrodecusto, :category_id, :centrodecusto_id,
@@ -142,6 +144,57 @@ class Lancamento < ActiveRecord::Base
     self.status = :cancelado
     self.dataacao = Date.today.strftime("%d-%m-%Y")
     self.save
+  end
+
+
+  # Metodos de formatacao
+  def valor_format
+    self.receita? ? sinal = "+" : sinal = "-"
+    number_to_currency("#{sinal}#{self.valor}", precision: 2, unit: "R$ ")
+  end
+
+  def datavencimento_format
+    !self.datavencimento.nil? ? self.datavencimento.strftime('%d-%m-%Y') : nil
+  end
+
+  def dataacao_format
+    !self.dataacao.nil? ? self.dataacao.strftime('%d-%m-%Y') : nil
+  end
+
+  def category_format
+    self.category.descricao
+  end
+
+  def centrodecusto_format
+    self.centrodecusto.descricao
+  end
+
+  def status_format
+    self.status
+  end
+
+  def estornar_format
+    if self.estornado? or self.quitado?
+      "<a href='#{Rails.application.routes.url_helpers.estornar_lancamento_path(self.id)}' class='btn mister-table-button' data-remote='true'>X</a>"
+    else
+      "<p></p>"
+    end
+  end
+
+  def quitar_format
+    if self.aberto? or self.quitado?
+      "<a href='#{Rails.application.routes.url_helpers.quitar_lancamento_path(self.id)}' class='btn mister-table-button' data-remote='true'>X</a>"
+    else
+      "<p></p>"
+    end
+  end
+
+  def cancelar_format
+    if self.aberto? or self.cancelado?
+      "<a href='#{Rails.application.routes.url_helpers.cancelar_lancamento_path(self.id)}' class='btn mister-table-button' data-remote='true'>X</a>"
+    else
+      "<p></p>"
+    end
   end
 
   def self.create_lancamento(params)

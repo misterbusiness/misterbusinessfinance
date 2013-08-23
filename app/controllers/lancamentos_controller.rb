@@ -27,7 +27,7 @@ class LancamentosController < ApplicationController
       columns = {"4" => "descricao", "5" => "datavencimento",
                  "6" => "valor", "7" => "category_id",
                  "8" => "centrodecusto_id", "9" => "status_cd",
-                 "10" => "dataacao",}
+                 "10" => "dataacao", }
       sort_col = "datavencimento"
       sort_direction = "asc"
 
@@ -78,13 +78,13 @@ class LancamentosController < ApplicationController
             when "<"
               query = query.valor_menor(valor1)
             when ">"
-             query = query.valor_maior(valor1)
+              query = query.valor_maior(valor1)
             when ">="
               query = query.valor_menor_igual(valor1)
             when "<="
               query = query.valor_maior_igual(valor1)
             when "["
-              query = query.valor_entre(valor1,valor2)
+              query = query.valor_entre(valor1, valor2)
           end
 
         end
@@ -101,15 +101,16 @@ class LancamentosController < ApplicationController
       sort_col = columns[params[:iSortCol_0]] unless params[:iSortCol_0].nil?
       sort_direction = params[:sSortDir_0] unless params[:sSortDir_0].nil?
 
-      query = query.order("#{sort_col} #{sort_direction}")
+      query = query.order("#{sort_col} #{sort_direction}") unless sort_col.nil?
       @lancamentos = query.paginate(:page => curr_page, :per_page => per_page)
 
       #major_total = query.sum('valor')
-      major_total = query.inject(0) {|sum, lancamento| lancamento.receita? ? sum + lancamento.valor : sum - lancamento.valor}
+      major_total = query.inject(0) { |sum, lancamento| lancamento.receita? ? sum + lancamento.valor : sum - lancamento.valor }
       major_total = number_to_currency(major_total, precision: 2, unit: "R$ ")
 
     end
 
+=begin
     # Teste retorno json
     json_rows = Array.new
     @lancamentos.each do |serie|
@@ -154,7 +155,65 @@ class LancamentosController < ApplicationController
       json_row.push(!serie.dataacao.nil? ? serie.dataacao.strftime('%d-%m-%Y') : nil)
       json_rows.push(json_row)
     end
+=end
 
+=begin
+    # Teste retorno json
+    json_rows = Array.new
+    @lancamentos.each do |serie|
+      json_row = ""
+
+      json_row = "['DT_RowId':'#{serie.id}'"
+      # O lançamento aberto pode ser quitado ou cancelado
+      if serie.aberto?
+        json_row = "#{json_row},'estorno':'<p></p>'"
+        json_row = "#{json_row},'quitar':'<a href='#{quitar_lancamento_path(serie.id)}' class='btn mister-table-button' data-remote='true'>X</a>"
+        json_row = "#{json_row},'cancelar':'<a href='#{cancelar_lancamento_path(serie.id)}' class='btn mister-table-button' data-remote='true'>X</a>'"
+      end
+
+      # O lançamento quitado pode ser des-quitado ou estornado
+      if serie.quitado?
+        json_row = "#{json_row},'estorno':'<a href='#{estornar_lancamento_path(serie.id)}' class='btn mister-table-button asd' data-remote='true'>X</a>'"
+        json_row = "#{json_row},'quitar':'<a href='#{quitar_lancamento_path(serie.id)}' class='btn mister-table-button' data-remote='true'>X</a>'"
+        json_row = "#{json_row},'cancelar':'<p></p>'"
+      end
+
+      # O lançamento estornado só pode ser des-estornado (para depois sofrer qualquer outra ação)
+      if serie.estornado?
+        json_row = "#{json_row},'estorno':'<a href='#{estornar_lancamento_path(serie.id)}' class='btn mister-table-button asd' data-remote='true'>X</a>'"
+        json_row = "#{json_row},'quitar':'<p></p>'"
+        json_row = "#{json_row},'cancelar':'<p></p>'"
+      end
+
+      # O lançamento cancelado só pode ser re-aberto
+      if serie.cancelado?
+        json_row = "#{json_row},'estorno':'<p></p>'"
+        json_row = "#{json_row},'quitar':'<p></p>'"
+        json_row = "#{json_row},'cancelar':'<a href='#{cancelar_lancamento_path(serie.id)}' class='btn mister-table-button' data-remote='true'>X</a>'"
+      end
+
+      json_row = "#{json_row},'descricao':'#{serie.descricao}'"
+      !serie.datavencimento.nil? ? datavencimento = serie.datavencimento.strftime('%d-%m-%Y') : datavencimento = nil
+      json_row = "#{json_row},'datavencimento':'#{datavencimento}'"
+
+      serie.receita? ? sinal = "+" : sinal = "-"
+      valor = number_to_currency("#{sinal}#{serie.valor}", precision: 2, unit: "R$ ")
+      json_row = "#{json_row},'valor':'#{valor}'"
+
+      json_row = "#{json_row},'categoria': '#{serie.category.descricao}'"
+      json_row = "#{json_row},'centrodecusto':'#{serie.centrodecusto.descricao}"
+      json_row = "#{json_row},'status':'#{serie.status}'"
+      !serie.dataacao.nil? ? dataacao = serie.dataacao.strftime('%d-%m-%Y') : dataacao = nil
+      json_row = "#{json_row},'dataacao':'#{dataacao}'"
+      json_rows.push(json_row)
+    end
+=end
+
+    # Teste retorno json
+    json_rows =   @lancamentos.as_json(:only => [:id, :descricao, :status],
+                     :methods => [:valor_format, :datavencimento_format, :dataacao_format,
+                                  :category_format, :centrodecusto_format, :estornar_format,
+                                  :quitar_format, :cancelar_format, :status_format])
 
     render :json => {
         :sEcho => params[:sEcho],
@@ -163,8 +222,6 @@ class LancamentosController < ApplicationController
         :majorTotal => major_total,
         :aaData => json_rows
     }
-
-    #render :layout => nil
   end
 
   def load
