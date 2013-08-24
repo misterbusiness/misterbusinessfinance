@@ -66,21 +66,6 @@ function buildDataTable() {
                 "aaSorting": [
                     [4, 'asc']
                 ],
-                /*
-                "aoColumns": [
-                    {"bSortable": false, "bVisible":true},
-                    {"bSortable": false},
-                    {"bSortable": false},
-                    {"bSortable": false},
-                    {"bSortable": true},
-                    {"bSortable": true},
-                    {"bSortable": true},
-                    {"bSortable": true},
-                    {"bSortable": true},
-                    {"bSortable": true},
-                    {"bSortable": true}
-                ],
-                */
                 "bSort": true,
                 "bJQueryUI": false,
                 "bSearchable": true,
@@ -109,26 +94,32 @@ function buildDataTable() {
                     "sRowSelect": "single",
                     "sSwfPath": "http://localhost:3000/swf/copy_csv_xls_pdf.swf",
                     "fnRowSelected": function (nodes) {
-                        $.get("/lancamentos/" + nodes[0].cells[0].innerHTML  + "/edit")
+                        var rowid = (nodes[0].id).substring(("lancamento_").length)
+
+                        if(rowid != "")
+                        {
+                            $.get("/lancamentos/" + rowid + "/edit")
+                        }
                     },
                     "fnRowDeselected": function (nodes) {
                         $.get("<%= Rails.application.routes.url_helpers.new_lancamento_path %>")
-                    }
+                    },
+                    "aButtons": [
+                        {
+                            "sExtends": "xls",
+                            "sButtonText": "Exportar dados para o Excel",
+                            "sFileName": "*.xls",
+                            "mColumns": [4, 5, 6, 7, 8],
+                            "bFooter": true,
+                            "bHeader": true
+                        }
+                    ]
                 },
-                /*
-                "aoColumnDefs": [
-                    {
-                        sDefaultContent: '',
-                        aTargets: [ '_all' ]
-                    }
-                ],
-                */
                 "aoColumns": [
-                    {"mData": "id", "bSortable": false},
                     {"mData": "estornar_format", "bSortable": false},
                     {"mData": "quitar_format", "bSortable": false},
                     {"mData": "cancelar_format", "bSortable": false},
-                    {"mData": "descricao", "bSortable": true},
+                    {"mData": "descricao_format", "bSortable": true},
                     {"mData": "datavencimento_format", "bSortable": true},
                     {"mData": "valor_format", "bSortable": true},
                     {"mData": "category_format", "bSortable": true},
@@ -151,6 +142,8 @@ function buildDataTable() {
                     }
                 }
             });
+
+            //new FixedHeader( oTable );
         }
         catch (err) {
             var txt = "There was an error on this page.\n\n";
@@ -226,13 +219,6 @@ function rowClick() {
     $("td:first", this).parent().children().each(function () {
         $(this).addClass('mister-table-row-selected');
     });
-
-    // You can pull the values out of the row here if required
-    /*
-     var a = $("td:first", this).text();
-     var b = $("td:eq(1)", this).text();
-     alert("One = "+a+", Two = "+b);
-     */
 }
 
 function defaultFilter() {

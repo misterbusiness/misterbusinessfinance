@@ -6,14 +6,11 @@
         <table id="tableResults" class="table table-hover table-condensed table-stripped">
           <thead id="tableFilter">
           <tr id="header">
-
-            <th style="vertical-align: top">Id</th>
-            <th style="vertical-align: top">Est</th>
-            <th style="vertical-align: top">Quitar</th>
-            <th style="vertical-align: top">Can</th>
+            <th style="vertical-align: top">E</th>
+            <th style="vertical-align: top">Q</th>
+            <th style="vertical-align: top">C</th>
             <th>Descrição <br/>
               <%= text_field(:filtro, :descricao, :class => "filtro_parametro input-large") %>
-              <%= %>
             </th>
             <th>Vencimento </br>
               <input type="text" id="filtro_DataVencimentoDe" class="filtro_parametro input-small" placeholder="De"/>
@@ -27,9 +24,7 @@
             </th>
             <th>Centro de Custo <br/>
               <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro mister-select", :multiple=> true } %>
-
             </th>
-
             <th>Status <br/>
               <select id="filtro_status" multiple="true" class="filtro_parametro input-large mister-select">
                 <option value=""></option>
@@ -75,17 +70,6 @@
           </tr>
           </tfoot>
           <tbody>
-          <!--<td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
--->
           </tbody>
         </table>
       </div>

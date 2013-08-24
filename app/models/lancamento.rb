@@ -1,4 +1,5 @@
 include ActionView::Helpers::NumberHelper
+include ActionView::Helpers::TextHelper
 
 class Lancamento < ActiveRecord::Base
   attr_accessible :datavencimento, :descricao, :status, :tipo, :valor,
@@ -148,6 +149,20 @@ class Lancamento < ActiveRecord::Base
 
 
   # Metodos de formatacao
+
+  # Metodo para atribuir o id do lançamento para a linha do datatable
+  def DT_RowId
+    "lancamento_#{self.id}"
+  end
+
+  def DT_RowClass
+    "mister-table-row"
+  end
+
+  def descricao_format
+    simple_format(self.descricao)
+  end
+
   def valor_format
     self.receita? ? sinal = "+" : sinal = "-"
     number_to_currency("#{sinal}#{self.valor}", precision: 2, unit: "R$ ")
