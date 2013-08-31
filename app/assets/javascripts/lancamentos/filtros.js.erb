@@ -11,6 +11,10 @@ $(document).ready(function () {
     buildDataTable();
 });
 
+$("#tableResults").children().click(function(){
+   alert("here");
+});
+
 function buildDataTable() {
     /// Initialize filter controls
     try {
@@ -93,8 +97,26 @@ function buildDataTable() {
                 "oTableTools": {
                     "sRowSelect": "single",
                     "sSwfPath": "http://localhost:3000/swf/copy_csv_xls_pdf.swf",
+                    "fnPreRowSelect": function (e)
+                    {
+                        if (e !== undefined)
+                        {
+                            // Caso seja um botão não permite a seleção da linha (apenas a execução do botão)
+                            if ($(e.target).hasClass("mister-table-button"))
+                            {
+                                /// Verifica se é uma linha selecionada
+                                /// Se for ela deve ser deselecionada
+                                if (this.fnGetSelected().length > 0)
+                                {
+                                    this.fnDeselect();
+                                }
+                                return false;
+                            }
+                        }
+                        return true;
+                    },
                     "fnRowSelected": function (nodes) {
-                        var rowid = (nodes[0].id).substring(("lancamento_").length)
+                        var rowid = (nodes[0].id).substring(("lancamento_").length);
 
                         if(rowid != "")
                         {
@@ -116,8 +138,8 @@ function buildDataTable() {
                     ]
                 },
                 "aoColumns": [
-                    {"mData": "estornar_format", "bSortable": false},
                     {"mData": "quitar_format", "bSortable": false},
+                    {"mData": "estornar_format", "bSortable": false},
                     {"mData": "cancelar_format", "bSortable": false},
                     {"mData": "descricao_format", "bSortable": true},
                     {"mData": "datavencimento_format", "bSortable": true},
@@ -193,6 +215,10 @@ function buildDataTable() {
         alert(txt);
     }
 }
+
+$("a").addEventListener('click', function(e){
+   alert("evento")
+});
 
 /******************************************************************************************
  * Função utilizada para gerenciar mais parametros enviados pelo servidor

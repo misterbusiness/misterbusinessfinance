@@ -111,7 +111,7 @@ class LancamentosController < ApplicationController
     end
 
     # Constroi o json com os dados para popular o datatable
-    json_rows =   @lancamentos.as_json(:only => [],
+    json_rows =   @lancamentos.as_json(:only => [:id],
                      :methods => [:DT_RowId, :DT_RowClass,  :descricao_format, :valor_format,
                                   :datavencimento_format, :dataacao_format,
                                   :category_format, :centrodecusto_format, :estornar_format,
@@ -259,24 +259,15 @@ class LancamentosController < ApplicationController
 
   # GET /lancamentos/1/edit
   def edit
-
-    DebugLog(params.inspect)
-
-    @lancamento = Lancamento.find(params[:id])
-
+    @lancamento = Lancamento.unscoped.find(params[:id])
     if (@lancamento.despesa?)
       @lancamento.valor = @lancamento.valor * -1
     end
-
-    #@lancamentorapidos = Lancamentorapido.all
-    #@categorias = Category.all
-    #@centrosdecusto = Centrodecusto.all
   end
 
   # POST /lancamentos
   # POST /lancamentos.json
   def create
-    DebugLog('Lancamento - params: ' + params.inspect)
     params[:lancamento][:valor] = params[:lancamento][:valor].gsub('.', '').gsub(',', '.')
 
     if Lancamento.create_lancamento(params)
@@ -293,8 +284,6 @@ class LancamentosController < ApplicationController
   # PUT /lancamentos/1
   # PUT /lancamentos/1.json
   def update
-
-    DebugLog('Lancamento - params: ' + params.inspect)
     params[:lancamento][:valor] = params[:lancamento][:valor].gsub('.', '').gsub(',', '.')
     @lancamento = Lancamento.find(params[:id])
 
@@ -404,7 +393,7 @@ class LancamentosController < ApplicationController
         flash[:notice] = 'Falha ao atualizar o lancamento'
       end
     end
-    @lancamentos = Lancamento.unscoped.all
+#    @lancamentos = Lancamento.unscoped.all
     @lancamento = Lancamento.new
   end
 
@@ -412,7 +401,7 @@ class LancamentosController < ApplicationController
   # DELETE /lancamentos/1.json
   def destroy
 
-    @lancamento = Lancamento.find(params[:id])
+    @lancamento = Lancamento.unscoped.find(params[:id])
 
     if @lancamento.is_original? then
       @lancamento.lancamento_estornado.destroy
@@ -428,14 +417,14 @@ class LancamentosController < ApplicationController
 
     # Recarrega as informações de lançamentos
     @lancamento = Lancamento.new
-    @lancamentos = Lancamento.unscoped.all
+    #@lancamentos = Lancamento.unscoped.all
     #redirect_to lancamentos_url
     #@lancamento.cancel
   end
 
 # Custom controllers
   def quitar
-    @lancamento = Lancamento.find(params[:id])
+    @lancamento = Lancamento.unscoped.find(params[:id])
     if @lancamento.quitado? #and !@lancamento.estornado?
       @lancamento.status = :aberto
       @lancamento.dataacao = nil
@@ -449,6 +438,7 @@ class LancamentosController < ApplicationController
         @lancamento.status = :quitado
         @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
         if @lancamento.save
+          @lancamento = Lancamento.new
           # flash[:notice] = 'Lancamento quitado com sucesso'
         else
           # flash[:notice] = 'Erro ao quitar lancamento'
@@ -456,35 +446,28 @@ class LancamentosController < ApplicationController
       else
         #flash[:notice] = 'Lancamento so pode estar ou quitado ou aberto'
       end
-
     end
-
-    # render :layout => false
-
   end
 
   def estornar
     DebugLog('Params: ' + params.inspect);
 
-    @lancamento = Lancamento.find(params[:id])
+    @lancamento = Lancamento.unscoped.find(params[:id])
     if @lancamento.quitado? and !@lancamento.has_estorno? then
 # Altera os valores do lançamento duplicado      
       @lancamento_estornado = @lancamento.dup
       @lancamento_estornado.descricao = "#{@lancamento_estornado.descricao} - ESTORNO"
 
       if @lancamento.receita? then
-
         @lancamento_estornado.tipo = :despesa
-
       else
-
         @lancamento_estornado.tipo = :receita
-
       end
 
       @lancamento_estornado.dataacao = Date.today.strftime("%d-%m-%Y")
       @lancamento_estornado.status = :estornado
-# Salva o lançamento estornado para recuperar o id       
+
+      # Salva o lançamento estornado para recuperar o id
       @lancamento_estornado.save
 
       @lancamento.lancamento_estornado = @lancamento_estornado
@@ -493,7 +476,8 @@ class LancamentosController < ApplicationController
       @lancamento.save
     else
       if @lancamento.has_estorno? then
-# Verifica se este é o original          
+
+        # Verifica se este é o original
         if @lancamento.is_original? then
           @lancamento.status = :aberto
           @lancamento.dataacao = nil
@@ -509,26 +493,26 @@ class LancamentosController < ApplicationController
         end
       end
     end
-    @lancamentos = Lancamento.unscoped.all
+    #@lancamentos = Lancamento.unscoped.all
     @lancamento = Lancamento.new
   end
 
   def cancelar
-    @lancamento = Lancamento.find(params[:id])
+    @lancamento = Lancamento.unscoped.find(params[:id])
     if @lancamento.aberto?
       @lancamento.status = :cancelado
       @lancamento.dataacao = Date.today.strftime("%d-%m-%Y")
-      if @lancamento.save
-        #flash[:notice] = 'Sucesso ao reverter quitar'
+      @lancamento.save
+    else
+      if @lancamento.cancelado?
+        @lancamento.status = :aberto
+        @lancamento.dataacao = nil
+        @lancamento.save
       else
-        #flash[:notice] = 'Erro ao reverter quitar'
+        #caso contrario não deve ser executada senhuma ação
       end
-
-      #flash[:notice] = 'Lancamento só pode estar ou quitado ou abert
     end
-
-    # render :layout => false
-
+    @lancamento = Lancamento.new
   end
 
 

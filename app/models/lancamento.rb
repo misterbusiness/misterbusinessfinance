@@ -190,25 +190,28 @@ class Lancamento < ActiveRecord::Base
 
   def estornar_format
     if self.estornado? or self.quitado?
-      "<a href='#{Rails.application.routes.url_helpers.estornar_lancamento_path(self.id)}' class='btn mister-table-button' data-remote='true'>X</a>"
+      "<a href='#{Rails.application.routes.url_helpers.estornar_lancamento_path(self.id)}'
+            class='btn mister-table-button' data-remote='true'>X</a>"
     else
-      "<p></p>"
+      "<p>&nbsp;</p>"
     end
   end
 
   def quitar_format
     if self.aberto? or self.quitado?
-      "<a href='#{Rails.application.routes.url_helpers.quitar_lancamento_path(self.id)}' class='btn mister-table-button' data-remote='true'>X</a>"
+      "<a href='#{Rails.application.routes.url_helpers.quitar_lancamento_path(self.id)}'
+          class='btn mister-table-button' data-remote='true'>X</a>"
     else
-      "<p></p>"
+      "<p>&nbsp;</p>"
     end
   end
 
   def cancelar_format
     if self.aberto? or self.cancelado?
-      "<a href='#{Rails.application.routes.url_helpers.cancelar_lancamento_path(self.id)}' class='btn mister-table-button' data-remote='true'>X</a>"
+      "<a href='#{Rails.application.routes.url_helpers.cancelar_lancamento_path(self.id)}'
+            class='btn mister-table-button' data-remote='true'>X</a>"
     else
-      "<p></p>"
+      "<p>&nbsp;</p>"
     end
   end
 

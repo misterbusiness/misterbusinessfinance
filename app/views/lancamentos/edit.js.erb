@@ -1,4 +1,4 @@
-<% if !@lancamento.estornado? and !@lancamento.cancelado? %>
+
 $("#lancamento_form").html("<%= escape_javascript(render(:partial => 'form'))%>");
 
 var freqRepeticoes = $("#frequencia_agendamentos");
@@ -26,5 +26,3 @@ prepareForm();
 
 $("#lancamento_valor").val(formatedValue);
 $("#lancamento_valor").blur();
-
-<% end %>

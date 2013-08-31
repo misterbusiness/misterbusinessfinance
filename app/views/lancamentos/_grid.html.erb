@@ -9,6 +9,7 @@
             <th style="vertical-align: top">E</th>
             <th style="vertical-align: top">Q</th>
             <th style="vertical-align: top">C</th>
+
             <th>Descrição <br/>
               <%= text_field(:filtro, :descricao, :class => "filtro_parametro input-large") %>
             </th>
@@ -45,6 +46,14 @@
             <td colspan="5">Total:</td>
             <td colspan="5"><div id="majorTotalPlace"></div></td>
           </tr>
+          <!--
+          <tr>
+            <td colspan="10">
+              <div class="span1"><%= button_to 'Quitar', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => '' %></div>
+              <div class="span1"><%= button_to 'Estornar', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => '' %></div>
+              <div class="span1"><%= button_to 'Cancelar', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => '' %></div>
+            </td>
+          </tr>-->
           <tr>
             <td colspan="10">
                 <div class="span12">

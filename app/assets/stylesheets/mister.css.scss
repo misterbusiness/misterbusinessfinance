@@ -90,6 +90,12 @@
 .mister-table-btn
 {
   width: 100%;
+  z-index: 99;
+}
+
+.mister-table-row
+  {
+  z-index:-1;
 }
 
 .mister-number

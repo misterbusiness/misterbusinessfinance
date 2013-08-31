@@ -18,11 +18,8 @@ $("#flash_notice").html("<%= escape_javascript(flash[:notice])%>");
 $("#flash_notice").show(300);
 
 
-/*Replace the html of the div post_lists with the updated new one*/
-
-<% @lancamento = Lancamento.new %>
+<% #@lancamento = Lancamento.new %>
 $("#lancamento_form").html("<%= escape_javascript( render(:partial => 'form') ) %>");
-
 $("#lancamento_valor").blur();
 
 drawCharts();
