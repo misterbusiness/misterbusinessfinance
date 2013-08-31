@@ -1,0 +1,37 @@
+body
+{
+    height: 100%;
+    padding-top: 70px;
+    font-size: 11px;
+}
+
+.notifications
+{
+    height: 250px;
+    overflow: auto;
+}
+
+.reports
+{
+    height: 250px;
+}
+
+.grid
+{
+    height: 350px;
+}
+
+.menu_ads
+{
+    height: 620px;
+}
+
+.form
+{
+    height: 250px;
+}
+
+.hundred_percent
+{
+    height: 100%;
+}

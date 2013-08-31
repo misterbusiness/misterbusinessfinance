@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/anjlab/bootstrap-rails.git
+  revision: c8d9ce8c966f0fcb6dd03407502f85bc297668b2
+  specs:
+    anjlab-bootstrap-rails (3.0.0.2)
+      railties (>= 3.0)
+      sass (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -197,6 +205,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgresql-adapter
   ancestry
+  anjlab-bootstrap-rails!
   annotate (= 2.5.0)
   bootstrap-sass
   bootstrap-will_paginate

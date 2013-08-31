@@ -22,6 +22,9 @@ gem 'wkhtmltopdf-binary'
 gem 'roo'
 gem 'jquery-datatables-rails' #, :github => 'rweng/jquery-datatables-rails'
 gem 'jquery-ui-rails'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+    :github => 'anjlab/bootstrap-rails'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
