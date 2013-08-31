@@ -67,14 +67,14 @@
       <div class="col-lg-4">
         <!-- ********************************* Categoria ************************************************************ -->
         <%= f.text_field :category_id, :as => :text, :id => "lancamento_category",
-                         :class => 'form-control' %>
+                         :class => 'form-control', :placeholder => "Categoria" %>
         <%= hidden_field_tag :category, "", :id => 'category_hidden' %>
       </div>
 
       <div class="col-lg-4">
         <!-- ***************************** Centro de custo ********************************************************** -->
         <%= f.text_field :centrodecusto_id, :as => :text, :id => "lancamento_centrodecusto",
-                         :class => 'form-control ' %>
+                         :class => 'form-control', :placeholder => "Centro de Custo" %>
         <%= hidden_field_tag :centrodecusto, "", :id => "centrodecusto_hidden" %>
       </div>
 

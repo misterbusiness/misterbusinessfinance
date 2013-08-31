@@ -1,0 +1,28 @@
+
+$("#lancamento_form").html("<%= escape_javascript(render :partial => 'form')%>");
+
+//var freqRepeticoes = $("#frequencia_agendamentos");
+//var freqParcelas = $("#frequencia_parcelas");
+
+//var numeroRepeticoes = $("#numero_agendamentos");
+//var numeroParcelas = $("#numero_parcelas");
+
+<!--<% if @lancamento.has_parcelamento? %>-->
+//numeroRepeticoes.prop('disabled', true);
+//freqRepeticoes.select2('disable');
+//
+//numeroParcelas.prop('disabled', true);
+//freqParcelas.select2('disable');
+<!--<% else %>-->
+//numeroParcelas.prop('disabled', false);
+//freqParcelas.select2('enable');
+<!--<% end %>-->
+
+// É necessário o carregamento da formatação já que o mesmo já foi executado pelo form
+//formatedValue = $.fn.autoNumeric.Format('lancamento_valor', $('#lancamento_valor').autoNumeric('get').val());
+
+drawCharts();
+prepareForm();
+
+//$("#lancamento_valor").val(formatedValue);
+//$("#lancamento_valor").blur();

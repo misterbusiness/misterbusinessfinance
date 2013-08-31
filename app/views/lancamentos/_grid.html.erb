@@ -11,20 +11,25 @@
             <th style="vertical-align: top">C</th>
 
             <th>Descrição <br/>
-              <%= text_field(:filtro, :descricao, :class => "filtro_parametro input-large") %>
+              <%= text_field(:filtro, :descricao,
+                             :class => "filtro_parametro form-control input-large") %>
             </th>
             <th>Vencimento </br>
-              <input type="text" id="filtro_DataVencimentoDe" class="filtro_parametro input-small" placeholder="De"/>
-              <input type="text" id="filtro_DataVencimentoAte" class="filtro_parametro input-small" placeholder="Até"/>
+              <form class="form-inline">
+              <input type="text" id="filtro_DataVencimentoDe"
+                         class="filtro_parametro form-control input-small" placeholder="De"/>
+                  <input type="text" id="filtro_DataVencimentoAte"
+                         class="filtro_parametro form-control input-small" placeholder="Até"/>
+              </form>
             </th>
             <th>Valor <br/>
               <input type="text" id="filtro_valor" class="filtro_parametro input-small" placeholder="= X, [ X Y ], < X, >= X,...">
             </th>
             <th>Categoria <br/>
-              <%= collection_select :filtro, :categoria, Category.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro mister-select", :multiple=> true } %>
+              <%= collection_select :filtro, :categoria, Category.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro mister-select", :multiple => true} %>
             </th>
             <th>Centro de Custo <br/>
-              <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro mister-select", :multiple=> true } %>
+              <%= collection_select :filtro, :centrodecusto, Centrodecusto.all, :id, :descricao, {:include_blank => true}, {:class => "filtro_parametro mister-select", :multiple => true} %>
             </th>
             <th>Status <br/>
               <select id="filtro_status" multiple="true" class="filtro_parametro input-large mister-select">
@@ -44,7 +49,9 @@
           <tfoot>
           <tr>
             <td colspan="5">Total:</td>
-            <td colspan="5"><div id="majorTotalPlace"></div></td>
+            <td colspan="5">
+              <div id="majorTotalPlace"></div>
+            </td>
           </tr>
           <!--
           <tr>
@@ -56,25 +63,25 @@
           </tr>-->
           <tr>
             <td colspan="10">
-                <div class="span12">
-                  <div class="span4 btn-group" data-toggle="buttons-radio">
-                    <div class="span3"><%= button_to 'Hoje', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'todayFilter();' %></div>
-                    <div class="span3"><%= button_to 'Esta Semana', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'weekFilter();' %></div>
-                    <div class="span3"><%= button_to 'Este Mês', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'monthFilter();' %></div>
-                    <div class="span3"><%= button_to 'Este Ano', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'yearFilter();' %></div>
-                  </div>
-                  <div class="span4 btn-group" data-toggle="buttons-checkbox">
-                    <div class="span6"><%= button_to 'Receitas', '#', :class => 'btn btn-success mister-table-btn span12', :remote => true, :onclick => 'receitaFilter();' %></div>
-                    <%=  hidden_field_tag 'filtro_receita' %>
-                    <div class="span6"><%= button_to 'Despesas', '#', :class => 'btn btn-danger mister-table-btn span12', :remote => true, :onclick => 'despesaFilter();' %></div>
-                    <%=  hidden_field_tag 'filtro_despesa' %>
-                  </div>
-                  <div class="span4">
-                    <div class="span6"><%= button_to 'Limpar Filtro', '#', :class => 'btn btn-inverse mister-table-btn span12', :remote => true, :onclick => 'defaultFilter();' %></div>
-                    <div class="span6"><%= button_to 'Limpar Ordenação', '#', :class => 'btn btn-inverse mister-table-btn span12', :remote => true, :onclick => 'defaultSort();' %></div>
-                  </div>
+              <div class="span12">
+                <div class="span4 btn-group" data-toggle="buttons-radio">
+                  <div class="span3"><%= button_to 'Hoje', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'todayFilter();' %></div>
+                  <div class="span3"><%= button_to 'Esta Semana', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'weekFilter();' %></div>
+                  <div class="span3"><%= button_to 'Este Mês', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'monthFilter();' %></div>
+                  <div class="span3"><%= button_to 'Este Ano', '#', :class => 'btn btn-primary mister-table-btn span12', :remote => true, :onclick => 'yearFilter();' %></div>
                 </div>
-              <%=  hidden_field_tag 'command', :id => 'filtro_command'  %>
+                <div class="span4 btn-group" data-toggle="buttons-checkbox">
+                  <div class="span6"><%= button_to 'Receitas', '#', :class => 'btn btn-success mister-table-btn span12', :remote => true, :onclick => 'receitaFilter();' %></div>
+                  <%= hidden_field_tag 'filtro_receita' %>
+                  <div class="span6"><%= button_to 'Despesas', '#', :class => 'btn btn-danger mister-table-btn span12', :remote => true, :onclick => 'despesaFilter();' %></div>
+                  <%= hidden_field_tag 'filtro_despesa' %>
+                </div>
+                <div class="span4">
+                  <div class="span6"><%= button_to 'Limpar Filtro', '#', :class => 'btn btn-inverse mister-table-btn span12', :remote => true, :onclick => 'defaultFilter();' %></div>
+                  <div class="span6"><%= button_to 'Limpar Ordenação', '#', :class => 'btn btn-inverse mister-table-btn span12', :remote => true, :onclick => 'defaultSort();' %></div>
+                </div>
+              </div>
+              <%= hidden_field_tag 'command', :id => 'filtro_command' %>
             </td>
           </tr>
           </tfoot>

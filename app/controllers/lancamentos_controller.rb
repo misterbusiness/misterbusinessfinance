@@ -264,6 +264,7 @@ class LancamentosController < ApplicationController
   end
 
   # Action utilizada para transformar lançamento rapido em lançamento
+  # GET /lancamentos/1/fill
   def fill
     @lancamento = Lancamento.new
     lancamentorapido = Lancamentorapido.find(params[:id])
@@ -273,7 +274,8 @@ class LancamentosController < ApplicationController
     @lancamento.category = lancamentorapido.category
     @lancamento.centrodecusto = lancamentorapido.centrodecusto
     @lancamento.tipo = lancamentorapido.tipo
-    @lancamento.datavencimento = Date.new(Date.now.year, Date.now.month, lancamentorapido.diavencimento)
+    @lancamento.datavencimento = Date.new(Date.today.year, Date.today.month, lancamentorapido.diavencimento)
+    @lancamento.status = :aberto
   end
 
   def new

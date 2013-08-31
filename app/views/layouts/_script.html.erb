@@ -3,4 +3,12 @@
     <!--<script src="assets/jquery-2.0.3.min.js"></script>-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!--<script src="assets/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load('visualization', '1', {packages: ['table']});
+        google.load('visualization', '1.0', {packages: ['controls']});
+        google.load('visualization', '1.0', {'packages': ['corechart']});
+    </script>
+    <%= render 'lancamentos/reports' %>
+
 <% end %>
