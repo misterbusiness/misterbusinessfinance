@@ -10,51 +10,55 @@ function prepareDescricao(){
             lancamentoDescricao.select2("open");
         }
     });
-
-    lancamentoDescricao.change(function () {
-        var selectedValue = $("#lancamento_descricao").val();
-        if (selectedValue != "") {
-            var jqxhr =
-                    $.ajax({
-                        url: "<%= Rails.application.routes.url_helpers.lancamentorapidos_path %>/" + selectedValue,
-                        dataType: 'json',
-                        data: {}
-                    })
-                            .success(function (response) {
-                                lancamentoDescricao.val(response.descricao);
-
-                                var radio_receita = $('#lancamento_tipo_receita');
-                                var radio_despesa = $('#lancamento_tipo_despesa');
-                                // Adicionados labels para fazer a troca de cores na seleção
-                                var label_receita = $("#receita_label");
-                                var label_despesa = $("#despesa_label");
-
-                                if (response.tipo_cd == 1) {
-                                    radio_despesa.prop("checked", true);
-                                    label_despesa.removeClass('label-default').addClass('label-important');
-                                    label_receita.removeClass('label-success').addClass('label-default');
-                                }
-                                else {
-                                    radio_receita.prop("checked", true);
-                                    label_receita.removeClass('label-default').addClass('label-success');
-                                    label_despesa.removeClass('label-important').addClass('label-default');
-                                }
-                                var valor = $.fn.autoNumeric.Format('lancamento_valor', response.valor + '');
-                                $("#lancamento_valor").val(valor);
-
-                                var selectedDate = new Date((new Date).getFullYear(), (new Date).getMonth(), response.diavencimento);
-                                $("#data_vencimento_picker").datepicker("setDate", selectedDate);
-                                $("#data_vencimento_picker").datepicker({ format: 'dd-mm-yyyy' });
-
-                                //$("#lancamento_category").select2('val',response.category_id).trigger("change");
-                                //$("#lancamento_centrodecusto").select2('val',response.centrodecusto_id).trigger("change");
-                                $("#lancamento_category").select2('val', response.category_id);
-                                $("#lancamento_centrodecusto").select2('val', response.centrodecusto_id);
-                            })
-                            .error(function () {
-                                // Erro ocorre quando não encontra nenhum registro
-                            })
-        }
+    lancamentoDescricao.on("select2-selecting", function(e){
+        $.get("lancamentos/" + e.val + "/fill");
     });
-//});
 }
+
+//    lancamentoDescricao.change(function () {
+//        var selectedValue = $("#lancamento_descricao").val();
+//        if (selectedValue != "") {
+//            var jqxhr =
+//                    $.ajax({
+//                        url: "<%= Rails.application.routes.url_helpers.lancamentorapidos_path %>/" + selectedValue,
+//                        dataType: 'json',
+//                        data: {}
+//                    })
+//                            .success(function (response) {
+//                                lancamentoDescricao.val(response.descricao);
+//
+//                                var radio_receita = $('#lancamento_tipo_receita');
+//                                var radio_despesa = $('#lancamento_tipo_despesa');
+//                                Adicionados labels para fazer a troca de cores na seleção
+//                                var label_receita = $("#receita_label");
+//                                var label_despesa = $("#despesa_label");
+//
+//                                if (response.tipo_cd == 1) {
+//                                    radio_despesa.prop("checked", true);
+//                                    label_despesa.removeClass('label-default').addClass('label-important');
+//                                    label_receita.removeClass('label-success').addClass('label-default');
+//                                }
+//                                else {
+//                                    radio_receita.prop("checked", true);
+//                                    label_receita.removeClass('label-default').addClass('label-success');
+//                                    label_despesa.removeClass('label-important').addClass('label-default');
+//                                }
+//                                var valor = $.fn.autoNumeric.Format('lancamento_valor', response.valor + '');
+//                                $("#lancamento_valor").val(valor);
+//
+//                                var selectedDate = new Date((new Date).getFullYear(), (new Date).getMonth(), response.diavencimento);
+//                                $("#data_vencimento_picker").datepicker("setDate", selectedDate);
+//                                $("#data_vencimento_picker").datepicker({ format: 'dd-mm-yyyy' });
+//
+//                                $("#lancamento_category").select2('val',response.category_id).trigger("change");
+//                                $("#lancamento_centrodecusto").select2('val',response.centrodecusto_id).trigger("change");
+//                                $("#lancamento_category").select2('val', response.category_id);
+//                                $("#lancamento_centrodecusto").select2('val', response.centrodecusto_id);
+//                            })
+//                            .error(function () {
+//                                Erro ocorre quando não encontra nenhum registro
+//                            })
+//        }
+//    });
+//});
+//}

@@ -122,6 +122,7 @@ Misterbusinessfinance::Application.routes.draw do
        put :quitar
        put :estornar
 	   put :cancelar
+       get :fill
      end
 
     get :filter

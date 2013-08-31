@@ -302,6 +302,21 @@ class LancamentosController < ApplicationController
     @lancamento = Lancamento.new
   end
 
+  # Action utilizada para transformar lançamento rapido em lançamento
+  # GET /lancamentos/1/fill
+  def fill
+    @lancamento = Lancamento.new
+    lancamentorapido = Lancamentorapido.find(params[:id])
+
+    @lancamento.descricao = lancamentorapido.descricao
+    @lancamento.valor = lancamentorapido.valor
+    @lancamento.category = lancamentorapido.category
+    @lancamento.centrodecusto = lancamentorapido.centrodecusto
+    @lancamento.tipo = lancamentorapido.tipo
+    @lancamento.datavencimento = Date.new(Date.today.year, Date.today.month, lancamentorapido.diavencimento)
+    @lancamento.status = :aberto
+  end
+
   # DELETE /lancamentos/1
   # DELETE /lancamentos/1.json
   def destroy
