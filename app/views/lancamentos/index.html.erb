@@ -1,4 +1,60 @@
-﻿<div class="quadrante span12">
+﻿<%= content_for(:module) do %>
+    <div class="col-lg-1">
+      <div class="panel panel-default menu_ads text-center">
+        <div class="panel-body">
+          <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a class="mister-module-menu-item" href="#">Financeiro</a></li>
+            <li class=""><a class="mister-module-menu-item" href="#">Comercial</a></li>
+            <li class=""><a class="mister-module-menu-item" href="#">Compras</a></li>
+            <li class=""><a class="mister-module-menu-item" href="#">RH</a></li>
+            <li class=""><a class="mister-module-menu-item" href="#">Empresa</a></li>
+            <li class="">&nbsp;</li>
+            <li class="">&nbsp;</li>
+            <li class="">&nbsp;</li>
+            <li class="">&nbsp;</li>
+            <li class="">&nbsp;</li>
+            <li class="">&nbsp;</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-11">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="panel panel-default form">
+            <div class="panel-body">
+              <%= render :partial => 'form' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <%= render :partial => 'notifications' %>
+        </div>
+        <div class="col-lg-4">
+          <div class="panel panel-default reports">
+            <div class="panel-heading">Relatórios</div>
+            <div id="charts">
+                <%= render :partial => 'charts' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="messagePanel" class="alert alert-success">&nbsp;</div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-default grid">
+            <div class="panel-body">
+              <%= render :partial => 'grid' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+
+<div class="quadrante span12">
 <div id="lancamento_index">
         <div class="mister-quadrante-box span4">
           <div>

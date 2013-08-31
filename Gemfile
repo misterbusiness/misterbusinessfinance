@@ -22,6 +22,12 @@ gem 'wkhtmltopdf-binary'
 gem 'roo'
 gem 'jquery-datatables-rails' #, :github => 'rweng/jquery-datatables-rails'
 gem 'jquery-ui-rails'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+    :github => 'anjlab/bootstrap-rails'
+gem 'select2-bootstrap-css'
+gem 'compass-rails'
+#gem 'select2-sass-bootstrap-rails'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -32,11 +38,6 @@ group :development, :test do
   gem 'rspec-rails', '2.11.0'
   gem 'factory_girl_rails', '~> 1.1'
   gem 'log4r'
-
-  # gem 'ruby-debug-ide'
-  # gem 'debugger'
-  # gem 'ruby-debug19'
-  #  gem 'ruby-debug'
 end
 
 group :development do
@@ -48,9 +49,6 @@ end
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', ' 1.2.3'
 

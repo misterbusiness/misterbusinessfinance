@@ -1,42 +1,74 @@
-@import "bootstrap";
-body { padding-top: 60px; }
-@import "bootstrap-responsive";
+//@import "bootstrap";
+//body { padding-top: 60px; }
+//@import "bootstrap-responsive";
+
+//@iconSpritePath: 'twitter/bootstrap/glyphicons-halflings.png';
+//@iconWhiteSpritePath: 'twitter/bootstrap/glyphicons-halflings-white.png';
 
 // Override bootstrap styles
 
-.table
-{
-  margin-bottom: 0px;
-}
-
-.span12
+.container
   {
-  margin-left: 0px;
+  max-width: 100%;
 }
 
-.row-fluid [class*="span"]
+.alert
   {
-  margin-left: 1%;
+  padding-top:    7px;
+  padding-bottom: 7px;
+  padding-right:  20px;
+  padding-left:   5px;
+
+  margin-bottom: 10px;
 }
 
-.table-stripped tr.odd
-{
-  background-color: mediumspringgreen;
-}
-
-.table-stripped tr.even
+.navbar
   {
-  background-color: white;
+  //padding-top: 7px;
+  //padding-bottom: 7px;
+  //padding-right: 7px;
+  //padding-left: 7px;
+
+  //margin-bottom: 7px;
+  //margin-top: 7px;
+  //margin-right: 7px;
+  //margin-left: 7px;
 }
 
-.table-stripped tr.odd td.sorting_1
-  {
-  background-color: seagreen;
-  color: white;
-}
-
-.table-stripped tr.even td.sorting_1
-  {
-  background-color: mediumspringgreen;
-  color: black;
-}
+//
+//.table
+//{
+//  margin-bottom: 0px;
+//}
+//
+//.span12
+//  {
+//  margin-left: 0px;
+//}
+//
+//.row-fluid [class*="span"]
+//  {
+//  margin-left: 1%;
+//}
+//
+//.table-stripped tr.odd
+//{
+//  background-color: mediumspringgreen;
+//}
+//
+//.table-stripped tr.even
+//  {
+//  background-color: white;
+//}
+//
+//.table-stripped tr.odd td.sorting_1
+//  {
+//  background-color: seagreen;
+//  color: white;
+//}
+//
+//.table-stripped tr.even td.sorting_1
+//  {
+//  background-color: mediumspringgreen;
+//  color: black;
+//}

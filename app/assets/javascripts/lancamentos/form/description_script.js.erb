@@ -2,7 +2,7 @@
 function prepareDescricao(){
 
     var lancamentoDescricao = $("#lancamento_descricao");
-    buildSelect2("lancamento_descricao", "Entre com a descrição", '<%= Rails.application.routes.url_helpers.list_lancamentosrapidos_path %>');
+    buildSelect2("lancamento_descricao", "Descrição", '<%= Rails.application.routes.url_helpers.list_lancamentosrapidos_path %>');
 
     lancamentoDescricao.on("open", function () {
         if (lancamentoDescricao.val() != "") {

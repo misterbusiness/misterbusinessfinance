@@ -1,156 +1,136 @@
-<%= form_for(@lancamento, :remote => true, :class => "form-horizontal") do |f| %>
-    <% if @lancamento.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>
+<%= form_for @lancamento, :remote => true, :html => {:class => "form-horizontal"} do |f| %>
+    <!--
+    <% if @lancamento.errors.any? %>-->
+        <!--<div id="error_explanation">-->
+        <!--<h2><%= pluralize(@lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>-->
 
-          <ul>
-            <% @lancamento.errors.full_messages.each do |msg| %>
-                <li>
-                  <%= msg %>
-                </li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-    <div class="span12">
+        <!--<ul>-->
+        <!--
+        <% @lancamento.errors.full_messages.each do |msg| %>-->
+            <!--<li>-->
+            <!--<%= msg %>-->
+            <!--</li>-->
+            <!--
+        <% end %>-->
+        <!--</ul>-->
+        <!--</div>-->
+        <!--
+    <% end %>-->
 
-
-      <!-- *******************************  Descrição  *********************************************************** -->
-
-      <div class="span12" onload="loadDescription('<%= lancamentorapidos_path %>', '<%= lancamentos_path %>')">
-        <%= f.text_field :descricao, :as => :text, :class => "span10 mister-textbox" %>
+    <div class="form-group">
+      <!-- *******************************  Status  *********************************************************** -->
+      <div class="col-lg-9">
+        <div class="label <%= @lancamento.aberto? ? "label-success" : "label-default" %>">Aberto</div>
+        <div class="label <%= @lancamento.quitado? ? "label-primary" : "label-default" %>">Quitado</div>
+        <div class="label <%= @lancamento.cancelado? ? "label-danger" : "label-default" %>">Cancelado</div>
+        <div class="label <%= @lancamento.estornado? ? "label-warning" : "label-default" %>">Estornado</div>
       </div>
 
-
-      <!-- ******************************* Data vencimento ******************************************************  -->
-      <div class="span12">
-        <div class="input-prepend">
-          <span class="add-on"><i class="icon-calendar"></i></span>
-
-          <%= f.text_field :datavencimento, :as => :text, :id => :data_vencimento_picker, "data-mask" => "99-99-9999",
-                           :placeholder => "Data de vencimento", :class => "span8",
-                           :value => (@lancamento.datavencimento.strftime("%d-%m-%Y") unless @lancamento.nil? or @lancamento.datavencimento.nil?) %>
-        </div>
-      </div>
-
-      <%= hidden_field_tag :datavencimento, "", :id => 'datavencimento_hidden' %>
-
-      <!-- ******************************** Valor *************************************************************** -->
-      <div class="span12">
-        <div class="span6 input-prepend">
-
-          <span class="add-on">R$</span>
-          <%= f.text_field :valor, :class => 'auto span8', :alt => 'n0p3c2S', :style => 'text-align:right;',
-                           :placeholder => "Valor" %>
-        </div>
-
-
-        <!-- ********************************** Tipo **************************************************************** -->
-        <div class="span2">
+      <!-- ********************************** Tipo **************************************************************** -->
+      <div class="col-lg-3">
+        <div class="col-lg-6">
           <%= f.radio_button :tipo, :receita, :style => "float:left; display:none" %>
           <a id="receita_label" class="label label-success" style="color:white"> Receita </a>
         </div>
-        <div class="span2">
+        <div class="col-lg-6">
           <%= f.radio_button :tipo, :despesa, :style => "float:left; display:none" %>
           <a id="despesa_label" class="label label-default" style="color:white"> Despesa </a>
         </div>
       </div>
+    </div>
 
-      <!-- ********************************* Categoria ************************************************************ -->
-      <div class="span12">
-        <div class="span6">
-          <%= f.text_field :category_id, :as => :text, :id => "lancamento_category" %>
+    <!-- *******************************  Descrição  *********************************************************** -->
+
+    <div class="form-group">
+      <!--onload="loadDescription('<%= lancamentorapidos_path %>', '<%= lancamentos_path %>')"-->
+
+      <div class="col-lg-8">
+        <%= f.text_field :descricao, :as => :text, :class => "form-control " %>
+      </div>
+
+      <!-- ******************************** Valor *************************************************************** -->
+      <div class="col-lg-4">
+        <div class="input-group">
+          <span class="input-group-addon">R$</span>
+          <%= f.text_field :valor, :class => 'auto col-lg-12 form-control ',
+                           :alt => 'n0p3c2S', :style => 'text-align:right;',
+                           :placeholder => "Valor" %>
+
         </div>
+      </div>
+    </div>
 
+    <%= hidden_field_tag :datavencimento, "", :id => 'datavencimento_hidden' %>
+
+    <div class="form-group">
+
+      <div class="col-lg-4">
+        <!-- ********************************* Categoria ************************************************************ -->
+        <%= f.text_field :category_id, :as => :text, :id => "lancamento_category",
+                         :class => 'form-control' %>
         <%= hidden_field_tag :category, "", :id => 'category_hidden' %>
+      </div>
 
+      <div class="col-lg-4">
         <!-- ***************************** Centro de custo ********************************************************** -->
-        <div class="span5">
-          <%= f.text_field :centrodecusto_id, :as => :text, :id => "lancamento_centrodecusto" %>
-        </div>
+        <%= f.text_field :centrodecusto_id, :as => :text, :id => "lancamento_centrodecusto",
+                         :class => 'form-control ' %>
         <%= hidden_field_tag :centrodecusto, "", :id => "centrodecusto_hidden" %>
       </div>
 
+      <!-- ******************************* Data vencimento ******************************************************  -->
+      <div class="col-lg-4">
+        <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
 
-    </div>
-    <div class="span12">
-      <div class="accordion" id="accordion2" style="width:400px;">
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-              <i class=" icon-info-sign"></i> Opções adicionais
-            </a>
-          </div>
-          <div id="collapseOne" class="accordion-body collapse">
-            <div class="accordion-inner">
-
-              <!-- ******************************** Parcelamento ********************************************************* -->
-              <label>Parcelamento</label>
-
-              <div class="container">
-                <div class="span1">
-                  <input type="text" placeholder="Nº de parcelas" id="numero_parcelas"
-                         class="span1"/>
-                  <%= hidden_field_tag :numParcelas, 0, :id => "numero_parcelas_hidden" %>
-                </div>
-                <div class="span2">
-                  <input type="text" placeholder="Frequencia" id="frequencia_parcelas" style="width:120px;"/>
-                  <%= hidden_field_tag :freqParcelas, "Semanal", :id => "frequencia_parcelas_hidden" %>
-                </div>
-                <div class="span1">
-                  <label id="total_parcela">0</label>
-                </div>
-              </div>
-
-              <!-- ******************************* Agendamento *********************************************************** -->
-              <label>Agendamento</label>
-
-              <div class="container">
-                <div class="span1">
-                  <input type="text" placeholder="Nº de repetições" id="numero_agendamentos"
-                         class="span1"/>
-                  <%= hidden_field_tag :numAgendamentos, 0, :id => "numero_agendamentos_hidden" %>
-                </div>
-                <div class="span2">
-                  <input type="text" placeholder="Frequencia" id="frequencia_agendamentos" style="width:120px;"/>
-                  <%= hidden_field_tag :freqAgendamentos, "Semanal", :id => "frequencia_agendamentos_hidden" %>
-                </div>
-                <div class="span1">
-                  <label id="total_agendamento">0</label>
-                </div>
-              </div>
-
-              <!-- ********************************* Quitado Checkbox ***************************************************** -->
-              <div class="container">
-                <label class="checkbox">
-                  <input id="quitado_checkbox" type="checkbox"> Quitado? &nbsp;&nbsp;
-                </label>
-                <%= hidden_field_tag :quitado, false, :id => "quitado_hidden" %>
-              </div>
-
-            </div>
-          </div>
+            </span>
+          <%= f.text_field :datavencimento, :as => :text, :id => :data_vencimento_picker,
+                           #"data-mask" => "99-99-9999",
+                           :placeholder => "Data de vencimento",
+                           :class => "form-control ",
+                           :value => (@lancamento.datavencimento.strftime("%d-%m-%Y") unless @lancamento.nil? or @lancamento.datavencimento.nil?) %>
         </div>
       </div>
     </div>
 
+    <div class="col-lg-12 form-group">
+      <div class="panel mister-panel panel-default">
+        <div class="panel-body">
+          <!--<label>Parcelamento</label>-->
+            <div class="col-lg-6">
+              <div class="col-lg-6">
+                <input class="form-control" type="text" placeholder="Parcelas" id="numero_parcelas"/>
+              </div>
+              <div class="col-lg-6">
+                <input class="form-control" type="text" placeholder="Frequencia" id="frequencia_parcelas"/>
+              </div>
+
+              <%= hidden_field_tag :numParcelas, 0, :id => "numero_parcelas_hidden" %>
+              <%= hidden_field_tag :freqParcelas, "Semanal", :id => "frequencia_parcelas_hidden" %>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="col-lg-6">
+                <input class="form-control" type="text" placeholder="Repetições" id="numero_agendamentos"/>
+              </div>
+              <div class="col-lg-6">
+                <input class="form-control" type="text" placeholder="Frequencia" id="frequencia_agendamentos"/>
+              </div>
+
+              <%= hidden_field_tag :numAgendamentos, 0, :id => "numero_agendamentos_hidden" %>
+              <%= hidden_field_tag :freqAgendamentos, "Semanal", :id => "frequencia_agendamentos_hidden" %>
+            </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ********************************** Submit ************************************************** -->
-    <div class="span12">
-        <div id="lancamento_quitado" class="actions span3">
-          <%= f.submit :class => "btn btn-primary", :id => "submit_btn" %>
-        </div>
-      <!--
-      <div class="span3">
-          <%= button_to :quitar, '#' %>
-      </div>
-      <div class="span3">
+    <div class="form-group pull-right">
 
+      <div id="lancamento_quitado" class="mister-submit-button">
+        <%= f.submit :class => "btn btn-primary", :id => "submit_btn" %>
       </div>
-      <div class="span3">
-
-      </div>
-      -->
     </div>
 
 <% end %>

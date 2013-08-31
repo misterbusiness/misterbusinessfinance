@@ -1,124 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mister Business</title>
-  <!--<title><%= content_for?(:title) ? yield(:title) : "Myapp" %></title> -->
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <title>MisterBusiness Finance</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- Bootstrap -->
+  <link href="assets/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="assets/bootstrap_and_overrides.css" rel="stylesheet" media="screen">
 
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <!-- Custom CSS -->
+  <link href="assets/custom.css" rel="stylesheet" media="screen">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/favicon.ico">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="assets/html5shiv.js"></script>
+  <script src="assets/respond.min.js"></script>
+  <![endif]-->
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <%= yield(:head) %>
 </head>
-<body style="padding-top: 10px;height: 100%;width:  100%">
-<!--<table border=1 height="750px" width="1550px">-->
-<div class="container-fluid" style="height: 100%">
-  <div class="row-fluid" style="height: 100%">
-    <div class="span1" style="height: 100%">
-      <div class="span12" style="height: 10%">
-        <!-- <b>Mister Business</b> -->
-        <%=  image_tag "Logo mister.png", size: '102' %>
-      </div>
+<body>
+<%= render 'layouts/logo' %>
+<%= render 'layouts/navigation' %>
+<%= render 'layouts/user' %>
+<%= render 'layouts/script' %>
+<%= render 'layouts/footer' %>
 
-      <div class="span12" style="height: 50%">
-        <ul class="nav nav-pills">
-          <li class="active span12"><a href="#">Financeiro</a></li>
-          <li class="span12"><a href="#">Comercial</a></li>
-          <li class="span12"><a href="#">Compras</a></li>
-          <li class="span12"><a href="#">RH</a></li>
-          <li class="span12"><a href="#">Empresa</a></li>
-          <li class="span12">&nbsp;</li>
-          <li class="span12">&nbsp;</li>
-          <li class="span12">&nbsp;</li>
-          <li class="span12">&nbsp;</li>
-          <li class="span12">&nbsp;</li>
-          <li class="span12">&nbsp;</li>
-        </ul>
-      </div>
-      <div class="span12" style="height: 40%">
-        <ul>
-          <li class="span12"><p>Anúncios</p></li>
-          <li class="span12">&nbsp;</li>
-          <li class="span12">&nbsp;</li>
-          <li class="span12">&nbsp;</li>
-          <li class="span12">&nbsp;</li>
-          <li class="span12">&nbsp;</li>
-          <li class="span12">&nbsp;</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mister-span span11">
-      <div class="span1" style="height: 100%"> Bem-vindo, Usuário</div>
-      <div class="span11" style="height: 100%">
-        <ul class="nav nav-pills">
-          <li class="<%= 'active' if current_page?(lancamentos_path) %>">
-            <a href="<%= lancamentos_path %>">Lançamentos</a>
-          </li>
-          <li class="<%= 'active' if current_page?(lancamentos_reports_fluxo_de_caixa_path) %>">
-            <a href="<%= lancamentos_reports_fluxo_de_caixa_path %>">Fluxo de caixa</a>
-          </li>
-          <li class="<%= 'active' if current_page?(lancamentos_reports_resultados_path) %>">
-            <a href="<%= lancamentos_reports_resultados_path %>">Resultados</a>
-          </li>
-          <li class="">
-            <a href="#reportsModal" role="button" data-toggle="modal" onclick="selectChartTab('reportsReceita')">
-              Relatórios
-            </a>
-          </li>
-          <li class="<%= 'active' if current_page?(targets_path) %>">
-            <a href="<%= targets_path %>">Metas</a>
-          </li>
-          <li class="<%= 'active' if current_page?(lancamentorapidos_path) %>">
-            <a href="<%= lancamentorapidos_path %>">Lançamentos Rápidos</a>
-          </li>
-          <li class="<%= 'active' if current_page?(categories_path) %>">
-            <a href="<%= categories_path %>">Categorias</a>
-          </li>
-          <li class="<%= 'active' if current_page?(centrodecustos_path) %>">
-            <a href="<%= centrodecustos_path %>">Centros de custo</a>
-          </li>
-          <li class="<%= 'active' if current_page?(import_lancamentos_path) %>">
-            <a href="<%= import_lancamentos_path %>">Importar</a>
-          </li>
-          <li>
-            <a href="#">Configurações</a>
-          </li>
-        </ul>
-      </div>
-      <div class="span12" id="container">
-        <div id="flash_notice" style="display:none" class="span12"></div>
-        <div>
-          <%= yield %>
-        </div>
-      </div>
-    </div>
+<div class="container">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <%= yield(:logo) %>
+    <%= yield(:head) %>
+  </nav>
 
+  <div class="row">
+    <%= yield(:module) %>
   </div>
+
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <%= yield(:user) %>
+    <%= yield(:footer) %>
+  </nav>
 </div>
-</div>
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span12 well"><b>MRBusiness. Todos os direitos reservados</b></div>
-  </div>
-</div>
-<!-- #########################################################################################################
-    Relatórios
-#############################################################################################################-->
-<!-- ############################################################################
-      Google library to load reports
-#################################################################################-->
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type="text/javascript">
-    google.load('visualization', '1', {packages: ['table']});
-    google.load('visualization', '1.0', {packages: ['controls']});
-    google.load('visualization', '1.0', {'packages': ['corechart']});
-</script>
-<%= render 'lancamentos/reports' %>
+
+<%= yield(:script) %>
+
 </body>
 </html>
