@@ -212,9 +212,11 @@ class LancamentosController < ApplicationController
     notif_receitas_atrasadas = Lancamento.receitas.abertos.ate(Date.today)
     if notif_receitas_atrasadas.count > 0
       @notificacoes[Random.new_seed] = {
-          :text => sprintf('Você tem %d Receitas Atrasadas.', notif_receitas_atrasadas.count),
-          :can_close => true,
-          :class => 'notification_information',
+          :text => sprintf('Receitas Atrasadas'),
+          :count => notif_receitas_atrasadas.count,
+          :value => notif_receitas_atrasadas.inject(0){|sum, lancamento| sum+lancamento.valor},
+          :can_close => false,
+          :class => 'alert alert-dismissable alert-warning',
           :filter_string => sprintf('receita=S&despesa=N&datavencimentode=1970-01-01&datavencimentoate=%s&status=%s', Date.today.strftime('%Y-%m-%d'), Lancamento.aberto)
       }
     end
@@ -223,9 +225,11 @@ class LancamentosController < ApplicationController
     notif_despesas_vencidas = Lancamento.despesas.abertos.ate(Date.today)
     if notif_receitas_atrasadas.count > 0
       @notificacoes[Random.new_seed] = {
-          :text => sprintf('Você tem %d Despesas Vencidas.', notif_despesas_vencidas.count),
-          :can_close => true,
-          :class => 'notification_success',
+          :text => sprintf('Despesas Vencidas'),
+          :count => notif_despesas_vencidas.count,
+          :value => notif_despesas_vencidas.inject(0){|sum, lancamento| sum+lancamento.valor},
+          :can_close => false,
+          :class => 'alert alert-dismissable alert-danger',
           :filter_string => sprintf('receita=N&despesa=S&datavencimentode=1970-01-01&datavencimentoate=%s&status=%s', Date.today.strftime('%Y-%m-%d'), Lancamento.aberto)
       }
     end
@@ -234,9 +238,12 @@ class LancamentosController < ApplicationController
     notif_receitas_a_receber = Lancamento.receitas.abertos.range(Date.today, Date.today + Configurable.number_of_future_days)
     if notif_receitas_a_receber.count > 0
       @notificacoes[Random.new_seed] = {
-          :text => sprintf('Você tem %d Receitas a receber nos próximos %d dias.', notif_receitas_a_receber.count, Configurable.number_of_future_days),
-          :can_close => true,
-          :class => 'notification_warning',
+          #:text => sprintf('Receitas a receber em %d dias.', Configurable.number_of_future_days),
+          :text => sprintf('Receitas a receber'),
+          :count => notif_receitas_a_receber.count,
+          :value => notif_receitas_a_receber.inject(0){|sum, lancamento| sum+lancamento.valor},
+          :can_close => false,
+          :class => 'alert alert-dismissable alert-success',
           :filter_string => sprintf('receita=S&despesa=N&datavencimentode=%s&datavencimentoate=%s&status=%s', Date.today.strftime('%Y-%m-%d'), (Date.today + Configurable.number_of_future_days).strftime('%Y-%m-%d'), Lancamento.aberto)
       }
     end
@@ -245,12 +252,30 @@ class LancamentosController < ApplicationController
     notif_despesas_vincendas = Lancamento.despesas.abertos.range(Date.today, Date.today + Configurable.number_of_future_days)
     if notif_despesas_vincendas.count > 0
       @notificacoes[Random.new_seed] = {
-          :text => sprintf('Você tem %d Despesas a vencer nos próximos %d dias.', notif_despesas_vincendas.count, Configurable.number_of_future_days),
-          :can_close => true,
-          :class => 'notification_attention',
+          #:text => sprintf('Despesas a vencer em %d dias.', Configurable.number_of_future_days),
+          :text => sprintf('Despesas a vencer'),
+          :count => notif_despesas_vincendas.count,
+          :value => notif_despesas_vincendas.inject(0){|sum, lancamento| sum+lancamento.valor},
+          :can_close => false,
+          :class => 'alert alert-dismissable alert-warning',
           :filter_string => sprintf('receita=N&despesa=S&datavencimentode=%s&datavencimentoate=%s&status=%s', Date.today.strftime('%Y-%m-%d'), (Date.today + Configurable.number_of_future_days).strftime('%Y-%m-%d'), Lancamento.aberto)
       }
     end
+  end
+
+  # Action utilizada para transformar lançamento rapido em lançamento
+  # GET /lancamentos/1/fill
+  def fill
+    @lancamento = Lancamento.new
+    lancamentorapido = Lancamentorapido.find(params[:id])
+
+    @lancamento.descricao = lancamentorapido.descricao
+    @lancamento.valor = lancamentorapido.valor
+    @lancamento.category = lancamentorapido.category
+    @lancamento.centrodecusto = lancamentorapido.centrodecusto
+    @lancamento.tipo = lancamentorapido.tipo
+    @lancamento.datavencimento = Date.new(Date.today.year, Date.today.month, lancamentorapido.diavencimento)
+    @lancamento.status = :aberto
   end
 
   def new
