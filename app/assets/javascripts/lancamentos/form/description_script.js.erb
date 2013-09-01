@@ -12,12 +12,21 @@ function prepareDescricao(){
     });
     lancamentoDescricao.on("select2-selecting", function(e)
     {
-//        $.get("/lancamentos/" + e.val + "/fill");
-        $.get("/lancamentos/9479/edit");
+        try
+        {
+            $.get("/lancamentos/" + e.val + "/fill");
+        }
+        catch (err) {
+            var txt = "There was an error on this page.\n\n";
+            txt += "Error description: " + err.message + "\n\n";
+            txt += "Click OK to continue.\n\n";
+            alert(txt);
+        }
+
+//        $.get("/lancamentos/9479/edit");
         //alert("selecting val="+ e.val+" choice="+ JSON.stringify(e.choice));
     });
 }
-
 //    lancamentoDescricao.change(function () {
 //        var selectedValue = $("#lancamento_descricao").val();
 //        if (selectedValue != "") {

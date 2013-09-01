@@ -1,5 +1,7 @@
 
-$("#lancamento_form").html("<%= escape_javascript(render :partial => 'form')%>");
+try
+{
+    $("#lancamento_form").html("<%= escape_javascript(render(:partial => 'form')) %>");
 
 //var freqRepeticoes = $("#frequencia_agendamentos");
 //var freqParcelas = $("#frequencia_parcelas");
@@ -21,8 +23,15 @@ $("#lancamento_form").html("<%= escape_javascript(render :partial => 'form')%>")
 // É necessário o carregamento da formatação já que o mesmo já foi executado pelo form
 //formatedValue = $.fn.autoNumeric.Format('lancamento_valor', $('#lancamento_valor').autoNumeric('get').val());
 
-drawCharts();
-prepareForm();
-
+    drawCharts();
+    prepareForm();
+}
+catch (err) {
+    var txt = "There was an error on this page.\n\n";
+    txt += "Error description: " + err.message + "\n\n";
+    txt += "Click OK to continue.\n\n";
+    alert(err.toString());
+    alert(txt);
+}
 //$("#lancamento_valor").val(formatedValue);
 //$("#lancamento_valor").blur();

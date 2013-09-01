@@ -60,10 +60,7 @@
       </div>
     </div>
 
-    <%= hidden_field_tag :datavencimento, "", :id => 'datavencimento_hidden' %>
-
     <div class="form-group">
-
       <div class="col-lg-4">
         <!-- ********************************* Categoria ************************************************************ -->
         <%= f.text_field :category_id, :as => :text, :id => "lancamento_category",
@@ -90,6 +87,7 @@
                            :placeholder => "Data de vencimento",
                            :class => "form-control ",
                            :value => (@lancamento.datavencimento.strftime("%d-%m-%Y") unless @lancamento.nil? or @lancamento.datavencimento.nil?) %>
+          <%= hidden_field_tag :datavencimento, "", :id => 'datavencimento_hidden' %>
         </div>
       </div>
     </div>

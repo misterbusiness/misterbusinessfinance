@@ -23,7 +23,8 @@ function prepareParcelamento(){
 
     numeroParcelas.blur(function () {
 /// Calculo da parcela
-        var dataVencimento = $("#datepicker").val();
+        var dataVencimento = $("#data_vencimento_picker").val();
+        alert("parcelamento. " + dataVencimento);
         var valorParcelas = $.fn.autoNumeric.Strip('lancamento_valor');
         var agendamentoBox = $("#numero_agendamentos");
         var agendamentoFreq = $("#frequencia_agendamentos");
