@@ -24,14 +24,16 @@ function prepareParcelamento(){
     numeroParcelas.blur(function () {
 /// Calculo da parcela
         var dataVencimento = $("#data_vencimento_picker").val();
-        alert("parcelamento. " + dataVencimento);
         var valorParcelas = $.fn.autoNumeric.Strip('lancamento_valor');
         var agendamentoBox = $("#numero_agendamentos");
         var agendamentoFreq = $("#frequencia_agendamentos");
 
         if (numeroParcelas.val() > 0) {
             var matematics = Math;
-            $("#total_parcela").text(matematics.abs(valorParcelas) / numeroParcelas.val());
+            var calculoParecela = matematics.abs(valorParcelas) / numeroParcelas.val();
+            calculoParecela = calculoParecela.toFixed(2);
+            $("#total_parcela").text("R$ " +calculoParecela);
+
 
 
             if (numeroParcelas.val() > 1) {

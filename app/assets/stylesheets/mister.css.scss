@@ -7,14 +7,15 @@ body
 
 .notifications
   {
-  height: 250px;
+  height: 270px;
   /*height: 250px;*/
   overflow: auto;
 }
 
 .reports
   {
-  height: 250px;
+  height: 270px;
+  //height: 50%;
 }
 
 .grid
@@ -36,7 +37,7 @@ body
 
 .form
   {
-  height: 250px;
+  height: 270px;
 }
 
 .hundred_percent
@@ -157,6 +158,14 @@ body
 
 .mister-table-btn
 {
+  color: white !important;
+  width: 100%;
+  z-index: 99;
+}
+
+.mister-table-btn2
+  {
+  color: darkslategray !important;
   width: 100%;
   z-index: 99;
 }

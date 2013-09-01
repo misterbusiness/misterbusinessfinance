@@ -7,6 +7,26 @@
 
 // Override bootstrap styles
 
+
+//a:hover { text-decoration: none; }
+//
+//.carousel-control:hover, .carousel-control:focus {
+//  color: #FFFFFF;
+//  opacity: 0.9;
+//  text-decoration: none;
+//}
+//
+//.carousel-control:hover, .carousel-control:focus a {
+//  color: #FFFFFF;
+//  opacity: 0.9;
+//  text-decoration: none;
+//}
+
+.breadcrumb
+  {
+  margin: 2px;
+}
+
 .container
   {
   max-width: 100%;
@@ -51,24 +71,25 @@
 //  margin-left: 1%;
 //}
 //
-//.table-stripped tr.odd
-//{
-//  background-color: mediumspringgreen;
-//}
-//
-//.table-stripped tr.even
-//  {
-//  background-color: white;
-//}
-//
-//.table-stripped tr.odd td.sorting_1
-//  {
-//  background-color: seagreen;
-//  color: white;
-//}
-//
-//.table-stripped tr.even td.sorting_1
-//  {
-//  background-color: mediumspringgreen;
-//  color: black;
-//}
+.table-stripped tr.odd
+{
+  background-color: RGB(240,240,240);
+  color: black;
+}
+
+.table-stripped tr.even
+  {
+  background-color: white;
+}
+
+.table-stripped tr.odd td.sorting_1
+  {
+  background-color: lightgray;;
+  color: back;
+}
+
+.table-stripped tr.even td.sorting_1
+  {
+  background-color: RGB(240,240,240);;
+  color: black;
+}

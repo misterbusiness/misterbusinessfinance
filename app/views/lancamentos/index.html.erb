@@ -22,7 +22,7 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="panel panel-default form">
-            <div class="panel-body">
+            <div class="panel-body" id="lancamento_form">
               <%= render :partial => 'form' %>
             </div>
           </div>
@@ -32,7 +32,20 @@
         </div>
         <div class="col-lg-4">
           <div class="panel panel-default reports">
-            <div class="panel-heading">Relatórios</div>
+            <div class="panel-heading">
+              <p>Estatísticas</p>
+              <!--<div class="col-lg-12">-->
+                <!--<div class="col-lg-9">-->
+
+                <!--</div>-->
+                <!--<a href="#reportsModal" role="button" class="btn btn-default btn-sm" data-toggle="modal" onclick="selectChartTab('reportsDespesa')">-->
+                  <!--<span class="glyphicon glyphicon-list-alt"></span>-->
+                <!--</a>-->
+                <!--<a href="<%= lancamentos_reports_fluxo_de_caixa_path %>" class="btn btn-default btn-sm" role="button">-->
+                  <!--<span class="glyphicon glyphicon-usd"></span>-->
+                <!--</a>-->
+              <!--</div>-->
+            </div>
             <div id="charts">
                 <%= render :partial => 'charts' %>
             </div>
@@ -44,7 +57,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="panel panel-default grid">
-            <div class="panel-body">
+            <div class="panel-body" id="lancamento_grid">
               <%= render :partial => 'grid' %>
             </div>
           </div>
@@ -54,43 +67,43 @@
 <% end %>
 
 
-<div class="quadrante span12">
-<div id="lancamento_index">
-        <div class="mister-quadrante-box span4">
-          <div>
-            <div class="span12 mister-quadrante-label" style="background-color: green">Formulário</div>
-            <div id="lancamento_form" class="span12"><%= render :partial => 'form' %></div>
-          </div>
-        </div>
+<!--<div class="quadrante span12">-->
+<!--<div id="lancamento_index">-->
+        <!--<div class="mister-quadrante-box span4">-->
+          <!--<div>-->
+            <!--<div class="span12 mister-quadrante-label" style="background-color: green">Formulário</div>-->
+            <!--<div id="lancamento_form" class="span12"><%= render :partial => 'form' %></div>-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="mister-quadrante-box span4 ">
-          <div class="span12 mister-quadrante-label" style="background-color: green">Notificações</div>
-          <div class="span12">
-            <%= render 'notifications' %>
-          </div>
-        </div>
+        <!--<div class="mister-quadrante-box span4 ">-->
+          <!--<div class="span12 mister-quadrante-label" style="background-color: green">Notificações</div>-->
+          <!--<div class="span12">-->
 
-        <div class="mister-quadrante-box span4 ">
-          <div class="span12 mister-quadrante-label" >Gráficos</div>
-          <div id="charts" class="span12">
-            <%= render 'charts' %>
-          </div>
-        </div>
-  </div>
-  <div style="width: 1%; float:left">&nbsp;</div>
-</div>
-  </br>
-<div class="span12" style="height: 2px;" ></div>
-<div class="quadrante mister-quadrante-box">
-  <div class="span12 mister-quadrante-label" >Grid</div>
-  <div style="width: 100%; float: none">
+          <!--</div>-->
+        <!--</div>-->
 
-  <div class="span12"  id="lancamento_grid">
-      <%= render :partial => 'grid' %>
-  </div>
+        <!--<div class="mister-quadrante-box span4 ">-->
+          <!--<div class="span12 mister-quadrante-label" >Gráficos</div>-->
+          <!--<div id="charts" class="span12">-->
 
-  <div id="table_div"></div>
+          <!--</div>-->
+        <!--</div>-->
+  <!--</div>-->
+  <!--<div style="width: 1%; float:left">&nbsp;</div>-->
+<!--</div>-->
+  <!--</br>-->
+<!--<div class="span12" style="height: 2px;" ></div>-->
+<!--<div class="quadrante mister-quadrante-box">-->
+  <!--<div class="span12 mister-quadrante-label" >Grid</div>-->
+  <!--<div style="width: 100%; float: none">-->
+
+  <!--<div class="span12"  id="lancamento_grid">-->
+
+  <!--</div>-->
+
+  <!--<div id="table_div"></div>-->
 
 
-</div>
-</div>
+<!--</div>-->
+<!--</div>-->

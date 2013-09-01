@@ -597,4 +597,37 @@ class LancamentosController < ApplicationController
       flash[:notice] = sprintf('%d de %d registros importados!', success, lastrow-1)
     end
   end
+
+
+  #### API CODE
+
+  def getAgendamentoEndDate
+    startDate = params[:startDate]
+    frequencia = params[:frequencia]
+    numRepeticoes = params[:numRepeticoes]
+
+    if !startDate.nil? and !frequencia.nil? and !numRepeticoes.nil?
+      numRepeticoes = numRepeticoes.to_i
+      startDate = DateTime.parse(startDate)
+      endDate = case frequencia
+                     when 'Semanal' then
+                        startDate + (numRepeticoes).weeks
+                     when 'Mensal' then
+                        startDate + (numRepeticoes).months
+                     when 'Semestral' then
+                        startDate + (numRepeticoes*6).months
+                     when 'Anual' then
+                          startDate + (numRepeticoes).years
+                     else
+                          startDate
+                end
+      render :json => { :valor => endDate.strftime('%d-%m-%Y')}
+    else
+      endDate = startDate
+      render :json => { :valor => endDate}
+    end
+
+
+  end
+
 end

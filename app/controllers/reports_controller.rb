@@ -40,8 +40,8 @@ class ReportsController < ApplicationController
           :options => {
               :colors => ['green', 'red', 'blue'],
               :title => 'Receita - Estatisticas',
-              :width => '400',
-              :height => '250',
+              #:width => '325',
+              #:height => '250',
               :hAxis => {:slantedText => 'true', :slantedTextAngle => '30'}
           },
           :cols => [['string', 'mes'], ['number', 'valor']],
@@ -67,8 +67,8 @@ class ReportsController < ApplicationController
           :options => {
               :colors => ['red'],
               :title => 'Despesa Realizada',
-              :width => '400',
-              :height => '250',
+              #:width => '400',
+              #:height => '250',
               :hAxis => {:slantedText => 'true', :slantedTextAngle => '30'}
           },
           :cols => [['string', 'mes'], ['number', 'valor']],
@@ -95,8 +95,8 @@ class ReportsController < ApplicationController
           :options => {
               :colors => ['green', 'red', 'blue'],
               :title => 'Estatisticas - Caixa',
-              :width => '400',
-              :height => '300'
+              #:width => '400',
+              #:height => '300'
           },
           :cols => [['string', 'mes'], ['number', 'valor']],
           :rows => @json_rows

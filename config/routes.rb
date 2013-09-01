@@ -129,6 +129,7 @@ Misterbusinessfinance::Application.routes.draw do
 
   end
 
+  match 'lancamentos/api/getAgendamentoEndDate', to: 'lancamentos#getAgendamentoEndDate', :via => :get
   match 'filter', to: 'lancamentos#filter', :via => :get
   resources :lancamentos
 

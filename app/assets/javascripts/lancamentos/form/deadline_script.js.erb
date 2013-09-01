@@ -6,4 +6,15 @@ function prepareDatavencimento(){
         todaybtn: true
     });
 //});
+    $('#data_vencimento_picker').change(function(){
+        try
+        {
+            agendamentoEndDate();
+        }
+        catch (err)
+        {
+            alert(err.message);
+        }
+    });
+
 }

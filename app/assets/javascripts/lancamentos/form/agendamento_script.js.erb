@@ -27,28 +27,30 @@ function prepareAgendamento(){
     numeroRepeticoes.blur(function () {
 
         var dataVencimento = $("#data_vencimento_picker").val();
-        alert("agendamento. " + dataVencimento);
         var numeroRepeticoes = $("#numero_agendamentos");
         var freqRepeticoes = $("#frequencia_agendamentos");
         var numeroParcelas = $("#numero_parcelas");
         var freqParcelas = $("#frequencia_parcelas");
 
-        $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
-        $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
+//        $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
+//        $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
+//
+//        $("#numero_parcelas_hidden").val(numeroParcelas.val());
+//        $("#frequencia_parcelas_hidden").val(freqParcelas.val());
 
-        $("#numero_parcelas_hidden").val(numeroParcelas.val());
-        $("#frequencia_parcelas_hidden").val(freqParcelas.val());
+//        $("#datavencimento_hidden").val(dataVencimento);
 
-        $("#datavencimento_hidden").val(dataVencimento);
+//        var getdateUrl = '/support/datestring'
+//        + '?numRepeticoes=' + numeroRepeticoes.val() + '&freqRepeticoes=' + freqRepeticoes.val()
+//                + '&datavencimento=' + dataVencimento;
 
-        var getdateUrl = '/support/datestring'
-        + '?numRepeticoes=' + numeroRepeticoes.val() + '&freqRepeticoes=' + freqRepeticoes.val()
-                + '&datavencimento=' + dataVencimento;
+//        $.getJSON(getdateUrl, function(data){
+//            alert("aqui3")
+//            $("#total_agendamento").text(data);
+//        });
 
-        $.getJSON(getdateUrl, function(data){
-            alert("aqui3")
-            $("#total_agendamento").text(data);
-        });
+        /// Calcula a data final de agendamento
+        agendamentoEndDate();
 
 
         if (numeroRepeticoes.val() > 1) {
@@ -76,11 +78,13 @@ function prepareAgendamento(){
 
     freqRepeticoes.change(function () {
 
-        $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
-        $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
-        $("#frequencia_parcelas_hidden").val(freqParcelas.val());
-        $("#numero_parcelas_hidden").val(numeroParcelas.val());
-        $("#datavencimento_hidden").val(dataVencimento);
+//        $("#frequencia_agendamentos_hidden").val(freqRepeticoes.val());
+//        $("#numero_agendamentos_hidden").val(numeroRepeticoes.val());
+//        $("#frequencia_parcelas_hidden").val(freqParcelas.val());
+//        $("#numero_parcelas_hidden").val(numeroParcelas.val());
+//        $("#datavencimento_hidden").val(dataVencimento);
+
+        agendamentoEndDate();
     });
 
     numeroRepeticoes.keydown(function (event) {
@@ -103,4 +107,47 @@ function prepareAgendamento(){
     });
 
 //});
+}
+
+//function agendamentoEndDate(startDate, frequencia, numRepeticoes)
+function agendamentoEndDate()
+{
+    /// Procura pelos valores para fazer o calculo
+    var startDate = $("#data_vencimento_picker").val();
+    var numRepeticoes = $("#numero_agendamentos").val();
+    var freqRepeticoes = $("#frequencia_agendamentos").val();
+
+    var url = "lancamentos/api/getAgendamentoEndDate?";
+
+    if (startDate == undefined || startDate == "")
+    {
+        startDate = <%= Date.today.strftime("%d-%m-%Y") %>
+    }
+
+    if (freqRepeticoes == undefined || freqRepeticoes == "")
+    {
+        freqRepeticoes = "Mensal"
+    }
+
+    if (numRepeticoes == undefined || numRepeticoes ==  "")
+    {
+        numRepeticoes = 0
+    }
+
+    if (freqRepeticoes !== undefined && numRepeticoes !== undefined && startDate !== undefined)
+    {
+        if(numRepeticoes > 1)
+        {
+            url += "startDate=" + startDate
+            url += "&frequencia=" + freqRepeticoes
+            url += "&numRepeticoes=" + numRepeticoes
+            $.getJSON(url, function(data)
+            {
+                if (data !== undefined)
+                {
+                    $("#total_agendamento").text(data.valor);
+                }
+            });
+        }
+    }
 }

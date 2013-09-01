@@ -191,27 +191,27 @@ class Lancamento < ActiveRecord::Base
   def estornar_format
     if self.estornado? or self.quitado?
       "<a href='#{Rails.application.routes.url_helpers.estornar_lancamento_path(self.id)}'
-            class='btn mister-table-button' data-remote='true'>X</a>"
+            class='btn btn-inverse mister-table-button' data-remote='true'><span class='glyphicon glyphicon-repeat'></span></a>"
     else
-      "<p>&nbsp;</p>"
+      "<a href='#' disabled='disabled' class='btn btn-inverse mister-table-button' data-remote='true'><span class='glyphicon glyphicon-repeat'></span></a>"
     end
   end
 
   def quitar_format
     if self.aberto? or self.quitado?
       "<a href='#{Rails.application.routes.url_helpers.quitar_lancamento_path(self.id)}'
-          class='btn mister-table-button' data-remote='true'>X</a>"
+          class='btn btn-inverse' data-remote='true'><span class='glyphicon glyphicon-ok-sign'></span></a>"
     else
-      "<p>&nbsp;</p>"
+      "<a href='#' disabled='disabled' class='btn btn-inverse' data-remote='true'><span class='glyphicon glyphicon-ok-sign'></span></a>"
     end
   end
 
   def cancelar_format
     if self.aberto? or self.cancelado?
       "<a href='#{Rails.application.routes.url_helpers.cancelar_lancamento_path(self.id)}'
-            class='btn mister-table-button' data-remote='true'>X</a>"
+            class='btn btn-inverse mister-table-button' data-remote='true'><span class='glyphicon glyphicon-remove-sign'></span></a>"
     else
-      "<p>&nbsp;</p>"
+      "<a href='#' disabled='disabled' class='btn btn-inverse mister-table-button' data-remote='true'><span class='glyphicon glyphicon-remove-sign'></span></a>"
     end
   end
 

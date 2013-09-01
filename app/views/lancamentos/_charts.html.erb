@@ -18,36 +18,36 @@
 
 </script>
 -->
-<div id="ChartsCarousel" class="carousel slide">
-  <ol class="carousel-indicators">
-    <li data-target="#ChartsCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#ChartsCarousel" data-slide-to="1"></li>
-    <li data-target="#ChartsCarousel" data-slide-to="2"></li>
-  </ol>
+<div id="ChartsCarousel" class="carousel slide col-lg-12">
+  <!--<ol class="carousel-indicators">-->
+    <!--<li data-target="#ChartsCarousel" data-slide-to="0" class="active"></li>-->
+    <!--<li data-target="#ChartsCarousel" data-slide-to="1"></li>-->
+    <!--<li data-target="#ChartsCarousel" data-slide-to="2"></li>-->
+  <!--</ol>-->
   <!-- Carousel items -->
   <div class="carousel-inner">
     <div class="active item">
         <div id="receita_chart_div"
              onload="drawVisualization('bar', 'receita_chart_div', '<%= lancamentos_reports_receita_estatisticas_path %>');">
         </div>
-        <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsReceita')">
-            Ver mais indicadores
-        </a>
+        <!--<a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsReceita')">-->
+            <!--Ver mais indicadores-->
+        <!--</a>-->
     </div>
     <div class="item">
         <div id="despesa_chart_div"
              onload="drawVisualization('bar', 'despesa_chart_div', '<%= lancamentos_reports_despesa_estatisticas_path %>');"></div>
-      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsDespesa')">
-        Ver mais estatisticas
-      </a>
+      <!--<a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsDespesa')">-->
+        <!--Ver mais estatisticas-->
+      <!--</a>-->
     </div>
     <div class="item">
 <!--      <a href="#reportsModal" role="button" class="btn" data-toggle="modal" onclick="selectChartTab('reportsCaixa')"> -->
         <div id="caixa_chart_div"
              onload="drawVisualization('column', 'caixa_chart_div', '<%= lancamentos_reports_fluxo_caixa_estatisticas_path %>');"></div>
-      <a href="<%= lancamentos_reports_fluxo_de_caixa_path %>" role="button" class="btn">
-        Ver Fluxo de Caixa
-      </a>
+      <!--<a href="<%= lancamentos_reports_fluxo_de_caixa_path %>" role="button" class="btn">-->
+        <!--Ver Fluxo de Caixa-->
+      <!--</a>-->
     </div>
 
     <!--<div class="item">
@@ -59,7 +59,14 @@
     </div>-->
   </div>
   <!-- Carousel nav -->
-  <a class="carousel-control left" href="#ChartsCarousel" data-slide="prev">&lsaquo;</a>
-  <a class="carousel-control right" href="#ChartsCarousel" data-slide="next">&rsaquo;</a>
+  <a class="left carousel-control" href="#ChartsCarousel" data-slide="prev">
+    <span class="icon-prev"></span>
+  </a>
+  <a class="right carousel-control" href="#ChartsCarousel" data-slide="next">
+    <span class="icon-next"></span>
+  </a>
+
+  <!--<a class="carousel-control left" href="#ChartsCarousel" data-slide="prev">&lsaquo;</a>-->
+  <!--<a class="carousel-control right" href="#ChartsCarousel" data-slide="next">&rsaquo;</a>-->
 </div>
 

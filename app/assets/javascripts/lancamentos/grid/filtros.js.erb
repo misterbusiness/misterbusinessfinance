@@ -67,6 +67,7 @@ function buildDataTable() {
         try {
             var oTable = $("#tableResults").dataTable({
                 "sDom": "t<lp><i>T<r>",
+//                "sDom": "<'row'<'col-6'f><'col-6'l>r>t<'row'<'col-6'i><'col-6'p>>",
                 "aaSorting": [
                     [4, 'asc']
                 ],
@@ -138,16 +139,16 @@ function buildDataTable() {
                     ]
                 },
                 "aoColumns": [
-                    {"mData": "quitar_format", "bSortable": false},
-                    {"mData": "estornar_format", "bSortable": false},
-                    {"mData": "cancelar_format", "bSortable": false},
-                    {"mData": "descricao_format", "bSortable": true},
-                    {"mData": "datavencimento_format", "bSortable": true},
-                    {"mData": "valor_format", "bSortable": true},
+                    {"mData": "descricao_format", "sWidth": "25%", "bSortable": true},
+                    {"mData": "datavencimento_format", "sWidth": "20%", "bSortable": true},
+                    {"mData": "valor_format", "sWidth": "10%", "bSortable": true},
                     {"mData": "category_format", "bSortable": true},
                     {"mData": "centrodecusto_format", "bSortable": true},
                     {"mData": "status_format", "bSortable": true},
-                    {"mData": "dataacao_format", "bSortable": true}
+                    {"mData": "dataacao_format", "sWidth": "20%", "bSortable": true},
+                    {"mData": "quitar_format", "bSortable": false},
+                    {"mData": "estornar_format", "bSortable": false},
+                    {"mData": "cancelar_format","sWidth": "2%" , "bSortable": false}
                 ],
                 "oLanguage": {
                     "sLengthMenu": "Exibir _MENU_ lançamentos por página",

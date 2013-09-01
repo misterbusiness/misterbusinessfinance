@@ -17,7 +17,7 @@
         <!--
     <% end %>-->
 
-    <div class="form-group">
+    <div class="form-group" xmlns="http://www.w3.org/1999/html">
       <!-- *******************************  Status  *********************************************************** -->
       <div class="col-lg-9">
         <div class="label <%= @lancamento.aberto? ? "label-success" : "label-default" %>">Aberto</div>
@@ -80,7 +80,6 @@
         <div class="input-group">
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
-
             </span>
           <%= f.text_field :datavencimento, :as => :text, :id => :data_vencimento_picker,
                            #"data-mask" => "99-99-9999",
@@ -91,43 +90,54 @@
         </div>
       </div>
     </div>
-
-    <div class="col-lg-12 form-group">
-      <div class="panel mister-panel panel-default">
-        <div class="panel-body">
-          <!--<label>Parcelamento</label>-->
-            <div class="col-lg-6">
-              <div class="col-lg-6">
-                <input class="form-control" type="text" placeholder="Parcelas" id="numero_parcelas"/>
-              </div>
-              <div class="col-lg-6">
-                <input class="form-control" type="text" placeholder="Frequencia" id="frequencia_parcelas"/>
-              </div>
-
-              <%= hidden_field_tag :numParcelas, 0, :id => "numero_parcelas_hidden" %>
-              <%= hidden_field_tag :freqParcelas, "Semanal", :id => "frequencia_parcelas_hidden" %>
+      <div class="form-group">
+      <div class="col-lg-10 mister-additonal-info">
+            <div class="col-lg-3">
+                <div class="breadcrumb">Parcelar</div>
             </div>
-
-            <div class="col-lg-6">
-              <div class="col-lg-6">
-                <input class="form-control" type="text" placeholder="Repetições" id="numero_agendamentos"/>
-              </div>
-              <div class="col-lg-6">
-                <input class="form-control" type="text" placeholder="Frequencia" id="frequencia_agendamentos"/>
-              </div>
-
-              <%= hidden_field_tag :numAgendamentos, 0, :id => "numero_agendamentos_hidden" %>
-              <%= hidden_field_tag :freqAgendamentos, "Semanal", :id => "frequencia_agendamentos_hidden" %>
+            <div class="col-lg-2">
+              <input class="form-control" type="text"
+                     placeholder="Nº" id="numero_parcelas"/>
             </div>
-        </div>
+            <div class="col-lg-3">
+                <input class="form-control" type="text"
+                       placeholder="" id="frequencia_parcelas"/>
+            </div>
+            <div class="col-lg-4">
+              <div class="breadcrumb" id="total_parcela"><%=  number_to_currency(0,:precision => 2, :unit => "R$ ") %></div>
+            </div>
+            <!--<div class="col-lg-2">&nbsp;</div>-->
+            <%= hidden_field_tag :numParcelas, 0, :id => "numero_parcelas_hidden" %>
+            <%= hidden_field_tag :freqParcelas, "Semanal", :id => "frequencia_parcelas_hidden" %>
       </div>
+      <div class="col-lg-10 mister-additonal-info">
+            <div class="col-lg-3">
+              <div class="breadcrumb">Repetir</div>
+            </div>
+            <div class="col-lg-2">
+              <input class="form-control" type="text"
+                     placeholder="Nº" id="numero_agendamentos"/>
+            </div>
+
+            <div class="col-lg-3">
+                <input class="form-control" type="text"
+                       placeholder="" id="frequencia_agendamentos"/>
+            </div>
+            <div class="col-lg-4">
+                <div class="breadcrumb" id="total_agendamento"><%= Date.today.strftime("%d-%m-%Y") %></div>
+            </div>
+            <!--<div class="col-lg-2">&nbsp;</div>-->
+            <%= hidden_field_tag :numAgendamentos, 0, :id => "numero_agendamentos_hidden" %>
+            <%= hidden_field_tag :freqAgendamentos, "Semanal", :id => "frequencia_agendamentos_hidden" %>
     </div>
+      </div>
 
     <!-- ********************************** Submit ************************************************** -->
-    <div class="form-group pull-right">
-
-      <div id="lancamento_quitado" class="mister-submit-button">
-        <%= f.submit :class => "btn btn-primary", :id => "submit_btn" %>
+    <div class="form-group">
+      <!--<div class="col-lg-4">&nbsp;</div>-->
+      <!--<div class="col-lg-4">&nbsp;</div>-->
+      <div id="lancamento_quitado" class="col-lg-12 mister-submit-button">
+        <%= f.submit :class => "btn btn-default col-lg-12", :id => "submit_btn" %>
       </div>
     </div>
 
